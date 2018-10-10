@@ -1,61 +1,56 @@
- /* algo4-1.c ÊµÏÖËã·¨4.6¡¢4.7µÄ³ÌÐò */
+/* algo4-1.c Êµï¿½ï¿½ï¿½ã·¨4.6ï¿½ï¿½4.7ï¿½Ä³ï¿½ï¿½ï¿½ */
 #include "../ch1/c1.h"
- #include "c4-1.h"
- #include "bo4-1.c"
+#include "c4-1.h"
+#include "bo4-1.c"
 
- void get_next(SString T,int next[])
- { /* ÇóÄ£Ê½´®TµÄnextº¯ÊýÖµ²¢´æÈëÊý×énext Ëã·¨ 4.7 */
-   int i=1,j=0;
-   next[1]=0;
-   while(i<T[0])
-     if(j==0||T[i]==T[j])
-     {
-       ++i;
-       ++j;
-       next[i]=j;
-     }
-     else
-       j=next[j];
- }
+void get_next(SString T, int next[]) { /* ï¿½ï¿½Ä£Ê½ï¿½ï¿½Tï¿½ï¿½nextï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½next ï¿½ã·¨ 4.7 */
+    int i = 1, j = 0;
+    next[1] = 0;
+    while (i < T[0])
+        if (j == 0 || T[i] == T[j]) {
+            ++i;
+            ++j;
+            next[i] = j;
+        } else
+            j = next[j];
+}
 
- int Index_KMP(SString S,SString T,int pos,int next[])
- { /* ÀûÓÃÄ£Ê½´®TµÄnextº¯ÊýÇóTÔÚÖ÷´®SÖÐµÚpos¸ö×Ö·ûÖ®ºóµÄÎ»ÖÃµÄKMPËã·¨¡£ */
-   /* ÆäÖÐ,T·Ç¿Õ,1¡Üpos¡ÜStrLength(S)¡£Ëã·¨ 4.6 */
-   int i=pos,j=1;
-   while(i<=S[0]&&j<=T[0])
-     if(j==0||S[i]==T[j]) /* ¼ÌÐø±È½Ïºó¼Ì×Ö·û */
-     {
-       ++i;
-       ++j;
-     }
-     else /* Ä£Ê½´®ÏòÓÒÒÆ¶¯ */
-       j=next[j];
-   if(j>T[0]) /* Æ¥Åä³É¹¦ */
-     return i-T[0];
-   else
-     return 0;
- }
-//KMPÄ£Ê½Æ¥Åä
- void main()
- {
-   int i,j,*p;
-   SString s1,s2; /* ÒÔ½Ì¿ÆÊéÖÐÍ¼4.5ÎªÀý */
-   StrAssign(s1,"acabaabaabcacaabc");
-   printf("Ö÷´®Îª: ");
-   StrPrint(s1);
-   StrAssign(s2,"abaabcac");
-   printf("×Ó´®Îª: ");
-   StrPrint(s2);
-   i=StrLength(s2);
-   p=(int*)malloc((i+1)*sizeof(int)); /* Éú³És2µÄnextÊý×é */
-   get_next(s2,p);
-   printf("×Ó´®µÄnextº¯ÊýÎª: ");
-   for(j=1;j<=i;j++)
-     printf("%d ",*(p+j));
-   printf("\n");
-   i=Index_KMP(s1,s2,1,p);
-   if(i)
-     printf("Ö÷´®ºÍ×Ó´®ÔÚµÚ%d¸ö×Ö·û´¦Ê×´ÎÆ¥Åä\n",i);
-   else
-     printf("Ö÷´®ºÍ×Ó´®Æ¥Åä²»³É¹¦\n");
- }
+int Index_KMP(SString S, SString T, int pos, int next[]) { /* ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½Tï¿½ï¿½nextï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½Ðµï¿½posï¿½ï¿½ï¿½Ö·ï¿½Ö®ï¿½ï¿½ï¿½Î»ï¿½Ãµï¿½KMPï¿½ã·¨ï¿½ï¿½ */
+    /* ï¿½ï¿½ï¿½ï¿½,Tï¿½Ç¿ï¿½,1ï¿½ï¿½posï¿½ï¿½StrLength(S)ï¿½ï¿½ï¿½ã·¨ 4.6 */
+    int i = pos, j = 1;
+    while (i <= S[0] && j <= T[0])
+        if (j == 0 || S[i] == T[j]) /* ï¿½ï¿½ï¿½ï¿½ï¿½È½Ïºï¿½ï¿½ï¿½Ö·ï¿½ */
+        {
+            ++i;
+            ++j;
+        } else /* Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ */
+            j = next[j];
+    if (j > T[0]) /* Æ¥ï¿½ï¿½É¹ï¿½ */
+        return i - T[0];
+    else
+        return 0;
+}
+
+//KMPÄ£Ê½Æ¥ï¿½ï¿½
+void main() {
+    int i, j, *p;
+    SString s1, s2; /* ï¿½Ô½Ì¿ï¿½ï¿½ï¿½ï¿½ï¿½Í¼4.5Îªï¿½ï¿½ */
+    StrAssign(s1, "acabaabaabcacaabc");
+    printf("ï¿½ï¿½ï¿½ï¿½Îª: ");
+    StrPrint(s1);
+    StrAssign(s2, "abaabcac");
+    printf("ï¿½Ó´ï¿½Îª: ");
+    StrPrint(s2);
+    i = StrLength(s2);
+    p = (int *) malloc((i + 1) * sizeof(int)); /* ï¿½ï¿½ï¿½ï¿½s2ï¿½ï¿½nextï¿½ï¿½ï¿½ï¿½ */
+    get_next(s2, p);
+    printf("ï¿½Ó´ï¿½ï¿½ï¿½nextï¿½ï¿½ï¿½ï¿½Îª: ");
+    for (j = 1; j <= i; j++)
+        printf("%d ", *(p + j));
+    printf("\n");
+    i = Index_KMP(s1, s2, 1, p);
+    if (i)
+        printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó´ï¿½ï¿½Úµï¿½%dï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½×´ï¿½Æ¥ï¿½ï¿½\n", i);
+    else
+        printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó´ï¿½Æ¥ï¿½ä²»ï¿½É¹ï¿½\n");
+}
