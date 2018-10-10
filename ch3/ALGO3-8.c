@@ -1,4 +1,4 @@
-/* algo3-8.c ÓÃµÝ¹éµ÷ÓÃÇóAckerman(m,n)µÄÖµ */
+/* algo3-8.c ç”¨é€’å½’è°ƒç”¨æ±‚Ackerman(m,n)çš„å€¼ */
 #define _CRT_SECURE_NO_DEPRECATE
 #include<stdio.h>
 

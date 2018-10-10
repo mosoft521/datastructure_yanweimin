@@ -1,93 +1,93 @@
-/* algo11-2.c Í¨¹ıÖÃ»»£­Ñ¡ÔñÅÅĞò²úÉú²»µÈ³¤µÄ³õÊ¼¹é²¢¶ÎÎÄ¼ş */
+/* algo11-2.c é€šè¿‡ç½®æ¢ï¼é€‰æ‹©æ’åºäº§ç”Ÿä¸ç­‰é•¿çš„åˆå§‹å½’å¹¶æ®µæ–‡ä»¶ */
 #include "../ch1/c1.h"
-typedef int InfoType; /* ¶¨ÒåÆäËüÊı¾İÏîµÄÀàĞÍ */
-#include "../ch10/c10-1.h" /* ¶¨ÒåKeyType¡¢RedType¼°SqList */
+typedef int InfoType; /* å®šä¹‰å…¶å®ƒæ•°æ®é¡¹çš„ç±»å‹ */
+#include "../ch10/c10-1.h" /* å®šä¹‰KeyTypeã€RedTypeåŠSqList */
 #define MAXKEY INT_MAX
 #define RUNEND_SYMBOL INT_MAX
-#define w 6 /* ÄÚ´æ¹¤×÷Çø¿ÉÈİÄÉµÄ¼ÇÂ¼¸öÊı */
-#define M 10 /* ÉèÊä³öM¸öÊı¾İ»»ĞĞ */
-#define N 24 /* Éè´óÎÄ¼şÓĞN¸öÊı¾İ */
+#define w 6 /* å†…å­˜å·¥ä½œåŒºå¯å®¹çº³çš„è®°å½•ä¸ªæ•° */
+#define M 10 /* è®¾è¾“å‡ºMä¸ªæ•°æ®æ¢è¡Œ */
+#define N 24 /* è®¾å¤§æ–‡ä»¶æœ‰Nä¸ªæ•°æ® */
 
-typedef int LoserTree[w]; /* °ÜÕßÊ÷ÊÇÍêÈ«¶ş²æÊ÷ÇÒ²»º¬Ò¶×Ó£¬¿É²ÉÓÃË³Ğò´æ´¢½á¹¹ */
+typedef int LoserTree[w]; /* è´¥è€…æ ‘æ˜¯å®Œå…¨äºŒå‰æ ‘ä¸”ä¸å«å¶å­ï¼Œå¯é‡‡ç”¨é¡ºåºå­˜å‚¨ç»“æ„ */
 typedef struct
 {
-	RedType rec; /* ¼ÇÂ¼ */
-	KeyType key; /* ´Ó¼ÇÂ¼ÖĞ³éÈ¡µÄ¹Ø¼ü×Ö */
-	int rnum; /* ËùÊô¹é²¢¶ÎµÄ¶ÎºÅ */
-}RedNode, WorkArea[w]; /* ÄÚ´æ¹¤×÷Çø£¬ÈİÁ¿Îªw */
+	RedType rec; /* è®°å½• */
+	KeyType key; /* ä»è®°å½•ä¸­æŠ½å–çš„å…³é”®å­— */
+	int rnum; /* æ‰€å±å½’å¹¶æ®µçš„æ®µå· */
+}RedNode, WorkArea[w]; /* å†…å­˜å·¥ä½œåŒºï¼Œå®¹é‡ä¸ºw */
 
-void Select_MiniMax(LoserTree ls, WorkArea wa, int q) /* Ëã·¨11.6 */
-{ /* ´Ówa[q]Æğµ½°ÜÕßÊ÷µÄ¸ù±È½ÏÑ¡ÔñMINIMAX¼ÇÂ¼£¬²¢ÓÉqÖ¸Ê¾ËüËùÔÚµÄ¹é²¢¶Î */
+void Select_MiniMax(LoserTree ls, WorkArea wa, int q) /* ç®—æ³•11.6 */
+{ /* ä»wa[q]èµ·åˆ°è´¥è€…æ ‘çš„æ ¹æ¯”è¾ƒé€‰æ‹©MINIMAXè®°å½•ï¼Œå¹¶ç”±qæŒ‡ç¤ºå®ƒæ‰€åœ¨çš„å½’å¹¶æ®µ */
 	int p, s, t;
 	for (t = (w + q) / 2, p = ls[t]; t > 0; t = t / 2, p = ls[t])
 		if (wa[p].rnum < wa[q].rnum || wa[p].rnum == wa[q].rnum&&wa[p].key < wa[q].key)
 		{
 			s = q;
-			q = ls[t]; /* qÖ¸Ê¾ĞÂµÄÊ¤ÀûÕß */
+			q = ls[t]; /* qæŒ‡ç¤ºæ–°çš„èƒœåˆ©è€… */
 			ls[t] = s;
 		}
 	ls[0] = q;
 }
 
 void Construct_Loser(LoserTree ls, WorkArea wa, FILE *fi)
-{ /* ÊäÈëw¸ö¼ÇÂ¼µ½ÄÚ´æ¹¤×÷Çøwa,½¨µÃ°ÜÕßÊ÷ls,Ñ¡³ö¹Ø¼ü×Ö×îĞ¡µÄ¼ÇÂ¼²¢ÓÉsÖ¸Ê¾ */
-  /* ÆäÔÚwaÖĞµÄÎ»ÖÃ¡£Ëã·¨11.7 */
+{ /* è¾“å…¥wä¸ªè®°å½•åˆ°å†…å­˜å·¥ä½œåŒºwa,å»ºå¾—è´¥è€…æ ‘ls,é€‰å‡ºå…³é”®å­—æœ€å°çš„è®°å½•å¹¶ç”±sæŒ‡ç¤º */
+  /* å…¶åœ¨waä¸­çš„ä½ç½®ã€‚ç®—æ³•11.7 */
 	int i;
 	for (i = 0; i < w; ++i)
-		wa[i].rnum = wa[i].key = ls[i] = 0; /* ¹¤×÷Çø³õÊ¼»¯ */
+		wa[i].rnum = wa[i].key = ls[i] = 0; /* å·¥ä½œåŒºåˆå§‹åŒ– */
 	for (i = w - 1; i >= 0; --i)
 	{
-		fread(&wa[i].rec, sizeof(RedType), 1, fi); /* ÊäÈëÒ»¸ö¼ÇÂ¼ */
-		wa[i].key = wa[i].rec.key; /* ÌáÈ¡¹Ø¼ü×Ö */
-		wa[i].rnum = 1; /* Æä¶ÎºÅÎª£¢1£¢ */
-		Select_MiniMax(ls, wa, i); /* µ÷Õû°ÜÕß */
+		fread(&wa[i].rec, sizeof(RedType), 1, fi); /* è¾“å…¥ä¸€ä¸ªè®°å½• */
+		wa[i].key = wa[i].rec.key; /* æå–å…³é”®å­— */
+		wa[i].rnum = 1; /* å…¶æ®µå·ä¸ºï¼‚1ï¼‚ */
+		Select_MiniMax(ls, wa, i); /* è°ƒæ•´è´¥è€… */
 	}
 }
 
 void get_run(LoserTree ls, WorkArea wa, int rc, int *rmax, FILE *fi, FILE *fo)
-{ /* ÇóµÃÒ»¸ö³õÊ¼¹é²¢¶Î£¬fiÎªÊäÈëÎÄ¼şÖ¸Õë£¬foÎªÊä³öÎÄ¼şÖ¸Õë¡£Ëã·¨11.5 */
+{ /* æ±‚å¾—ä¸€ä¸ªåˆå§‹å½’å¹¶æ®µï¼Œfiä¸ºè¾“å…¥æ–‡ä»¶æŒ‡é’ˆï¼Œfoä¸ºè¾“å‡ºæ–‡ä»¶æŒ‡é’ˆã€‚ç®—æ³•11.5 */
 	int q;
 	KeyType minimax;
-	while (wa[ls[0]].rnum == rc) /* Ñ¡µÃµÄMINIMAX¼ÇÂ¼Êôµ±Ç°¶ÎÊ± */
+	while (wa[ls[0]].rnum == rc) /* é€‰å¾—çš„MINIMAXè®°å½•å±å½“å‰æ®µæ—¶ */
 	{
-		q = ls[0]; /* qÖ¸Ê¾MINIMAX¼ÇÂ¼ÔÚwaÖĞµÄÎ»ÖÃ */
+		q = ls[0]; /* qæŒ‡ç¤ºMINIMAXè®°å½•åœ¨waä¸­çš„ä½ç½® */
 		minimax = wa[q].key;
-		fwrite(&wa[q].rec, sizeof(RedType), 1, fo); /* ½«¸ÕÑ¡µÃµÄMINIMAX¼ÇÂ¼Ğ´ÈëÊä³öÎÄ¼ş */
-		fread(&wa[q].rec, sizeof(RedType), 1, fi); /* ´ÓÊäÈëÎÄ¼ş¶ÁÈëÏÂÒ»¼ÇÂ¼(¸Ä) */
+		fwrite(&wa[q].rec, sizeof(RedType), 1, fo); /* å°†åˆšé€‰å¾—çš„MINIMAXè®°å½•å†™å…¥è¾“å‡ºæ–‡ä»¶ */
+		fread(&wa[q].rec, sizeof(RedType), 1, fi); /* ä»è¾“å…¥æ–‡ä»¶è¯»å…¥ä¸‹ä¸€è®°å½•(æ”¹) */
 		if (feof(fi))
-		{ /* ÊäÈëÎÄ¼ş½áÊø£¬ĞéÉè¼ÇÂ¼£¨Êô£¢rmax+1£¢¶Î£© */
+		{ /* è¾“å…¥æ–‡ä»¶ç»“æŸï¼Œè™šè®¾è®°å½•ï¼ˆå±ï¼‚rmax+1ï¼‚æ®µï¼‰ */
 			wa[q].rnum = *rmax + 1;
 			wa[q].key = MAXKEY;
 		}
 		else
-		{ /* ÊäÈëÎÄ¼ş·Ç¿ÕÊ± */
-			wa[q].key = wa[q].rec.key; /* ÌáÈ¡¹Ø¼ü×Ö */
+		{ /* è¾“å…¥æ–‡ä»¶éç©ºæ—¶ */
+			wa[q].key = wa[q].rec.key; /* æå–å…³é”®å­— */
 			if (wa[q].key < minimax)
-			{ /* ĞÂ¶ÁÈëµÄ¼ÇÂ¼ÊôÏÂÒ»¶Î */
+			{ /* æ–°è¯»å…¥çš„è®°å½•å±ä¸‹ä¸€æ®µ */
 				*rmax = rc + 1;
 				wa[q].rnum = *rmax;
 			}
-			else /* ĞÂ¶ÁÈëµÄ¼ÇÂ¼Êôµ±Ç°¶Î */
+			else /* æ–°è¯»å…¥çš„è®°å½•å±å½“å‰æ®µ */
 				wa[q].rnum = rc;
 		}
-		Select_MiniMax(ls, wa, q); /* Ñ¡ÔñĞÂµÄMINIMAX¼ÇÂ¼ */
+		Select_MiniMax(ls, wa, q); /* é€‰æ‹©æ–°çš„MINIMAXè®°å½• */
 	}
 }
 
 void Replace_Selection(LoserTree ls, WorkArea wa, FILE *fi, FILE *fo)
-{ /* ÔÚ°ÜÕßÊ÷lsºÍÄÚ´æ¹¤×÷ÇøwaÉÏÓÃÖÃ»»£­Ñ¡ÔñÅÅĞòÇó³õÊ¼¹é²¢¶Î£¬fiÎªÊäÈëÎÄ¼ş */
-  /* (Ö»¶ÁÎÄ¼ş)Ö¸Õë,foÎªÊä³öÎÄ¼ş(Ö»Ğ´ÎÄ¼ş)Ö¸Õë,Á½¸öÎÄ¼ş¾ùÒÑ´ò¿ª¡£Ëã·¨11.4 */
+{ /* åœ¨è´¥è€…æ ‘lså’Œå†…å­˜å·¥ä½œåŒºwaä¸Šç”¨ç½®æ¢ï¼é€‰æ‹©æ’åºæ±‚åˆå§‹å½’å¹¶æ®µï¼Œfiä¸ºè¾“å…¥æ–‡ä»¶ */
+  /* (åªè¯»æ–‡ä»¶)æŒ‡é’ˆ,foä¸ºè¾“å‡ºæ–‡ä»¶(åªå†™æ–‡ä»¶)æŒ‡é’ˆ,ä¸¤ä¸ªæ–‡ä»¶å‡å·²æ‰“å¼€ã€‚ç®—æ³•11.4 */
 	int rc, rmax;
 	RedType j;
 	j.key = RUNEND_SYMBOL;
-	Construct_Loser(ls, wa, fi); /* ³õ½¨°ÜÕßÊ÷ */
-	rc = rmax = 1; /* rcÖ¸Ê¾µ±Ç°Éú³ÉµÄ³õÊ¼¹é²¢¶ÎµÄ¶ÎºÅ£¬rmaxÖ¸Ê¾waÖĞ¹Ø¼ü×ÖËùÊô³õÊ¼¹é²¢¶ÎµÄ×î´ó¶ÎºÅ */
-	while (rc <= rmax) /* £¢rc=rmax+1£¢±êÖ¾ÊäÈëÎÄ¼şµÄÖÃ»»£­Ñ¡ÔñÅÅĞòÒÑÍê³É */
+	Construct_Loser(ls, wa, fi); /* åˆå»ºè´¥è€…æ ‘ */
+	rc = rmax = 1; /* rcæŒ‡ç¤ºå½“å‰ç”Ÿæˆçš„åˆå§‹å½’å¹¶æ®µçš„æ®µå·ï¼ŒrmaxæŒ‡ç¤ºwaä¸­å…³é”®å­—æ‰€å±åˆå§‹å½’å¹¶æ®µçš„æœ€å¤§æ®µå· */
+	while (rc <= rmax) /* ï¼‚rc=rmax+1ï¼‚æ ‡å¿—è¾“å…¥æ–‡ä»¶çš„ç½®æ¢ï¼é€‰æ‹©æ’åºå·²å®Œæˆ */
 	{
-		get_run(ls, wa, rc, &rmax, fi, fo); /* ÇóµÃÒ»¸ö³õÊ¼¹é²¢¶Î */
+		get_run(ls, wa, rc, &rmax, fi, fo); /* æ±‚å¾—ä¸€ä¸ªåˆå§‹å½’å¹¶æ®µ */
 		j.otherinfo = rc;
-		fwrite(&j, sizeof(RedType), 1, fo); /* ½«¶Î½áÊø±êÖ¾Ğ´ÈëÊä³öÎÄ¼ş */
-		rc = wa[ls[0]].rnum; /* ÉèÖÃÏÂÒ»¶ÎµÄ¶ÎºÅ */
+		fwrite(&j, sizeof(RedType), 1, fo); /* å°†æ®µç»“æŸæ ‡å¿—å†™å…¥è¾“å‡ºæ–‡ä»¶ */
+		rc = wa[ls[0]].rnum; /* è®¾ç½®ä¸‹ä¸€æ®µçš„æ®µå· */
 	}
 }
 
@@ -104,53 +104,53 @@ void main()
 	WorkArea wa;
 	int i, k, j = RUNEND_SYMBOL;
 	char s[3], fname[4];
-	fo = fopen("ori", "wb"); /* ÒÔĞ´µÄ·½Ê½´ò¿ª´óÎÄ¼şori */
-	fwrite(a, sizeof(RedType), N, fo); /* ½«Êı×éaĞ´Èë´óÎÄ¼şori */
+	fo = fopen("ori", "wb"); /* ä»¥å†™çš„æ–¹å¼æ‰“å¼€å¤§æ–‡ä»¶ori */
+	fwrite(a, sizeof(RedType), N, fo); /* å°†æ•°ç»„aå†™å…¥å¤§æ–‡ä»¶ori */
 	fclose(fo);
-	fi = fopen("ori", "rb"); /* ÒÔ¶ÁµÄ·½Ê½ÖØĞÂ´ò¿ª´óÎÄ¼şori */
-	printf("´óÎÄ¼şµÄ¼ÇÂ¼Îª:\n");
+	fi = fopen("ori", "rb"); /* ä»¥è¯»çš„æ–¹å¼é‡æ–°æ‰“å¼€å¤§æ–‡ä»¶ori */
+	printf("å¤§æ–‡ä»¶çš„è®°å½•ä¸º:\n");
 	for (i = 1; i <= N; i++)
 	{
-		fread(&b, sizeof(RedType), 1, fi); /* ÒÀ´Î½«´óÎÄ¼şoriµÄÊı¾İ¶ÁÈëb */
-		print(b); /* Êä³öbµÄÄÚÈİ */
+		fread(&b, sizeof(RedType), 1, fi); /* ä¾æ¬¡å°†å¤§æ–‡ä»¶oriçš„æ•°æ®è¯»å…¥b */
+		print(b); /* è¾“å‡ºbçš„å†…å®¹ */
 		if (i%M == 0)
 			printf("\n");
 	}
 	printf("\n");
-	rewind(fi); /* Ê¹fiµÄÖ¸ÕëÖØĞÂ·µ»Ø´óÎÄ¼şoriµÄÆğÊ¼Î»ÖÃ£¬ÒÔ±ãÖØĞÂ¶ÁÈëÄÚ´æ£¬²úÉúÓĞĞòµÄ×ÓÎÄ¼ş */
-	fo = fopen("out", "wb"); /* ÒÔĞ´µÄ·½Ê½´ò¿ª³õÊ¼¹é²¢¶ÎÎÄ¼şout */
-	Replace_Selection(ls, wa, fi, fo); /* ÓÃÖÃ»»£­Ñ¡ÔñÅÅĞòÇó³õÊ¼¹é²¢¶Î */
+	rewind(fi); /* ä½¿fiçš„æŒ‡é’ˆé‡æ–°è¿”å›å¤§æ–‡ä»¶oriçš„èµ·å§‹ä½ç½®ï¼Œä»¥ä¾¿é‡æ–°è¯»å…¥å†…å­˜ï¼Œäº§ç”Ÿæœ‰åºçš„å­æ–‡ä»¶ */
+	fo = fopen("out", "wb"); /* ä»¥å†™çš„æ–¹å¼æ‰“å¼€åˆå§‹å½’å¹¶æ®µæ–‡ä»¶out */
+	Replace_Selection(ls, wa, fi, fo); /* ç”¨ç½®æ¢ï¼é€‰æ‹©æ’åºæ±‚åˆå§‹å½’å¹¶æ®µ */
 	fclose(fo);
 	fclose(fi);
-	fi = fopen("out", "rb"); /* ÒÔ¶ÁµÄ·½Ê½ÖØĞÂ´ò¿ª³õÊ¼¹é²¢¶ÎÎÄ¼şout */
-	printf("³õÊ¼¹é²¢¶ÎÎÄ¼şµÄ¼ÇÂ¼Îª:\n");
+	fi = fopen("out", "rb"); /* ä»¥è¯»çš„æ–¹å¼é‡æ–°æ‰“å¼€åˆå§‹å½’å¹¶æ®µæ–‡ä»¶out */
+	printf("åˆå§‹å½’å¹¶æ®µæ–‡ä»¶çš„è®°å½•ä¸º:\n");
 	i = 1;
 	do
 	{
-		k = fread(&b, sizeof(RedType), 1, fi); /* ÒÀ´Î½«´óÎÄ¼şoutµÄÊı¾İ¶ÁÈëb */
+		k = fread(&b, sizeof(RedType), 1, fi); /* ä¾æ¬¡å°†å¤§æ–‡ä»¶outçš„æ•°æ®è¯»å…¥b */
 		if (k == 1)
 		{
-			print(b); /* Êä³öbµÄÄÚÈİ */
+			print(b); /* è¾“å‡ºbçš„å†…å®¹ */
 			if (i++%M == 0)
 				printf("\n");
 		}
 	} while (k == 1);
 	printf("\n");
-	rewind(fi); /* Ê¹fiµÄÖ¸ÕëÖØĞÂ·µ»Ø´óÎÄ¼şoriµÄÆğÊ¼Î»ÖÃ£¬ÒÔ±ãÖØĞÂ¶ÁÈëÄÚ´æ£¬²úÉúÓĞĞòµÄ×ÓÎÄ¼ş */
+	rewind(fi); /* ä½¿fiçš„æŒ‡é’ˆé‡æ–°è¿”å›å¤§æ–‡ä»¶oriçš„èµ·å§‹ä½ç½®ï¼Œä»¥ä¾¿é‡æ–°è¯»å…¥å†…å­˜ï¼Œäº§ç”Ÿæœ‰åºçš„å­æ–‡ä»¶ */
 	k = 0;
-	while (!feof(fi)) /* °´¶ÎÊä³ö³õÊ¼¹é²¢¶ÎÎÄ¼şout */
+	while (!feof(fi)) /* æŒ‰æ®µè¾“å‡ºåˆå§‹å½’å¹¶æ®µæ–‡ä»¶out */
 	{
-		_itoa(k, s, 10); /* ÒÀ´ÎÉú³ÉÎÄ¼şÃûf0,f1,¡­ */
+		_itoa(k, s, 10); /* ä¾æ¬¡ç”Ÿæˆæ–‡ä»¶åf0,f1,â€¦ */
 		strcpy(fname, "f");
 		strcat(fname, s);
-		fo = fopen(fname, "wb"); /* ÒÀ´ÎÒÔĞ´µÄ·½Ê½´ò¿ªÎÄ¼şf0,f1,¡­ */
+		fo = fopen(fname, "wb"); /* ä¾æ¬¡ä»¥å†™çš„æ–¹å¼æ‰“å¼€æ–‡ä»¶f0,f1,â€¦ */
 		do
 		{
 			i = fread(&b, sizeof(RedType), 1, fi);
-			if (i == 1) /* fread()µ÷ÓÃ³É¹¦ */
+			if (i == 1) /* fread()è°ƒç”¨æˆåŠŸ */
 			{
-				fwrite(&b, sizeof(RedType), 1, fo); /* ½«bĞ´ÈëÎÄ¼şf0,f1,¡­ */
-				if (b.key == j) /* 1¸ö¹é²¢¶Î½áÊø */
+				fwrite(&b, sizeof(RedType), 1, fo); /* å°†bå†™å…¥æ–‡ä»¶f0,f1,â€¦ */
+				if (b.key == j) /* 1ä¸ªå½’å¹¶æ®µç»“æŸ */
 				{
 					k++;
 					fclose(fo);
@@ -160,5 +160,5 @@ void main()
 		} while (i == 1);
 	};
 	fclose(fi);
-	printf("¹²²úÉú%d¸ö³õÊ¼¹é²¢¶ÎÎÄ¼ş\n", k);
+	printf("å…±äº§ç”Ÿ%dä¸ªåˆå§‹å½’å¹¶æ®µæ–‡ä»¶\n", k);
 }

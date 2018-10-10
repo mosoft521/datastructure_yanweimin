@@ -1,22 +1,22 @@
- /* bo5-2.c ÈıÔª×éÏ¡Êè¾ØÕóµÄ»ù±¾²Ù×÷,°üÀ¨Ëã·¨5.1(9¸ö) */
+ /* bo5-2.c ä¸‰å…ƒç»„ç¨€ç–çŸ©é˜µçš„åŸºæœ¬æ“ä½œ,åŒ…æ‹¬ç®—æ³•5.1(9ä¸ª) */
  Status CreateSMatrix(TSMatrix *M)
- { /* ´´½¨Ï¡Êè¾ØÕóM */
+ { /* åˆ›å»ºç¨€ç–çŸ©é˜µM */
    int i,m,n;
    ElemType e;
    Status k;
-   printf("ÇëÊäÈë¾ØÕóµÄĞĞÊı,ÁĞÊı,·ÇÁãÔªËØÊı£º");
+   printf("è¯·è¾“å…¥çŸ©é˜µçš„è¡Œæ•°,åˆ—æ•°,éé›¶å…ƒç´ æ•°ï¼š");
    scanf("%d,%d,%d",&(*M).mu,&(*M).nu,&(*M).tu);
-   (*M).data[0].i=0; /* ÎªÒÔÏÂ±È½ÏË³Ğò×ö×¼±¸ */
+   (*M).data[0].i=0; /* ä¸ºä»¥ä¸‹æ¯”è¾ƒé¡ºåºåšå‡†å¤‡ */
    for(i=1;i<=(*M).tu;i++)
    {
      do
      {
-       printf("Çë°´ĞĞĞòË³ĞòÊäÈëµÚ%d¸ö·ÇÁãÔªËØËùÔÚµÄĞĞ(1¡«%d),ÁĞ(1¡«%d),ÔªËØÖµ£º",i,(*M).mu,(*M).nu);
+       printf("è¯·æŒ‰è¡Œåºé¡ºåºè¾“å…¥ç¬¬%dä¸ªéé›¶å…ƒç´ æ‰€åœ¨çš„è¡Œ(1ï½%d),åˆ—(1ï½%d),å…ƒç´ å€¼ï¼š",i,(*M).mu,(*M).nu);
        scanf("%d,%d,%d",&m,&n,&e);
        k=0;
-       if(m<1||m>(*M).mu||n<1||n>(*M).nu) /* ĞĞ»òÁĞ³¬³ö·¶Î§ */
+       if(m<1||m>(*M).mu||n<1||n>(*M).nu) /* è¡Œæˆ–åˆ—è¶…å‡ºèŒƒå›´ */
          k=1;
-       if(m<(*M).data[i-1].i||m==(*M).data[i-1].i&&n<=(*M).data[i-1].j) /* ĞĞ»òÁĞµÄË³ĞòÓĞ´í */
+       if(m<(*M).data[i-1].i||m==(*M).data[i-1].i&&n<=(*M).data[i-1].j) /* è¡Œæˆ–åˆ—çš„é¡ºåºæœ‰é”™ */
          k=1;
      }while(k);
      (*M).data[i].i=m;
@@ -27,29 +27,29 @@
  }
 
  void DestroySMatrix(TSMatrix *M)
- { /* Ïú»ÙÏ¡Êè¾ØÕóM */
+ { /* é”€æ¯ç¨€ç–çŸ©é˜µM */
    (*M).mu=0;
    (*M).nu=0;
    (*M).tu=0;
  }
 
  void PrintSMatrix(TSMatrix M)
- { /* Êä³öÏ¡Êè¾ØÕóM */
+ { /* è¾“å‡ºç¨€ç–çŸ©é˜µM */
    int i;
-   printf("%dĞĞ%dÁĞ%d¸ö·ÇÁãÔªËØ¡£\n",M.mu,M.nu,M.tu);
-   printf("ĞĞ  ÁĞ  ÔªËØÖµ\n");
+   printf("%dè¡Œ%dåˆ—%dä¸ªéé›¶å…ƒç´ ã€‚\n",M.mu,M.nu,M.tu);
+   printf("è¡Œ  åˆ—  å…ƒç´ å€¼\n");
    for(i=1;i<=M.tu;i++)
      printf("%2d%4d%8d\n",M.data[i].i,M.data[i].j,M.data[i].e);
  }
 
  Status CopySMatrix(TSMatrix M,TSMatrix *T)
- { /* ÓÉÏ¡Êè¾ØÕóM¸´ÖÆµÃµ½T */
+ { /* ç”±ç¨€ç–çŸ©é˜µMå¤åˆ¶å¾—åˆ°T */
    (*T)=M;
    return OK;
  }
 
- int comp(int c1,int c2) /* Áí¼Ó */
- { /* AddSMatrixº¯ÊıÒªÓÃµ½ */
+ int comp(int c1,int c2) /* å¦åŠ  */
+ { /* AddSMatrixå‡½æ•°è¦ç”¨åˆ° */
    int i;
    if(c1<c2)
      i=1;
@@ -61,7 +61,7 @@
  }
 
  Status AddSMatrix(TSMatrix M,TSMatrix N,TSMatrix *Q)
- { /* ÇóÏ¡Êè¾ØÕóµÄºÍQ=M+N */
+ { /* æ±‚ç¨€ç–çŸ©é˜µçš„å’ŒQ=M+N */
    Triple *Mp,*Me,*Np,*Ne,*Qh,*Qe;
    if(M.mu!=N.mu)
      return ERROR;
@@ -69,11 +69,11 @@
      return ERROR;
    (*Q).mu=M.mu;
    (*Q).nu=M.nu;
-   Mp=&M.data[1]; /* MpµÄ³õÖµÖ¸Ïò¾ØÕóMµÄ·ÇÁãÔªËØÊ×µØÖ· */
-   Np=&N.data[1]; /* NpµÄ³õÖµÖ¸Ïò¾ØÕóNµÄ·ÇÁãÔªËØÊ×µØÖ· */
-   Me=&M.data[M.tu]; /* MeÖ¸Ïò¾ØÕóMµÄ·ÇÁãÔªËØÎ²µØÖ· */
-   Ne=&N.data[N.tu]; /* NeÖ¸Ïò¾ØÕóNµÄ·ÇÁãÔªËØÎ²µØÖ· */
-   Qh=Qe=(*Q).data; /* Qh¡¢QeµÄ³õÖµÖ¸Ïò¾ØÕóQµÄ·ÇÁãÔªËØÊ×µØÖ·µÄÇ°Ò»µØÖ· */
+   Mp=&M.data[1]; /* Mpçš„åˆå€¼æŒ‡å‘çŸ©é˜µMçš„éé›¶å…ƒç´ é¦–åœ°å€ */
+   Np=&N.data[1]; /* Npçš„åˆå€¼æŒ‡å‘çŸ©é˜µNçš„éé›¶å…ƒç´ é¦–åœ°å€ */
+   Me=&M.data[M.tu]; /* MeæŒ‡å‘çŸ©é˜µMçš„éé›¶å…ƒç´ å°¾åœ°å€ */
+   Ne=&N.data[N.tu]; /* NeæŒ‡å‘çŸ©é˜µNçš„éé›¶å…ƒç´ å°¾åœ°å€ */
+   Qh=Qe=(*Q).data; /* Qhã€Qeçš„åˆå€¼æŒ‡å‘çŸ©é˜µQçš„éé›¶å…ƒç´ é¦–åœ°å€çš„å‰ä¸€åœ°å€ */
    while(Mp<=Me&&Np<=Ne)
    {
      Qe++;
@@ -82,14 +82,14 @@
        case  1: *Qe=*Mp;
                 Mp++;
                 break;
-       case  0: switch(comp(Mp->j,Np->j)) /* M¡¢N¾ØÕóµ±Ç°·ÇÁãÔªËØµÄĞĞÏàµÈ,¼ÌĞø±È½ÏÁĞ */
+       case  0: switch(comp(Mp->j,Np->j)) /* Mã€NçŸ©é˜µå½“å‰éé›¶å…ƒç´ çš„è¡Œç›¸ç­‰,ç»§ç»­æ¯”è¾ƒåˆ— */
                 {
                   case  1: *Qe=*Mp;
                            Mp++;
                            break;
                   case  0: *Qe=*Mp;
                            Qe->e+=Np->e;
-                           if(!Qe->e) /* ÔªËØÖµÎª0£¬²»´æÈëÑ¹Ëõ¾ØÕó */
+                           if(!Qe->e) /* å…ƒç´ å€¼ä¸º0ï¼Œä¸å­˜å…¥å‹ç¼©çŸ©é˜µ */
                              Qe--;
                            Mp++;
                            Np++;
@@ -102,26 +102,26 @@
                 Np++;
      }
    }
-   if(Mp>Me) /* ¾ØÕóMµÄÔªËØÈ«²¿´¦ÀíÍê±Ï */
+   if(Mp>Me) /* çŸ©é˜µMçš„å…ƒç´ å…¨éƒ¨å¤„ç†å®Œæ¯• */
      while(Np<=Ne)
      {
        Qe++;
        *Qe=*Np;
        Np++;
      }
-   if(Np>Ne) /* ¾ØÕóNµÄÔªËØÈ«²¿´¦ÀíÍê±Ï */
+   if(Np>Ne) /* çŸ©é˜µNçš„å…ƒç´ å…¨éƒ¨å¤„ç†å®Œæ¯• */
      while(Mp<=Me)
      {
        Qe++;
        *Qe=*Mp;
        Mp++;
      }
-   (*Q).tu=Qe-Qh; /* ¾ØÕóQµÄ·ÇÁãÔªËØ¸öÊı */
+   (*Q).tu=Qe-Qh; /* çŸ©é˜µQçš„éé›¶å…ƒç´ ä¸ªæ•° */
    return OK;
  }
 
  Status SubtSMatrix(TSMatrix M,TSMatrix N,TSMatrix *Q)
- { /* ÇóÏ¡Êè¾ØÕóµÄ²îQ=M-N */
+ { /* æ±‚ç¨€ç–çŸ©é˜µçš„å·®Q=M-N */
    int i;
    for(i=1;i<=N.tu;i++)
      N.data[i].e*=-1;
@@ -130,19 +130,19 @@
  }
 
  Status MultSMatrix(TSMatrix M,TSMatrix N,TSMatrix *Q)
- { /* ÇóÏ¡Êè¾ØÕóµÄ³Ë»ıQ=M*N */
+ { /* æ±‚ç¨€ç–çŸ©é˜µçš„ä¹˜ç§¯Q=M*N */
    int i,j,h=M.mu,l=N.nu,Qn=0;
-   /* h,l·Ö±ğÎª¾ØÕóQµÄĞĞ¡¢ÁĞÖµ,QnÎª¾ØÕóQµÄ·ÇÁãÔªËØ¸öÊı£¬³õÖµÎª0 */
+   /* h,låˆ†åˆ«ä¸ºçŸ©é˜µQçš„è¡Œã€åˆ—å€¼,Qnä¸ºçŸ©é˜µQçš„éé›¶å…ƒç´ ä¸ªæ•°ï¼Œåˆå€¼ä¸º0 */
    ElemType *Qe;
    if(M.nu!=N.mu)
      return ERROR;
    (*Q).mu=M.mu;
    (*Q).nu=N.nu;
-   Qe=(ElemType *)malloc(h*l*sizeof(ElemType)); /* QeÎª¾ØÕóQµÄÁÙÊ±Êı×é */
-   /* ¾ØÕóQµÄµÚiĞĞjÁĞµÄÔªËØÖµ´æÓÚ*(Qe+(i-1)*l+j-1)ÖĞ£¬³õÖµÎª0 */
+   Qe=(ElemType *)malloc(h*l*sizeof(ElemType)); /* Qeä¸ºçŸ©é˜µQçš„ä¸´æ—¶æ•°ç»„ */
+   /* çŸ©é˜µQçš„ç¬¬iè¡Œjåˆ—çš„å…ƒç´ å€¼å­˜äº*(Qe+(i-1)*l+j-1)ä¸­ï¼Œåˆå€¼ä¸º0 */
    for(i=0;i<h*l;i++)
-     *(Qe+i)=0; /* ¸³³õÖµ0 */
-   for(i=1;i<=M.tu;i++) /* ¾ØÕóÔªËØÏà³Ë£¬½á¹ûÀÛ¼Óµ½Qe */
+     *(Qe+i)=0; /* èµ‹åˆå€¼0 */
+   for(i=1;i<=M.tu;i++) /* çŸ©é˜µå…ƒç´ ç›¸ä¹˜ï¼Œç»“æœç´¯åŠ åˆ°Qe */
      for(j=1;j<=N.tu;j++)
        if(M.data[i].j==N.data[j].i)
          *(Qe+(M.data[i].i-1)*l+N.data[j].j-1)+=M.data[i].e*N.data[j].e;
@@ -161,7 +161,7 @@
  }
 
  Status TransposeSMatrix(TSMatrix M,TSMatrix *T)
- { /* ÇóÏ¡Êè¾ØÕóMµÄ×ªÖÃ¾ØÕóT¡£Ëã·¨5.1 */
+ { /* æ±‚ç¨€ç–çŸ©é˜µMçš„è½¬ç½®çŸ©é˜µTã€‚ç®—æ³•5.1 */
    int p,q,col;
    (*T).mu=M.nu;
    (*T).nu=M.mu;

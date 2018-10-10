@@ -1,25 +1,25 @@
-/* algo7-2.c ÊµÏÖËã·¨7.9µÄ³ÌĞò */
+/* algo7-2.c å®ç°ç®—æ³•7.9çš„ç¨‹åº */
 #include "../ch1/c1.h"
 typedef int VRType;
 typedef char InfoType;
-#define MAX_NAME 3 /* ¶¥µã×Ö·û´®µÄ×î´ó³¤¶È+1 */
-#define MAX_INFO 20 /* Ïà¹ØĞÅÏ¢×Ö·û´®µÄ×î´ó³¤¶È+1 */
+#define MAX_NAME 3 /* é¡¶ç‚¹å­—ç¬¦ä¸²çš„æœ€å¤§é•¿åº¦+1 */
+#define MAX_INFO 20 /* ç›¸å…³ä¿¡æ¯å­—ç¬¦ä¸²çš„æœ€å¤§é•¿åº¦+1 */
 typedef char VertexType[MAX_NAME];
 #include "c7-1.h"
 #include "bo7-1.c"
 
 typedef struct
-{ /* ¼ÇÂ¼´Ó¶¥µã¼¯Uµ½V-UµÄ´ú¼Û×îĞ¡µÄ±ßµÄ¸¨ÖúÊı×é¶¨Òå */
+{ /* è®°å½•ä»é¡¶ç‚¹é›†Uåˆ°V-Uçš„ä»£ä»·æœ€å°çš„è¾¹çš„è¾…åŠ©æ•°ç»„å®šä¹‰ */
 	VertexType adjvex;
 	VRType lowcost;
 }minside[MAX_VERTEX_NUM];
 
 int minimum(minside SZ, MGraph G)
-{ /* Çóclosedge.lowcostµÄ×îĞ¡ÕıÖµ */
+{ /* æ±‚closedge.lowcostçš„æœ€å°æ­£å€¼ */
 	int i = 0, j, k, min;
 	while (!SZ[i].lowcost)
 		i++;
-	min = SZ[i].lowcost; /* µÚÒ»¸ö²»Îª0µÄÖµ */
+	min = SZ[i].lowcost; /* ç¬¬ä¸€ä¸ªä¸ä¸º0çš„å€¼ */
 	k = i;
 	for (j = i + 1; j < G.vexnum; j++)
 		if (SZ[j].lowcost>0)
@@ -32,11 +32,11 @@ int minimum(minside SZ, MGraph G)
 }
 
 void MiniSpanTree_PRIM(MGraph G, VertexType u)
-{ /* ÓÃÆÕÀïÄ·Ëã·¨´ÓµÚu¸ö¶¥µã³ö·¢¹¹ÔìÍøGµÄ×îĞ¡Éú³ÉÊ÷T,Êä³öTµÄ¸÷Ìõ±ß Ëã·¨7.9 */
+{ /* ç”¨æ™®é‡Œå§†ç®—æ³•ä»ç¬¬uä¸ªé¡¶ç‚¹å‡ºå‘æ„é€ ç½‘Gçš„æœ€å°ç”Ÿæˆæ ‘T,è¾“å‡ºTçš„å„æ¡è¾¹ ç®—æ³•7.9 */
 	int i, j, k;
 	minside closedge;
 	k = LocateVex(G, u);
-	for (j = 0; j < G.vexnum; ++j) /* ¸¨ÖúÊı×é³õÊ¼»¯ */
+	for (j = 0; j < G.vexnum; ++j) /* è¾…åŠ©æ•°ç»„åˆå§‹åŒ– */
 	{
 		if (j != k)
 		{
@@ -44,16 +44,16 @@ void MiniSpanTree_PRIM(MGraph G, VertexType u)
 			closedge[j].lowcost = G.arcs[k][j].adj;
 		}
 	}
-	closedge[k].lowcost = 0; /* ³õÊ¼,U={u} */
-	printf("×îĞ¡´ú¼ÛÉú³ÉÊ÷µÄ¸÷Ìõ±ßÎª:\n");
+	closedge[k].lowcost = 0; /* åˆå§‹,U={u} */
+	printf("æœ€å°ä»£ä»·ç”Ÿæˆæ ‘çš„å„æ¡è¾¹ä¸º:\n");
 	for (i = 1; i < G.vexnum; ++i)
-	{ /* Ñ¡ÔñÆäÓàG.vexnum-1¸ö¶¥µã */
-		k = minimum(closedge, G); /* Çó³öTµÄÏÂÒ»¸ö½áµã£ºµÚK¶¥µã */
-		printf("(%s-%s)\n", closedge[k].adjvex, G.vexs[k]); /* Êä³öÉú³ÉÊ÷µÄ±ß */
-		closedge[k].lowcost = 0; /* µÚK¶¥µã²¢ÈëU¼¯ */
+	{ /* é€‰æ‹©å…¶ä½™G.vexnum-1ä¸ªé¡¶ç‚¹ */
+		k = minimum(closedge, G); /* æ±‚å‡ºTçš„ä¸‹ä¸€ä¸ªç»“ç‚¹ï¼šç¬¬Ké¡¶ç‚¹ */
+		printf("(%s-%s)\n", closedge[k].adjvex, G.vexs[k]); /* è¾“å‡ºç”Ÿæˆæ ‘çš„è¾¹ */
+		closedge[k].lowcost = 0; /* ç¬¬Ké¡¶ç‚¹å¹¶å…¥Ué›† */
 		for (j = 0; j < G.vexnum; ++j)
 			if (G.arcs[k][j].adj < closedge[j].lowcost)
-			{ /* ĞÂ¶¥µã²¢ÈëU¼¯ºóÖØĞÂÑ¡Ôñ×îĞ¡±ß */
+			{ /* æ–°é¡¶ç‚¹å¹¶å…¥Ué›†åé‡æ–°é€‰æ‹©æœ€å°è¾¹ */
 				strcpy(closedge[j].adjvex, G.vexs[k]);
 				closedge[j].lowcost = G.arcs[k][j].adj;
 			}

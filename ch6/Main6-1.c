@@ -1,13 +1,13 @@
-/* main6-1.c ¼ìÑébo6-1.cµÄÖ÷³ÌĞò£¬ÀûÓÃÌõ¼ş±àÒëÑ¡ÔñÊı¾İÀàĞÍÎªchar»òint */
-/*#define CHAR 1 /* ×Ö·ûĞÍ */
-#define CHAR 0 /* ÕûĞÍ(¶şÕßÑ¡Ò») */
+/* main6-1.c æ£€éªŒbo6-1.cçš„ä¸»ç¨‹åºï¼Œåˆ©ç”¨æ¡ä»¶ç¼–è¯‘é€‰æ‹©æ•°æ®ç±»å‹ä¸ºcharæˆ–int */
+/*#define CHAR 1 /* å­—ç¬¦å‹ */
+#define CHAR 0 /* æ•´å‹(äºŒè€…é€‰ä¸€) */
 #include "../ch1/c1.h"
 #if CHAR
 typedef char TElemType;
-TElemType Nil = ' '; /* Éè×Ö·ûĞÍÒÔ¿Õ¸ñ·ûÎª¿Õ */
+TElemType Nil = ' '; /* è®¾å­—ç¬¦å‹ä»¥ç©ºæ ¼ç¬¦ä¸ºç©º */
 #else
 typedef int TElemType;
-TElemType Nil = 0; /* ÉèÕûĞÍÒÔ0Îª¿Õ */
+TElemType Nil = 0; /* è®¾æ•´å‹ä»¥0ä¸ºç©º */
 #endif
 #include"c6-1.h"
 #include"bo6-1.c"
@@ -27,45 +27,45 @@ void main()
 	SqBiTree T, s;
 	InitBiTree(T);
 	CreateBiTree(T);
-	printf("½¨Á¢¶ş²æÊ÷ºó,Ê÷¿Õ·ñ£¿%d(1:ÊÇ 0:·ñ) Ê÷µÄÉî¶È=%d\n", BiTreeEmpty(T), BiTreeDepth(T));
+	printf("å»ºç«‹äºŒå‰æ ‘å,æ ‘ç©ºå¦ï¼Ÿ%d(1:æ˜¯ 0:å¦) æ ‘çš„æ·±åº¦=%d\n", BiTreeEmpty(T), BiTreeDepth(T));
 	i = Root(T, &e);
 	if (i)
-		printf("¶ş²æÊ÷µÄ¸ùÎª£º%d\n", e);
+		printf("äºŒå‰æ ‘çš„æ ¹ä¸ºï¼š%d\n", e);
 	else
-		printf("Ê÷¿Õ£¬ÎŞ¸ù\n");
-	printf("²ãĞò±éÀú¶ş²æÊ÷:\n");
+		printf("æ ‘ç©ºï¼Œæ— æ ¹\n");
+	printf("å±‚åºéå†äºŒå‰æ ‘:\n");
 	LevelOrderTraverse(T, visit);
-	printf("ÖĞĞò±éÀú¶ş²æÊ÷:\n");
+	printf("ä¸­åºéå†äºŒå‰æ ‘:\n");
 	InOrderTraverse(T, visit);
-	printf("ºóĞò±éÀú¶ş²æÊ÷:\n");
+	printf("ååºéå†äºŒå‰æ ‘:\n");
 	PostOrderTraverse(T, visit);
-	printf("ÇëÊäÈë´ıĞŞ¸Ä½áµãµÄ²ãºÅ ±¾²ãĞòºÅ: ");
+	printf("è¯·è¾“å…¥å¾…ä¿®æ”¹ç»“ç‚¹çš„å±‚å· æœ¬å±‚åºå·: ");
 	scanf("%d%d", &p.level, &p.order);
 	e = Value(T, p);
-	printf("´ıĞŞ¸Ä½áµãµÄÔ­ÖµÎª%dÇëÊäÈëĞÂÖµ: ", e);
+	printf("å¾…ä¿®æ”¹ç»“ç‚¹çš„åŸå€¼ä¸º%dè¯·è¾“å…¥æ–°å€¼: ", e);
 	scanf("%d", &e);
 	Assign(T, p, e);
-	printf("ÏÈĞò±éÀú¶ş²æÊ÷:\n");
+	printf("å…ˆåºéå†äºŒå‰æ ‘:\n");
 	PreOrderTraverse(T, visit);
-	printf("½áµã%dµÄË«Ç×Îª%d,×óÓÒº¢×Ó·Ö±ğÎª", e, Parent(T, e));
-	printf("%d,%d,×óÓÒĞÖµÜ·Ö±ğÎª", LeftChild(T, e), RightChild(T, e));
+	printf("ç»“ç‚¹%dçš„åŒäº²ä¸º%d,å·¦å³å­©å­åˆ†åˆ«ä¸º", e, Parent(T, e));
+	printf("%d,%d,å·¦å³å…„å¼Ÿåˆ†åˆ«ä¸º", LeftChild(T, e), RightChild(T, e));
 	printf("%d,%d\n", LeftSibling(T, e), RightSibling(T, e));
 	InitBiTree(s);
-	printf("½¨Á¢ÓÒ×ÓÊ÷Îª¿ÕµÄÊ÷s:\n");
+	printf("å»ºç«‹å³å­æ ‘ä¸ºç©ºçš„æ ‘s:\n");
 	CreateBiTree(s);
-	printf("Ê÷s²åµ½Ê÷TÖĞ,ÇëÊäÈëÊ÷TÖĞÊ÷sµÄË«Ç×½áµã sÎª×ó(0)»òÓÒ(1)×ÓÊ÷: ");
+	printf("æ ‘sæ’åˆ°æ ‘Tä¸­,è¯·è¾“å…¥æ ‘Tä¸­æ ‘sçš„åŒäº²ç»“ç‚¹ sä¸ºå·¦(0)æˆ–å³(1)å­æ ‘: ");
 	scanf("%d%d", &e, &j);
 	InsertChild(T, e, j, s);
 	Print(T);
-	printf("É¾³ı×ÓÊ÷,ÇëÊäÈë´ıÉ¾³ı×ÓÊ÷¸ù½áµãµÄ²ãºÅ ±¾²ãĞòºÅ ×ó(0)»òÓÒ(1)×ÓÊ÷: ");
+	printf("åˆ é™¤å­æ ‘,è¯·è¾“å…¥å¾…åˆ é™¤å­æ ‘æ ¹ç»“ç‚¹çš„å±‚å· æœ¬å±‚åºå· å·¦(0)æˆ–å³(1)å­æ ‘: ");
 	scanf("%d%d%d", &p.level, &p.order, &j);
 	DeleteChild(T, p, j);
 	Print(T);
 	ClearBiTree(T);
-	printf("Çå³ı¶ş²æÊ÷ºó,Ê÷¿Õ·ñ£¿%d(1:ÊÇ 0:·ñ) Ê÷µÄÉî¶È=%d\n", BiTreeEmpty(T), BiTreeDepth(T));
+	printf("æ¸…é™¤äºŒå‰æ ‘å,æ ‘ç©ºå¦ï¼Ÿ%d(1:æ˜¯ 0:å¦) æ ‘çš„æ·±åº¦=%d\n", BiTreeEmpty(T), BiTreeDepth(T));
 	i = Root(T, &e);
 	if (i)
-		printf("¶ş²æÊ÷µÄ¸ùÎª£º%d\n", e);
+		printf("äºŒå‰æ ‘çš„æ ¹ä¸ºï¼š%d\n", e);
 	else
-		printf("Ê÷¿Õ£¬ÎŞ¸ù\n");
+		printf("æ ‘ç©ºï¼Œæ— æ ¹\n");
 }

@@ -1,7 +1,7 @@
- /* bo5-1.c Ë³Ğò´æ´¢Êı×é(´æ´¢½á¹¹ÓÉc5-1.h¶¨Òå)µÄ»ù±¾²Ù×÷(5¸ö) */
+ /* bo5-1.c é¡ºåºå­˜å‚¨æ•°ç»„(å­˜å‚¨ç»“æ„ç”±c5-1.hå®šä¹‰)çš„åŸºæœ¬æ“ä½œ(5ä¸ª) */
  Status InitArray(Array *A,int dim,...)
- { /* ÈôÎ¬ÊıdimºÍ¸÷Î¬³¤¶ÈºÏ·¨£¬Ôò¹¹ÔìÏàÓ¦µÄÊı×éA£¬²¢·µ»ØOK */
-   int elemtotal=1,i; /* elemtotalÊÇÔªËØ×ÜÖµ */
+ { /* è‹¥ç»´æ•°dimå’Œå„ç»´é•¿åº¦åˆæ³•ï¼Œåˆ™æ„é€ ç›¸åº”çš„æ•°ç»„Aï¼Œå¹¶è¿”å›OK */
+   int elemtotal=1,i; /* elemtotalæ˜¯å…ƒç´ æ€»å€¼ */
    va_list ap;
    if(dim<1||dim>MAX_ARRAY_DIM)
      return ERROR;
@@ -14,7 +14,7 @@
    {
      (*A).bounds[i]=va_arg(ap,int);
      if((*A).bounds[i]<0)
-       return UNDERFLOW; /* ÔÚmath.hÖĞ¶¨ÒåÎª4 */
+       return UNDERFLOW; /* åœ¨math.hä¸­å®šä¹‰ä¸º4 */
      elemtotal*=(*A).bounds[i];
    }
    va_end(ap);
@@ -31,7 +31,7 @@
  }
 
  Status DestroyArray(Array *A)
- { /* Ïú»ÙÊı×éA */
+ { /* é”€æ¯æ•°ç»„A */
    if((*A).base)
    {
      free((*A).base);
@@ -56,8 +56,8 @@
    return OK;
  }
 
- Status Locate(Array A,va_list ap,int *off) /* Value()¡¢Assign()µ÷ÓÃ´Ëº¯Êı */
- { /* ÈôapÖ¸Ê¾µÄ¸÷ÏÂ±êÖµºÏ·¨£¬ÔòÇó³ö¸ÃÔªËØÔÚAÖĞµÄÏà¶ÔµØÖ·off */
+ Status Locate(Array A,va_list ap,int *off) /* Value()ã€Assign()è°ƒç”¨æ­¤å‡½æ•° */
+ { /* è‹¥apæŒ‡ç¤ºçš„å„ä¸‹æ ‡å€¼åˆæ³•ï¼Œåˆ™æ±‚å‡ºè¯¥å…ƒç´ åœ¨Aä¸­çš„ç›¸å¯¹åœ°å€off */
    int i,ind;
    *off=0;
    for(i=0;i<A.dim;i++)
@@ -70,25 +70,25 @@
    return OK;
  }
 
- Status Value(ElemType *e,Array A,...) /* ÔÚVC++ÖĞ£¬...Ö®Ç°µÄĞÎ²Î²»ÄÜÊÇÒıÓÃÀàĞÍ */
- { /* ...ÒÀ´ÎÎª¸÷Î¬µÄÏÂ±êÖµ£¬Èô¸÷ÏÂ±êºÏ·¨£¬Ôòe±»¸³ÖµÎªAµÄÏàÓ¦µÄÔªËØÖµ */
+ Status Value(ElemType *e,Array A,...) /* åœ¨VC++ä¸­ï¼Œ...ä¹‹å‰çš„å½¢å‚ä¸èƒ½æ˜¯å¼•ç”¨ç±»å‹ */
+ { /* ...ä¾æ¬¡ä¸ºå„ç»´çš„ä¸‹æ ‡å€¼ï¼Œè‹¥å„ä¸‹æ ‡åˆæ³•ï¼Œåˆ™eè¢«èµ‹å€¼ä¸ºAçš„ç›¸åº”çš„å…ƒç´ å€¼ */
    va_list ap;
    Status result;
    int off;
    va_start(ap,A);
-   if((result=Locate(A,ap,&off))==OVERFLOW) /* µ÷ÓÃLocate() */
+   if((result=Locate(A,ap,&off))==OVERFLOW) /* è°ƒç”¨Locate() */
      return result;
    *e=*(A.base+off);
    return OK;
  }
 
  Status Assign(Array *A,ElemType e,...)
- { /* ...ÒÀ´ÎÎª¸÷Î¬µÄÏÂ±êÖµ£¬Èô¸÷ÏÂ±êºÏ·¨£¬Ôò½«eµÄÖµ¸³¸øAµÄÖ¸¶¨µÄÔªËØ */
+ { /* ...ä¾æ¬¡ä¸ºå„ç»´çš„ä¸‹æ ‡å€¼ï¼Œè‹¥å„ä¸‹æ ‡åˆæ³•ï¼Œåˆ™å°†eçš„å€¼èµ‹ç»™Açš„æŒ‡å®šçš„å…ƒç´  */
    va_list ap;
    Status result;
    int off;
    va_start(ap,e);
-   if((result=Locate(*A,ap,&off))==OVERFLOW) /* µ÷ÓÃLocate() */
+   if((result=Locate(*A,ap,&off))==OVERFLOW) /* è°ƒç”¨Locate() */
      return result;
    *((*A).base+off)=e;
    return OK;

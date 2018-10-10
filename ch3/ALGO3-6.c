@@ -1,11 +1,11 @@
-/* algo3-6.c ±í´ïÊ½ÇóÖµ£¨ÊäÈë¡¢Êä³öºÍÖĞ¼ä½á¹û¾ùÖ»ÄÜÊÇ0¡«9£© */
+/* algo3-6.c è¡¨è¾¾å¼æ±‚å€¼ï¼ˆè¾“å…¥ã€è¾“å‡ºå’Œä¸­é—´ç»“æœå‡åªèƒ½æ˜¯0ï½9ï¼‰ */
 typedef char SElemType;
 #include "../ch1/c1.h"
 #include "c3-1.h"
 #include "bo3-1.c"
 
 SElemType Precede(SElemType t1, SElemType t2)
-{ /* ¸ù¾İ½Ì¿ÆÊé±í3.1£¬ÅĞ¶ÏÁ½·ûºÅµÄÓÅÏÈ¹ØÏµ */
+{ /* æ ¹æ®æ•™ç§‘ä¹¦è¡¨3.1ï¼Œåˆ¤æ–­ä¸¤ç¬¦å·çš„ä¼˜å…ˆå…³ç³» */
 	SElemType f;
 	switch (t2)
 	{
@@ -51,7 +51,7 @@ SElemType Precede(SElemType t1, SElemType t2)
 }
 
 Status In(SElemType c)
-{ /* ÅĞ¶ÏcÊÇ·ñÎªÔËËã·û */
+{ /* åˆ¤æ–­cæ˜¯å¦ä¸ºè¿ç®—ç¬¦ */
 	switch (c)
 	{
 	case'+':
@@ -83,8 +83,8 @@ SElemType Operate(SElemType a, SElemType theta, SElemType b)
 	return c;
 }
 
-SElemType EvaluateExpression() /* Ëã·¨3.4 */
-{ /* ËãÊõ±í´ïÊ½ÇóÖµµÄËã·ûÓÅÏÈËã·¨¡£ÉèOPTRºÍOPND·Ö±ğÎªÔËËã·ûÕ»ºÍÔËËãÊıÕ» */
+SElemType EvaluateExpression() /* ç®—æ³•3.4 */
+{ /* ç®—æœ¯è¡¨è¾¾å¼æ±‚å€¼çš„ç®—ç¬¦ä¼˜å…ˆç®—æ³•ã€‚è®¾OPTRå’ŒOPNDåˆ†åˆ«ä¸ºè¿ç®—ç¬¦æ ˆå’Œè¿ç®—æ•°æ ˆ */
 	SqStack OPTR, OPND;
 	SElemType a, b, c, x, theta;
 	InitStack(&OPTR);
@@ -94,27 +94,27 @@ SElemType EvaluateExpression() /* Ëã·¨3.4 */
 	GetTop(OPTR, &x);
 	while (c != '#' || x != '#')
 	{
-		if (In(c)) /* ÊÇ7ÖÖÔËËã·ûÖ®Ò» */
+		if (In(c)) /* æ˜¯7ç§è¿ç®—ç¬¦ä¹‹ä¸€ */
 			switch (Precede(x, c))
 			{
-			case'<':Push(&OPTR, c); /* Õ»¶¥ÔªËØÓÅÏÈÈ¨µÍ */
+			case'<':Push(&OPTR, c); /* æ ˆé¡¶å…ƒç´ ä¼˜å…ˆæƒä½ */
 				c = getchar();
 				break;
-			case'=':Pop(&OPTR, &x); /* ÍÑÀ¨ºÅ²¢½ÓÊÕÏÂÒ»×Ö·û */
+			case'=':Pop(&OPTR, &x); /* è„±æ‹¬å·å¹¶æ¥æ”¶ä¸‹ä¸€å­—ç¬¦ */
 				c = getchar();
 				break;
-			case'>':Pop(&OPTR, &theta); /* ÍËÕ»²¢½«ÔËËã½á¹ûÈëÕ» */
+			case'>':Pop(&OPTR, &theta); /* é€€æ ˆå¹¶å°†è¿ç®—ç»“æœå…¥æ ˆ */
 				Pop(&OPND, &b);
 				Pop(&OPND, &a);
 				Push(&OPND, Operate(a, theta, b));
 				break;
 			}
-		else if (c >= '0'&&c <= '9') /* cÊÇ²Ù×÷Êı */
+		else if (c >= '0'&&c <= '9') /* cæ˜¯æ“ä½œæ•° */
 		{
 			Push(&OPND, c);
 			c = getchar();
 		}
-		else /* cÊÇ·Ç·¨×Ö·û */
+		else /* cæ˜¯éæ³•å­—ç¬¦ */
 		{
 			printf("ERROR4\n");
 			exit(ERROR);
@@ -127,6 +127,6 @@ SElemType EvaluateExpression() /* Ëã·¨3.4 */
 
 void main()
 {
-	printf("ÇëÊäÈëËãÊõ±í´ïÊ½£¨ÖĞ¼äÖµ¼°×îÖÕ½á¹ûÒªÔÚ0¡«9Ö®¼ä£©£¬²¢ÒÔ#½áÊø\n");
+	printf("è¯·è¾“å…¥ç®—æœ¯è¡¨è¾¾å¼ï¼ˆä¸­é—´å€¼åŠæœ€ç»ˆç»“æœè¦åœ¨0ï½9ä¹‹é—´ï¼‰ï¼Œå¹¶ä»¥#ç»“æŸ\n");
 	printf("%c\n", EvaluateExpression());
 }

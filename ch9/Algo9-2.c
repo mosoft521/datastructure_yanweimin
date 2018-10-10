@@ -1,19 +1,19 @@
-/* algo9-2.c ¼ìÑébo9-1.(ÓĞĞò±í²¿·Ö)µÄ³ÌĞò */
+/* algo9-2.c æ£€éªŒbo9-1.(æœ‰åºè¡¨éƒ¨åˆ†)çš„ç¨‹åº */
 #include "../ch1/c1.h"
-#define N 11 /* Êı¾İÔªËØ¸öÊı */
-typedef int KeyType; /* Éè¹Ø¼ü×ÖÓòÎªÕûĞÍ */
-typedef struct /* Êı¾İÔªËØÀàĞÍ */
+#define N 11 /* æ•°æ®å…ƒç´ ä¸ªæ•° */
+typedef int KeyType; /* è®¾å…³é”®å­—åŸŸä¸ºæ•´å‹ */
+typedef struct /* æ•°æ®å…ƒç´ ç±»å‹ */
 {
-	KeyType key; /* ¹Ø¼ü×ÖÓò */
-	int others; /* ÆäËü²¿·Ö */
+	KeyType key; /* å…³é”®å­—åŸŸ */
+	int others; /* å…¶å®ƒéƒ¨åˆ† */
 }ElemType;
 ElemType r[N] = { {5,1},{13,2},{19,3},{21,4},{37,5},{56,6},{64,7},{75,8},
-	   {80,9},{88,10},{92,11} }; /* Êı¾İÔªËØ(ÒÔ½Ì¿ÆÊéP.219µÄÊı¾İÎªÀı),È«¾Ö±äÁ¿ */
+	   {80,9},{88,10},{92,11} }; /* æ•°æ®å…ƒç´ (ä»¥æ•™ç§‘ä¹¦P.219çš„æ•°æ®ä¸ºä¾‹),å…¨å±€å˜é‡ */
 #include "c9.h"
 #include "c9-1.h"
 #include "bo9-1.c"
 
-void print(ElemType c) /* Traverse()µ÷ÓÃµÄº¯Êı */
+void print(ElemType c) /* Traverse()è°ƒç”¨çš„å‡½æ•° */
 {
 	printf("(%d %d) ", c.key, c.others);
 }
@@ -23,15 +23,15 @@ void main()
 	SSTable st;
 	int i;
 	KeyType s;
-	Creat_Ord(&st, N); /* ÓÉÈ«¾ÖÊı×é²úÉú·Ç½µĞò¾²Ì¬²éÕÒ±íst */
-	Traverse(st, print); /* Ë³ĞòÊä³ö·Ç½µĞò¾²Ì¬²éÕÒ±íst */
+	Creat_Ord(&st, N); /* ç”±å…¨å±€æ•°ç»„äº§ç”Ÿéé™åºé™æ€æŸ¥æ‰¾è¡¨st */
+	Traverse(st, print); /* é¡ºåºè¾“å‡ºéé™åºé™æ€æŸ¥æ‰¾è¡¨st */
 	printf("\n");
-	printf("ÇëÊäÈë´ı²éÕÒÖµµÄ¹Ø¼ü×Ö: ");
+	printf("è¯·è¾“å…¥å¾…æŸ¥æ‰¾å€¼çš„å…³é”®å­—: ");
 	scanf("%d", &s);
-	i = Search_Bin(st, s); /* ÕÛ°ë²éÕÒÓĞĞò±í */
+	i = Search_Bin(st, s); /* æŠ˜åŠæŸ¥æ‰¾æœ‰åºè¡¨ */
 	if (i)
-		printf("(%d %d) %dÊÇµÚ%d¸ö¼ÇÂ¼µÄ¹Ø¼ü×Ö\n", st.elem[i].key, st.elem[i].others, s, i);
+		printf("(%d %d) %dæ˜¯ç¬¬%dä¸ªè®°å½•çš„å…³é”®å­—\n", st.elem[i].key, st.elem[i].others, s, i);
 	else
-		printf("Ã»ÕÒµ½\n");
+		printf("æ²¡æ‰¾åˆ°\n");
 	Destroy(&st);
 }

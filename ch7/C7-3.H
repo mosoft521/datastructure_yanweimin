@@ -1,18 +1,18 @@
- /* c7-3.h ÓĞÏòÍ¼µÄÊ®×ÖÁ´±í´æ´¢±íÊ¾ */
+ /* c7-3.h æœ‰å‘å›¾çš„åå­—é“¾è¡¨å­˜å‚¨è¡¨ç¤º */
  #define MAX_VERTEX_NUM 20
  typedef struct ArcBox
  {
-   int tailvex,headvex; /* ¸Ã»¡µÄÎ²ºÍÍ·¶¥µãµÄÎ»ÖÃ */
-   struct ArcBox *hlink,*tlink; /* ·Ö±ğÎª»¡Í·ÏàÍ¬ºÍ»¡Î²ÏàÍ¬µÄ»¡µÄÁ´Óò */
-   InfoType *info; /* ¸Ã»¡Ïà¹ØĞÅÏ¢µÄÖ¸Õë(¿ÉÎŞ) */
- }ArcBox; /* »¡½áµã */
+   int tailvex,headvex; /* è¯¥å¼§çš„å°¾å’Œå¤´é¡¶ç‚¹çš„ä½ç½® */
+   struct ArcBox *hlink,*tlink; /* åˆ†åˆ«ä¸ºå¼§å¤´ç›¸åŒå’Œå¼§å°¾ç›¸åŒçš„å¼§çš„é“¾åŸŸ */
+   InfoType *info; /* è¯¥å¼§ç›¸å…³ä¿¡æ¯çš„æŒ‡é’ˆ(å¯æ— ) */
+ }ArcBox; /* å¼§ç»“ç‚¹ */
  typedef struct
  {
    VertexType data;
-   ArcBox *firstin,*firstout; /* ·Ö±ğÖ¸Ïò¸Ã¶¥µãµÚÒ»ÌõÈë»¡ºÍ³ö»¡ */
- }VexNode; /* ¶¥µã½áµã */
+   ArcBox *firstin,*firstout; /* åˆ†åˆ«æŒ‡å‘è¯¥é¡¶ç‚¹ç¬¬ä¸€æ¡å…¥å¼§å’Œå‡ºå¼§ */
+ }VexNode; /* é¡¶ç‚¹ç»“ç‚¹ */
  typedef struct
  {
-   VexNode xlist[MAX_VERTEX_NUM]; /* ±íÍ·ÏòÁ¿(Êı×é) */
-   int vexnum,arcnum; /* ÓĞÏòÍ¼µÄµ±Ç°¶¥µãÊıºÍ»¡Êı */
+   VexNode xlist[MAX_VERTEX_NUM]; /* è¡¨å¤´å‘é‡(æ•°ç»„) */
+   int vexnum,arcnum; /* æœ‰å‘å›¾çš„å½“å‰é¡¶ç‚¹æ•°å’Œå¼§æ•° */
  }OLGraph;

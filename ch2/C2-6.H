@@ -1,7 +1,7 @@
- /* c2-6.h ³éÏóÊı¾İÀàĞÍPolynomialµÄÊµÏÖ */
- typedef struct /* ÏîµÄ±íÊ¾,¶àÏîÊ½µÄÏî×÷ÎªLinkListµÄÊı¾İÔªËØ */
+ /* c2-6.h æŠ½è±¡æ•°æ®ç±»å‹Polynomialçš„å®ç° */
+ typedef struct /* é¡¹çš„è¡¨ç¤º,å¤šé¡¹å¼çš„é¡¹ä½œä¸ºLinkListçš„æ•°æ®å…ƒç´  */
  {
-   float coef; /* ÏµÊı */
-   int expn; /* Ö¸Êı */
+   float coef; /* ç³»æ•° */
+   int expn; /* æŒ‡æ•° */
  }term,ElemType;
- /* Á½¸öÀàĞÍÃû:termÓÃÓÚ±¾ADT,ElemTypeÎªLinkListµÄÊı¾İ¶ÔÏóÃû */
+ /* ä¸¤ä¸ªç±»å‹å:termç”¨äºæœ¬ADT,ElemTypeä¸ºLinkListçš„æ•°æ®å¯¹è±¡å */

@@ -1,14 +1,14 @@
- /* c5-5.h ¹ãÒå±íµÄÍ·Î²Á´±í´æ´¢±íÊ¾ */
- typedef enum{ATOM,LIST}ElemTag; /* ATOM==0:Ô­×Ó,LIST==1:×Ó±í */
+ /* c5-5.h å¹¿ä¹‰è¡¨çš„å¤´å°¾é“¾è¡¨å­˜å‚¨è¡¨ç¤º */
+ typedef enum{ATOM,LIST}ElemTag; /* ATOM==0:åŸå­,LIST==1:å­è¡¨ */
  typedef struct GLNode
  {
-   ElemTag tag; /* ¹«¹²²¿·Ö,ÓÃÓÚÇø·ÖÔ­×Ó½áµãºÍ±í½áµã */
-   union /* Ô­×Ó½áµãºÍ±í½áµãµÄÁªºÏ²¿·Ö */
+   ElemTag tag; /* å…¬å…±éƒ¨åˆ†,ç”¨äºåŒºåˆ†åŸå­ç»“ç‚¹å’Œè¡¨ç»“ç‚¹ */
+   union /* åŸå­ç»“ç‚¹å’Œè¡¨ç»“ç‚¹çš„è”åˆéƒ¨åˆ† */
    {
-     AtomType atom; /* atomÊÇÔ­×Ó½áµãµÄÖµÓò,AtomTypeÓÉÓÃ»§¶¨Òå */
+     AtomType atom; /* atomæ˜¯åŸå­ç»“ç‚¹çš„å€¼åŸŸ,AtomTypeç”±ç”¨æˆ·å®šä¹‰ */
      struct
      {
        struct GLNode *hp,*tp;
-     }ptr; /* ptrÊÇ±í½áµãµÄÖ¸ÕëÓò,prt.hpºÍptr.tp·Ö±ğÖ¸Ïò±íÍ·ºÍ±íÎ² */
+     }ptr; /* ptræ˜¯è¡¨ç»“ç‚¹çš„æŒ‡é’ˆåŸŸ,prt.hpå’Œptr.tpåˆ†åˆ«æŒ‡å‘è¡¨å¤´å’Œè¡¨å°¾ */
    }a;
- }*GList,GLNode; /* ¹ãÒå±íÀàĞÍ */
+ }*GList,GLNode; /* å¹¿ä¹‰è¡¨ç±»å‹ */

@@ -1,12 +1,12 @@
-/* algo9-8.c ¼ìÑébo9-6.cµÄ³ÌĞò */
+/* algo9-8.c æ£€éªŒbo9-6.cçš„ç¨‹åº */
 #include "../ch1/c1.h"
-#define N 16 /* Êı¾İÔªËØ¸öÊı */
-#define LENGTH 27 /* ½áµãµÄ×î´ó¶È+1(´óĞ´Ó¢ÎÄ×ÖÄ¸) */
+#define N 16 /* æ•°æ®å…ƒç´ ä¸ªæ•° */
+#define LENGTH 27 /* ç»“ç‚¹çš„æœ€å¤§åº¦+1(å¤§å†™è‹±æ–‡å­—æ¯) */
 typedef struct
 {
 	int ord;
-}Others; /* ¼ÇÂ¼µÄÆäËü²¿·Ö */
-#define Nil ' ' /* ¶¨Òå½áÊø·ûÎª¿Õ¸ñ(Óë½Ì¿ÆÊé²»Í¬) */
+}Others; /* è®°å½•çš„å…¶å®ƒéƒ¨åˆ† */
+#define Nil ' ' /* å®šä¹‰ç»“æŸç¬¦ä¸ºç©ºæ ¼(ä¸æ•™ç§‘ä¹¦ä¸åŒ) */
 #include "c9-5.h"
 #include "bo9-6.c"
 
@@ -27,28 +27,28 @@ void main()
 				 {{"CHA"},5},{{"CHANG"},6},{{"WEN"},7},{{"CHAO"},8},
 				 {{"YUN"},9},{{"YANG"},10},{{"LONG"},11},{{"WANG"},12},
 				 {{"ZHAO"},13},{{"LIU"},14},{{"WU"},15},{{"CHEN"},16} };
-	/* Êı¾İÔªËØ(ÒÔ½Ì¿ÆÊéÊ½9-24ÎªÀı) */
+	/* æ•°æ®å…ƒç´ (ä»¥æ•™ç§‘ä¹¦å¼9-24ä¸ºä¾‹) */
 	InitDSTable(&t);
 	for (i = 0; i < N; i++)
 	{
 		r[i].key.num = strlen(r[i].key.ch) + 1;
-		r[i].key.ch[r[i].key.num] = Nil; /* ÔÚ¹Ø¼ü×Ö·û´®×îºó¼Ó½áÊø·û */
+		r[i].key.ch[r[i].key.num] = Nil; /* åœ¨å…³é”®å­—ç¬¦ä¸²æœ€ååŠ ç»“æŸç¬¦ */
 		p = SearchTrie(t, r[i].key);
 		if (!p)
 			InsertTrie(&t, &r[i]);
 	}
-	printf("°´¹Ø¼ü×Ö·û´®µÄË³Ğò±éÀúTrieÊ÷(¼üÊ÷):\n");
+	printf("æŒ‰å…³é”®å­—ç¬¦ä¸²çš„é¡ºåºéå†Trieæ ‘(é”®æ ‘):\n");
 	TraverseDSTable(t, pr);
-	printf("\nÇëÊäÈë´ı²éÕÒ¼ÇÂ¼µÄ¹Ø¼ü×Ö·û´®: ");
+	printf("\nè¯·è¾“å…¥å¾…æŸ¥æ‰¾è®°å½•çš„å…³é”®å­—ç¬¦ä¸²: ");
 	scanf("%s", s);
 	k.num = strlen(s) + 1;
 	strcpy(k.ch, s);
-	k.ch[k.num] = Nil; /* ÔÚ¹Ø¼ü×Ö·û´®×îºó¼Ó½áÊø·û */
+	k.ch[k.num] = Nil; /* åœ¨å…³é”®å­—ç¬¦ä¸²æœ€ååŠ ç»“æŸç¬¦ */
 	p = SearchTrie(t, k);
 	if (p)
 		pr(p);
 	else
-		printf("Ã»ÕÒµ½");
+		printf("æ²¡æ‰¾åˆ°");
 	printf("\n");
 	DestroyDSTable(&t);
 }

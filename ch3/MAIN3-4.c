@@ -1,4 +1,4 @@
-/* main3-4.c кЁпР╤сап(╥гя╜╩╥),╪ЛяИbo3-4.c╣джВЁлпР */
+/* main3-4.c И║╨Е╨▐И≤÷Е┬≈(И²·Е╬╙Г▌╞),Фё─И╙▄bo3-4.cГ └Д╦╩Г╗▀Е╨▐ */
 #include "../ch1/c1.h"
 typedef int QElemType;
 #include "c3-3.h"
@@ -16,35 +16,35 @@ void main()
 	QElemType d;
 	SqQueue Q;
 	InitQueue(&Q);
-	printf("ЁУй╪╩╞╤сап╨Сё╛╤сап©у╥Яё©%u(1:©у 0:╥Я)\n", QueueEmpty(Q));
-	printf("╤сапЁ╓╤хн╙ё╨%d\n", QueueLength(Q));
-	printf("гКйДхК╤сапт╙кь╦ЖйЩn: ");
+	printf("Е┬²Е╖▀Е▄√И≤÷Е┬≈Е░▌О╪▄И≤÷Е┬≈Г╘╨Е░╕О╪÷%u(1:Г╘╨ 0:Е░╕)\n", QueueEmpty(Q));
+	printf("И≤÷Е┬≈И∙©Е╨╕Д╦╨О╪ %d\n", QueueLength(Q));
+	printf("Х╞╥Х╬⌠Е┘╔И≤÷Е┬≈Е┘┐Г╢═Д╦╙Ф∙╟n: ");
 	scanf("%d", &n);
-	printf("гКйДхК%d╦ЖуШпм╤сапт╙кь:\n", n);
+	printf("Х╞╥Х╬⌠Е┘╔%dД╦╙Ф∙╢Е·▀И≤÷Е┬≈Е┘┐Г╢═:\n", n);
 	for (i = 0; i < n; i++)
 	{
 		scanf("%d", &d);
 		EnQueue(&Q, d);
 	}
-	printf("╤сапЁ╓╤хн╙ё╨%d\n", QueueLength(Q));
-	printf("ожтз╤сап©у╥Яё©%u(1:©у 0:╥Я)\n", QueueEmpty(Q));
-	printf("ожтз╤сапжп╣дт╙кьн╙: \n");
+	printf("И≤÷Е┬≈И∙©Е╨╕Д╦╨О╪ %d\n", QueueLength(Q));
+	printf("Г▌╟Е°╗И≤÷Е┬≈Г╘╨Е░╕О╪÷%u(1:Г╘╨ 0:Е░╕)\n", QueueEmpty(Q));
+	printf("Г▌╟Е°╗И≤÷Е┬≈Д╦╜Г └Е┘┐Г╢═Д╦╨: \n");
 	QueueTraverse(Q, visit);
 	DeQueue(&Q, &d);
-	printf("и╬ЁЩ╤см╥т╙кь%d\n", d);
-	printf("╤сапжп╣дт╙кьн╙: \n");
+	printf("Е┬═И≥╓И≤÷Е╓╢Е┘┐Г╢═%d\n", d);
+	printf("И≤÷Е┬≈Д╦╜Г └Е┘┐Г╢═Д╦╨: \n");
 	QueueTraverse(Q, visit);
 	j = GetHead(Q, &d);
 	if (j)
-		printf("╤см╥т╙кьн╙: %d\n", d);
+		printf("И≤÷Е╓╢Е┘┐Г╢═Д╦╨: %d\n", d);
 	else
-		printf("нч╤см╥т╙кь(©у╤сап)\n");
+		printf("Ф≈═И≤÷Е╓╢Е┘┐Г╢═(Г╘╨И≤÷Е┬≈)\n");
 	ClearQueue(&Q);
-	printf("гЕ©у╤сап╨С, ╤сап©у╥Яё©%u(1:©у 0:╥Я)\n", QueueEmpty(Q));
+	printf("Ф╦┘Г╘╨И≤÷Е┬≈Е░▌, И≤÷Е┬≈Г╘╨Е░╕О╪÷%u(1:Г╘╨ 0:Е░╕)\n", QueueEmpty(Q));
 	j = GetHead(Q, &d);
 	if (j)
-		printf("╤см╥т╙кьн╙: %d\n", d);
+		printf("И≤÷Е╓╢Е┘┐Г╢═Д╦╨: %d\n", d);
 	else
-		printf("нч╤см╥т╙кь(©у╤сап)\n");
+		printf("Ф≈═И≤÷Е╓╢Е┘┐Г╢═(Г╘╨И≤÷Е┬≈)\n");
 	DestroyQueue(&Q);
 }

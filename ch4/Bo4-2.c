@@ -1,22 +1,22 @@
- /* bo4-2.c ´®²ÉÓÃ¶Ñ·ÖÅä´æ´¢½á¹¹(ÓÉc4-2.h¶¨Òå)µÄ»ù±¾²Ù×÷(15¸ö) */
- /* °üÀ¨Ëã·¨4.1¡¢4.4 */
+ /* bo4-2.c ä¸²é‡‡ç”¨å †åˆ†é…å­˜å‚¨ç»“æ„(ç”±c4-2.hå®šä¹‰)çš„åŸºæœ¬æ“ä½œ(15ä¸ª) */
+ /* åŒ…æ‹¬ç®—æ³•4.1ã€4.4 */
  Status StrAssign(HString *T,char *chars)
- { /* Éú³ÉÒ»¸öÆäÖµµÈÓÚ´®³£Á¿charsµÄ´®T */
+ { /* ç”Ÿæˆä¸€ä¸ªå…¶å€¼ç­‰äºä¸²å¸¸é‡charsçš„ä¸²T */
    int i,j;
    if((*T).ch)
-     free((*T).ch); /* ÊÍ·ÅTÔ­ÓĞ¿Õ¼ä */
-   i=strlen(chars); /* ÇócharsµÄ³¤¶Èi */
+     free((*T).ch); /* é‡Šæ”¾TåŸæœ‰ç©ºé—´ */
+   i=strlen(chars); /* æ±‚charsçš„é•¿åº¦i */
    if(!i)
-   { /* charsµÄ³¤¶ÈÎª0 */
+   { /* charsçš„é•¿åº¦ä¸º0 */
      (*T).ch=NULL;
      (*T).length=0;
    }
    else
-   { /* charsµÄ³¤¶È²»Îª0 */
-     (*T).ch=(char*)malloc(i*sizeof(char)); /* ·ÖÅä´®¿Õ¼ä */
-     if(!(*T).ch) /* ·ÖÅä´®¿Õ¼äÊ§°Ü */
+   { /* charsçš„é•¿åº¦ä¸ä¸º0 */
+     (*T).ch=(char*)malloc(i*sizeof(char)); /* åˆ†é…ä¸²ç©ºé—´ */
+     if(!(*T).ch) /* åˆ†é…ä¸²ç©ºé—´å¤±è´¥ */
        exit(OVERFLOW);
-     for(j=0;j<i;j++) /* ¿½±´´® */
+     for(j=0;j<i;j++) /* æ‹·è´ä¸² */
        (*T).ch[j]=chars[j];
      (*T).length=i;
    }
@@ -24,21 +24,21 @@
  }
 
  Status StrCopy(HString *T,HString S)
- { /* ³õÊ¼Ìõ¼ş:´®S´æÔÚ¡£²Ù×÷½á¹û: ÓÉ´®S¸´ÖÆµÃ´®T */
+ { /* åˆå§‹æ¡ä»¶:ä¸²Så­˜åœ¨ã€‚æ“ä½œç»“æœ: ç”±ä¸²Så¤åˆ¶å¾—ä¸²T */
    int i;
    if((*T).ch)
-     free((*T).ch); /* ÊÍ·ÅTÔ­ÓĞ¿Õ¼ä */
-   (*T).ch=(char*)malloc(S.length*sizeof(char)); /* ·ÖÅä´®¿Õ¼ä */
-   if(!(*T).ch) /* ·ÖÅä´®¿Õ¼äÊ§°Ü */
+     free((*T).ch); /* é‡Šæ”¾TåŸæœ‰ç©ºé—´ */
+   (*T).ch=(char*)malloc(S.length*sizeof(char)); /* åˆ†é…ä¸²ç©ºé—´ */
+   if(!(*T).ch) /* åˆ†é…ä¸²ç©ºé—´å¤±è´¥ */
      exit(OVERFLOW);
-   for(i=0;i<S.length;i++) /* ¿½±´´® */
+   for(i=0;i<S.length;i++) /* æ‹·è´ä¸² */
      (*T).ch[i]=S.ch[i];
    (*T).length=S.length;
    return OK;
  }
 
  Status StrEmpty(HString S)
- { /* ³õÊ¼Ìõ¼ş: ´®S´æÔÚ¡£²Ù×÷½á¹û: ÈôSÎª¿Õ´®,Ôò·µ»ØTRUE,·ñÔò·µ»ØFALSE */
+ { /* åˆå§‹æ¡ä»¶: ä¸²Så­˜åœ¨ã€‚æ“ä½œç»“æœ: è‹¥Sä¸ºç©ºä¸²,åˆ™è¿”å›TRUE,å¦åˆ™è¿”å›FALSE */
    if(S.length==0&&S.ch==NULL)
      return TRUE;
    else
@@ -46,7 +46,7 @@
  }
 
  int StrCompare(HString S,HString T)
- { /* ÈôS>T,Ôò·µ»ØÖµ>0;ÈôS=T,Ôò·µ»ØÖµ=0;ÈôS<T,Ôò·µ»ØÖµ<0 */
+ { /* è‹¥S>T,åˆ™è¿”å›å€¼>0;è‹¥S=T,åˆ™è¿”å›å€¼=0;è‹¥S<T,åˆ™è¿”å›å€¼<0 */
    int i;
    for(i=0;i<S.length&&i<T.length;++i)
      if(S.ch[i]!=T.ch[i])
@@ -55,12 +55,12 @@
  }
 
  int StrLength(HString S)
- { /* ·µ»ØSµÄÔªËØ¸öÊı,³ÆÎª´®µÄ³¤¶È */
+ { /* è¿”å›Sçš„å…ƒç´ ä¸ªæ•°,ç§°ä¸ºä¸²çš„é•¿åº¦ */
    return S.length;
  }
 
  Status ClearString(HString *S)
- { /* ½«SÇåÎª¿Õ´® */
+ { /* å°†Sæ¸…ä¸ºç©ºä¸² */
    if((*S).ch)
    {
      free((*S).ch);
@@ -71,10 +71,10 @@
  }
 
  Status Concat(HString *T,HString S1,HString S2)
- { /* ÓÃT·µ»ØÓÉS1ºÍS2Áª½Ó¶ø³ÉµÄĞÂ´® */
+ { /* ç”¨Tè¿”å›ç”±S1å’ŒS2è”æ¥è€Œæˆçš„æ–°ä¸² */
    int i;
    if((*T).ch)
-     free((*T).ch); /* ÊÍ·Å¾É¿Õ¼ä */
+     free((*T).ch); /* é‡Šæ”¾æ—§ç©ºé—´ */
    (*T).length=S1.length+S2.length;
    (*T).ch=(char *)malloc((*T).length*sizeof(char));
    if(!(*T).ch)
@@ -87,20 +87,20 @@
  }
 
  Status SubString(HString *Sub, HString S,int pos,int len)
- { /* ÓÃSub·µ»Ø´®SµÄµÚpos¸ö×Ö·ûÆğ³¤¶ÈÎªlenµÄ×Ó´®¡£ */
-   /* ÆäÖĞ,1¡Üpos¡ÜStrLength(S)ÇÒ0¡Ülen¡ÜStrLength(S)-pos+1 */
+ { /* ç”¨Subè¿”å›ä¸²Sçš„ç¬¬posä¸ªå­—ç¬¦èµ·é•¿åº¦ä¸ºlençš„å­ä¸²ã€‚ */
+   /* å…¶ä¸­,1â‰¤posâ‰¤StrLength(S)ä¸”0â‰¤lenâ‰¤StrLength(S)-pos+1 */
    int i;
    if(pos<1||pos>S.length||len<0||len>S.length-pos+1)
      return ERROR;
    if((*Sub).ch)
-     free((*Sub).ch); /* ÊÍ·Å¾É¿Õ¼ä */
-   if(!len) /* ¿Õ×Ó´® */
+     free((*Sub).ch); /* é‡Šæ”¾æ—§ç©ºé—´ */
+   if(!len) /* ç©ºå­ä¸² */
    {
      (*Sub).ch=NULL;
      (*Sub).length=0;
    }
    else
-   { /* ÍêÕû×Ó´® */
+   { /* å®Œæ•´å­ä¸² */
      (*Sub).ch=(char*)malloc(len*sizeof(char));
      if(!(*Sub).ch)
        exit(OVERFLOW);
@@ -112,14 +112,14 @@
  }
 
  void InitString(HString *T)
- { /* ³õÊ¼»¯(²úÉú¿Õ´®)×Ö·û´®T¡£Áí¼Ó */
+ { /* åˆå§‹åŒ–(äº§ç”Ÿç©ºä¸²)å­—ç¬¦ä¸²Tã€‚å¦åŠ  */
    (*T).length=0;
    (*T).ch=NULL;
  }
 
- int Index(HString S,HString T,int pos) /* Ëã·¨4.1 */
- { /* TÎª·Ç¿Õ´®¡£ÈôÖ÷´®SÖĞµÚpos¸ö×Ö·ûÖ®ºó´æÔÚÓëTÏàµÈµÄ×Ó´®, */
-   /* Ôò·µ»ØµÚÒ»¸öÕâÑùµÄ×Ó´®ÔÚSÖĞµÄÎ»ÖÃ,·ñÔò·µ»Ø0 */
+ int Index(HString S,HString T,int pos) /* ç®—æ³•4.1 */
+ { /* Tä¸ºéç©ºä¸²ã€‚è‹¥ä¸»ä¸²Sä¸­ç¬¬posä¸ªå­—ç¬¦ä¹‹åå­˜åœ¨ä¸Tç›¸ç­‰çš„å­ä¸², */
+   /* åˆ™è¿”å›ç¬¬ä¸€ä¸ªè¿™æ ·çš„å­ä¸²åœ¨Sä¸­çš„ä½ç½®,å¦åˆ™è¿”å›0 */
    int n,m,i;
    HString sub;
    InitString(&sub);
@@ -140,27 +140,27 @@
    return 0;
   }
 
- Status StrInsert(HString *S,int pos,HString T) /* Ëã·¨4.4 */
- { /* 1¡Üpos¡ÜStrLength(S)+1¡£ÔÚ´®SµÄµÚpos¸ö×Ö·ûÖ®Ç°²åÈë´®T */
+ Status StrInsert(HString *S,int pos,HString T) /* ç®—æ³•4.4 */
+ { /* 1â‰¤posâ‰¤StrLength(S)+1ã€‚åœ¨ä¸²Sçš„ç¬¬posä¸ªå­—ç¬¦ä¹‹å‰æ’å…¥ä¸²T */
    int i;
-   if(pos<1||pos>(*S).length+1) /* pos²»ºÏ·¨ */
+   if(pos<1||pos>(*S).length+1) /* posä¸åˆæ³• */
      return ERROR;
-   if(T.length) /* T·Ç¿Õ,ÔòÖØĞÂ·ÖÅä¿Õ¼ä,²åÈëT */
+   if(T.length) /* Téç©º,åˆ™é‡æ–°åˆ†é…ç©ºé—´,æ’å…¥T */
    {
      (*S).ch=(char*)realloc((*S).ch,((*S).length+T.length)*sizeof(char));
      if(!(*S).ch)
        exit(OVERFLOW);
-     for(i=(*S).length-1;i>=pos-1;--i) /* Îª²åÈëT¶øÌÚ³öÎ»ÖÃ */
+     for(i=(*S).length-1;i>=pos-1;--i) /* ä¸ºæ’å…¥Tè€Œè…¾å‡ºä½ç½® */
        (*S).ch[i+T.length]=(*S).ch[i];
      for(i=0;i<T.length;i++)
-       (*S).ch[pos-1+i]=T.ch[i]; /* ²åÈëT */
+       (*S).ch[pos-1+i]=T.ch[i]; /* æ’å…¥T */
      (*S).length+=T.length;
    }
    return OK;
  }
 
  Status StrDelete(HString *S,int pos,int len)
- { /* ´Ó´®SÖĞÉ¾³ıµÚpos¸ö×Ö·ûÆğ³¤¶ÈÎªlenµÄ×Ó´® */
+ { /* ä»ä¸²Sä¸­åˆ é™¤ç¬¬posä¸ªå­—ç¬¦èµ·é•¿åº¦ä¸ºlençš„å­ä¸² */
    int i;
    if((*S).length<pos+len-1)
      exit(ERROR);
@@ -172,30 +172,30 @@
  }
 
  Status Replace(HString *S,HString T,HString V)
- { /* ³õÊ¼Ìõ¼ş: ´®S,TºÍV´æÔÚ,TÊÇ·Ç¿Õ´®£¨´Ëº¯ÊıÓë´®µÄ´æ´¢½á¹¹ÎŞ¹Ø£© */
-   /* ²Ù×÷½á¹û: ÓÃVÌæ»»Ö÷´®SÖĞ³öÏÖµÄËùÓĞÓëTÏàµÈµÄ²»ÖØµşµÄ×Ó´® */
-   int i=1; /* ´Ó´®SµÄµÚÒ»¸ö×Ö·ûÆğ²éÕÒ´®T */
-   if(StrEmpty(T)) /* TÊÇ¿Õ´® */
+ { /* åˆå§‹æ¡ä»¶: ä¸²S,Tå’ŒVå­˜åœ¨,Tæ˜¯éç©ºä¸²ï¼ˆæ­¤å‡½æ•°ä¸ä¸²çš„å­˜å‚¨ç»“æ„æ— å…³ï¼‰ */
+   /* æ“ä½œç»“æœ: ç”¨Væ›¿æ¢ä¸»ä¸²Sä¸­å‡ºç°çš„æ‰€æœ‰ä¸Tç›¸ç­‰çš„ä¸é‡å çš„å­ä¸² */
+   int i=1; /* ä»ä¸²Sçš„ç¬¬ä¸€ä¸ªå­—ç¬¦èµ·æŸ¥æ‰¾ä¸²T */
+   if(StrEmpty(T)) /* Tæ˜¯ç©ºä¸² */
      return ERROR;
    do
    {
-     i=Index(*S,T,i); /* ½á¹ûiÎª´ÓÉÏÒ»¸öiÖ®ºóÕÒµ½µÄ×Ó´®TµÄÎ»ÖÃ */
-     if(i) /* ´®SÖĞ´æÔÚ´®T */
+     i=Index(*S,T,i); /* ç»“æœiä¸ºä»ä¸Šä¸€ä¸ªiä¹‹åæ‰¾åˆ°çš„å­ä¸²Tçš„ä½ç½® */
+     if(i) /* ä¸²Sä¸­å­˜åœ¨ä¸²T */
      {
-       StrDelete(S,i,StrLength(T)); /* É¾³ı¸Ã´®T */
-       StrInsert(S,i,V); /* ÔÚÔ­´®TµÄÎ»ÖÃ²åÈë´®V */
-       i+=StrLength(V); /* ÔÚ²åÈëµÄ´®VºóÃæ¼ÌĞø²éÕÒ´®T */
+       StrDelete(S,i,StrLength(T)); /* åˆ é™¤è¯¥ä¸²T */
+       StrInsert(S,i,V); /* åœ¨åŸä¸²Tçš„ä½ç½®æ’å…¥ä¸²V */
+       i+=StrLength(V); /* åœ¨æ’å…¥çš„ä¸²Våé¢ç»§ç»­æŸ¥æ‰¾ä¸²T */
      }
    }while(i);
    return OK;
  }
 
  void DestroyString()
- { /* ¶Ñ·ÖÅäÀàĞÍµÄ×Ö·û´®ÎŞ·¨Ïú»Ù */
+ { /* å †åˆ†é…ç±»å‹çš„å­—ç¬¦ä¸²æ— æ³•é”€æ¯ */
  }
 
  void StrPrint(HString T)
- { /* Êä³öT×Ö·û´®¡£Áí¼Ó */
+ { /* è¾“å‡ºTå­—ç¬¦ä¸²ã€‚å¦åŠ  */
    int i;
    for(i=0;i<T.length;i++)
      printf("%c",T.ch[i]);

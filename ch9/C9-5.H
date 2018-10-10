@@ -1,38 +1,38 @@
- /* c9-5.h Trie¼üÊ÷ÀàĞÍ */
- #define MAXKEYLEN 16 /* ¹Ø¼ü×ÖµÄ×î´ó³¤¶È£¬Í¬c9-4.h */
+ /* c9-5.h Trieé”®æ ‘ç±»å‹ */
+ #define MAXKEYLEN 16 /* å…³é”®å­—çš„æœ€å¤§é•¿åº¦ï¼ŒåŒc9-4.h */
  typedef struct
  {
-   char ch[MAXKEYLEN]; /* ¹Ø¼ü×Ö */
-   int num; /* ¹Ø¼ü×Ö³¤¶È */
- }KeysType; /* ¹Ø¼ü×ÖÀàĞÍ£¬Í¬c9-4.h */
+   char ch[MAXKEYLEN]; /* å…³é”®å­— */
+   int num; /* å…³é”®å­—é•¿åº¦ */
+ }KeysType; /* å…³é”®å­—ç±»å‹ï¼ŒåŒc9-4.h */
 
  typedef struct
  {
-   KeysType key; /* ¹Ø¼ü×Ö */
-   Others others; /* ÆäËü²¿·Ö(ÓÉÖ÷³Ì¶¨Òå) */
- }Record; /* ¼ÇÂ¼ÀàĞÍ£¬Í¬c9-4.h */
+   KeysType key; /* å…³é”®å­— */
+   Others others; /* å…¶å®ƒéƒ¨åˆ†(ç”±ä¸»ç¨‹å®šä¹‰) */
+ }Record; /* è®°å½•ç±»å‹ï¼ŒåŒc9-4.h */
 
- typedef enum{LEAF,BRANCH}NodeKind; /* ½áµãÖÖÀà:{Ò¶×Ó,·ÖÖ§}£¬Í¬c9-4.h */
+ typedef enum{LEAF,BRANCH}NodeKind; /* ç»“ç‚¹ç§ç±»:{å¶å­,åˆ†æ”¯}ï¼ŒåŒc9-4.h */
 
- typedef struct TrieNode /* Trie¼üÊ÷ÀàĞÍ */
+ typedef struct TrieNode /* Trieé”®æ ‘ç±»å‹ */
  {
    NodeKind kind;
    union
    {
-     struct /* Ò¶×Ó½áµã */
+     struct /* å¶å­ç»“ç‚¹ */
      {
        KeysType K;
        Record *infoptr;
      }lf;
-     struct /* ·ÖÖ§½áµã */
+     struct /* åˆ†æ”¯ç»“ç‚¹ */
      {
-       struct TrieNode *ptr[LENGTH]; /* LENGTHÎª½áµãµÄ×î´ó¶È+1,ÔÚÖ÷³Ì¶¨Òå */
-     /*  int num; ¸Ä */
+       struct TrieNode *ptr[LENGTH]; /* LENGTHä¸ºç»“ç‚¹çš„æœ€å¤§åº¦+1,åœ¨ä¸»ç¨‹å®šä¹‰ */
+     /*  int num; æ”¹ */
      }bh;
    }a;
  }TrieNode,*TrieTree;
 
- /* ¶ÔÁ½¸ö×Ö·û´®ĞÍ¹Ø¼ü×ÖµÄ±È½ÏÔ¼¶¨ÎªÈçÏÂµÄºê¶¨Òå */
+ /* å¯¹ä¸¤ä¸ªå­—ç¬¦ä¸²å‹å…³é”®å­—çš„æ¯”è¾ƒçº¦å®šä¸ºå¦‚ä¸‹çš„å®å®šä¹‰ */
  #define EQ(a,b) (!strcmp((a),(b)))
  #define LT(a,b) (strcmp((a),(b))<0)
  #define LQ(a,b) (strcmp((a),(b))<=0)

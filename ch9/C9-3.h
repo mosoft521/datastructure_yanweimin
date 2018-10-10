@@ -1,25 +1,25 @@
- /* c9-3.h BÊ÷µÄ½áµãÀàĞÍ */
+ /* c9-3.h Bæ ‘çš„ç»“ç‚¹ç±»å‹ */
  typedef struct
  {
-   KeyType key; /* ¹Ø¼ü×Ö */
-   Others others; /* ÆäËü²¿·Ö(ÓÉÖ÷³Ì¶¨Òå) */
- }Record; /* ¼ÇÂ¼ÀàĞÍ */
+   KeyType key; /* å…³é”®å­— */
+   Others others; /* å…¶å®ƒéƒ¨åˆ†(ç”±ä¸»ç¨‹å®šä¹‰) */
+ }Record; /* è®°å½•ç±»å‹ */
 
  typedef struct BTNode
  {
-   int keynum; /* ½áµãÖĞ¹Ø¼ü×Ö¸öÊı£¬¼´½áµãµÄ´óĞ¡ */
-   struct BTNode *parent; /* Ö¸ÏòË«Ç×½áµã */
-   struct Node /* ½áµãÏòÁ¿ÀàĞÍ */
+   int keynum; /* ç»“ç‚¹ä¸­å…³é”®å­—ä¸ªæ•°ï¼Œå³ç»“ç‚¹çš„å¤§å° */
+   struct BTNode *parent; /* æŒ‡å‘åŒäº²ç»“ç‚¹ */
+   struct Node /* ç»“ç‚¹å‘é‡ç±»å‹ */
    {
-     KeyType key; /* ¹Ø¼ü×ÖÏòÁ¿ */
-     struct BTNode *ptr; /* ×ÓÊ÷Ö¸ÕëÏòÁ¿ */
-     Record *recptr; /* ¼ÇÂ¼Ö¸ÕëÏòÁ¿ */
-   }node[m+1]; /* key,recptrµÄ0ºÅµ¥ÔªÎ´ÓÃ */
- }BTNode,*BTree; /* BÊ÷½áµãºÍBÊ÷µÄÀàĞÍ */
+     KeyType key; /* å…³é”®å­—å‘é‡ */
+     struct BTNode *ptr; /* å­æ ‘æŒ‡é’ˆå‘é‡ */
+     Record *recptr; /* è®°å½•æŒ‡é’ˆå‘é‡ */
+   }node[m+1]; /* key,recptrçš„0å·å•å…ƒæœªç”¨ */
+ }BTNode,*BTree; /* Bæ ‘ç»“ç‚¹å’ŒBæ ‘çš„ç±»å‹ */
 
  typedef struct
  {
-   BTNode *pt; /* Ö¸ÏòÕÒµ½µÄ½áµã */
-   int i; /* 1..m£¬ÔÚ½áµãÖĞµÄ¹Ø¼ü×ÖĞòºÅ */
-   int tag; /* 1:²éÕÒ³É¹¦£¬O:²éÕÒÊ§°Ü */
- }Result; /* BÊ÷µÄ²éÕÒ½á¹ûÀàĞÍ */
+   BTNode *pt; /* æŒ‡å‘æ‰¾åˆ°çš„ç»“ç‚¹ */
+   int i; /* 1..mï¼Œåœ¨ç»“ç‚¹ä¸­çš„å…³é”®å­—åºå· */
+   int tag; /* 1:æŸ¥æ‰¾æˆåŠŸï¼ŒO:æŸ¥æ‰¾å¤±è´¥ */
+ }Result; /* Bæ ‘çš„æŸ¥æ‰¾ç»“æœç±»å‹ */

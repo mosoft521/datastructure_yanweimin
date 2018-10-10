@@ -1,19 +1,19 @@
-/* alg10-11.c Á´Ê½»ùÊıÅÅĞò */
+/* alg10-11.c é“¾å¼åŸºæ•°æ’åº */
 
 #include "../ch1/c1.h"
-typedef int InfoType; /* ¶¨ÒåÆäËüÊı¾İÏîµÄÀàĞÍ */
-typedef int KeyType; /* ¶¨ÒåRedTypeÀàĞÍµÄ¹Ø¼ü×ÖÎªÕûĞÍ */
+typedef int InfoType; /* å®šä¹‰å…¶å®ƒæ•°æ®é¡¹çš„ç±»å‹ */
+typedef int KeyType; /* å®šä¹‰RedTypeç±»å‹çš„å…³é”®å­—ä¸ºæ•´å‹ */
 typedef struct
 {
-	KeyType key; /* ¹Ø¼ü×ÖÏî */
-	InfoType otherinfo; /* ÆäËüÊı¾İÏî */
-}RedType; /* ¼ÇÂ¼ÀàĞÍ(Í¬c10-1.h) */
-typedef char KeysType; /* ¶¨Òå¹Ø¼ü×ÖÀàĞÍÎª×Ö·ûĞÍ */
+	KeyType key; /* å…³é”®å­—é¡¹ */
+	InfoType otherinfo; /* å…¶å®ƒæ•°æ®é¡¹ */
+}RedType; /* è®°å½•ç±»å‹(åŒc10-1.h) */
+typedef char KeysType; /* å®šä¹‰å…³é”®å­—ç±»å‹ä¸ºå­—ç¬¦å‹ */
 #include "c10-3.h"
 void InitList(SLList *L, RedType D[], int n)
-{ /* ³õÊ¼»¯¾²Ì¬Á´±íL£¨°ÑÊı×éDÖĞµÄÊı¾İ´æÓÚLÖĞ£© */
+{ /* åˆå§‹åŒ–é™æ€é“¾è¡¨Lï¼ˆæŠŠæ•°ç»„Dä¸­çš„æ•°æ®å­˜äºLä¸­ï¼‰ */
 	char c[MAX_NUM_OF_KEY], c1[MAX_NUM_OF_KEY];
-	int i, j, max = D[0].key; /* maxÎª¹Ø¼ü×ÖµÄ×î´óÖµ */
+	int i, j, max = D[0].key; /* maxä¸ºå…³é”®å­—çš„æœ€å¤§å€¼ */
 	for (i = 1; i < n; i++)
 		if (max < D[i].key)
 			max = D[i].key;
@@ -22,8 +22,8 @@ void InitList(SLList *L, RedType D[], int n)
 	for (i = 1; i <= n; i++)
 	{
 		(*L).r[i].otheritems = D[i - 1].otherinfo;
-		_itoa(D[i - 1].key, c, 10); /* ½«10½øÖÆÕûĞÍ×ª»¯Îª×Ö·ûĞÍ,´æÈëc */
-		for (j = strlen(c); j < (*L).keynum; j++) /* ÈôcµÄ³¤¶È<maxµÄÎ»Êı,ÔÚcÇ°²¹'0' */
+		_itoa(D[i - 1].key, c, 10); /* å°†10è¿›åˆ¶æ•´å‹è½¬åŒ–ä¸ºå­—ç¬¦å‹,å­˜å…¥c */
+		for (j = strlen(c); j < (*L).keynum; j++) /* è‹¥cçš„é•¿åº¦<maxçš„ä½æ•°,åœ¨cå‰è¡¥'0' */
 		{
 			strcpy(c1, "0");
 			strcat(c1, c);
@@ -35,54 +35,54 @@ void InitList(SLList *L, RedType D[], int n)
 }
 
 int ord(char c)
-{ /* ·µ»ØkµÄÓ³Éä(¸öÎ»ÕûÊı) */
+{ /* è¿”å›kçš„æ˜ å°„(ä¸ªä½æ•´æ•°) */
 	return c - '0';
 }
 
-void Distribute(SLCell r[], int i, ArrType f, ArrType e) /* Ëã·¨10.15 */
-{ /* ¾²Ì¬¼ü±íLµÄrÓòÖĞ¼ÇÂ¼ÒÑ°´(keys[0],...,keys[i-1])ÓĞĞò¡£±¾Ëã·¨°´ */
-  /* µÚi¸ö¹Ø¼ü×Ökeys[i]½¨Á¢RADIX¸ö×Ó±í,Ê¹Í¬Ò»×Ó±íÖĞ¼ÇÂ¼µÄkeys[i]ÏàÍ¬¡£ */
-  /* f[0..RADIX-1]ºÍe[0..RADIX-1]·Ö±ğÖ¸Ïò¸÷×Ó±íÖĞµÚÒ»¸öºÍ×îºóÒ»¸ö¼ÇÂ¼ */
+void Distribute(SLCell r[], int i, ArrType f, ArrType e) /* ç®—æ³•10.15 */
+{ /* é™æ€é”®è¡¨Lçš„råŸŸä¸­è®°å½•å·²æŒ‰(keys[0],...,keys[i-1])æœ‰åºã€‚æœ¬ç®—æ³•æŒ‰ */
+  /* ç¬¬iä¸ªå…³é”®å­—keys[i]å»ºç«‹RADIXä¸ªå­è¡¨,ä½¿åŒä¸€å­è¡¨ä¸­è®°å½•çš„keys[i]ç›¸åŒã€‚ */
+  /* f[0..RADIX-1]å’Œe[0..RADIX-1]åˆ†åˆ«æŒ‡å‘å„å­è¡¨ä¸­ç¬¬ä¸€ä¸ªå’Œæœ€åä¸€ä¸ªè®°å½• */
 	int j, p;
 	for (j = 0; j < RADIX; ++j)
-		f[j] = 0; /* ¸÷×Ó±í³õÊ¼»¯Îª¿Õ±í */
+		f[j] = 0; /* å„å­è¡¨åˆå§‹åŒ–ä¸ºç©ºè¡¨ */
 	for (p = r[0].next; p; p = r[p].next)
 	{
-		j = ord(r[p].keys[i]); /* ord½«¼ÇÂ¼ÖĞµÚi¸ö¹Ø¼ü×ÖÓ³Éäµ½[0..RADIX-1] */
+		j = ord(r[p].keys[i]); /* ordå°†è®°å½•ä¸­ç¬¬iä¸ªå…³é”®å­—æ˜ å°„åˆ°[0..RADIX-1] */
 		if (!f[j])
 			f[j] = p;
 		else
 			r[e[j]].next = p;
-		e[j] = p; /* ½«pËùÖ¸µÄ½áµã²åÈëµÚj¸ö×Ó±íÖĞ */
+		e[j] = p; /* å°†pæ‰€æŒ‡çš„ç»“ç‚¹æ’å…¥ç¬¬jä¸ªå­è¡¨ä¸­ */
 	}
 }
 
 int succ(int i)
-{ /* Çóºó¼Ìº¯Êı */
+{ /* æ±‚åç»§å‡½æ•° */
 	return ++i;
 }
 
 void Collect(SLCell r[], ArrType f, ArrType e)
-{ /* ±¾Ëã·¨°´keys[i]×ÔĞ¡ÖÁ´óµØ½«f[0..RADIX-1]ËùÖ¸¸÷×Ó±íÒÀ´ÎÁ´½Ó³É */
-  /* Ò»¸öÁ´±í£¬e[0..RADIX-1]Îª¸÷×Ó±íµÄÎ²Ö¸Õë¡£Ëã·¨10.16 */
+{ /* æœ¬ç®—æ³•æŒ‰keys[i]è‡ªå°è‡³å¤§åœ°å°†f[0..RADIX-1]æ‰€æŒ‡å„å­è¡¨ä¾æ¬¡é“¾æ¥æˆ */
+  /* ä¸€ä¸ªé“¾è¡¨ï¼Œe[0..RADIX-1]ä¸ºå„å­è¡¨çš„å°¾æŒ‡é’ˆã€‚ç®—æ³•10.16 */
 	int j, t;
-	for (j = 0; !f[j]; j = succ(j)); /* ÕÒµÚÒ»¸ö·Ç¿Õ×Ó±í£¬succÎªÇóºó¼Ìº¯Êı */
+	for (j = 0; !f[j]; j = succ(j)); /* æ‰¾ç¬¬ä¸€ä¸ªéç©ºå­è¡¨ï¼Œsuccä¸ºæ±‚åç»§å‡½æ•° */
 	r[0].next = f[j];
-	t = e[j]; /* r[0].nextÖ¸ÏòµÚÒ»¸ö·Ç¿Õ×Ó±íÖĞµÚÒ»¸ö½áµã */
+	t = e[j]; /* r[0].nextæŒ‡å‘ç¬¬ä¸€ä¸ªéç©ºå­è¡¨ä¸­ç¬¬ä¸€ä¸ªç»“ç‚¹ */
 	while (j < RADIX - 1)
 	{
-		for (j = succ(j); j < RADIX - 1 && !f[j]; j = succ(j)); /* ÕÒÏÂÒ»¸ö·Ç¿Õ×Ó±í */
+		for (j = succ(j); j < RADIX - 1 && !f[j]; j = succ(j)); /* æ‰¾ä¸‹ä¸€ä¸ªéç©ºå­è¡¨ */
 		if (f[j])
-		{ /* Á´½ÓÁ½¸ö·Ç¿Õ×Ó±í */
+		{ /* é“¾æ¥ä¸¤ä¸ªéç©ºå­è¡¨ */
 			r[t].next = f[j];
 			t = e[j];
 		}
 	}
-	r[t].next = 0; /* tÖ¸Ïò×îºóÒ»¸ö·Ç¿Õ×Ó±íÖĞµÄ×îºóÒ»¸ö½áµã */
+	r[t].next = 0; /* tæŒ‡å‘æœ€åä¸€ä¸ªéç©ºå­è¡¨ä¸­çš„æœ€åä¸€ä¸ªç»“ç‚¹ */
 }
 
 void printl(SLList L)
-{ /* °´Á´±íÊä³ö¾²Ì¬Á´±í */
+{ /* æŒ‰é“¾è¡¨è¾“å‡ºé™æ€é“¾è¡¨ */
 	int i = L.r[0].next, j;
 	while (i)
 	{
@@ -94,25 +94,25 @@ void printl(SLList L)
 }
 
 void RadixSort(SLList *L)
-{ /* LÊÇ²ÉÓÃ¾²Ì¬Á´±í±íÊ¾µÄË³Ğò±í¡£¶ÔL×÷»ùÊıÅÅĞò£¬Ê¹µÃL³ÉÎª°´¹Ø¼ü×Ö */
-  /* ×ÔĞ¡µ½´óµÄÓĞĞò¾²Ì¬Á´±í£¬L.r[0]ÎªÍ·½áµã¡£Ëã·¨10.17 */
+{ /* Læ˜¯é‡‡ç”¨é™æ€é“¾è¡¨è¡¨ç¤ºçš„é¡ºåºè¡¨ã€‚å¯¹Lä½œåŸºæ•°æ’åºï¼Œä½¿å¾—Læˆä¸ºæŒ‰å…³é”®å­— */
+  /* è‡ªå°åˆ°å¤§çš„æœ‰åºé™æ€é“¾è¡¨ï¼ŒL.r[0]ä¸ºå¤´ç»“ç‚¹ã€‚ç®—æ³•10.17 */
 	int i;
 	ArrType f, e;
 	for (i = 0; i < (*L).recnum; ++i)
 		(*L).r[i].next = i + 1;
-	(*L).r[(*L).recnum].next = 0; /* ½«L¸ÄÔìÎª¾²Ì¬Á´±í */
+	(*L).r[(*L).recnum].next = 0; /* å°†Læ”¹é€ ä¸ºé™æ€é“¾è¡¨ */
 	for (i = 0; i < (*L).keynum; ++i)
-	{ /* °´×îµÍÎ»ÓÅÏÈÒÀ´Î¶Ô¸÷¹Ø¼ü×Ö½øĞĞ·ÖÅäºÍÊÕ¼¯ */
-		Distribute((*L).r, i, f, e); /* µÚiÌË·ÖÅä */
-		Collect((*L).r, f, e); /* µÚiÌËÊÕ¼¯ */
-		printf("µÚ%dÌËÊÕ¼¯ºó:\n", i + 1);
+	{ /* æŒ‰æœ€ä½ä½ä¼˜å…ˆä¾æ¬¡å¯¹å„å…³é”®å­—è¿›è¡Œåˆ†é…å’Œæ”¶é›† */
+		Distribute((*L).r, i, f, e); /* ç¬¬iè¶Ÿåˆ†é… */
+		Collect((*L).r, f, e); /* ç¬¬iè¶Ÿæ”¶é›† */
+		printf("ç¬¬%dè¶Ÿæ”¶é›†å:\n", i + 1);
 		printl(*L);
 		printf("\n");
 	}
 }
 
 void print(SLList L)
-{ /* °´Êı×éĞòºÅÊä³ö¾²Ì¬Á´±í */
+{ /* æŒ‰æ•°ç»„åºå·è¾“å‡ºé™æ€é“¾è¡¨ */
 	int i, j;
 	printf("keynum=%d recnum=%d\n", L.keynum, L.recnum);
 	for (i = 1; i <= L.recnum; i++)
@@ -124,8 +124,8 @@ void print(SLList L)
 	}
 }
 
-void Sort(SLList L, int adr[]) /* ¸Ä´Ë¾ä(ÀàĞÍ) */
-{ /* ÇóµÃadr[1..L.length]£¬adr[i]Îª¾²Ì¬Á´±íLµÄµÚi¸ö×îĞ¡¼ÇÂ¼µÄĞòºÅ */
+void Sort(SLList L, int adr[]) /* æ”¹æ­¤å¥(ç±»å‹) */
+{ /* æ±‚å¾—adr[1..L.length]ï¼Œadr[i]ä¸ºé™æ€é“¾è¡¨Lçš„ç¬¬iä¸ªæœ€å°è®°å½•çš„åºå· */
 	int i = 1, p = L.r[0].next;
 	while (p)
 	{
@@ -134,21 +134,21 @@ void Sort(SLList L, int adr[]) /* ¸Ä´Ë¾ä(ÀàĞÍ) */
 	}
 }
 
-void Rearrange(SLList *L, int adr[]) /* ¸Ä´Ë¾ä(ÀàĞÍ) */
-{ /* adr¸ø³ö¾²Ì¬Á´±íLµÄÓĞĞò´ÎĞò£¬¼´L.r[adr[i]]ÊÇµÚiĞ¡µÄ¼ÇÂ¼¡£ */
-  /* ±¾Ëã·¨°´adrÖØÅÅL.r£¬Ê¹ÆäÓĞĞò¡£Ëã·¨10.18(LµÄÀàĞÍÓĞ±ä) */
+void Rearrange(SLList *L, int adr[]) /* æ”¹æ­¤å¥(ç±»å‹) */
+{ /* adrç»™å‡ºé™æ€é“¾è¡¨Lçš„æœ‰åºæ¬¡åºï¼Œå³L.r[adr[i]]æ˜¯ç¬¬iå°çš„è®°å½•ã€‚ */
+  /* æœ¬ç®—æ³•æŒ‰adré‡æ’L.rï¼Œä½¿å…¶æœ‰åºã€‚ç®—æ³•10.18(Lçš„ç±»å‹æœ‰å˜) */
 	int i, j, k;
-	for (i = 1; i < (*L).recnum; ++i) /* ¸Ä´Ë¾ä(ÀàĞÍ) */
+	for (i = 1; i < (*L).recnum; ++i) /* æ”¹æ­¤å¥(ç±»å‹) */
 		if (adr[i] != i)
 		{
 			j = i;
-			(*L).r[0] = (*L).r[i]; /* Ôİ´æ¼ÇÂ¼(*L).r[i] */
+			(*L).r[0] = (*L).r[i]; /* æš‚å­˜è®°å½•(*L).r[i] */
 			while (adr[j] != i)
-			{ /* µ÷Õû(*L).r[adr[j]]µÄ¼ÇÂ¼µ½Î»Ö±µ½adr[j]=iÎªÖ¹ */
+			{ /* è°ƒæ•´(*L).r[adr[j]]çš„è®°å½•åˆ°ä½ç›´åˆ°adr[j]=iä¸ºæ­¢ */
 				k = adr[j];
 				(*L).r[j] = (*L).r[k];
 				adr[j] = j;
-				j = k; /* ¼ÇÂ¼°´Ğòµ½Î» */
+				j = k; /* è®°å½•æŒ‰åºåˆ°ä½ */
 			}
 			(*L).r[j] = (*L).r[0];
 			adr[j] = j;
@@ -162,14 +162,14 @@ void main()
 	SLList l;
 	int *adr;
 	InitList(&l, d, N);
-	printf("ÅÅĞòÇ°(nextÓò»¹Ã»¸³Öµ):\n");
+	printf("æ’åºå‰(nextåŸŸè¿˜æ²¡èµ‹å€¼):\n");
 	print(l);
 	RadixSort(&l);
-	printf("ÅÅĞòºó(¾²Ì¬Á´±í):\n");
+	printf("æ’åºå(é™æ€é“¾è¡¨):\n");
 	print(l);
 	adr = (int*)malloc((l.recnum)*sizeof(int));
 	Sort(l, adr);
 	Rearrange(&l, adr);
-	printf("ÅÅĞòºó(ÖØÅÅ¼ÇÂ¼):\n");
+	printf("æ’åºå(é‡æ’è®°å½•):\n");
 	print(l);
 }

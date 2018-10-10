@@ -1,18 +1,18 @@
-/* algo9-6.c ¼ìÑébo9-4.cµÄ³ÌĞò */
+/* algo9-6.c æ£€éªŒbo9-4.cçš„ç¨‹åº */
 #include "../ch1/c1.h"
-#define m 3 /* BÊ÷µÄ½×£¬ÔİÉèÎª3 */
-#define N 16 /* Êı¾İÔªËØ¸öÊı */
-#define MAX 5 /* ×Ö·û´®×î´ó³¤¶È+1 */
-typedef int KeyType; /* Éè¹Ø¼ü×ÖÓòÎªÕûĞÍ */
+#define m 3 /* Bæ ‘çš„é˜¶ï¼Œæš‚è®¾ä¸º3 */
+#define N 16 /* æ•°æ®å…ƒç´ ä¸ªæ•° */
+#define MAX 5 /* å­—ç¬¦ä¸²æœ€å¤§é•¿åº¦+1 */
+typedef int KeyType; /* è®¾å…³é”®å­—åŸŸä¸ºæ•´å‹ */
 typedef struct
 {
 	char info[MAX];
-}Others;/* ¼ÇÂ¼µÄÆäËü²¿·Ö */
+}Others;/* è®°å½•çš„å…¶å®ƒéƒ¨åˆ† */
 
 #include "c9-3.h"
 #include "bo9-4.c"
 
-void print(BTNode c, int i) /* TraverseDSTable()µ÷ÓÃµÄº¯Êı */
+void print(BTNode c, int i) /* TraverseDSTable()è°ƒç”¨çš„å‡½æ•° */
 {
 	printf("(%d,%s)", c.node[i].key, c.node[i].recptr->others.info);
 }
@@ -22,7 +22,7 @@ void main()
 	Record r[N] = { {24,"1"},{45,"2"},{53,"3"},{12,"4"},{37,"5"},
 				 {50,"6"},{61,"7"},{90,"8"},{100,"9"},{70,"10"},
 				 {3,"11"},{30,"12"},{26,"13"},{85,"14"},{3,"15"},
-		 {7,"16"} }; /* (ÒÔ½Ì¿ÆÊéÖĞÍ¼9.16ÎªÀı) */
+		 {7,"16"} }; /* (ä»¥æ•™ç§‘ä¹¦ä¸­å›¾9.16ä¸ºä¾‹) */
 	BTree t;
 	Result s;
 	int i;
@@ -33,15 +33,15 @@ void main()
 		if (!s.tag)
 			InsertBTree(&t, &r[i], s.pt, s.i);
 	}
-	printf("°´¹Ø¼ü×ÖµÄË³Ğò±éÀúB_Ê÷:\n");
+	printf("æŒ‰å…³é”®å­—çš„é¡ºåºéå†B_æ ‘:\n");
 	TraverseDSTable(t, print);
-	printf("\nÇëÊäÈë´ı²éÕÒ¼ÇÂ¼µÄ¹Ø¼ü×Ö: ");
+	printf("\nè¯·è¾“å…¥å¾…æŸ¥æ‰¾è®°å½•çš„å…³é”®å­—: ");
 	scanf("%d", &i);
 	s = SearchBTree(t, i);
 	if (s.tag)
 		print(*(s.pt), s.i);
 	else
-		printf("Ã»ÕÒµ½");
+		printf("æ²¡æ‰¾åˆ°");
 	printf("\n");
 	DestroyDSTable(&t);
 }

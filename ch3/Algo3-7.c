@@ -1,11 +1,11 @@
-/* algo3-7.c ±í´ïÊ½ÇóÖµ(·¶Î§ÎªintÀàĞÍ,ÊäÈë¸ºÊıÒªÓÃ(0-ÕıÊı)±íÊ¾) */
-typedef int SElemType; /* Õ»ÔªËØÀàĞÍÎªÕûĞÍ,¸Ä½øËã·¨3.4 */
+/* algo3-7.c è¡¨è¾¾å¼æ±‚å€¼(èŒƒå›´ä¸ºintç±»å‹,è¾“å…¥è´Ÿæ•°è¦ç”¨(0-æ­£æ•°)è¡¨ç¤º) */
+typedef int SElemType; /* æ ˆå…ƒç´ ç±»å‹ä¸ºæ•´å‹,æ”¹è¿›ç®—æ³•3.4 */
 #include "../ch1/c1.h"
 #include "c3-1.h"
 #include "bo3-1.c"
 
-SElemType Precede(SElemType t1, SElemType t2) /* Í¬algo3-6.c */
-{ /* ¸ù¾İ½Ì¿ÆÊé±í3.1£¬ÅĞ¶ÏÁ½·ûºÅµÄÓÅÏÈ¹ØÏµ */
+SElemType Precede(SElemType t1, SElemType t2) /* åŒalgo3-6.c */
+{ /* æ ¹æ®æ•™ç§‘ä¹¦è¡¨3.1ï¼Œåˆ¤æ–­ä¸¤ç¬¦å·çš„ä¼˜å…ˆå…³ç³» */
 	SElemType f;
 	switch (t2)
 	{
@@ -50,8 +50,8 @@ SElemType Precede(SElemType t1, SElemType t2) /* Í¬algo3-6.c */
 	return f;
 }
 
-Status In(SElemType c) /* ¼¸ºõÓëalgo3-6.cÏàÍ¬ */
-{ /* ÅĞ¶ÏcÊÇ·ñÎªÔËËã·û */
+Status In(SElemType c) /* å‡ ä¹ä¸algo3-6.cç›¸åŒ */
+{ /* åˆ¤æ–­cæ˜¯å¦ä¸ºè¿ç®—ç¬¦ */
 	switch (c)
 	{
 	case'+':
@@ -60,12 +60,12 @@ Status In(SElemType c) /* ¼¸ºõÓëalgo3-6.cÏàÍ¬ */
 	case'/':
 	case'(':
 	case')':
-	case'=':return TRUE; /* ´Ë¾ä²»Í¬ÓÚalgo3-6.c */
+	case'=':return TRUE; /* æ­¤å¥ä¸åŒäºalgo3-6.c */
 	default:return FALSE;
 	}
 }
 
-SElemType Operate(SElemType a, SElemType theta, SElemType b) /* ÓĞ¸Ä¶¯ */
+SElemType Operate(SElemType a, SElemType theta, SElemType b) /* æœ‰æ”¹åŠ¨ */
 {
 	SElemType c;
 	switch (theta)
@@ -81,35 +81,35 @@ SElemType Operate(SElemType a, SElemType theta, SElemType b) /* ÓĞ¸Ä¶¯ */
 	return c;
 }
 
-SElemType EvaluateExpression() /* ÓĞ¸Ä¶¯ */
-{ /* ËãÊõ±í´ïÊ½ÇóÖµµÄËã·ûÓÅÏÈËã·¨¡£ÉèOPTRºÍOPND·Ö±ğÎªÔËËã·ûÕ»ºÍÔËËãÊıÕ» */
+SElemType EvaluateExpression() /* æœ‰æ”¹åŠ¨ */
+{ /* ç®—æœ¯è¡¨è¾¾å¼æ±‚å€¼çš„ç®—ç¬¦ä¼˜å…ˆç®—æ³•ã€‚è®¾OPTRå’ŒOPNDåˆ†åˆ«ä¸ºè¿ç®—ç¬¦æ ˆå’Œè¿ç®—æ•°æ ˆ */
 	SqStack OPTR, OPND;
 	SElemType a, b, d, x, theta;
-	char c; /* ´æ·ÅÓÉ¼üÅÌ½ÓÊÕµÄ×Ö·û´® */
-	char z[6]; /* ´æ·ÅÕûÊı×Ö·û´® */
+	char c; /* å­˜æ”¾ç”±é”®ç›˜æ¥æ”¶çš„å­—ç¬¦ä¸² */
+	char z[6]; /* å­˜æ”¾æ•´æ•°å­—ç¬¦ä¸² */
 	int i;
-	InitStack(&OPTR); /* ³õÊ¼»¯ÔËËã·ûÕ» */
-	Push(&OPTR, '='); /* =ÊÇ±í´ïÊ½½áÊø±êÖ¾ */
-	InitStack(&OPND); /* ³õÊ¼»¯ÔËËãÊıÕ» */
+	InitStack(&OPTR); /* åˆå§‹åŒ–è¿ç®—ç¬¦æ ˆ */
+	Push(&OPTR, '='); /* =æ˜¯è¡¨è¾¾å¼ç»“æŸæ ‡å¿— */
+	InitStack(&OPND); /* åˆå§‹åŒ–è¿ç®—æ•°æ ˆ */
 	c = getchar();
 	GetTop(OPTR, &x);
 	while (c != '=' || x != '=')
 	{
-		if (In(c)) /* ÊÇ7ÖÖÔËËã·ûÖ®Ò» */
+		if (In(c)) /* æ˜¯7ç§è¿ç®—ç¬¦ä¹‹ä¸€ */
 			switch (Precede(x, c))
 			{
-			case'<':Push(&OPTR, c); /* Õ»¶¥ÔªËØÓÅÏÈÈ¨µÍ */
+			case'<':Push(&OPTR, c); /* æ ˆé¡¶å…ƒç´ ä¼˜å…ˆæƒä½ */
 				c = getchar();
 				break;
-			case'=':Pop(&OPTR, &x); /* ÍÑÀ¨ºÅ²¢½ÓÊÕÏÂÒ»×Ö·û */
+			case'=':Pop(&OPTR, &x); /* è„±æ‹¬å·å¹¶æ¥æ”¶ä¸‹ä¸€å­—ç¬¦ */
 				c = getchar();
 				break;
-			case'>':Pop(&OPTR, &theta); /* ÍËÕ»²¢½«ÔËËã½á¹ûÈëÕ» */
+			case'>':Pop(&OPTR, &theta); /* é€€æ ˆå¹¶å°†è¿ç®—ç»“æœå…¥æ ˆ */
 				Pop(&OPND, &b);
 				Pop(&OPND, &a);
 				Push(&OPND, Operate(a, theta, b));
 			}
-		else if (c >= '0'&&c <= '9') /* cÊÇ²Ù×÷Êı */
+		else if (c >= '0'&&c <= '9') /* cæ˜¯æ“ä½œæ•° */
 		{
 			i = 0;
 			do
@@ -119,10 +119,10 @@ SElemType EvaluateExpression() /* ÓĞ¸Ä¶¯ */
 				c = getchar();
 			} while (c >= '0'&&c <= '9');
 			z[i] = 0;
-			d = atoi(z); /* ½«×Ö·û´®Êı×é×ªÎªÕûĞÍ´æÓÚd */
+			d = atoi(z); /* å°†å­—ç¬¦ä¸²æ•°ç»„è½¬ä¸ºæ•´å‹å­˜äºd */
 			Push(&OPND, d);
 		}
-		else /* cÊÇ·Ç·¨×Ö·û */
+		else /* cæ˜¯éæ³•å­—ç¬¦ */
 		{
 			printf("ERROR3\n");
 			exit(ERROR);
@@ -133,8 +133,8 @@ SElemType EvaluateExpression() /* ÓĞ¸Ä¶¯ */
 	return x;
 }
 
-void main() /* ÓĞ¸Ä¶¯ */
+void main() /* æœ‰æ”¹åŠ¨ */
 {
-	printf("ÇëÊäÈëËãÊõ±í´ïÊ½,¸ºÊıÒªÓÃ(0-ÕıÊı)±íÊ¾,²¢ÒÔ=½áÊø\n");
+	printf("è¯·è¾“å…¥ç®—æœ¯è¡¨è¾¾å¼,è´Ÿæ•°è¦ç”¨(0-æ­£æ•°)è¡¨ç¤º,å¹¶ä»¥=ç»“æŸ\n");
 	printf("%d\n", EvaluateExpression());
 }

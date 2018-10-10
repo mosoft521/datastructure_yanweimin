@@ -1,23 +1,23 @@
- /* algo3-9.c ÓÃµÝ¹éº¯ÊýÇó½âÃÔ¹¬ÎÊÌâ(Çó³öËùÓÐ½â) */
- #include<stdio.h> /* ¸ù¾Ý¡¶PASCAL³ÌÐòÉè¼Æ¡·(Ö£Æô»ª±àÖø)ÖÐµÄ³ÌÐò¸Ä±à */
- struct PosType /* ÃÔ¹¬×ø±êÎ»ÖÃÀàÐÍ */
+ /* algo3-9.c ç”¨é€’å½’å‡½æ•°æ±‚è§£è¿·å®«é—®é¢˜(æ±‚å‡ºæ‰€æœ‰è§£) */
+ #include<stdio.h> /* æ ¹æ®ã€ŠPASCALç¨‹åºè®¾è®¡ã€‹(éƒ‘å¯åŽç¼–è‘—)ä¸­çš„ç¨‹åºæ”¹ç¼– */
+ struct PosType /* è¿·å®«åæ ‡ä½ç½®ç±»åž‹ */
  {
-   int x; /* ÐÐÖµ */
-   int y; /* ÁÐÖµ */
+   int x; /* è¡Œå€¼ */
+   int y; /* åˆ—å€¼ */
  };
 
- #define MAXLENGTH 25 /* ÉèÃÔ¹¬µÄ×î´óÐÐÁÐÎª25 */
- typedef int MazeType[MAXLENGTH][MAXLENGTH]; /* [ÐÐ][ÁÐ] */
+ #define MAXLENGTH 25 /* è®¾è¿·å®«çš„æœ€å¤§è¡Œåˆ—ä¸º25 */
+ typedef int MazeType[MAXLENGTH][MAXLENGTH]; /* [è¡Œ][åˆ—] */
 
- /* È«¾Ö±äÁ¿ */
- struct PosType end; /* ÃÔ¹¬ÖÕµãÎ»ÖÃ */
- MazeType m; /* ÃÔ¹¬Êý×é */
- int x,y; /* ÃÔ¹¬ÐÐÊý£¬ÁÐÊý */
+ /* å…¨å±€å˜é‡ */
+ struct PosType end; /* è¿·å®«ç»ˆç‚¹ä½ç½® */
+ MazeType m; /* è¿·å®«æ•°ç»„ */
+ int x,y; /* è¿·å®«è¡Œæ•°ï¼Œåˆ—æ•° */
 
- /* ¶¨ÒåÇ½ÔªËØÖµÎª0,¿ÉÍ¨¹ýÂ·¾¶Îª-1,Í¨¹ýÂ·¾¶Îª×ã¼£ */
+ /* å®šä¹‰å¢™å…ƒç´ å€¼ä¸º0,å¯é€šè¿‡è·¯å¾„ä¸º-1,é€šè¿‡è·¯å¾„ä¸ºè¶³è¿¹ */
 
  void Print(int x,int y)
- { /* Êä³ö½â */
+ { /* è¾“å‡ºè§£ */
    int i,j;
    for(i=0;i<x;i++)
    {
@@ -29,23 +29,23 @@
  }
 
  void Try(struct PosType cur,int curstep)
- { /* ÓÉµ±Ç°Î»ÖÃcur¡¢µ±Ç°²½ÖècurstepÊÔÌ½ÏÂÒ»µã */
+ { /* ç”±å½“å‰ä½ç½®curã€å½“å‰æ­¥éª¤curstepè¯•æŽ¢ä¸‹ä¸€ç‚¹ */
    int i;
-   struct PosType next; /* ÏÂÒ»¸öÎ»ÖÃ */
-   struct PosType direc[4]={{0,1},{1,0},{0,-1},{-1,0}}; /* {ÐÐÔöÁ¿,ÁÐÔöÁ¿} */
-   /* ÒÆ¶¯·½Ïò,ÒÀ´ÎÎª¶«ÄÏÎ÷±± */
-   for(i=0;i<=3;i++) /* ÒÀ´ÎÊÔÌ½¶«ÄÏÎ÷±±ËÄ¸ö·½Ïò */
+   struct PosType next; /* ä¸‹ä¸€ä¸ªä½ç½® */
+   struct PosType direc[4]={{0,1},{1,0},{0,-1},{-1,0}}; /* {è¡Œå¢žé‡,åˆ—å¢žé‡} */
+   /* ç§»åŠ¨æ–¹å‘,ä¾æ¬¡ä¸ºä¸œå—è¥¿åŒ— */
+   for(i=0;i<=3;i++) /* ä¾æ¬¡è¯•æŽ¢ä¸œå—è¥¿åŒ—å››ä¸ªæ–¹å‘ */
    {
      next.x=cur.x+direc[i].x;
      next.y=cur.y+direc[i].y;
-     if(m[next.x][next.y]==-1) /* ÊÇÍ¨Â· */
+     if(m[next.x][next.y]==-1) /* æ˜¯é€šè·¯ */
      {
        m[next.x][next.y]=++curstep;
-       if(next.x!=end.x||next.y!=end.y) /* Ã»µ½ÖÕµã */
-         Try(next,curstep); /* ÊÔÌ½ÏÂÒ»µã(µÝ¹éµ÷ÓÃ) */
+       if(next.x!=end.x||next.y!=end.y) /* æ²¡åˆ°ç»ˆç‚¹ */
+         Try(next,curstep); /* è¯•æŽ¢ä¸‹ä¸€ç‚¹(é€’å½’è°ƒç”¨) */
        else
-         Print(x,y); /* Êä³ö½á¹û */
-       m[next.x][next.y]=-1; /* »Ö¸´ÎªÍ¨Â·£¬ÊÔÌ½ÏÂÒ»ÌõÂ· */
+         Print(x,y); /* è¾“å‡ºç»“æžœ */
+       m[next.x][next.y]=-1; /* æ¢å¤ä¸ºé€šè·¯ï¼Œè¯•æŽ¢ä¸‹ä¸€æ¡è·¯ */
        curstep--;
      }
    }
@@ -55,36 +55,36 @@
  {
    struct PosType begin;
    int i,j,x1,y1;
-   printf("ÇëÊäÈëÃÔ¹¬µÄÐÐÊý,ÁÐÊý(°üÀ¨ÍâÇ½)£º");
+   printf("è¯·è¾“å…¥è¿·å®«çš„è¡Œæ•°,åˆ—æ•°(åŒ…æ‹¬å¤–å¢™)ï¼š");
    scanf("%d,%d",&x,&y);
-   for(i=0;i<x;i++) /* ¶¨ÒåÖÜ±ßÖµÎª0(Í¬Ç½) */
+   for(i=0;i<x;i++) /* å®šä¹‰å‘¨è¾¹å€¼ä¸º0(åŒå¢™) */
    {
-     m[0][i]=0; /* ÐÐÖÜ±ß */
+     m[0][i]=0; /* è¡Œå‘¨è¾¹ */
      m[x-1][i]=0;
    }
    for(j=1;j<y-1;j++)
    {
-     m[j][0]=0; /* ÁÐÖÜ±ß */
+     m[j][0]=0; /* åˆ—å‘¨è¾¹ */
      m[j][y-1]=0;
    }
    for(i=1;i<x-1;i++)
      for(j=1;j<y-1;j++)
-       m[i][j]=-1; /* ¶¨ÒåÍ¨µÀ³õÖµÎª-1 */
-   printf("ÇëÊäÈëÃÔ¹¬ÄÚÇ½µ¥ÔªÊý£º");
+       m[i][j]=-1; /* å®šä¹‰é€šé“åˆå€¼ä¸º-1 */
+   printf("è¯·è¾“å…¥è¿·å®«å†…å¢™å•å…ƒæ•°ï¼š");
    scanf("%d",&j);
    if(j)
-     printf("ÇëÒÀ´ÎÊäÈëÃÔ¹¬ÄÚÇ½Ã¿¸öµ¥ÔªµÄÐÐÊý,ÁÐÊý£º\n");
+     printf("è¯·ä¾æ¬¡è¾“å…¥è¿·å®«å†…å¢™æ¯ä¸ªå•å…ƒçš„è¡Œæ•°,åˆ—æ•°ï¼š\n");
    for(i=1;i<=j;i++)
    {
      scanf("%d,%d",&x1,&y1);
      m[x1][y1]=0;
    }
-   printf("ÃÔ¹¬½á¹¹ÈçÏÂ:\n");
+   printf("è¿·å®«ç»“æž„å¦‚ä¸‹:\n");
    Print(x,y);
-   printf("ÇëÊäÈëÆðµãµÄÐÐÊý,ÁÐÊý£º");
+   printf("è¯·è¾“å…¥èµ·ç‚¹çš„è¡Œæ•°,åˆ—æ•°ï¼š");
    scanf("%d,%d",&begin.x,&begin.y);
-   printf("ÇëÊäÈëÖÕµãµÄÐÐÊý,ÁÐÊý£º");
+   printf("è¯·è¾“å…¥ç»ˆç‚¹çš„è¡Œæ•°,åˆ—æ•°ï¼š");
    scanf("%d,%d",&end.x,&end.y);
    m[begin.x][begin.y]=1;
-   Try(begin,1); /* ÓÉµÚÒ»²½ÆðµãÊÔÌ½Æð */
+   Try(begin,1); /* ç”±ç¬¬ä¸€æ­¥èµ·ç‚¹è¯•æŽ¢èµ· */
  }

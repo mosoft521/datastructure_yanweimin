@@ -1,60 +1,60 @@
-/* bo9-5.c ��̬���ұ�(˫������)�Ļ������� */
+/* bo9-5.c 动态查找表(双链键树)的基本操作 */
 Status InitDSTable(DLTree *DT)
-{ /* �������: ����һ���յ�˫������DT */
+{ /* 操作结果: 构造一个空的双链键树DT */
 	*DT = NULL;
 	return OK;
 }
 
 void DestroyDSTable(DLTree *DT)
-{ /* ��ʼ����: ˫������DT���ڡ��������: ����˫������DT */
-	if (*DT) /* �ǿ��� */
+{ /* 初始条件: 双链键树DT存在。操作结果: 销毁双链键树DT */
+	if (*DT) /* 非空树 */
 	{
-		if ((*DT)->kind == BRANCH && (*DT)->a.first) /* *DT�Ƿ�֧������к��� */
-			DestroyDSTable(&(*DT)->a.first); /* ���ٺ������� */
-		if ((*DT)->next) /* ���ֵ� */
-			DestroyDSTable(&(*DT)->next); /* �����ֵ����� */
-		free(*DT); /* �ͷŸ���� */
-		*DT = NULL; /* ��ָ�븳0 */
+		if ((*DT)->kind == BRANCH && (*DT)->a.first) /* *DT是分支结点且有孩子 */
+			DestroyDSTable(&(*DT)->a.first); /* 销毁孩子子树 */
+		if ((*DT)->next) /* 有兄弟 */
+			DestroyDSTable(&(*DT)->next); /* 销毁兄弟子树 */
+		free(*DT); /* 释放根结点 */
+		*DT = NULL; /* 空指针赋0 */
 	}
 }
 
 Record *SearchDLTree(DLTree T, KeysType K)
-{ /* �ڷǿ�˫������T�в��ҹؼ��ֵ���K�ļ�¼�������ڣ� */
-  /* �򷵻�ָ��ü�¼��ָ�룬���򷵻ؿ�ָ�롣�㷨9.15���иĶ� */
+{ /* 在非空双链键树T中查找关键字等于K的记录，若存在， */
+  /* 则返回指向该记录的指针，否则返回空指针。算法9.15，有改动 */
 	DLTree p;
 	int i;
 	if (T)
 	{
-		p = T; /* ��ʼ�� */
+		p = T; /* 初始化 */
 		i = 0;
 		while (p&&i < K.num)
 		{
-			while (p&&p->symbol != K.ch[i]) /* ���ҹؼ��ֵĵ�iλ */
+			while (p&&p->symbol != K.ch[i]) /* 查找关键字的第i位 */
 				p = p->next;
-			if (p&&i < K.num) /* ׼��������һλ */
+			if (p&&i < K.num) /* 准备查找下一位 */
 				p = p->a.first;
 			++i;
-		} /* ���ҽ��� */
-		if (!p) /* ���Ҳ��ɹ� */
+		} /* 查找结束 */
+		if (!p) /* 查找不成功 */
 			return NULL;
-		else /* ���ҳɹ� */
+		else /* 查找成功 */
 			return p->a.infoptr;
 	}
 	else
-		return NULL; /* ���� */
+		return NULL; /* 树空 */
 }
 
 void InsertDSTable(DLTree *DT, Record *r)
-{ /* ��ʼ����: ˫������DT���ڣ�rΪ�����������Ԫ�ص�ָ�� */
-  /* �������: ��DT�в�������ؼ��ֵ���(*r).key.ch������Ԫ�أ� */
-  /*           �򰴹ؼ���˳���r��DT�� */
+{ /* 初始条件: 双链键树DT存在，r为待插入的数据元素的指针 */
+  /* 操作结果: 若DT中不存在其关键字等于(*r).key.ch的数据元素， */
+  /*           则按关键字顺序插r到DT中 */
 	DLTree p = NULL, q = NULL, ap;
 	int i = 0;
 	KeysType K = r->key;
-	if (!*DT&&K.num) /* �����ҹؼ��ַ����ǿ� */
+	if (!*DT&&K.num) /* 空树且关键字符串非空 */
 	{
 		*DT = ap = (DLTree)malloc(sizeof(DLTNode));
-		for (; i < K.num; i++) /* �����֧��� */
+		for (; i < K.num; i++) /* 插入分支结点 */
 		{
 			if (p)
 				p->a.first = ap;
@@ -64,42 +64,42 @@ void InsertDSTable(DLTree *DT, Record *r)
 			p = ap;
 			ap = (DLTree)malloc(sizeof(DLTNode));
 		}
-		p->a.first = ap; /* ����Ҷ�ӽ�� */
+		p->a.first = ap; /* 插入叶子结点 */
 		ap->next = NULL;
 		ap->symbol = Nil;
 		ap->kind = LEAF;
 		ap->a.infoptr = r;
 	}
-	else /* �ǿ��� */
+	else /* 非空树 */
 	{
-		p = *DT; /* ָ������ */
+		p = *DT; /* 指向根结点 */
 		while (p&&i < K.num)
 		{
-			while (p&&p->symbol < K.ch[i]) /* ���ֵܽ����� */
+			while (p&&p->symbol < K.ch[i]) /* 沿兄弟结点查找 */
 			{
 				q = p;
 				p = p->next;
 			}
-			if (p&&p->symbol == K.ch[i]) /* �ҵ���K.ch[i]����Ľ�� */
+			if (p&&p->symbol == K.ch[i]) /* 找到与K.ch[i]相符的结点 */
 			{
 				q = p;
-				p = p->a.first; /* pָ����K.ch[i+1]�ȽϵĽ�� */
+				p = p->a.first; /* p指向将与K.ch[i+1]比较的结点 */
 				++i;
 			}
-			else /* û�ҵ�,����ؼ��� */
+			else /* 没找到,插入关键字 */
 			{
 				ap = (DLTree)malloc(sizeof(DLTNode));
 				if (q->a.first == p)
-					q->a.first = ap; /* �ڳ��ӵ�λ�ò��� */
+					q->a.first = ap; /* 在长子的位置插入 */
 				else /* q->next==p */
-					q->next = ap; /* ���ֵܵ�λ�ò��� */
+					q->next = ap; /* 在兄弟的位置插入 */
 				ap->next = p;
 				ap->symbol = K.ch[i];
 				ap->kind = BRANCH;
 				p = ap;
 				ap = (DLTree)malloc(sizeof(DLTNode));
 				i++;
-				for (; i < K.num; i++) /* �����֧��� */
+				for (; i < K.num; i++) /* 插入分支结点 */
 				{
 					p->a.first = ap;
 					ap->next = NULL;
@@ -108,7 +108,7 @@ void InsertDSTable(DLTree *DT, Record *r)
 					p = ap;
 					ap = (DLTree)malloc(sizeof(DLTNode));
 				}
-				p->a.first = ap; /* ����Ҷ�ӽ�� */
+				p->a.first = ap; /* 插入叶子结点 */
 				ap->next = NULL;
 				ap->symbol = Nil;
 				ap->kind = LEAF;
@@ -122,13 +122,13 @@ typedef struct
 {
 	char ch;
 	DLTree p;
-}SElemType; /* ����ջԪ������ */
+}SElemType; /* 定义栈元素类型 */
 #include "../ch3/c3-1.h"
 #include "../ch3/bo3-1.c"
 void TraverseDSTable(DLTree DT, void(*Vi)(Record))
-{ /* ��ʼ����: ˫������DT���ڣ�Vi�ǶԽ�������Ӧ�ú����� */
-  /*           ViR�ǶԼ�¼������Ӧ�ú��� */
-  /* �������: ���ؼ��ֵ�˳������ؼ��ּ����Ӧ�ļ�¼ */
+{ /* 初始条件: 双链键树DT存在，Vi是对结点操作的应用函数， */
+  /*           ViR是对记录操作的应用函数 */
+  /* 操作结果: 按关键字的顺序输出关键字及其对应的记录 */
 	SqStack s;
 	SElemType e;
 	DLTree p;
@@ -140,7 +140,7 @@ void TraverseDSTable(DLTree DT, void(*Vi)(Record))
 		e.ch = DT->symbol;
 		Push(&s, e);
 		p = DT->a.first;
-		while (p->kind == BRANCH) /* ��֧��� */
+		while (p->kind == BRANCH) /* 分支结点 */
 		{
 			e.p = p;
 			e.ch = p->symbol;
@@ -156,10 +156,10 @@ void TraverseDSTable(DLTree DT, void(*Vi)(Record))
 		{
 			Pop(&s, &e);
 			p = e.p;
-			if (p->next) /* ���ֵܽ�� */
+			if (p->next) /* 有兄弟结点 */
 			{
 				p = p->next;
-				while (p->kind == BRANCH) /* ��֧��� */
+				while (p->kind == BRANCH) /* 分支结点 */
 				{
 					e.p = p;
 					e.ch = p->symbol;
@@ -172,7 +172,7 @@ void TraverseDSTable(DLTree DT, void(*Vi)(Record))
 				Vi(*(p->a.infoptr));
 				i++;
 				if (i%n == 0)
-					printf("\n"); /* ���n��Ԫ�غ��� */
+					printf("\n"); /* 输出n个元素后换行 */
 			}
 		}
 	}

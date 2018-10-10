@@ -1,13 +1,13 @@
-/* algo9-9.c ¼ìÑébo9-7.cµÄ³ÌĞò */
+/* algo9-9.c æ£€éªŒbo9-7.cçš„ç¨‹åº */
 #include "../ch1/c1.h"
-#define NULLKEY 0 /* 0ÎªÎŞ¼ÇÂ¼±êÖ¾ */
-#define N 10 /* Êı¾İÔªËØ¸öÊı */
-typedef int KeyType; /* Éè¹Ø¼ü×ÖÓòÎªÕûĞÍ */
+#define NULLKEY 0 /* 0ä¸ºæ— è®°å½•æ ‡å¿— */
+#define N 10 /* æ•°æ®å…ƒç´ ä¸ªæ•° */
+typedef int KeyType; /* è®¾å…³é”®å­—åŸŸä¸ºæ•´å‹ */
 typedef struct
 {
 	KeyType key;
 	int ord;
-}ElemType; /* Êı¾İÔªËØÀàĞÍ */
+}ElemType; /* æ•°æ®å…ƒç´ ç±»å‹ */
 
 #include "c9.h"
 #include "c9-6.h"
@@ -27,31 +27,31 @@ void main()
 	KeyType k;
 	InitHashTable(&h);
 	for (i = 0; i < N - 1; i++)
-	{ /* ²åÈëÇ°N-1¸ö¼ÇÂ¼ */
+	{ /* æ’å…¥å‰N-1ä¸ªè®°å½• */
 		j = InsertHash(&h, r[i]);
 		if (j == DUPLICATE)
-			printf("±íÖĞÒÑÓĞ¹Ø¼ü×ÖÎª%dµÄ¼ÇÂ¼£¬ÎŞ·¨ÔÙ²åÈë¼ÇÂ¼(%d,%d)\n", r[i].key, r[i].key, r[i].ord);
+			printf("è¡¨ä¸­å·²æœ‰å…³é”®å­—ä¸º%dçš„è®°å½•ï¼Œæ— æ³•å†æ’å…¥è®°å½•(%d,%d)\n", r[i].key, r[i].key, r[i].ord);
 	}
-	printf("°´¹şÏ£µØÖ·µÄË³Ğò±éÀú¹şÏ£±í:\n");
+	printf("æŒ‰å“ˆå¸Œåœ°å€çš„é¡ºåºéå†å“ˆå¸Œè¡¨:\n");
 	TraverseHash(h, print);
-	printf("ÇëÊäÈë´ı²éÕÒ¼ÇÂ¼µÄ¹Ø¼ü×Ö: ");
+	printf("è¯·è¾“å…¥å¾…æŸ¥æ‰¾è®°å½•çš„å…³é”®å­—: ");
 	scanf("%d", &k);
 	j = Find(h, k, &p);
 	if (j == SUCCESS)
 		print(p, h.elem[p]);
 	else
-		printf("Ã»ÕÒµ½\n");
-	j = InsertHash(&h, r[i]); /* ²åÈëµÚN¸ö¼ÇÂ¼ */
-	if (j == ERROR) /* ÖØ½¨¹şÏ£±í */
-		j = InsertHash(&h, r[i]); /* ÖØ½¨¹şÏ£±íºóÖØĞÂ²åÈëµÚN¸ö¼ÇÂ¼ */
-	printf("°´¹şÏ£µØÖ·µÄË³Ğò±éÀúÖØ½¨ºóµÄ¹şÏ£±í:\n");
+		printf("æ²¡æ‰¾åˆ°\n");
+	j = InsertHash(&h, r[i]); /* æ’å…¥ç¬¬Nä¸ªè®°å½• */
+	if (j == ERROR) /* é‡å»ºå“ˆå¸Œè¡¨ */
+		j = InsertHash(&h, r[i]); /* é‡å»ºå“ˆå¸Œè¡¨åé‡æ–°æ’å…¥ç¬¬Nä¸ªè®°å½• */
+	printf("æŒ‰å“ˆå¸Œåœ°å€çš„é¡ºåºéå†é‡å»ºåçš„å“ˆå¸Œè¡¨:\n");
 	TraverseHash(h, print);
-	printf("ÇëÊäÈë´ı²éÕÒ¼ÇÂ¼µÄ¹Ø¼ü×Ö: ");
+	printf("è¯·è¾“å…¥å¾…æŸ¥æ‰¾è®°å½•çš„å…³é”®å­—: ");
 	scanf("%d", &k);
 	j = Find(h, k, &p);
 	if (j == SUCCESS)
 		print(p, h.elem[p]);
 	else
-		printf("Ã»ÕÒµ½\n");
+		printf("æ²¡æ‰¾åˆ°\n");
 	DestroyHashTable(&h);
 }

@@ -1,21 +1,21 @@
- /* c10-2.h ¾²Ì¬Á´±íÀàĞÍ */
- #define SIZE 100 /* ¾²Ì¬Á´±íÈİÁ¿ */
- typedef int KeyType; /* ¶¨Òå¹Ø¼ü×ÖÀàĞÍÎªÕûĞÍ */
+ /* c10-2.h é™æ€é“¾è¡¨ç±»å‹ */
+ #define SIZE 100 /* é™æ€é“¾è¡¨å®¹é‡ */
+ typedef int KeyType; /* å®šä¹‰å…³é”®å­—ç±»å‹ä¸ºæ•´å‹ */
 
  typedef struct
  {
-   KeyType key; /* ¹Ø¼ü×ÖÏî */
-   InfoType otherinfo; /* ÆäËüÊı¾İÏî£¬¾ßÌåÀàĞÍÔÚÖ÷³ÌÖĞ¶¨Òå */
- }RedType; /* ¼ÇÂ¼ÀàĞÍ */
+   KeyType key; /* å…³é”®å­—é¡¹ */
+   InfoType otherinfo; /* å…¶å®ƒæ•°æ®é¡¹ï¼Œå…·ä½“ç±»å‹åœ¨ä¸»ç¨‹ä¸­å®šä¹‰ */
+ }RedType; /* è®°å½•ç±»å‹ */
 
  typedef struct
  {
-   RedType rc; /* ¼ÇÂ¼Ïî */
-   int next; /* Ö¸ÕëÏî */
- }SLNode; /* ±í½áµãÀàĞÍ */
+   RedType rc; /* è®°å½•é¡¹ */
+   int next; /* æŒ‡é’ˆé¡¹ */
+ }SLNode; /* è¡¨ç»“ç‚¹ç±»å‹ */
 
  typedef struct
  {
-   SLNode r[SIZE]; /* 0ºÅµ¥ÔªÎª±íÍ·½áµã */
-   int length; /* Á´±íµ±Ç°³¤¶È */
- }SLinkListType; /* ¾²Ì¬Á´±íÀàĞÍ */
+   SLNode r[SIZE]; /* 0å·å•å…ƒä¸ºè¡¨å¤´ç»“ç‚¹ */
+   int length; /* é“¾è¡¨å½“å‰é•¿åº¦ */
+ }SLinkListType; /* é™æ€é“¾è¡¨ç±»å‹ */

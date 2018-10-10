@@ -1,17 +1,17 @@
-/* algo7-4.c Êä³öÓĞÏòÍ¼µÄÒ»¸öÍØÆËĞòÁĞ¡£ÊµÏÖËã·¨7.12µÄ³ÌĞò */
+/* algo7-4.c è¾“å‡ºæœ‰å‘å›¾çš„ä¸€ä¸ªæ‹“æ‰‘åºåˆ—ã€‚å®ç°ç®—æ³•7.12çš„ç¨‹åº */
 #include "../ch1/c1.h"
-#define MAX_NAME 5 /* ¶¥µã×Ö·û´®µÄ×î´ó³¤¶È */
+#define MAX_NAME 5 /* é¡¶ç‚¹å­—ç¬¦ä¸²çš„æœ€å¤§é•¿åº¦ */
 typedef int InfoType;
-typedef char VertexType[MAX_NAME]; /* ×Ö·û´®ÀàĞÍ */
+typedef char VertexType[MAX_NAME]; /* å­—ç¬¦ä¸²ç±»å‹ */
 #include "c7-2.h"
 #include "bo7-2.c"
 
 void FindInDegree(ALGraph G, int indegree[])
-{ /* Çó¶¥µãµÄÈë¶È£¬Ëã·¨7.12¡¢7.13µ÷ÓÃ */
+{ /* æ±‚é¡¶ç‚¹çš„å…¥åº¦ï¼Œç®—æ³•7.12ã€7.13è°ƒç”¨ */
 	int i;
 	ArcNode *p;
 	for (i = 0; i < G.vexnum; i++)
-		indegree[i] = 0; /* ¸³³õÖµ */
+		indegree[i] = 0; /* èµ‹åˆå€¼ */
 	for (i = 0; i < G.vexnum; i++)
 	{
 		p = G.vertices[i].firstarc;
@@ -23,41 +23,41 @@ void FindInDegree(ALGraph G, int indegree[])
 	}
 }
 
-typedef int SElemType; /* Õ»ÀàĞÍ */
+typedef int SElemType; /* æ ˆç±»å‹ */
 #include "../ch3/c3-1.h"
 #include "../ch3/bo3-1.c"
 Status TopologicalSort(ALGraph G)
-{ /* ÓĞÏòÍ¼G²ÉÓÃÁÚ½Ó±í´æ´¢½á¹¹¡£ÈôGÎŞ»ØÂ·,ÔòÊä³öGµÄ¶¥µãµÄÒ»¸öÍØÆËĞòÁĞ²¢·µ»ØOK, */
-  /* ·ñÔò·µ»ØERROR¡£Ëã·¨7.12 */
+{ /* æœ‰å‘å›¾Gé‡‡ç”¨é‚»æ¥è¡¨å­˜å‚¨ç»“æ„ã€‚è‹¥Gæ— å›è·¯,åˆ™è¾“å‡ºGçš„é¡¶ç‚¹çš„ä¸€ä¸ªæ‹“æ‰‘åºåˆ—å¹¶è¿”å›OK, */
+  /* å¦åˆ™è¿”å›ERRORã€‚ç®—æ³•7.12 */
 	int i, k, count, indegree[MAX_VERTEX_NUM];
 	SqStack S;
 	ArcNode *p;
-	FindInDegree(G, indegree); /* ¶Ô¸÷¶¥µãÇóÈë¶Èindegree[0..vernum-1] */
-	InitStack(&S); /* ³õÊ¼»¯Õ» */
-	for (i = 0; i < G.vexnum; ++i) /* ½¨ÁãÈë¶È¶¥µãÕ»S */
+	FindInDegree(G, indegree); /* å¯¹å„é¡¶ç‚¹æ±‚å…¥åº¦indegree[0..vernum-1] */
+	InitStack(&S); /* åˆå§‹åŒ–æ ˆ */
+	for (i = 0; i < G.vexnum; ++i) /* å»ºé›¶å…¥åº¦é¡¶ç‚¹æ ˆS */
 		if (!indegree[i])
-			Push(&S, i); /* Èë¶ÈÎª0Õß½øÕ» */
-	count = 0; /* ¶ÔÊä³ö¶¥µã¼ÆÊı */
+			Push(&S, i); /* å…¥åº¦ä¸º0è€…è¿›æ ˆ */
+	count = 0; /* å¯¹è¾“å‡ºé¡¶ç‚¹è®¡æ•° */
 	while (!StackEmpty(S))
-	{ /* Õ»²»¿Õ */
+	{ /* æ ˆä¸ç©º */
 		Pop(&S, &i);
-		printf("%s ", G.vertices[i].data); /* Êä³öiºÅ¶¥µã²¢¼ÆÊı */
+		printf("%s ", G.vertices[i].data); /* è¾“å‡ºiå·é¡¶ç‚¹å¹¶è®¡æ•° */
 		++count;
 		for (p = G.vertices[i].firstarc; p; p = p->nextarc)
-		{ /* ¶ÔiºÅ¶¥µãµÄÃ¿¸öÁÚ½ÓµãµÄÈë¶È¼õ1 */
+		{ /* å¯¹iå·é¡¶ç‚¹çš„æ¯ä¸ªé‚»æ¥ç‚¹çš„å…¥åº¦å‡1 */
 			k = p->adjvex;
-			if (!(--indegree[k])) /* ÈôÈë¶È¼õÎª0,ÔòÈëÕ» */
+			if (!(--indegree[k])) /* è‹¥å…¥åº¦å‡ä¸º0,åˆ™å…¥æ ˆ */
 				Push(&S, k);
 		}
 	}
 	if (count < G.vexnum)
 	{
-		printf("´ËÓĞÏòÍ¼ÓĞ»ØÂ·\n");
+		printf("æ­¤æœ‰å‘å›¾æœ‰å›è·¯\n");
 		return ERROR;
 	}
 	else
 	{
-		printf("ÎªÒ»¸öÍØÆËĞòÁĞ¡£\n");
+		printf("ä¸ºä¸€ä¸ªæ‹“æ‰‘åºåˆ—ã€‚\n");
 		return OK;
 	}
 }
@@ -65,7 +65,7 @@ Status TopologicalSort(ALGraph G)
 void main()
 {
 	ALGraph f;
-	printf("ÇëÑ¡ÔñÓĞÏòÍ¼\n");
+	printf("è¯·é€‰æ‹©æœ‰å‘å›¾\n");
 	CreateGraph(&f);
 	Display(f);
 	TopologicalSort(f);

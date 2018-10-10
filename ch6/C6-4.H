@@ -1,12 +1,12 @@
- /* c6-4.h Ê÷µÄË«Ç×±í´æ´¢±íÊ¾ */
+ /* c6-4.h æ ‘çš„åŒäº²è¡¨å­˜å‚¨è¡¨ç¤º */
  #define MAX_TREE_SIZE 100
  typedef struct
  {
    TElemType data;
-   int parent; /* Ë«Ç×Î»ÖÃÓò */
+   int parent; /* åŒäº²ä½ç½®åŸŸ */
  } PTNode;
  typedef struct
  {
    PTNode nodes[MAX_TREE_SIZE];
-   int n; /* ½áµãÊı */
+   int n; /* ç»“ç‚¹æ•° */
  } PTree;

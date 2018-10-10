@@ -1,27 +1,27 @@
-/* algo10-5.c µ÷ÓÃËã·¨10.6(a)µÄ³ÌÐò */
+/* algo10-5.c è°ƒç”¨ç®—æ³•10.6(a)çš„ç¨‹åº */
 #include<stdio.h>
-typedef int InfoType; /* ¶¨ÒåÆäËüÊý¾ÝÏîµÄÀàÐÍ */
+typedef int InfoType; /* å®šä¹‰å…¶å®ƒæ•°æ®é¡¹çš„ç±»åž‹ */
 #include "c10-1.h"
 int Partition(SqList *L, int low, int high)
-{ /* ½»»»Ë³Ðò±íLÖÐ×Ó±íL.r[low..high]µÄ¼ÇÂ¼£¬Ê¹ÊàÖá¼ÇÂ¼µ½Î»£¬ */
-  /* ²¢·µ»ØÆäËùÔÚÎ»ÖÃ£¬´ËÊ±ÔÚËüÖ®Ç°(ºó)µÄ¼ÇÂ¼¾ù²»´ó(Ð¡)ÓÚËü¡£Ëã·¨10.6(a) */
+{ /* äº¤æ¢é¡ºåºè¡¨Lä¸­å­è¡¨L.r[low..high]çš„è®°å½•ï¼Œä½¿æž¢è½´è®°å½•åˆ°ä½ï¼Œ */
+  /* å¹¶è¿”å›žå…¶æ‰€åœ¨ä½ç½®ï¼Œæ­¤æ—¶åœ¨å®ƒä¹‹å‰(åŽ)çš„è®°å½•å‡ä¸å¤§(å°)äºŽå®ƒã€‚ç®—æ³•10.6(a) */
 	RedType t;
 	KeyType pivotkey;
-	pivotkey = (*L).r[low].key; /* ÓÃ×Ó±íµÄµÚÒ»¸ö¼ÇÂ¼×÷ÊàÖá¼ÇÂ¼ */
+	pivotkey = (*L).r[low].key; /* ç”¨å­è¡¨çš„ç¬¬ä¸€ä¸ªè®°å½•ä½œæž¢è½´è®°å½• */
 	while (low < high)
-	{ /* ´Ó±íµÄÁ½¶Ë½»ÌæµØÏòÖÐ¼äÉ¨Ãè */
+	{ /* ä»Žè¡¨çš„ä¸¤ç«¯äº¤æ›¿åœ°å‘ä¸­é—´æ‰«æ */
 		while (low < high && (*L).r[high].key >= pivotkey)
 			--high;
-		t = (*L).r[low]; /* ½«±ÈÊàÖá¼ÇÂ¼Ð¡µÄ¼ÇÂ¼½»»»µ½µÍ¶Ë */
+		t = (*L).r[low]; /* å°†æ¯”æž¢è½´è®°å½•å°çš„è®°å½•äº¤æ¢åˆ°ä½Žç«¯ */
 		(*L).r[low] = (*L).r[high];
 		(*L).r[high] = t;
 		while (low < high && (*L).r[low].key <= pivotkey)
 			++low;
-		t = (*L).r[low]; /* ½«±ÈÊàÖá¼ÇÂ¼´óµÄ¼ÇÂ¼½»»»µ½¸ß¶Ë */
+		t = (*L).r[low]; /* å°†æ¯”æž¢è½´è®°å½•å¤§çš„è®°å½•äº¤æ¢åˆ°é«˜ç«¯ */
 		(*L).r[low] = (*L).r[high];
 		(*L).r[high] = t;
 	}
-	return low; /* ·µ»ØÊàÖáËùÔÚÎ»ÖÃ */
+	return low; /* è¿”å›žæž¢è½´æ‰€åœ¨ä½ç½® */
 }
 
 #include "bo10-2.c"
@@ -34,9 +34,9 @@ void main()
 	for (i = 0; i < N; i++)
 		l.r[i + 1] = d[i];
 	l.length = N;
-	printf("ÅÅÐòÇ°:\n");
+	printf("æŽ’åºå‰:\n");
 	print(l);
 	QuickSort(&l);
-	printf("ÅÅÐòºó:\n");
+	printf("æŽ’åºåŽ:\n");
 	print(l);
 }

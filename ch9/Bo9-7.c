@@ -1,20 +1,20 @@
- /* bo9-7.c ¹şÏ£º¯ÊıµÄ»ù±¾²Ù×÷ */
+ /* bo9-7.c å“ˆå¸Œå‡½æ•°çš„åŸºæœ¬æ“ä½œ */
  Status InitHashTable(HashTable *H)
- { /* ²Ù×÷½á¹û: ¹¹ÔìÒ»¸ö¿ÕµÄ¹şÏ£±í */
+ { /* æ“ä½œç»“æœ: æ„é€ ä¸€ä¸ªç©ºçš„å“ˆå¸Œè¡¨ */
    int i;
-   (*H).count=0; /* µ±Ç°ÔªËØ¸öÊıÎª0 */
-   (*H).sizeindex=0; /* ³õÊ¼´æ´¢ÈİÁ¿Îªhashsize[0] */
+   (*H).count=0; /* å½“å‰å…ƒç´ ä¸ªæ•°ä¸º0 */
+   (*H).sizeindex=0; /* åˆå§‹å­˜å‚¨å®¹é‡ä¸ºhashsize[0] */
    m=hashsize[0];
    (*H).elem=(ElemType*)malloc(m*sizeof(ElemType));
    if(!(*H).elem)
-     exit(OVERFLOW); /* ´æ´¢·ÖÅäÊ§°Ü */
+     exit(OVERFLOW); /* å­˜å‚¨åˆ†é…å¤±è´¥ */
    for(i=0;i<m;i++)
-     (*H).elem[i].key=NULLKEY; /* Î´Ìî¼ÇÂ¼µÄ±êÖ¾ */
+     (*H).elem[i].key=NULLKEY; /* æœªå¡«è®°å½•çš„æ ‡å¿— */
    return OK;
  }
 
  void DestroyHashTable(HashTable *H)
- { /* ³õÊ¼Ìõ¼ş: ¹şÏ£±íH´æÔÚ¡£²Ù×÷½á¹û: Ïú»Ù¹şÏ£±íH */
+ { /* åˆå§‹æ¡ä»¶: å“ˆå¸Œè¡¨Hå­˜åœ¨ã€‚æ“ä½œç»“æœ: é”€æ¯å“ˆå¸Œè¡¨H */
    free((*H).elem);
    (*H).elem=NULL;
    (*H).count=0;
@@ -22,99 +22,99 @@
  }
 
  unsigned Hash(KeyType K)
- { /* Ò»¸ö¼òµ¥µÄ¹şÏ£º¯Êı(mÎª±í³¤£¬È«¾Ö±äÁ¿) */
+ { /* ä¸€ä¸ªç®€å•çš„å“ˆå¸Œå‡½æ•°(mä¸ºè¡¨é•¿ï¼Œå…¨å±€å˜é‡) */
    return K%m;
  }
 
- void collision(int *p,int d) /* ÏßĞÔÌ½²âÔÙÉ¢ÁĞ */
- { /* ¿ª·Å¶¨Ö··¨´¦Àí³åÍ» */
+ void collision(int *p,int d) /* çº¿æ€§æ¢æµ‹å†æ•£åˆ— */
+ { /* å¼€æ”¾å®šå€æ³•å¤„ç†å†²çª */
    *p=(*p+d)%m;
  }
 
  Status SearchHash(HashTable H,KeyType K,int *p,int *c)
- { /* ÔÚ¿ª·Å¶¨Ö·¹şÏ£±íHÖĞ²éÕÒ¹Ø¼üÂëÎªKµÄÔªËØ,Èô²éÕÒ³É¹¦,ÒÔpÖ¸Ê¾´ı²éÊı¾İ */
-   /* ÔªËØÔÚ±íÖĞÎ»ÖÃ,²¢·µ»ØSUCCESS;·ñÔò,ÒÔpÖ¸Ê¾²åÈëÎ»ÖÃ,²¢·µ»ØUNSUCCESS */
-   /* cÓÃÒÔ¼Æ³åÍ»´ÎÊı£¬Æä³õÖµÖÃÁã£¬¹©½¨±í²åÈëÊ±²Î¿¼¡£Ëã·¨9.17 */
-   *p=Hash(K); /* ÇóµÃ¹şÏ£µØÖ· */
+ { /* åœ¨å¼€æ”¾å®šå€å“ˆå¸Œè¡¨Hä¸­æŸ¥æ‰¾å…³é”®ç ä¸ºKçš„å…ƒç´ ,è‹¥æŸ¥æ‰¾æˆåŠŸ,ä»¥pæŒ‡ç¤ºå¾…æŸ¥æ•°æ® */
+   /* å…ƒç´ åœ¨è¡¨ä¸­ä½ç½®,å¹¶è¿”å›SUCCESS;å¦åˆ™,ä»¥pæŒ‡ç¤ºæ’å…¥ä½ç½®,å¹¶è¿”å›UNSUCCESS */
+   /* cç”¨ä»¥è®¡å†²çªæ¬¡æ•°ï¼Œå…¶åˆå€¼ç½®é›¶ï¼Œä¾›å»ºè¡¨æ’å…¥æ—¶å‚è€ƒã€‚ç®—æ³•9.17 */
+   *p=Hash(K); /* æ±‚å¾—å“ˆå¸Œåœ°å€ */
    while(H.elem[*p].key!=NULLKEY&&!EQ(K,H.elem[*p].key))
-   { /* ¸ÃÎ»ÖÃÖĞÌîÓĞ¼ÇÂ¼£®²¢ÇÒ¹Ø¼ü×Ö²»ÏàµÈ */
+   { /* è¯¥ä½ç½®ä¸­å¡«æœ‰è®°å½•ï¼å¹¶ä¸”å…³é”®å­—ä¸ç›¸ç­‰ */
      (*c)++;
      if(*c<m)
-       collision(p,*c); /* ÇóµÃÏÂÒ»Ì½²éµØÖ·p */
+       collision(p,*c); /* æ±‚å¾—ä¸‹ä¸€æ¢æŸ¥åœ°å€p */
      else
        break;
    }
    if EQ(K,H.elem[*p].key)
-     return SUCCESS; /* ²éÕÒ³É¹¦£¬p·µ»Ø´ı²éÊı¾İÔªËØÎ»ÖÃ */
+     return SUCCESS; /* æŸ¥æ‰¾æˆåŠŸï¼Œpè¿”å›å¾…æŸ¥æ•°æ®å…ƒç´ ä½ç½® */
    else
-     return UNSUCCESS; /* ²éÕÒ²»³É¹¦(H.elem[p].key==NULLKEY)£¬p·µ»ØµÄÊÇ²åÈëÎ»ÖÃ */
+     return UNSUCCESS; /* æŸ¥æ‰¾ä¸æˆåŠŸ(H.elem[p].key==NULLKEY)ï¼Œpè¿”å›çš„æ˜¯æ’å…¥ä½ç½® */
  }
 
- Status InsertHash(HashTable *,ElemType); /* ¶Ôº¯ÊıµÄÉùÃ÷ */
- void RecreateHashTable(HashTable *H) /* ÖØ½¨¹şÏ£±í */
- { /* ÖØ½¨¹şÏ£±í */
+ Status InsertHash(HashTable *,ElemType); /* å¯¹å‡½æ•°çš„å£°æ˜ */
+ void RecreateHashTable(HashTable *H) /* é‡å»ºå“ˆå¸Œè¡¨ */
+ { /* é‡å»ºå“ˆå¸Œè¡¨ */
    int i,count=(*H).count;
    ElemType *p,*elem=(ElemType*)malloc(count*sizeof(ElemType));
    p=elem;
-   printf("ÖØ½¨¹şÏ£±í\n");
-   for(i=0;i<m;i++) /* ±£´æÔ­ÓĞµÄÊı¾İµ½elemÖĞ */
-     if(((*H).elem+i)->key!=NULLKEY) /* ¸Ãµ¥ÔªÓĞÊı¾İ */
+   printf("é‡å»ºå“ˆå¸Œè¡¨\n");
+   for(i=0;i<m;i++) /* ä¿å­˜åŸæœ‰çš„æ•°æ®åˆ°elemä¸­ */
+     if(((*H).elem+i)->key!=NULLKEY) /* è¯¥å•å…ƒæœ‰æ•°æ® */
        *p++=*((*H).elem+i);
    (*H).count=0;
-   (*H).sizeindex++; /* Ôö´ó´æ´¢ÈİÁ¿ */
+   (*H).sizeindex++; /* å¢å¤§å­˜å‚¨å®¹é‡ */
    m=hashsize[(*H).sizeindex];
    p=(ElemType*)realloc((*H).elem,m*sizeof(ElemType));
    if(!p)
-     exit(OVERFLOW); /* ´æ´¢·ÖÅäÊ§°Ü */
+     exit(OVERFLOW); /* å­˜å‚¨åˆ†é…å¤±è´¥ */
    (*H).elem=p;
    for(i=0;i<m;i++)
-     (*H).elem[i].key=NULLKEY; /* Î´Ìî¼ÇÂ¼µÄ±êÖ¾(³õÊ¼»¯) */
-   for(p=elem;p<elem+count;p++) /* ½«Ô­ÓĞµÄÊı¾İ°´ÕÕĞÂµÄ±í³¤²åÈëµ½ÖØ½¨µÄ¹şÏ£±íÖĞ */
+     (*H).elem[i].key=NULLKEY; /* æœªå¡«è®°å½•çš„æ ‡å¿—(åˆå§‹åŒ–) */
+   for(p=elem;p<elem+count;p++) /* å°†åŸæœ‰çš„æ•°æ®æŒ‰ç…§æ–°çš„è¡¨é•¿æ’å…¥åˆ°é‡å»ºçš„å“ˆå¸Œè¡¨ä¸­ */
      InsertHash(H,*p);
  }
 
  Status InsertHash(HashTable *H,ElemType e)
- { /* ²éÕÒ²»³É¹¦Ê±²åÈëÊı¾İÔªËØeµ½¿ª·Å¶¨Ö·¹şÏ£±íHÖĞ£¬²¢·µ»ØOK£» */
-   /* Èô³åÍ»´ÎÊı¹ı´ó£¬ÔòÖØ½¨¹şÏ£±í¡£Ëã·¨9.18 */
+ { /* æŸ¥æ‰¾ä¸æˆåŠŸæ—¶æ’å…¥æ•°æ®å…ƒç´ eåˆ°å¼€æ”¾å®šå€å“ˆå¸Œè¡¨Hä¸­ï¼Œå¹¶è¿”å›OKï¼› */
+   /* è‹¥å†²çªæ¬¡æ•°è¿‡å¤§ï¼Œåˆ™é‡å»ºå“ˆå¸Œè¡¨ã€‚ç®—æ³•9.18 */
    int c,p;
    c=0;
-   if(SearchHash(*H,e.key,&p,&c)) /* ±íÖĞÒÑÓĞÓëeÓĞÏàÍ¬¹Ø¼ü×ÖµÄÔªËØ */
+   if(SearchHash(*H,e.key,&p,&c)) /* è¡¨ä¸­å·²æœ‰ä¸eæœ‰ç›¸åŒå…³é”®å­—çš„å…ƒç´  */
      return DUPLICATE;
-   else if(c<hashsize[(*H).sizeindex]/2) /* ³åÍ»´ÎÊıcÎ´´ïµ½ÉÏÏŞ,(cµÄ·§Öµ¿Éµ÷) */
-   { /* ²åÈëe */
+   else if(c<hashsize[(*H).sizeindex]/2) /* å†²çªæ¬¡æ•°cæœªè¾¾åˆ°ä¸Šé™,(cçš„é˜€å€¼å¯è°ƒ) */
+   { /* æ’å…¥e */
      (*H).elem[p]=e;
      ++(*H).count;
      return OK;
    }
    else
-     RecreateHashTable(H); /* ÖØ½¨¹şÏ£±í */
+     RecreateHashTable(H); /* é‡å»ºå“ˆå¸Œè¡¨ */
    return ERROR;
  }
 
  void TraverseHash(HashTable H,void(*Vi)(int,ElemType))
- { /* °´¹şÏ£µØÖ·µÄË³Ğò±éÀú¹şÏ£±í */
+ { /* æŒ‰å“ˆå¸Œåœ°å€çš„é¡ºåºéå†å“ˆå¸Œè¡¨ */
    int i;
-   printf("¹şÏ£µØÖ·0¡«%d\n",m-1);
+   printf("å“ˆå¸Œåœ°å€0ï½%d\n",m-1);
    for(i=0;i<m;i++)
-     if(H.elem[i].key!=NULLKEY) /* ÓĞÊı¾İ */
+     if(H.elem[i].key!=NULLKEY) /* æœ‰æ•°æ® */
        Vi(i,H.elem[i]);
  }
 
  Status Find(HashTable H,KeyType K,int *p)
- { /* ÔÚ¿ª·Å¶¨Ö·¹şÏ£±íHÖĞ²éÕÒ¹Ø¼üÂëÎªKµÄÔªËØ,Èô²éÕÒ³É¹¦,ÒÔpÖ¸Ê¾´ı²éÊı¾İ */
-   /* ÔªËØÔÚ±íÖĞÎ»ÖÃ,²¢·µ»ØSUCCESS;·ñÔò,·µ»ØUNSUCCESS */
+ { /* åœ¨å¼€æ”¾å®šå€å“ˆå¸Œè¡¨Hä¸­æŸ¥æ‰¾å…³é”®ç ä¸ºKçš„å…ƒç´ ,è‹¥æŸ¥æ‰¾æˆåŠŸ,ä»¥pæŒ‡ç¤ºå¾…æŸ¥æ•°æ® */
+   /* å…ƒç´ åœ¨è¡¨ä¸­ä½ç½®,å¹¶è¿”å›SUCCESS;å¦åˆ™,è¿”å›UNSUCCESS */
    int c=0;
-   *p=Hash(K); /* ÇóµÃ¹şÏ£µØÖ· */
+   *p=Hash(K); /* æ±‚å¾—å“ˆå¸Œåœ°å€ */
    while(H.elem[*p].key!=NULLKEY&&!EQ(K,H.elem[*p].key))
-   { /* ¸ÃÎ»ÖÃÖĞÌîÓĞ¼ÇÂ¼£®²¢ÇÒ¹Ø¼ü×Ö²»ÏàµÈ */
+   { /* è¯¥ä½ç½®ä¸­å¡«æœ‰è®°å½•ï¼å¹¶ä¸”å…³é”®å­—ä¸ç›¸ç­‰ */
      c++;
      if(c<m)
-       collision(p,c); /* ÇóµÃÏÂÒ»Ì½²éµØÖ·p */
+       collision(p,c); /* æ±‚å¾—ä¸‹ä¸€æ¢æŸ¥åœ°å€p */
      else
-       return UNSUCCESS; /* ²éÕÒ²»³É¹¦(H.elem[p].key==NULLKEY) */
+       return UNSUCCESS; /* æŸ¥æ‰¾ä¸æˆåŠŸ(H.elem[p].key==NULLKEY) */
    }
    if EQ(K,H.elem[*p].key)
-     return SUCCESS; /* ²éÕÒ³É¹¦£¬p·µ»Ø´ı²éÊı¾İÔªËØÎ»ÖÃ */
+     return SUCCESS; /* æŸ¥æ‰¾æˆåŠŸï¼Œpè¿”å›å¾…æŸ¥æ•°æ®å…ƒç´ ä½ç½® */
    else
-     return UNSUCCESS; /* ²éÕÒ²»³É¹¦(H.elem[p].key==NULLKEY) */
+     return UNSUCCESS; /* æŸ¥æ‰¾ä¸æˆåŠŸ(H.elem[p].key==NULLKEY) */
  }

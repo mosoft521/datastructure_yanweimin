@@ -1,44 +1,44 @@
-/* main5-3.c ¼ìÑébo5-3.cµÄÖ÷³ÌĞò(Óëmain5-2.cºÜÏàÏñ) */
+/* main5-3.c æ£€éªŒbo5-3.cçš„ä¸»ç¨‹åº(ä¸main5-2.cå¾ˆç›¸åƒ) */
 #include "../ch1/c1.h"
 typedef int ElemType;
-#include "c5-3.h" /* ´ËĞĞÓëmain5-2.c²»Í¬ */
-#include "bo5-3.c" /* ´ËĞĞÓëmain5-2.c²»Í¬ */
+#include "c5-3.h" /* æ­¤è¡Œä¸main5-2.cä¸åŒ */
+#include "bo5-3.c" /* æ­¤è¡Œä¸main5-2.cä¸åŒ */
 void main()
 {
-	RLSMatrix A, B, C; /* ´ËĞĞÓëmain5-2.c²»Í¬ */
-	printf("´´½¨¾ØÕóA: ");
+	RLSMatrix A, B, C; /* æ­¤è¡Œä¸main5-2.cä¸åŒ */
+	printf("åˆ›å»ºçŸ©é˜µA: ");
 	CreateSMatrix(&A);
 	PrintSMatrix(A);
-	printf("ÓÉ¾ØÕóA¸´ÖÆ¾ØÕóB: ");
+	printf("ç”±çŸ©é˜µAå¤åˆ¶çŸ©é˜µB: ");
 	CopySMatrix(A, &B);
 	PrintSMatrix(B);
 	DestroySMatrix(&B);
-	printf("Ïú»Ù¾ØÕóBºó:\n");
+	printf("é”€æ¯çŸ©é˜µBå:\n");
 	PrintSMatrix(B);
-	printf("´´½¨¾ØÕóB2:(Óë¾ØÕóAµÄĞĞ¡¢ÁĞÊıÏàÍ¬£¬ĞĞ¡¢ÁĞ·Ö±ğÎª%d,%d)\n", A.mu, A.nu);
+	printf("åˆ›å»ºçŸ©é˜µB2:(ä¸çŸ©é˜µAçš„è¡Œã€åˆ—æ•°ç›¸åŒï¼Œè¡Œã€åˆ—åˆ†åˆ«ä¸º%d,%d)\n", A.mu, A.nu);
 	CreateSMatrix(&B);
 	PrintSMatrix(B);
-	printf("¾ØÕóC1(A+B): ");
+	printf("çŸ©é˜µC1(A+B): ");
 	AddSMatrix(A, B, &C);
 	PrintSMatrix(C);
 	DestroySMatrix(&C);
-	printf("¾ØÕóC2(A-B): ");
+	printf("çŸ©é˜µC2(A-B): ");
 	SubtSMatrix(A, B, &C);
 	PrintSMatrix(C);
 	DestroySMatrix(&C);
-	printf("¾ØÕóC3(AµÄ×ªÖÃ): ");
+	printf("çŸ©é˜µC3(Açš„è½¬ç½®): ");
 	TransposeSMatrix(A, &C);
 	PrintSMatrix(C);
 	DestroySMatrix(&A);
 	DestroySMatrix(&B);
 	DestroySMatrix(&C);
-	printf("´´½¨¾ØÕóA2: ");
+	printf("åˆ›å»ºçŸ©é˜µA2: ");
 	CreateSMatrix(&A);
 	PrintSMatrix(A);
-	printf("´´½¨¾ØÕóB3:(ĞĞÊıÓ¦Óë¾ØÕóA2µÄÁĞÊıÏàÍ¬=%d)\n", A.nu);
+	printf("åˆ›å»ºçŸ©é˜µB3:(è¡Œæ•°åº”ä¸çŸ©é˜µA2çš„åˆ—æ•°ç›¸åŒ=%d)\n", A.nu);
 	CreateSMatrix(&B);
 	PrintSMatrix(B);
-	printf("¾ØÕóC5(A*B): ");
+	printf("çŸ©é˜µC5(A*B): ");
 	MultSMatrix(A, B, &C);
 	PrintSMatrix(C);
 	DestroySMatrix(&A);

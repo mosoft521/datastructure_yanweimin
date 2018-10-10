@@ -1,6 +1,6 @@
- /* bo2-5.c Ë«Á´Ñ­»·ÏßĞÔ±í(´æ´¢½á¹¹ÓÉc2-4.h¶¨Òå)µÄ»ù±¾²Ù×÷(14¸ö) */
+ /* bo2-5.c åŒé“¾å¾ªç¯çº¿æ€§è¡¨(å­˜å‚¨ç»“æ„ç”±c2-4.hå®šä¹‰)çš„åŸºæœ¬æ“ä½œ(14ä¸ª) */
  Status InitList(DuLinkList *L)
- { /* ²úÉú¿ÕµÄË«ÏòÑ­»·Á´±íL */
+ { /* äº§ç”Ÿç©ºçš„åŒå‘å¾ªç¯é“¾è¡¨L */
    *L=(DuLinkList)malloc(sizeof(DuLNode));
    if(*L)
    {
@@ -12,9 +12,9 @@
  }
 
  Status DestroyList(DuLinkList *L)
- { /* ²Ù×÷½á¹û£ºÏú»ÙË«ÏòÑ­»·Á´±íL */
-   DuLinkList q,p=(*L)->next; /* pÖ¸ÏòµÚÒ»¸ö½áµã */
-   while(p!=*L) /* pÃ»µ½±íÍ· */
+ { /* æ“ä½œç»“æœï¼šé”€æ¯åŒå‘å¾ªç¯é“¾è¡¨L */
+   DuLinkList q,p=(*L)->next; /* pæŒ‡å‘ç¬¬ä¸€ä¸ªç»“ç‚¹ */
+   while(p!=*L) /* pæ²¡åˆ°è¡¨å¤´ */
    {
      q=p->next;
      free(p);
@@ -25,21 +25,21 @@
    return OK;
  }
 
- Status ClearList(DuLinkList L) /* ²»¸Ä±äL */
- { /* ³õÊ¼Ìõ¼ş£ºLÒÑ´æÔÚ¡£²Ù×÷½á¹û£º½«LÖØÖÃÎª¿Õ±í */
-   DuLinkList q,p=L->next; /* pÖ¸ÏòµÚÒ»¸ö½áµã */
-   while(p!=L) /* pÃ»µ½±íÍ· */
+ Status ClearList(DuLinkList L) /* ä¸æ”¹å˜L */
+ { /* åˆå§‹æ¡ä»¶ï¼šLå·²å­˜åœ¨ã€‚æ“ä½œç»“æœï¼šå°†Lé‡ç½®ä¸ºç©ºè¡¨ */
+   DuLinkList q,p=L->next; /* pæŒ‡å‘ç¬¬ä¸€ä¸ªç»“ç‚¹ */
+   while(p!=L) /* pæ²¡åˆ°è¡¨å¤´ */
    {
      q=p->next;
      free(p);
      p=q;
    }
-   L->next=L->prior=L; /* Í·½áµãµÄÁ½¸öÖ¸ÕëÓò¾ùÖ¸Ïò×ÔÉí */
+   L->next=L->prior=L; /* å¤´ç»“ç‚¹çš„ä¸¤ä¸ªæŒ‡é’ˆåŸŸå‡æŒ‡å‘è‡ªèº« */
    return OK;
  }
 
  Status ListEmpty(DuLinkList L)
- { /* ³õÊ¼Ìõ¼ş£ºÏßĞÔ±íLÒÑ´æÔÚ¡£²Ù×÷½á¹û£ºÈôLÎª¿Õ±í£¬Ôò·µ»ØTRUE£¬·ñÔò·µ»ØFALSE */
+ { /* åˆå§‹æ¡ä»¶ï¼šçº¿æ€§è¡¨Lå·²å­˜åœ¨ã€‚æ“ä½œç»“æœï¼šè‹¥Lä¸ºç©ºè¡¨ï¼Œåˆ™è¿”å›TRUEï¼Œå¦åˆ™è¿”å›FALSE */
    if(L->next==L&&L->prior==L)
      return TRUE;
    else
@@ -47,10 +47,10 @@
  }
 
  int ListLength(DuLinkList L)
- { /* ³õÊ¼Ìõ¼ş£ºLÒÑ´æÔÚ¡£²Ù×÷½á¹û£º·µ»ØLÖĞÊı¾İÔªËØ¸öÊı */
+ { /* åˆå§‹æ¡ä»¶ï¼šLå·²å­˜åœ¨ã€‚æ“ä½œç»“æœï¼šè¿”å›Lä¸­æ•°æ®å…ƒç´ ä¸ªæ•° */
    int i=0;
-   DuLinkList p=L->next; /* pÖ¸ÏòµÚÒ»¸ö½áµã */
-   while(p!=L) /* pÃ»µ½±íÍ· */
+   DuLinkList p=L->next; /* pæŒ‡å‘ç¬¬ä¸€ä¸ªç»“ç‚¹ */
+   while(p!=L) /* pæ²¡åˆ°è¡¨å¤´ */
    {
      i++;
      p=p->next;
@@ -59,30 +59,30 @@
  }
 
  Status GetElem(DuLinkList L,int i,ElemType *e)
- { /* µ±µÚi¸öÔªËØ´æÔÚÊ±,ÆäÖµ¸³¸øe²¢·µ»ØOK,·ñÔò·µ»ØERROR */
-   int j=1; /* jÎª¼ÆÊıÆ÷ */
-   DuLinkList p=L->next; /* pÖ¸ÏòµÚÒ»¸ö½áµã */
-   while(p!=L&&j<i) /* Ë³Ö¸ÕëÏòºó²éÕÒ,Ö±µ½pÖ¸ÏòµÚi¸öÔªËØ»òpÖ¸ÏòÍ·½áµã */
+ { /* å½“ç¬¬iä¸ªå…ƒç´ å­˜åœ¨æ—¶,å…¶å€¼èµ‹ç»™eå¹¶è¿”å›OK,å¦åˆ™è¿”å›ERROR */
+   int j=1; /* jä¸ºè®¡æ•°å™¨ */
+   DuLinkList p=L->next; /* pæŒ‡å‘ç¬¬ä¸€ä¸ªç»“ç‚¹ */
+   while(p!=L&&j<i) /* é¡ºæŒ‡é’ˆå‘åæŸ¥æ‰¾,ç›´åˆ°pæŒ‡å‘ç¬¬iä¸ªå…ƒç´ æˆ–pæŒ‡å‘å¤´ç»“ç‚¹ */
    {
      p=p->next;
      j++;
    }
-   if(p==L||j>i) /* µÚi¸öÔªËØ²»´æÔÚ */
+   if(p==L||j>i) /* ç¬¬iä¸ªå…ƒç´ ä¸å­˜åœ¨ */
      return ERROR;
-   *e=p->data; /* È¡µÚi¸öÔªËØ */
+   *e=p->data; /* å–ç¬¬iä¸ªå…ƒç´  */
    return OK;
  }
 
  int LocateElem(DuLinkList L,ElemType e,Status(*compare)(ElemType,ElemType))
- { /* ³õÊ¼Ìõ¼ş£ºLÒÑ´æÔÚ£¬compare()ÊÇÊı¾İÔªËØÅĞ¶¨º¯Êı */
-   /* ²Ù×÷½á¹û£º·µ»ØLÖĞµÚ1¸öÓëeÂú×ã¹ØÏµcompare()µÄÊı¾İÔªËØµÄÎ»Ğò¡£ */
-   /*           ÈôÕâÑùµÄÊı¾İÔªËØ²»´æÔÚ£¬Ôò·µ»ØÖµÎª0 */
+ { /* åˆå§‹æ¡ä»¶ï¼šLå·²å­˜åœ¨ï¼Œcompare()æ˜¯æ•°æ®å…ƒç´ åˆ¤å®šå‡½æ•° */
+   /* æ“ä½œç»“æœï¼šè¿”å›Lä¸­ç¬¬1ä¸ªä¸eæ»¡è¶³å…³ç³»compare()çš„æ•°æ®å…ƒç´ çš„ä½åºã€‚ */
+   /*           è‹¥è¿™æ ·çš„æ•°æ®å…ƒç´ ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›å€¼ä¸º0 */
    int i=0;
-   DuLinkList p=L->next; /* pÖ¸ÏòµÚ1¸öÔªËØ */
+   DuLinkList p=L->next; /* pæŒ‡å‘ç¬¬1ä¸ªå…ƒç´  */
    while(p!=L)
    {
      i++;
-     if(compare(p->data,e)) /* ÕÒµ½ÕâÑùµÄÊı¾İÔªËØ */
+     if(compare(p->data,e)) /* æ‰¾åˆ°è¿™æ ·çš„æ•°æ®å…ƒç´  */
        return i;
      p=p->next;
    }
@@ -90,10 +90,10 @@
  }
 
  Status PriorElem(DuLinkList L,ElemType cur_e,ElemType *pre_e)
- { /* ²Ù×÷½á¹û£ºÈôcur_eÊÇLµÄÊı¾İÔªËØ£¬ÇÒ²»ÊÇµÚÒ»¸ö£¬ÔòÓÃpre_e·µ»ØËüµÄÇ°Çı£¬ */
-   /*           ·ñÔò²Ù×÷Ê§°Ü£¬pre_eÎŞ¶¨Òå */
-   DuLinkList p=L->next->next; /* pÖ¸ÏòµÚ2¸öÔªËØ */
-   while(p!=L) /* pÃ»µ½±íÍ· */
+ { /* æ“ä½œç»“æœï¼šè‹¥cur_eæ˜¯Lçš„æ•°æ®å…ƒç´ ï¼Œä¸”ä¸æ˜¯ç¬¬ä¸€ä¸ªï¼Œåˆ™ç”¨pre_eè¿”å›å®ƒçš„å‰é©±ï¼Œ */
+   /*           å¦åˆ™æ“ä½œå¤±è´¥ï¼Œpre_eæ— å®šä¹‰ */
+   DuLinkList p=L->next->next; /* pæŒ‡å‘ç¬¬2ä¸ªå…ƒç´  */
+   while(p!=L) /* pæ²¡åˆ°è¡¨å¤´ */
    {
      if(p->data==cur_e)
      {
@@ -106,10 +106,10 @@
  }
 
  Status NextElem(DuLinkList L,ElemType cur_e,ElemType *next_e)
- { /* ²Ù×÷½á¹û£ºÈôcur_eÊÇLµÄÊı¾İÔªËØ£¬ÇÒ²»ÊÇ×îºóÒ»¸ö£¬ÔòÓÃnext_e·µ»ØËüµÄºó¼Ì£¬ */
-   /*           ·ñÔò²Ù×÷Ê§°Ü£¬next_eÎŞ¶¨Òå */
-   DuLinkList p=L->next->next; /* pÖ¸ÏòµÚ2¸öÔªËØ */
-   while(p!=L) /* pÃ»µ½±íÍ· */
+ { /* æ“ä½œç»“æœï¼šè‹¥cur_eæ˜¯Lçš„æ•°æ®å…ƒç´ ï¼Œä¸”ä¸æ˜¯æœ€åä¸€ä¸ªï¼Œåˆ™ç”¨next_eè¿”å›å®ƒçš„åç»§ï¼Œ */
+   /*           å¦åˆ™æ“ä½œå¤±è´¥ï¼Œnext_eæ— å®šä¹‰ */
+   DuLinkList p=L->next->next; /* pæŒ‡å‘ç¬¬2ä¸ªå…ƒç´  */
+   while(p!=L) /* pæ²¡åˆ°è¡¨å¤´ */
    {
      if(p->prior->data==cur_e)
      {
@@ -121,8 +121,8 @@
    return FALSE;
  }
 
- DuLinkList GetElemP(DuLinkList L,int i) /* Áí¼Ó */
- { /* ÔÚË«ÏòÁ´±íLÖĞ·µ»ØµÚi¸öÔªËØµÄÎ»ÖÃÖ¸Õë(Ëã·¨2.18¡¢2.19Òªµ÷ÓÃµÄº¯Êı) */
+ DuLinkList GetElemP(DuLinkList L,int i) /* å¦åŠ  */
+ { /* åœ¨åŒå‘é“¾è¡¨Lä¸­è¿”å›ç¬¬iä¸ªå…ƒç´ çš„ä½ç½®æŒ‡é’ˆ(ç®—æ³•2.18ã€2.19è¦è°ƒç”¨çš„å‡½æ•°) */
    int j;
    DuLinkList p=L;
    for(j=1;j<=i;j++)
@@ -130,18 +130,18 @@
    return p;
  }
 
- Status ListInsert(DuLinkList L,int i,ElemType e) /* ¸Ä½øËã·¨2.18 */
- { /* ÔÚ´øÍ·½áµãµÄË«Á´Ñ­»·ÏßĞÔ±íLÖĞµÚi¸öÎ»ÖÃÖ®Ç°²åÈëÔªËØe£¬iµÄºÏ·¨ÖµÎª1¡Üi¡Ü±í³¤+1 */
+ Status ListInsert(DuLinkList L,int i,ElemType e) /* æ”¹è¿›ç®—æ³•2.18 */
+ { /* åœ¨å¸¦å¤´ç»“ç‚¹çš„åŒé“¾å¾ªç¯çº¿æ€§è¡¨Lä¸­ç¬¬iä¸ªä½ç½®ä¹‹å‰æ’å…¥å…ƒç´ eï¼Œiçš„åˆæ³•å€¼ä¸º1â‰¤iâ‰¤è¡¨é•¿+1 */
    DuLinkList p,s;
-   if(i<1||i>ListLength(L)+1) /* iÖµ²»ºÏ·¨ */
+   if(i<1||i>ListLength(L)+1) /* iå€¼ä¸åˆæ³• */
      return ERROR;
-   p=GetElemP(L,i-1); /* ÔÚLÖĞÈ·¶¨µÚi-1¸öÔªËØµÄÎ»ÖÃÖ¸Õëp */
-   if(!p) /* p=NULL,¼´µÚi-1¸öÔªËØ²»´æÔÚ */
+   p=GetElemP(L,i-1); /* åœ¨Lä¸­ç¡®å®šç¬¬i-1ä¸ªå…ƒç´ çš„ä½ç½®æŒ‡é’ˆp */
+   if(!p) /* p=NULL,å³ç¬¬i-1ä¸ªå…ƒç´ ä¸å­˜åœ¨ */
      return ERROR;
    s=(DuLinkList)malloc(sizeof(DuLNode));
    if(!s)
      return OVERFLOW;
-   s->data=e; /* ÔÚµÚi-1¸öÔªËØÖ®ºó²åÈë */
+   s->data=e; /* åœ¨ç¬¬i-1ä¸ªå…ƒç´ ä¹‹åæ’å…¥ */
    s->prior=p;
    s->next=p->next;
    p->next->prior=s;
@@ -149,13 +149,13 @@
    return OK;
  }
 
- Status ListDelete(DuLinkList L,int i,ElemType *e) /* Ëã·¨2.19 */
- { /* É¾³ı´øÍ·½áµãµÄË«Á´Ñ­»·ÏßĞÔ±íLµÄµÚi¸öÔªËØ,iµÄºÏ·¨ÖµÎª1¡Üi¡Ü±í³¤+1 */
+ Status ListDelete(DuLinkList L,int i,ElemType *e) /* ç®—æ³•2.19 */
+ { /* åˆ é™¤å¸¦å¤´ç»“ç‚¹çš„åŒé“¾å¾ªç¯çº¿æ€§è¡¨Lçš„ç¬¬iä¸ªå…ƒç´ ,içš„åˆæ³•å€¼ä¸º1â‰¤iâ‰¤è¡¨é•¿+1 */
    DuLinkList p;
-   if(i<1||i>ListLength(L)) /* iÖµ²»ºÏ·¨ */
+   if(i<1||i>ListLength(L)) /* iå€¼ä¸åˆæ³• */
      return ERROR;
-   p=GetElemP(L,i);  /* ÔÚLÖĞÈ·¶¨µÚi¸öÔªËØµÄÎ»ÖÃÖ¸Õëp */
-   if(!p) /* p=NULL,¼´µÚi¸öÔªËØ²»´æÔÚ */
+   p=GetElemP(L,i);  /* åœ¨Lä¸­ç¡®å®šç¬¬iä¸ªå…ƒç´ çš„ä½ç½®æŒ‡é’ˆp */
+   if(!p) /* p=NULL,å³ç¬¬iä¸ªå…ƒç´ ä¸å­˜åœ¨ */
      return ERROR;
    *e=p->data;
    p->prior->next=p->next;
@@ -165,8 +165,8 @@
  }
 
  void ListTraverse(DuLinkList L,void(*visit)(ElemType))
- { /* ÓÉË«Á´Ñ­»·ÏßĞÔ±íLµÄÍ·½áµã³ö·¢,ÕıĞò¶ÔÃ¿¸öÊı¾İÔªËØµ÷ÓÃº¯Êıvisit() */
-   DuLinkList p=L->next; /* pÖ¸ÏòÍ·½áµã */
+ { /* ç”±åŒé“¾å¾ªç¯çº¿æ€§è¡¨Lçš„å¤´ç»“ç‚¹å‡ºå‘,æ­£åºå¯¹æ¯ä¸ªæ•°æ®å…ƒç´ è°ƒç”¨å‡½æ•°visit() */
+   DuLinkList p=L->next; /* pæŒ‡å‘å¤´ç»“ç‚¹ */
    while(p!=L)
    {
      visit(p->data);
@@ -176,8 +176,8 @@
  }
 
  void ListTraverseBack(DuLinkList L,void(*visit)(ElemType))
- { /* ÓÉË«Á´Ñ­»·ÏßĞÔ±íLµÄÍ·½áµã³ö·¢,ÄæĞò¶ÔÃ¿¸öÊı¾İÔªËØµ÷ÓÃº¯Êıvisit()¡£Áí¼Ó */
-   DuLinkList p=L->prior; /* pÖ¸ÏòÎ²½áµã */
+ { /* ç”±åŒé“¾å¾ªç¯çº¿æ€§è¡¨Lçš„å¤´ç»“ç‚¹å‡ºå‘,é€†åºå¯¹æ¯ä¸ªæ•°æ®å…ƒç´ è°ƒç”¨å‡½æ•°visit()ã€‚å¦åŠ  */
+   DuLinkList p=L->prior; /* pæŒ‡å‘å°¾ç»“ç‚¹ */
    while(p!=L)
    {
      visit(p->data);

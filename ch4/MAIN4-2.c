@@ -1,4 +1,4 @@
-/* main4-2.c ¼ìÑébo4-2.cµÄÖ÷³ÌĞò */
+/* main4-2.c æ£€éªŒbo4-2.cçš„ä¸»ç¨‹åº */
 #include "../ch1/c1.h"
 #include "c4-2.h"
 #include "bo4-2.c"
@@ -7,15 +7,15 @@ void main()
 	int i;
 	char c, *p = "God bye!", *q = "God luck!";
 	HString t, s, r;
-	InitString(&t); /* HStringÀàĞÍ±ØĞè³õÊ¼»¯ */
+	InitString(&t); /* HStringç±»å‹å¿…éœ€åˆå§‹åŒ– */
 	InitString(&s);
 	InitString(&r);
 	StrAssign(&t, p);
-	printf("´®tÎª: ");
+	printf("ä¸²tä¸º: ");
 	StrPrint(t);
-	printf("´®³¤Îª%d ´®¿Õ·ñ£¿%d(1:¿Õ 0:·ñ)\n", StrLength(t), StrEmpty(t));
+	printf("ä¸²é•¿ä¸º%d ä¸²ç©ºå¦ï¼Ÿ%d(1:ç©º 0:å¦)\n", StrLength(t), StrEmpty(t));
 	StrAssign(&s, q);
-	printf("´®sÎª: ");
+	printf("ä¸²sä¸º: ");
 	StrPrint(s);
 	i = StrCompare(s, t);
 	if (i < 0)
@@ -24,33 +24,33 @@ void main()
 		c = '=';
 	else
 		c = '>';
-	printf("´®s%c´®t\n", c);
+	printf("ä¸²s%cä¸²t\n", c);
 	Concat(&r, t, s);
-	printf("´®tÁª½Ó´®s²úÉúµÄ´®rÎª: ");
+	printf("ä¸²tè”æ¥ä¸²säº§ç”Ÿçš„ä¸²rä¸º: ");
 	StrPrint(r);
 	StrAssign(&s, "oo");
-	printf("´®sÎª: ");
+	printf("ä¸²sä¸º: ");
 	StrPrint(s);
 	StrAssign(&t, "o");
-	printf("´®tÎª: ");
+	printf("ä¸²tä¸º: ");
 	StrPrint(t);
 	Replace(&r, t, s);
-	printf("°Ñ´®rÖĞºÍ´®tÏàÍ¬µÄ×Ó´®ÓÃ´®s´úÌæºó£¬´®rÎª:\n");
+	printf("æŠŠä¸²rä¸­å’Œä¸²tç›¸åŒçš„å­ä¸²ç”¨ä¸²sä»£æ›¿åï¼Œä¸²rä¸º:\n");
 	StrPrint(r);
 	ClearString(&s);
-	printf("´®sÇå¿Õºó£¬´®³¤Îª%d ¿Õ·ñ£¿%d(1:¿Õ 0:·ñ)\n", StrLength(s), StrEmpty(s));
+	printf("ä¸²sæ¸…ç©ºåï¼Œä¸²é•¿ä¸º%d ç©ºå¦ï¼Ÿ%d(1:ç©º 0:å¦)\n", StrLength(s), StrEmpty(s));
 	SubString(&s, r, 6, 4);
-	printf("´®sÎª´Ó´®rµÄµÚ6¸ö×Ö·ûÆğµÄ4¸ö×Ö·û£¬³¤¶ÈÎª%d ´®sÎª: ", s.length);
+	printf("ä¸²sä¸ºä»ä¸²rçš„ç¬¬6ä¸ªå­—ç¬¦èµ·çš„4ä¸ªå­—ç¬¦ï¼Œé•¿åº¦ä¸º%d ä¸²sä¸º: ", s.length);
 	StrPrint(s);
 	StrCopy(&t, r);
-	printf("¸´ÖÆ´®tÎª´®r,´®tÎª: ");
+	printf("å¤åˆ¶ä¸²tä¸ºä¸²r,ä¸²tä¸º: ");
 	StrPrint(t);
 	StrInsert(&t, 6, s);
-	printf("ÔÚ´®tµÄµÚ6¸ö×Ö·ûÇ°²åÈë´®sºó£¬´®tÎª: ");
+	printf("åœ¨ä¸²tçš„ç¬¬6ä¸ªå­—ç¬¦å‰æ’å…¥ä¸²såï¼Œä¸²tä¸º: ");
 	StrPrint(t);
 	StrDelete(&t, 1, 5);
-	printf("´Ó´®tµÄµÚ1¸ö×Ö·ûÆğÉ¾³ı5¸ö×Ö·ûºó,´®tÎª: ");
+	printf("ä»ä¸²tçš„ç¬¬1ä¸ªå­—ç¬¦èµ·åˆ é™¤5ä¸ªå­—ç¬¦å,ä¸²tä¸º: ");
 	StrPrint(t);
-	printf("%dÊÇ´Ó´®tµÄµÚ1¸ö×Ö·ûÆğ£¬ºÍ´®sÏàÍ¬µÄµÚ1¸ö×Ó´®µÄÎ»ÖÃ\n", Index(t, s, 1));
-	printf("%dÊÇ´Ó´®tµÄµÚ2¸ö×Ö·ûÆğ£¬ºÍ´®sÏàÍ¬µÄµÚ1¸ö×Ó´®µÄÎ»ÖÃ\n", Index(t, s, 2));
+	printf("%dæ˜¯ä»ä¸²tçš„ç¬¬1ä¸ªå­—ç¬¦èµ·ï¼Œå’Œä¸²sç›¸åŒçš„ç¬¬1ä¸ªå­ä¸²çš„ä½ç½®\n", Index(t, s, 1));
+	printf("%dæ˜¯ä»ä¸²tçš„ç¬¬2ä¸ªå­—ç¬¦èµ·ï¼Œå’Œä¸²sç›¸åŒçš„ç¬¬1ä¸ªå­ä¸²çš„ä½ç½®\n", Index(t, s, 2));
 }

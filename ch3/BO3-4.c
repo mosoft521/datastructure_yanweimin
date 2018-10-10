@@ -1,15 +1,15 @@
- /* bo3-4.c Ë³Ğò¶ÓÁĞ(·ÇÑ­»·,´æ´¢½á¹¹ÓÉc3-3.h¶¨Òå)µÄ»ù±¾²Ù×÷(9¸ö) */
+ /* bo3-4.c é¡ºåºé˜Ÿåˆ—(éå¾ªç¯,å­˜å‚¨ç»“æ„ç”±c3-3.hå®šä¹‰)çš„åŸºæœ¬æ“ä½œ(9ä¸ª) */
  Status InitQueue(SqQueue *Q)
- { /* ¹¹ÔìÒ»¸ö¿Õ¶ÓÁĞQ */
+ { /* æ„é€ ä¸€ä¸ªç©ºé˜Ÿåˆ—Q */
    (*Q).base=(QElemType *)malloc(MAXQSIZE*sizeof(QElemType));
-   if(!(*Q).base) /* ´æ´¢·ÖÅäÊ§°Ü */
+   if(!(*Q).base) /* å­˜å‚¨åˆ†é…å¤±è´¥ */
      exit(OVERFLOW);
    (*Q).front=(*Q).rear=0;
    return OK;
  }
 
  Status DestroyQueue(SqQueue *Q)
- { /* Ïú»Ù¶ÓÁĞQ,Q²»ÔÙ´æÔÚ */
+ { /* é”€æ¯é˜Ÿåˆ—Q,Qä¸å†å­˜åœ¨ */
    if((*Q).base)
      free((*Q).base);
    (*Q).base=NULL;
@@ -18,38 +18,38 @@
  }
 
  Status ClearQueue(SqQueue *Q)
- { /* ½«QÇåÎª¿Õ¶ÓÁĞ */
+ { /* å°†Qæ¸…ä¸ºç©ºé˜Ÿåˆ— */
    (*Q).front=(*Q).rear=0;
    return OK;
  }
 
  Status QueueEmpty(SqQueue Q)
- { /* Èô¶ÓÁĞQÎª¿Õ¶ÓÁĞ,Ôò·µ»ØTRUE,·ñÔò·µ»ØFALSE */
-   if(Q.front==Q.rear) /* ¶ÓÁĞ¿ÕµÄ±êÖ¾ */
+ { /* è‹¥é˜Ÿåˆ—Qä¸ºç©ºé˜Ÿåˆ—,åˆ™è¿”å›TRUE,å¦åˆ™è¿”å›FALSE */
+   if(Q.front==Q.rear) /* é˜Ÿåˆ—ç©ºçš„æ ‡å¿— */
      return TRUE;
    else
      return FALSE;
  }
 
  int QueueLength(SqQueue Q)
- { /* ·µ»ØQµÄÔªËØ¸öÊı,¼´¶ÓÁĞµÄ³¤¶È */
+ { /* è¿”å›Qçš„å…ƒç´ ä¸ªæ•°,å³é˜Ÿåˆ—çš„é•¿åº¦ */
    return(Q.rear-Q.front);
  }
 
  Status GetHead(SqQueue Q,QElemType *e)
- { /* Èô¶ÓÁĞ²»¿Õ,ÔòÓÃe·µ»ØQµÄ¶ÓÍ·ÔªËØ,²¢·µ»ØOK,·ñÔò·µ»ØERROR */
-   if(Q.front==Q.rear) /* ¶ÓÁĞ¿Õ */
+ { /* è‹¥é˜Ÿåˆ—ä¸ç©º,åˆ™ç”¨eè¿”å›Qçš„é˜Ÿå¤´å…ƒç´ ,å¹¶è¿”å›OK,å¦åˆ™è¿”å›ERROR */
+   if(Q.front==Q.rear) /* é˜Ÿåˆ—ç©º */
      return ERROR;
    *e=*(Q.base+Q.front);
    return OK;
  }
 
  Status EnQueue(SqQueue *Q,QElemType e)
- { /* ²åÈëÔªËØeÎªQµÄĞÂµÄ¶ÓÎ²ÔªËØ */
+ { /* æ’å…¥å…ƒç´ eä¸ºQçš„æ–°çš„é˜Ÿå°¾å…ƒç´  */
    if((*Q).rear>=MAXQSIZE)
-   { /* ¶ÓÁĞÂú£¬Ôö¼Ó1¸ö´æ´¢µ¥Ôª */
+   { /* é˜Ÿåˆ—æ»¡ï¼Œå¢åŠ 1ä¸ªå­˜å‚¨å•å…ƒ */
      (*Q).base=(QElemType *)realloc((*Q).base,((*Q).rear+1)*sizeof(QElemType));
-     if(!(*Q).base) /* Ôö¼Óµ¥ÔªÊ§°Ü */
+     if(!(*Q).base) /* å¢åŠ å•å…ƒå¤±è´¥ */
        return ERROR;
    }
    *((*Q).base+(*Q).rear)=e;
@@ -58,8 +58,8 @@
  }
 
  Status DeQueue(SqQueue *Q,QElemType *e)
- { /* Èô¶ÓÁĞ²»¿Õ,ÔòÉ¾³ıQµÄ¶ÓÍ·ÔªËØ,ÓÃe·µ»ØÆäÖµ,²¢·µ»ØOK,·ñÔò·µ»ØERROR */
-   if((*Q).front==(*Q).rear) /* ¶ÓÁĞ¿Õ */
+ { /* è‹¥é˜Ÿåˆ—ä¸ç©º,åˆ™åˆ é™¤Qçš„é˜Ÿå¤´å…ƒç´ ,ç”¨eè¿”å›å…¶å€¼,å¹¶è¿”å›OK,å¦åˆ™è¿”å›ERROR */
+   if((*Q).front==(*Q).rear) /* é˜Ÿåˆ—ç©º */
      return ERROR;
    *e=(*Q).base[(*Q).front];
    (*Q).front=(*Q).front+1;
@@ -67,7 +67,7 @@
  }
 
  Status QueueTraverse(SqQueue Q,void(*vi)(QElemType))
- { /* ´Ó¶ÓÍ·µ½¶ÓÎ²ÒÀ´Î¶Ô¶ÓÁĞQÖĞÃ¿¸öÔªËØµ÷ÓÃº¯Êıvi()¡£Ò»µ©viÊ§°Ü,Ôò²Ù×÷Ê§°Ü */
+ { /* ä»é˜Ÿå¤´åˆ°é˜Ÿå°¾ä¾æ¬¡å¯¹é˜Ÿåˆ—Qä¸­æ¯ä¸ªå…ƒç´ è°ƒç”¨å‡½æ•°vi()ã€‚ä¸€æ—¦viå¤±è´¥,åˆ™æ“ä½œå¤±è´¥ */
    int i;
    i=Q.front;
    while(i!=Q.rear)

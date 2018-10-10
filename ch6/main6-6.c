@@ -1,40 +1,40 @@
-/* main6-6.c ¼ìÑébo6-6.cµÄÖ÷³ÌĞò */
-#define CHAR /* ×Ö·ûĞÍ */
-/*#define INT /* ÕûĞÍ£¨¶şÕßÑ¡Ò»£© */
+/* main6-6.c æ£€éªŒbo6-6.cçš„ä¸»ç¨‹åº */
+#define CHAR /* å­—ç¬¦å‹ */
+/*#define INT /* æ•´å‹ï¼ˆäºŒè€…é€‰ä¸€ï¼‰ */
 #include "../ch1/c1.h"
 #ifdef CHAR
 typedef char TElemType;
-TElemType Nil = ' '; /* ×Ö·ûĞÍÒÔ¿Õ¸ñ·ûÎª¿Õ */
+TElemType Nil = ' '; /* å­—ç¬¦å‹ä»¥ç©ºæ ¼ç¬¦ä¸ºç©º */
 #endif
 #ifdef INT
 typedef int TElemType;
-TElemType Nil = 0; /* ÕûĞÍÒÔ0Îª¿Õ */
+TElemType Nil = 0; /* æ•´å‹ä»¥0ä¸ºç©º */
 #endif
 #include"c6-6.h"
 #include"bo6-6.c"
 
 Status visitT(BiPTree T)
 {
-	if (T) /* T·Ç¿Õ */
+	if (T) /* Téç©º */
 #ifdef CHAR
-		printf("%cÊÇ", T->data);
-	if (T->parent) /* TÓĞË«Ç× */
+		printf("%cæ˜¯", T->data);
+	if (T->parent) /* Tæœ‰åŒäº² */
 	{
 		printf("%c", T->parent->data);
 #endif
 #ifdef INT
-		printf("%dÊÇ", T->data);
-		if (T->parent) /* TÓĞË«Ç× */
+		printf("%dæ˜¯", T->data);
+		if (T->parent) /* Tæœ‰åŒäº² */
 		{
 			printf("%d", T->parent->data);
 #endif
 			if (T->parent->lchild == T)
-				printf("µÄ×óº¢×Ó\n");
+				printf("çš„å·¦å­©å­\n");
 			else
-				printf("µÄÓÒº¢×Ó\n");
+				printf("çš„å³å­©å­\n");
 	}
 		else
-			printf("¸ù½áµã\n");
+			printf("æ ¹ç»“ç‚¹\n");
 		return OK;
 }
 
@@ -44,59 +44,59 @@ Status visitT(BiPTree T)
 		BiPTree T, c, q;
 		TElemType e1, e2;
 		InitBiTree(&T);
-		printf("¹¹Ôì¿Õ¶ş²æÊ÷ºó,Ê÷¿Õ·ñ£¿%d(1:ÊÇ 0:·ñ) Ê÷µÄÉî¶È=%d\n", BiTreeEmpty(T), BiTreeDepth(T));
+		printf("æ„é€ ç©ºäºŒå‰æ ‘å,æ ‘ç©ºå¦ï¼Ÿ%d(1:æ˜¯ 0:å¦) æ ‘çš„æ·±åº¦=%d\n", BiTreeEmpty(T), BiTreeDepth(T));
 		e1 = Root(T);
 		if (e1 != Nil)
 #ifdef CHAR
-			printf("¶ş²æÊ÷µÄ¸ùÎª: %c\n", e1);
+			printf("äºŒå‰æ ‘çš„æ ¹ä¸º: %c\n", e1);
 #endif
 #ifdef INT
-		printf("¶ş²æÊ÷µÄ¸ùÎª: %d\n", e1);
+		printf("äºŒå‰æ ‘çš„æ ¹ä¸º: %d\n", e1);
 #endif
 		else
-			printf("Ê÷¿Õ£¬ÎŞ¸ù\n");
+			printf("æ ‘ç©ºï¼Œæ— æ ¹\n");
 #ifdef CHAR
-		printf("Çë°´ÏÈĞòÊäÈë¶ş²æÊ÷(Èç:abÈı¸ö¿Õ¸ñ±íÊ¾aÎª¸ù½áµã,bÎª×ó×ÓÊ÷µÄ¶ş²æÊ÷)\n");
+		printf("è¯·æŒ‰å…ˆåºè¾“å…¥äºŒå‰æ ‘(å¦‚:abä¸‰ä¸ªç©ºæ ¼è¡¨ç¤ºaä¸ºæ ¹ç»“ç‚¹,bä¸ºå·¦å­æ ‘çš„äºŒå‰æ ‘)\n");
 #endif
 #ifdef INT
-		printf("Çë°´ÏÈĞòÊäÈë¶ş²æÊ÷(Èç:1 2 0 0 0±íÊ¾1Îª¸ù½áµã,2Îª×ó×ÓÊ÷µÄ¶ş²æÊ÷)\n");
+		printf("è¯·æŒ‰å…ˆåºè¾“å…¥äºŒå‰æ ‘(å¦‚:1 2 0 0 0è¡¨ç¤º1ä¸ºæ ¹ç»“ç‚¹,2ä¸ºå·¦å­æ ‘çš„äºŒå‰æ ‘)\n");
 #endif
 		CreateBiTree(&T);
-		printf("½¨Á¢¶ş²æÊ÷ºó,Ê÷¿Õ·ñ£¿%d(1:ÊÇ 0:·ñ) Ê÷µÄÉî¶È=%d\n", BiTreeEmpty(T), BiTreeDepth(T));
+		printf("å»ºç«‹äºŒå‰æ ‘å,æ ‘ç©ºå¦ï¼Ÿ%d(1:æ˜¯ 0:å¦) æ ‘çš„æ·±åº¦=%d\n", BiTreeEmpty(T), BiTreeDepth(T));
 		e1 = Root(T);
 		if (e1 != Nil)
 #ifdef CHAR
-			printf("¶ş²æÊ÷µÄ¸ùÎª: %c\n", e1);
+			printf("äºŒå‰æ ‘çš„æ ¹ä¸º: %c\n", e1);
 #endif
 #ifdef INT
-		printf("¶ş²æÊ÷µÄ¸ùÎª: %d\n", e1);
+		printf("äºŒå‰æ ‘çš„æ ¹ä¸º: %d\n", e1);
 #endif
 		else
-			printf("Ê÷¿Õ£¬ÎŞ¸ù\n");
-		printf("ÖĞĞòµİ¹é±éÀú¶ş²æÊ÷:\n");
+			printf("æ ‘ç©ºï¼Œæ— æ ¹\n");
+		printf("ä¸­åºé€’å½’éå†äºŒå‰æ ‘:\n");
 		InOrderTraverse(T, visitT);
-		printf("ºóĞòµİ¹é±éÀú¶ş²æÊ÷:\n");
+		printf("ååºé€’å½’éå†äºŒå‰æ ‘:\n");
 		PostOrderTraverse(T, visitT);
-		scanf("%*c"); /* ³Ôµô»Ø³µ·û */
-		printf("°´»Ø³µ¼ü¼ÌĞø:");
-		getchar(); /* ÔİÍ£Êä³ö */
-		printf("²ãĞò±éÀú¶ş²æÊ÷:\n");
+		scanf("%*c"); /* åƒæ‰å›è½¦ç¬¦ */
+		printf("æŒ‰å›è½¦é”®ç»§ç»­:");
+		getchar(); /* æš‚åœè¾“å‡º */
+		printf("å±‚åºéå†äºŒå‰æ ‘:\n");
 		LevelOrderTraverse(T, visitT);
-		printf("ÇëÊäÈëÒ»¸ö½áµãµÄÖµ: ");
+		printf("è¯·è¾“å…¥ä¸€ä¸ªç»“ç‚¹çš„å€¼: ");
 #ifdef CHAR
 		scanf("%c", &e1);
 #endif
 #ifdef INT
 		scanf("%d", &e1);
 #endif
-		c = Point(T, e1); /* cÎªe1µÄÖ¸Õë */
+		c = Point(T, e1); /* cä¸ºe1çš„æŒ‡é’ˆ */
 #ifdef CHAR
-		printf("½áµãµÄÖµÎª%c\n", Value(c));
+		printf("ç»“ç‚¹çš„å€¼ä¸º%c\n", Value(c));
 #endif
 #ifdef INT
-		printf("½áµãµÄÖµÎª%d\n", Value(c));
+		printf("ç»“ç‚¹çš„å€¼ä¸º%d\n", Value(c));
 #endif
-		printf("Óû¸Ä±ä´Ë½áµãµÄÖµ£¬ÇëÊäÈëĞÂÖµ: ");
+		printf("æ¬²æ”¹å˜æ­¤ç»“ç‚¹çš„å€¼ï¼Œè¯·è¾“å…¥æ–°å€¼: ");
 #ifdef CHAR
 		scanf("%*c%c%*c", &e2);
 #endif
@@ -104,95 +104,95 @@ Status visitT(BiPTree T)
 		scanf("%d", &e2);
 #endif
 		Assign(c, e2);
-		printf("²ãĞò±éÀú¶ş²æÊ÷:\n");
+		printf("å±‚åºéå†äºŒå‰æ ‘:\n");
 		LevelOrderTraverse(T, visitT);
 		e1 = Parent(T, e2);
 		if (e1 != Nil)
 #ifdef CHAR
-			printf("%cµÄË«Ç×ÊÇ%c\n", e2, e1);
+			printf("%cçš„åŒäº²æ˜¯%c\n", e2, e1);
 #endif
 #ifdef INT
-		printf("%dµÄË«Ç×ÊÇ%d\n", e2, e1);
+		printf("%dçš„åŒäº²æ˜¯%d\n", e2, e1);
 #endif
 		else
 #ifdef CHAR
-			printf("%cÃ»ÓĞË«Ç×\n", e2);
+			printf("%cæ²¡æœ‰åŒäº²\n", e2);
 #endif
 #ifdef INT
-		printf("%dÃ»ÓĞË«Ç×\n", e2);
+		printf("%dæ²¡æœ‰åŒäº²\n", e2);
 #endif
 		e1 = LeftChild(T, e2);
 		if (e1 != Nil)
 #ifdef CHAR
-			printf("%cµÄ×óº¢×ÓÊÇ%c\n", e2, e1);
+			printf("%cçš„å·¦å­©å­æ˜¯%c\n", e2, e1);
 #endif
 #ifdef INT
-		printf("%dµÄ×óº¢×ÓÊÇ%d\n", e2, e1);
+		printf("%dçš„å·¦å­©å­æ˜¯%d\n", e2, e1);
 #endif
 		else
 #ifdef CHAR
-			printf("%cÃ»ÓĞ×óº¢×Ó\n", e2);
+			printf("%cæ²¡æœ‰å·¦å­©å­\n", e2);
 #endif
 #ifdef INT
-		printf("%dÃ»ÓĞ×óº¢×Ó\n", e2);
+		printf("%dæ²¡æœ‰å·¦å­©å­\n", e2);
 #endif
 		e1 = RightChild(T, e2);
 		if (e1 != Nil)
 #ifdef CHAR
-			printf("%cµÄÓÒº¢×ÓÊÇ%c\n", e2, e1);
+			printf("%cçš„å³å­©å­æ˜¯%c\n", e2, e1);
 #endif
 #ifdef INT
-		printf("%dµÄÓÒº¢×ÓÊÇ%d\n", e2, e1);
+		printf("%dçš„å³å­©å­æ˜¯%d\n", e2, e1);
 #endif
 		else
 #ifdef CHAR
-			printf("%cÃ»ÓĞÓÒº¢×Ó\n", e2);
+			printf("%cæ²¡æœ‰å³å­©å­\n", e2);
 #endif
 #ifdef INT
-		printf("%dÃ»ÓĞÓÒº¢×Ó\n", e2);
+		printf("%dæ²¡æœ‰å³å­©å­\n", e2);
 #endif
 		e1 = LeftSibling(T, e2);
 		if (e1 != Nil)
 #ifdef CHAR
-			printf("%cµÄ×óĞÖµÜÊÇ%c\n", e2, e1);
+			printf("%cçš„å·¦å…„å¼Ÿæ˜¯%c\n", e2, e1);
 #endif
 #ifdef INT
-		printf("%dµÄ×óĞÖµÜÊÇ%d\n", e2, e1);
+		printf("%dçš„å·¦å…„å¼Ÿæ˜¯%d\n", e2, e1);
 #endif
 		else
 #ifdef CHAR
-			printf("%cÃ»ÓĞ×óĞÖµÜ\n", e2);
+			printf("%cæ²¡æœ‰å·¦å…„å¼Ÿ\n", e2);
 #endif
 #ifdef INT
-		printf("%dÃ»ÓĞ×óĞÖµÜ\n", e2);
+		printf("%dæ²¡æœ‰å·¦å…„å¼Ÿ\n", e2);
 #endif
 		e1 = RightSibling(T, e2);
 		if (e1 != Nil)
 #ifdef CHAR
-			printf("%cµÄÓÒĞÖµÜÊÇ%c\n", e2, e1);
+			printf("%cçš„å³å…„å¼Ÿæ˜¯%c\n", e2, e1);
 #endif
 #ifdef INT
-		printf("%dµÄÓÒĞÖµÜÊÇ%d\n", e2, e1);
+		printf("%dçš„å³å…„å¼Ÿæ˜¯%d\n", e2, e1);
 #endif
 		else
 #ifdef CHAR
-			printf("%cÃ»ÓĞÓÒĞÖµÜ\n", e2);
+			printf("%cæ²¡æœ‰å³å…„å¼Ÿ\n", e2);
 #endif
 #ifdef INT
-		printf("%dÃ»ÓĞÓÒĞÖµÜ\n", e2);
+		printf("%dæ²¡æœ‰å³å…„å¼Ÿ\n", e2);
 #endif 
 		InitBiTree(&c);
-		printf("¹¹ÔìÒ»¸öÓÒ×ÓÊ÷Îª¿ÕµÄ¶ş²æÊ÷c:\n");
+		printf("æ„é€ ä¸€ä¸ªå³å­æ ‘ä¸ºç©ºçš„äºŒå‰æ ‘c:\n");
 #ifdef CHAR
-		printf("ÇëÏÈĞòÊäÈë¶ş²æÊ÷(Èç:abÈı¸ö¿Õ¸ñ±íÊ¾aÎª¸ù½áµã,bÎª×ó×ÓÊ÷µÄ¶ş²æÊ÷)\n");
+		printf("è¯·å…ˆåºè¾“å…¥äºŒå‰æ ‘(å¦‚:abä¸‰ä¸ªç©ºæ ¼è¡¨ç¤ºaä¸ºæ ¹ç»“ç‚¹,bä¸ºå·¦å­æ ‘çš„äºŒå‰æ ‘)\n");
 #endif
 #ifdef INT
-		printf("ÇëÏÈĞòÊäÈë¶ş²æÊ÷(Èç:1 2 0 0 0±íÊ¾1Îª¸ù½áµã,2Îª×ó×ÓÊ÷µÄ¶ş²æÊ÷)\n");
+		printf("è¯·å…ˆåºè¾“å…¥äºŒå‰æ ‘(å¦‚:1 2 0 0 0è¡¨ç¤º1ä¸ºæ ¹ç»“ç‚¹,2ä¸ºå·¦å­æ ‘çš„äºŒå‰æ ‘)\n");
 #endif
 		CreateBiTree(&c);
-		printf("ÏÈĞòµİ¹é±éÀú¶ş²æÊ÷c:\n");
+		printf("å…ˆåºé€’å½’éå†äºŒå‰æ ‘c:\n");
 		PreOrderTraverse(c, visitT);
-		printf("Ê÷c²åµ½Ê÷TÖĞ,ÇëÊäÈëÊ÷TÖĞÊ÷cµÄË«Ç×½áµã cÎª×ó(0)»òÓÒ(1)×ÓÊ÷: ");
+		printf("æ ‘cæ’åˆ°æ ‘Tä¸­,è¯·è¾“å…¥æ ‘Tä¸­æ ‘cçš„åŒäº²ç»“ç‚¹ cä¸ºå·¦(0)æˆ–å³(1)å­æ ‘: ");
 #ifdef CHAR
 		scanf("%*c%c%d", &e1, &i);
 #endif
@@ -201,9 +201,9 @@ Status visitT(BiPTree T)
 #endif
 		q = Point(T, e1);
 		InsertChild(q, i, c);
-		printf("ÏÈĞòµİ¹é±éÀú¶ş²æÊ÷:\n");
+		printf("å…ˆåºé€’å½’éå†äºŒå‰æ ‘:\n");
 		PreOrderTraverse(T, visitT);
-		printf("É¾³ı×ÓÊ÷,ÇëÊäÈë´ıÉ¾³ı×ÓÊ÷µÄË«Ç×½áµã  ×ó(0)»òÓÒ(1)×ÓÊ÷: ");
+		printf("åˆ é™¤å­æ ‘,è¯·è¾“å…¥å¾…åˆ é™¤å­æ ‘çš„åŒäº²ç»“ç‚¹  å·¦(0)æˆ–å³(1)å­æ ‘: ");
 #ifdef CHAR
 		scanf("%*c%c%d", &e1, &i);
 #endif
@@ -212,7 +212,7 @@ Status visitT(BiPTree T)
 #endif
 		q = Point(T, e1);
 		DeleteChild(q, i);
-		printf("ÏÈĞòµİ¹é±éÀú¶ş²æÊ÷:\n");
+		printf("å…ˆåºé€’å½’éå†äºŒå‰æ ‘:\n");
 		PreOrderTraverse(T, visitT);
 		DestroyBiTree(&T);
 	}

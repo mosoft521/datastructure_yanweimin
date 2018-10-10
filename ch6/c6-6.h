@@ -1,6 +1,6 @@
- /* c6-6.h ¶ş²æÊ÷µÄÈı²æÁ´±í´æ´¢±íÊ¾ */
+ /* c6-6.h äºŒå‰æ ‘çš„ä¸‰å‰é“¾è¡¨å­˜å‚¨è¡¨ç¤º */
  typedef struct BiTPNode
  {
    TElemType data;
-   struct BiTPNode *parent,*lchild,*rchild; /* Ë«Ç×¡¢×óÓÒº¢×ÓÖ¸Õë */
+   struct BiTPNode *parent,*lchild,*rchild; /* åŒäº²ã€å·¦å³å­©å­æŒ‡é’ˆ */
  }BiTPNode,*BiPTree;

@@ -1,4 +1,4 @@
-/* main4-1.c ¼ìÑébo4-1.cµÄÖ÷³ÌĞò */
+/* main4-1.c æ£€éªŒbo4-1.cçš„ä¸»ç¨‹åº */
 #include "../ch1/c1.h"
 #include "c4-1.h"
 #include "bo4-1.c"
@@ -8,24 +8,24 @@ void main()
 	Status k;
 	char s, c[MAXSTRLEN + 1];
 	SString t, s1, s2;
-	printf("ÇëÊäÈë´®s1: ");
+	printf("è¯·è¾“å…¥ä¸²s1: ");
 	gets(c);
 	k = StrAssign(s1, c);
 	if (!k)
 	{
-		printf("´®³¤³¬¹ıMAXSTRLEN(=%d)\n", MAXSTRLEN);
+		printf("ä¸²é•¿è¶…è¿‡MAXSTRLEN(=%d)\n", MAXSTRLEN);
 		exit(0);
 	}
-	printf("´®³¤Îª%d ´®¿Õ·ñ£¿%d(1:ÊÇ 0:·ñ)\n", StrLength(s1), StrEmpty(s1));
+	printf("ä¸²é•¿ä¸º%d ä¸²ç©ºå¦ï¼Ÿ%d(1:æ˜¯ 0:å¦)\n", StrLength(s1), StrEmpty(s1));
 	StrCopy(s2, s1);
-	printf("¿½±´s1Éú³ÉµÄ´®Îª: ");
+	printf("æ‹·è´s1ç”Ÿæˆçš„ä¸²ä¸º: ");
 	StrPrint(s2);
-	printf("ÇëÊäÈë´®s2: ");
+	printf("è¯·è¾“å…¥ä¸²s2: ");
 	gets(c);
 	k = StrAssign(s2, c);
 	if (!k)
 	{
-		printf("´®³¤³¬¹ıMAXSTRLEN(%d)\n", MAXSTRLEN);
+		printf("ä¸²é•¿è¶…è¿‡MAXSTRLEN(%d)\n", MAXSTRLEN);
 		exit(0);
 	}
 	i = StrCompare(s1, s2);
@@ -35,42 +35,42 @@ void main()
 		s = '=';
 	else
 		s = '>';
-	printf("´®s1%c´®s2\n", s);
+	printf("ä¸²s1%cä¸²s2\n", s);
 	k = Concat(t, s1, s2);
-	printf("´®s1Áª½Ó´®s2µÃµ½µÄ´®tÎª: ");
+	printf("ä¸²s1è”æ¥ä¸²s2å¾—åˆ°çš„ä¸²tä¸º: ");
 	StrPrint(t);
 	if (k == FALSE)
-		printf("´®tÓĞ½Ø¶Ï\n");
+		printf("ä¸²tæœ‰æˆªæ–­\n");
 	ClearString(s1);
-	printf("ÇåÎª¿Õ´®ºó,´®s1Îª: ");
+	printf("æ¸…ä¸ºç©ºä¸²å,ä¸²s1ä¸º: ");
 	StrPrint(s1);
-	printf("´®³¤Îª%d ´®¿Õ·ñ£¿%d(1:ÊÇ 0:·ñ)\n", StrLength(s1), StrEmpty(s1));
-	printf("Çó´®tµÄ×Ó´®,ÇëÊäÈë×Ó´®µÄÆğÊ¼Î»ÖÃ,×Ó´®³¤¶È: ");
+	printf("ä¸²é•¿ä¸º%d ä¸²ç©ºå¦ï¼Ÿ%d(1:æ˜¯ 0:å¦)\n", StrLength(s1), StrEmpty(s1));
+	printf("æ±‚ä¸²tçš„å­ä¸²,è¯·è¾“å…¥å­ä¸²çš„èµ·å§‹ä½ç½®,å­ä¸²é•¿åº¦: ");
 	scanf("%d,%d", &i, &j);
 	k = SubString(s2, t, i, j);
 	if (k)
 	{
-		printf("×Ó´®s2Îª: ");
+		printf("å­ä¸²s2ä¸º: ");
 		StrPrint(s2);
 	}
-	printf("´Ó´®tµÄµÚpos¸ö×Ö·ûÆğ,É¾³ılen¸ö×Ö·û£¬ÇëÊäÈëpos,len: ");
+	printf("ä»ä¸²tçš„ç¬¬posä¸ªå­—ç¬¦èµ·,åˆ é™¤lenä¸ªå­—ç¬¦ï¼Œè¯·è¾“å…¥pos,len: ");
 	scanf("%d,%d", &i, &j);
 	StrDelete(t, i, j);
-	printf("É¾³ıºóµÄ´®tÎª: ");
+	printf("åˆ é™¤åçš„ä¸²tä¸º: ");
 	StrPrint(t);
 	i = StrLength(s2) / 2;
 	StrInsert(s2, i, t);
-	printf("ÔÚ´®s2µÄµÚ%d¸ö×Ö·ûÖ®Ç°²åÈë´®tºó,´®s2Îª:\n", i);
+	printf("åœ¨ä¸²s2çš„ç¬¬%dä¸ªå­—ç¬¦ä¹‹å‰æ’å…¥ä¸²tå,ä¸²s2ä¸º:\n", i);
 	StrPrint(s2);
 	i = Index(s2, t, 1);
-	printf("s2µÄµÚ%d¸ö×ÖÄ¸ÆğºÍtµÚÒ»´ÎÆ¥Åä\n", i);
+	printf("s2çš„ç¬¬%dä¸ªå­—æ¯èµ·å’Œtç¬¬ä¸€æ¬¡åŒ¹é…\n", i);
 	SubString(t, s2, 1, 1);
-	printf("´®tÎª£º");
+	printf("ä¸²tä¸ºï¼š");
 	StrPrint(t);
 	Concat(s1, t, t);
-	printf("´®s1Îª£º");
+	printf("ä¸²s1ä¸ºï¼š");
 	StrPrint(s1);
 	Replace(s2, t, s1);
-	printf("ÓÃ´®s1È¡´ú´®s2ÖĞºÍ´®tÏàÍ¬µÄ²»ÖØµşµÄ´®ºó,´®s2Îª: ");
+	printf("ç”¨ä¸²s1å–ä»£ä¸²s2ä¸­å’Œä¸²tç›¸åŒçš„ä¸é‡å çš„ä¸²å,ä¸²s2ä¸º: ");
 	StrPrint(s2);
 }

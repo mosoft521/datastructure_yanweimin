@@ -1,26 +1,26 @@
- /* c9-4.h Ë«Á´Ê÷µÄ´æ´¢½á¹¹ */
- #define MAXKEYLEN 16 /* ¹Ø¼ü×ÖµÄ×î´ó³¤¶È */
+ /* c9-4.h åŒé“¾æ ‘çš„å­˜å‚¨ç»“æ„ */
+ #define MAXKEYLEN 16 /* å…³é”®å­—çš„æœ€å¤§é•¿åº¦ */
  typedef struct
  {
-   char ch[MAXKEYLEN]; /* ¹Ø¼ü×Ö */
-   int num; /* ¹Ø¼ü×Ö³¤¶È */
- }KeysType; /* ¹Ø¼ü×ÖÀàĞÍ */
+   char ch[MAXKEYLEN]; /* å…³é”®å­— */
+   int num; /* å…³é”®å­—é•¿åº¦ */
+ }KeysType; /* å…³é”®å­—ç±»å‹ */
 
  typedef struct
  {
-   KeysType key; /* ¹Ø¼ü×Ö */
-   Others others; /* ÆäËü²¿·Ö(ÓÉÖ÷³Ì¶¨Òå) */
- }Record; /* ¼ÇÂ¼ÀàĞÍ */
+   KeysType key; /* å…³é”®å­— */
+   Others others; /* å…¶å®ƒéƒ¨åˆ†(ç”±ä¸»ç¨‹å®šä¹‰) */
+ }Record; /* è®°å½•ç±»å‹ */
 
- typedef enum{LEAF,BRANCH}NodeKind; /* ½áµãÖÖÀà:{Ò¶×Ó,·ÖÖ§} */
- typedef struct DLTNode /* Ë«Á´Ê÷ÀàĞÍ */
+ typedef enum{LEAF,BRANCH}NodeKind; /* ç»“ç‚¹ç§ç±»:{å¶å­,åˆ†æ”¯} */
+ typedef struct DLTNode /* åŒé“¾æ ‘ç±»å‹ */
  {
    char symbol;
-   struct DLTNode *next; /* Ö¸ÏòĞÖµÜ½áµãµÄÖ¸Õë */
+   struct DLTNode *next; /* æŒ‡å‘å…„å¼Ÿç»“ç‚¹çš„æŒ‡é’ˆ */
    NodeKind kind;
    union
    {
-     Record *infoptr; /* Ò¶×Ó½áµãµÄ¼ÇÂ¼Ö¸Õë */
-     struct DLTNode *first; /* ·ÖÖ§½áµãµÄº¢×ÓÁ´Ö¸Õë */
+     Record *infoptr; /* å¶å­ç»“ç‚¹çš„è®°å½•æŒ‡é’ˆ */
+     struct DLTNode *first; /* åˆ†æ”¯ç»“ç‚¹çš„å­©å­é“¾æŒ‡é’ˆ */
    }a;
  }DLTNode,*DLTree;

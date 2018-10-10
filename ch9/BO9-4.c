@@ -1,24 +1,24 @@
- /* bo9-4.c ¶¯Ì¬²éÕÒ±í(BÊ÷)µÄ»ù±¾²Ù×÷ */
+ /* bo9-4.c åŠ¨æ€æŸ¥æ‰¾è¡¨(Bæ ‘)çš„åŸºæœ¬æ“ä½œ */
  Status InitDSTable(BTree *DT)
- { /* ²Ù×÷½á¹û: ¹¹ÔìÒ»¸ö¿ÕµÄ¶¯Ì¬²éÕÒ±íDT */
+ { /* æ“ä½œç»“æœ: æ„é€ ä¸€ä¸ªç©ºçš„åŠ¨æ€æŸ¥æ‰¾è¡¨DT */
    *DT=NULL;
    return OK;
  }
 
  void DestroyDSTable(BTree *DT)
- { /* ³õÊ¼Ìõ¼ş: ¶¯Ì¬²éÕÒ±íDT´æÔÚ¡£²Ù×÷½á¹û: Ïú»Ù¶¯Ì¬²éÕÒ±íDT */
+ { /* åˆå§‹æ¡ä»¶: åŠ¨æ€æŸ¥æ‰¾è¡¨DTå­˜åœ¨ã€‚æ“ä½œç»“æœ: é”€æ¯åŠ¨æ€æŸ¥æ‰¾è¡¨DT */
    int i;
-   if(*DT) /* ·Ç¿ÕÊ÷ */
+   if(*DT) /* éç©ºæ ‘ */
    {
      for(i=0;i<=(*DT)->keynum;i++)
-       DestroyDSTable(&(*DT)->node[i].ptr); /* ÒÀ´ÎÏú»ÙµÚi¿Ã×ÓÊ÷ */
-     free(*DT); /* ÊÍ·Å¸ù½áµã */
-     *DT=NULL; /* ¿ÕÖ¸Õë¸³0 */
+       DestroyDSTable(&(*DT)->node[i].ptr); /* ä¾æ¬¡é”€æ¯ç¬¬iæ£µå­æ ‘ */
+     free(*DT); /* é‡Šæ”¾æ ¹ç»“ç‚¹ */
+     *DT=NULL; /* ç©ºæŒ‡é’ˆèµ‹0 */
    }
  }
 
  int Search(BTree p, KeyType K)
- { /* ÔÚp->node[1..keynum].keyÖĞ²éÕÒi,Ê¹µÃp->node[i].key¡ÜK£¼p->node[i+1].key */
+ { /* åœ¨p->node[1..keynum].keyä¸­æŸ¥æ‰¾i,ä½¿å¾—p->node[i].keyâ‰¤Kï¼œp->node[i+1].key */
    int i=0,j;
    for(j=1;j<=p->keynum;j++)
      if(p->node[j].key<=K)
@@ -27,17 +27,17 @@
  }
 
  Result SearchBTree(BTree T, KeyType K)
- { /* ÔÚm½×BÊ÷TÉÏ²éÕÒ¹Ø¼ü×ÖK£¬·µ»Ø½á¹û(pt,i,tag)¡£Èô²éÕÒ³É¹¦£¬ÔòÌØÕ÷Öµ */
-   /* tag=1£¬Ö¸ÕëptËùÖ¸½áµãÖĞµÚi¸ö¹Ø¼ü×ÖµÈÓÚK£»·ñÔòÌØÕ÷Öµtag=0£¬µÈÓÚKµÄ */
-   /* ¹Ø¼ü×ÖÓ¦²åÈëÔÚÖ¸ÕëPtËùÖ¸½áµãÖĞµÚiºÍµÚi+1¸ö¹Ø¼ü×ÖÖ®¼ä¡£Ëã·¨9.13 */
-   BTree p=T,q=NULL; /* ³õÊ¼»¯£¬pÖ¸Ïò´ı²é½áµã£¬qÖ¸ÏòpµÄË«Ç× */
+ { /* åœ¨mé˜¶Bæ ‘Tä¸ŠæŸ¥æ‰¾å…³é”®å­—Kï¼Œè¿”å›ç»“æœ(pt,i,tag)ã€‚è‹¥æŸ¥æ‰¾æˆåŠŸï¼Œåˆ™ç‰¹å¾å€¼ */
+   /* tag=1ï¼ŒæŒ‡é’ˆptæ‰€æŒ‡ç»“ç‚¹ä¸­ç¬¬iä¸ªå…³é”®å­—ç­‰äºKï¼›å¦åˆ™ç‰¹å¾å€¼tag=0ï¼Œç­‰äºKçš„ */
+   /* å…³é”®å­—åº”æ’å…¥åœ¨æŒ‡é’ˆPtæ‰€æŒ‡ç»“ç‚¹ä¸­ç¬¬iå’Œç¬¬i+1ä¸ªå…³é”®å­—ä¹‹é—´ã€‚ç®—æ³•9.13 */
+   BTree p=T,q=NULL; /* åˆå§‹åŒ–ï¼ŒpæŒ‡å‘å¾…æŸ¥ç»“ç‚¹ï¼ŒqæŒ‡å‘pçš„åŒäº² */
    Status found=FALSE;
    int i=0;
    Result r;
    while(p&&!found)
    {
-     i=Search(p,K); /* p->node[i].key¡ÜK<p->node[i+1].key */
-     if(i>0&&p->node[i].key==K) /* ÕÒµ½´ı²é¹Ø¼ü×Ö */
+     i=Search(p,K); /* p->node[i].keyâ‰¤K<p->node[i+1].key */
+     if(i>0&&p->node[i].key==K) /* æ‰¾åˆ°å¾…æŸ¥å…³é”®å­— */
        found=TRUE;
      else
      {
@@ -46,12 +46,12 @@
      }
    }
    r.i=i;
-   if(found) /* ²éÕÒ³É¹¦ */
+   if(found) /* æŸ¥æ‰¾æˆåŠŸ */
    {
      r.pt=p;
      r.tag=1;
    }
-   else /*  ²éÕÒ²»³É¹¦£¬·µ»ØKµÄ²åÈëÎ»ÖÃĞÅÏ¢ */
+   else /*  æŸ¥æ‰¾ä¸æˆåŠŸï¼Œè¿”å›Kçš„æ’å…¥ä½ç½®ä¿¡æ¯ */
    {
      r.pt=q;
      r.tag=0;
@@ -60,9 +60,9 @@
  }
 
  void Insert(BTree *q,int i,Record *r,BTree ap)
- { /* ½«r->key¡¢rºÍap·Ö±ğ²åÈëµ½q->key[i+1]¡¢q->recptr[i+1]ºÍq->ptr[i+1]ÖĞ */
+ { /* å°†r->keyã€rå’Œapåˆ†åˆ«æ’å…¥åˆ°q->key[i+1]ã€q->recptr[i+1]å’Œq->ptr[i+1]ä¸­ */
    int j;
-   for(j=(*q)->keynum;j>i;j--) /* ¿Õ³öq->node[i+1] */
+   for(j=(*q)->keynum;j>i;j--) /* ç©ºå‡ºq->node[i+1] */
      (*q)->node[j+1]=(*q)->node[j];
    (*q)->node[i+1].key=r->key;
    (*q)->node[i+1].ptr=ap;
@@ -71,10 +71,10 @@
  }
 
  void split(BTree *q,BTree *ap)
- { /* ½«½áµãq·ÖÁÑ³ÉÁ½¸ö½áµã£¬Ç°Ò»°ë±£Áô£¬ºóÒ»°ëÒÆÈëĞÂÉú½áµãap */
+ { /* å°†ç»“ç‚¹qåˆ†è£‚æˆä¸¤ä¸ªç»“ç‚¹ï¼Œå‰ä¸€åŠä¿ç•™ï¼Œåä¸€åŠç§»å…¥æ–°ç”Ÿç»“ç‚¹ap */
    int i,s=(m+1)/2;
-   *ap=(BTree)malloc(sizeof(BTNode)); /* Éú³ÉĞÂ½áµãap */
-   (*ap)->node[0].ptr=(*q)->node[s].ptr; /* ºóÒ»°ëÒÆÈëap */
+   *ap=(BTree)malloc(sizeof(BTNode)); /* ç”Ÿæˆæ–°ç»“ç‚¹ap */
+   (*ap)->node[0].ptr=(*q)->node[s].ptr; /* åä¸€åŠç§»å…¥ap */
    for(i=s+1;i<=m;i++)
    {
      (*ap)->node[i-s]=(*q)->node[i];
@@ -83,11 +83,11 @@
    }
    (*ap)->keynum=m-s;
    (*ap)->parent=(*q)->parent;
-   (*q)->keynum=s-1; /* qµÄÇ°Ò»°ë±£Áô£¬ĞŞ¸Äkeynum */
+   (*q)->keynum=s-1; /* qçš„å‰ä¸€åŠä¿ç•™ï¼Œä¿®æ”¹keynum */
  }
 
  void NewRoot(BTree *T,Record *r,BTree ap)
- { /* Éú³Éº¬ĞÅÏ¢(T,r,ap)µÄĞÂµÄ¸ù½áµã*T£¬Ô­TºÍapÎª×ÓÊ÷Ö¸Õë */
+ { /* ç”Ÿæˆå«ä¿¡æ¯(T,r,ap)çš„æ–°çš„æ ¹ç»“ç‚¹*Tï¼ŒåŸTå’Œapä¸ºå­æ ‘æŒ‡é’ˆ */
    BTree p;
    p=(BTree)malloc(sizeof(BTNode));
    p->node[0].ptr=*T;
@@ -104,8 +104,8 @@
  }
 
  void InsertBTree(BTree *T,Record *r,BTree q,int i)
- { /* ÔÚm½×BÊ÷TÉÏ½áµã*qµÄkey[i]Óëkey[i+1]Ö®¼ä²åÈë¹Ø¼ü×ÖKµÄÖ¸Õër¡£ÈôÒıÆğ */
-   /* ½áµã¹ı´ó,ÔòÑØË«Ç×Á´½øĞĞ±ØÒªµÄ½áµã·ÖÁÑµ÷Õû,Ê¹TÈÔÊÇm½×BÊ÷¡£Ëã·¨9.14¸Ä */
+ { /* åœ¨mé˜¶Bæ ‘Tä¸Šç»“ç‚¹*qçš„key[i]ä¸key[i+1]ä¹‹é—´æ’å…¥å…³é”®å­—Kçš„æŒ‡é’ˆrã€‚è‹¥å¼•èµ· */
+   /* ç»“ç‚¹è¿‡å¤§,åˆ™æ²¿åŒäº²é“¾è¿›è¡Œå¿…è¦çš„ç»“ç‚¹åˆ†è£‚è°ƒæ•´,ä½¿Tä»æ˜¯mé˜¶Bæ ‘ã€‚ç®—æ³•9.14æ”¹ */
    BTree ap=NULL;
    Status finished=FALSE;
    int s;
@@ -113,35 +113,35 @@
    rx=r;
    while(q&&!finished)
    {
-     Insert(&q,i,rx,ap); /* ½«r->key¡¢rºÍap·Ö±ğ²åÈëµ½q->key[i+1]¡¢q->recptr[i+1]ºÍq->ptr[i+1]ÖĞ */
+     Insert(&q,i,rx,ap); /* å°†r->keyã€rå’Œapåˆ†åˆ«æ’å…¥åˆ°q->key[i+1]ã€q->recptr[i+1]å’Œq->ptr[i+1]ä¸­ */
      if(q->keynum<m)
-       finished=TRUE; /* ²åÈëÍê³É */
+       finished=TRUE; /* æ’å…¥å®Œæˆ */
      else
-     { /* ·ÖÁÑ½áµã*q */
+     { /* åˆ†è£‚ç»“ç‚¹*q */
        s=(m+1)/2;
        rx=q->node[s].recptr;
-       split(&q,&ap); /* ½«q->key[s+1..m],q->ptr[s..m]ºÍq->recptr[s+1..m]ÒÆÈëĞÂ½áµã*ap */
+       split(&q,&ap); /* å°†q->key[s+1..m],q->ptr[s..m]å’Œq->recptr[s+1..m]ç§»å…¥æ–°ç»“ç‚¹*ap */
        q=q->parent;
        if(q)
-         i=Search(q,rx->key); /* ÔÚË«Ç×½áµã*qÖĞ²éÕÒrx->keyµÄ²åÈëÎ»ÖÃ */
+         i=Search(q,rx->key); /* åœ¨åŒäº²ç»“ç‚¹*qä¸­æŸ¥æ‰¾rx->keyçš„æ’å…¥ä½ç½® */
      }
    }
-   if(!finished) /* TÊÇ¿ÕÊ÷(²ÎÊıq³õÖµÎªNULL)»ò¸ù½áµãÒÑ·ÖÁÑÎª½áµã*qºÍ*ap */
-     NewRoot(T,rx,ap); /* Éú³Éº¬ĞÅÏ¢(T,rx,ap)µÄĞÂµÄ¸ù½áµã*T£¬Ô­TºÍapÎª×ÓÊ÷Ö¸Õë */
+   if(!finished) /* Tæ˜¯ç©ºæ ‘(å‚æ•°qåˆå€¼ä¸ºNULL)æˆ–æ ¹ç»“ç‚¹å·²åˆ†è£‚ä¸ºç»“ç‚¹*qå’Œ*ap */
+     NewRoot(T,rx,ap); /* ç”Ÿæˆå«ä¿¡æ¯(T,rx,ap)çš„æ–°çš„æ ¹ç»“ç‚¹*Tï¼ŒåŸTå’Œapä¸ºå­æ ‘æŒ‡é’ˆ */
  }
 
  void TraverseDSTable(BTree DT,void(*Visit)(BTNode,int))
- { /* ³õÊ¼Ìõ¼ş: ¶¯Ì¬²éÕÒ±íDT´æÔÚ£¬VisitÊÇ¶Ô½áµã²Ù×÷µÄÓ¦ÓÃº¯Êı */
-   /* ²Ù×÷½á¹û: °´¹Ø¼ü×ÖµÄË³Ğò¶ÔDTµÄÃ¿¸ö½áµãµ÷ÓÃº¯ÊıVisit()Ò»´ÎÇÒÖÁ¶àÒ»´Î */
+ { /* åˆå§‹æ¡ä»¶: åŠ¨æ€æŸ¥æ‰¾è¡¨DTå­˜åœ¨ï¼ŒVisitæ˜¯å¯¹ç»“ç‚¹æ“ä½œçš„åº”ç”¨å‡½æ•° */
+   /* æ“ä½œç»“æœ: æŒ‰å…³é”®å­—çš„é¡ºåºå¯¹DTçš„æ¯ä¸ªç»“ç‚¹è°ƒç”¨å‡½æ•°Visit()ä¸€æ¬¡ä¸”è‡³å¤šä¸€æ¬¡ */
    int i;
-   if(DT) /* ·Ç¿ÕÊ÷ */
+   if(DT) /* éç©ºæ ‘ */
    {
-     if(DT->node[0].ptr) /* ÓĞµÚ0¿Ã×ÓÊ÷ */
+     if(DT->node[0].ptr) /* æœ‰ç¬¬0æ£µå­æ ‘ */
        TraverseDSTable(DT->node[0].ptr,Visit);
      for(i=1;i<=DT->keynum;i++)
      {
        Visit(*DT,i);
-       if(DT->node[i].ptr) /* ÓĞµÚi¿Ã×ÓÊ÷ */
+       if(DT->node[i].ptr) /* æœ‰ç¬¬iæ£µå­æ ‘ */
 	 TraverseDSTable(DT->node[i].ptr,Visit);
      }
    }

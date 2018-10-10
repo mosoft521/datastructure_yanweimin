@@ -1,4 +1,4 @@
- /* algo4-5.c ¸ù¾İalgo4-4.c²úÉúµÄÎÄ¼ş,Ë÷Òı²éÑ¯Í¼Êé */
+ /* algo4-5.c æ ¹æ®algo4-4.cäº§ç”Ÿçš„æ–‡ä»¶,ç´¢å¼•æŸ¥è¯¢å›¾ä¹¦ */
  #include "../ch1/c1.h"
  typedef int ElemType;
  #include "../ch2/c2-5.h"
@@ -6,86 +6,86 @@
  #include "c4-2.h"
  #include "bo4-2.c"
 
- #define MaxBookNum 10 /* ¼ÙÉèÖ»¶Ô10±¾Êé½¨Ë÷Òı±í */
- #define MaxKeyNum 25 /* Ë÷Òı±íµÄ×î´óÈİÁ¿(¹Ø¼ü´ÊµÄ×î´óÊı) */
- #define MaxLineLen 51 /* ÊéÄ¿´®(ÊéÃû+ÊéºÅ)bufµÄ×î´ó³¤¶È */
+ #define MaxBookNum 10 /* å‡è®¾åªå¯¹10æœ¬ä¹¦å»ºç´¢å¼•è¡¨ */
+ #define MaxKeyNum 25 /* ç´¢å¼•è¡¨çš„æœ€å¤§å®¹é‡(å…³é”®è¯çš„æœ€å¤§æ•°) */
+ #define MaxLineLen 51 /* ä¹¦ç›®ä¸²(ä¹¦å+ä¹¦å·)bufçš„æœ€å¤§é•¿åº¦ */
 
  typedef struct
  {
-   HString key; /* ¹Ø¼ü´Ê(¶Ñ·ÖÅäÀàĞÍ,c4-2.h) */
-   LinkList bnolist; /* ´æ·ÅÊéºÅË÷ÒıµÄÁ´±í(c2-5.h) */
- }IdxTermType; /* Ë÷ÒıÏîÀàĞÍ */
+   HString key; /* å…³é”®è¯(å †åˆ†é…ç±»å‹,c4-2.h) */
+   LinkList bnolist; /* å­˜æ”¾ä¹¦å·ç´¢å¼•çš„é“¾è¡¨(c2-5.h) */
+ }IdxTermType; /* ç´¢å¼•é¡¹ç±»å‹ */
 
  typedef struct
  {
    IdxTermType item[MaxKeyNum+1];
-   int last; /* ¹Ø¼ü´ÊµÄ¸öÊı */
- }IdxListType; /* Ë÷Òı±íÀàĞÍ(ÓĞĞò±í) */
+   int last; /* å…³é”®è¯çš„ä¸ªæ•° */
+ }IdxListType; /* ç´¢å¼•è¡¨ç±»å‹(æœ‰åºè¡¨) */
 
  typedef struct
  {
-   char bookname[MaxLineLen]; /* ÊéÄ¿´® */
-   int bookno; /* ÊéºÅ */
- }BookTermType; /* ÊéÄ¿ÏîÀàĞÍ */
+   char bookname[MaxLineLen]; /* ä¹¦ç›®ä¸² */
+   int bookno; /* ä¹¦å· */
+ }BookTermType; /* ä¹¦ç›®é¡¹ç±»å‹ */
 
- typedef struct BookListType /* ÊéÄ¿±íÀàĞÍ(ÓĞĞò±í) */
+ typedef struct BookListType /* ä¹¦ç›®è¡¨ç±»å‹(æœ‰åºè¡¨) */
  {
    BookTermType item[MaxBookNum];
-   int last; /* ÊéÄ¿µÄÊıÁ¿ */
- }BookListType; /* ÊéÄ¿±íÀàĞÍ(ÓĞĞò±í) */
+   int last; /* ä¹¦ç›®çš„æ•°é‡ */
+ }BookListType; /* ä¹¦ç›®è¡¨ç±»å‹(æœ‰åºè¡¨) */
 
  void main()
  {
-   FILE *f; /* ÈÎºÎÊ±¼ä×î¶à´ò¿ªÒ»¸öÎÄ¼ş */
-   IdxListType idxlist; /* Ë÷Òı±í */
-   BookListType booklist; /* ÊéÄ¿±í */
-   char buf[MaxLineLen+1]; /* µ±Ç°ÊéÄ¿´®(°üÀ¨'\0') */
-   HString ch; /* Ë÷Òı×Ö·û´® */
-   int BookNo; /* ÊéºÅ±äÁ¿ */
+   FILE *f; /* ä»»ä½•æ—¶é—´æœ€å¤šæ‰“å¼€ä¸€ä¸ªæ–‡ä»¶ */
+   IdxListType idxlist; /* ç´¢å¼•è¡¨ */
+   BookListType booklist; /* ä¹¦ç›®è¡¨ */
+   char buf[MaxLineLen+1]; /* å½“å‰ä¹¦ç›®ä¸²(åŒ…æ‹¬'\0') */
+   HString ch; /* ç´¢å¼•å­—ç¬¦ä¸² */
+   int BookNo; /* ä¹¦å·å˜é‡ */
    int i,k,l;
    Link p;
-   InitString(&ch); /* ³õÊ¼»¯HStringÀàĞÍµÄ±äÁ¿ */
-   f=fopen("BookIdx.txt","r"); /* ´ò¿ªÊéÃû¹Ø¼ü´ÊË÷Òı±íÎÄ¼ş */
+   InitString(&ch); /* åˆå§‹åŒ–HStringç±»å‹çš„å˜é‡ */
+   f=fopen("BookIdx.txt","r"); /* æ‰“å¼€ä¹¦åå…³é”®è¯ç´¢å¼•è¡¨æ–‡ä»¶ */
    if(!f)
      exit(OVERFLOW);
-   fscanf(f,"%d",&idxlist.last); /* ÊéÃû¹Ø¼ü´Ê¸öÊı */
-   for(k=0;k<idxlist.last;k++) /* °Ñ¹Ø¼ü´ÊÎÄ¼şµÄÄÚÈİ¿½µ½idxlistÖĞ */
+   fscanf(f,"%d",&idxlist.last); /* ä¹¦åå…³é”®è¯ä¸ªæ•° */
+   for(k=0;k<idxlist.last;k++) /* æŠŠå…³é”®è¯æ–‡ä»¶çš„å†…å®¹æ‹·åˆ°idxlistä¸­ */
    {
      fscanf(f,"%s",buf);
      i=0;
      while(buf[i])
-       buf[i++]=tolower(buf[i]); /* ×ÖÄ¸×ªÎªĞ¡Ğ´ */
+       buf[i++]=tolower(buf[i]); /* å­—æ¯è½¬ä¸ºå°å†™ */
      InitString(&idxlist.item[k].key);
      StrAssign(&idxlist.item[k].key,buf);
-     InitList(&idxlist.item[k].bnolist); /* ³õÊ¼»¯ÊéºÅÁ´±í bo2-6.c */
+     InitList(&idxlist.item[k].bnolist); /* åˆå§‹åŒ–ä¹¦å·é“¾è¡¨ bo2-6.c */
      fscanf(f,"%d",&i);
      for(l=0;l<i;l++)
      {
        fscanf(f,"%d",&BookNo);
-       if(!MakeNode(&p,BookNo)) /* ·ÖÅäÊ§°Ü bo2-6.c */
+       if(!MakeNode(&p,BookNo)) /* åˆ†é…å¤±è´¥ bo2-6.c */
          exit(OVERFLOW);
        p->next=NULL;
-       Append(&idxlist.item[k].bnolist,p); /* ²åÈëĞÂµÄÊéºÅË÷Òı bo2-6.c */
+       Append(&idxlist.item[k].bnolist,p); /* æ’å…¥æ–°çš„ä¹¦å·ç´¢å¼• bo2-6.c */
      }
    }
    fclose(f);
-   f=fopen("BookInfo.txt","r"); /* ´ò¿ªÊéÄ¿ÎÄ¼ş */
+   f=fopen("BookInfo.txt","r"); /* æ‰“å¼€ä¹¦ç›®æ–‡ä»¶ */
    if(!f)
      exit(FALSE);
    i=0;
-   while(!feof(f)) /* °ÑÊéÄ¿ÎÄ¼şµÄÄÚÈİ¿½µ½booklistÖĞ */
+   while(!feof(f)) /* æŠŠä¹¦ç›®æ–‡ä»¶çš„å†…å®¹æ‹·åˆ°booklistä¸­ */
    {
      fgets(buf,MaxLineLen,f);
-     booklist.item[i].bookno=(buf[0]-'0')*100+(buf[1]-'0')*10+(buf[2]-'0'); /* Ç°ÈıÎ»ÎªÊéºÅ */
+     booklist.item[i].bookno=(buf[0]-'0')*100+(buf[1]-'0')*10+(buf[2]-'0'); /* å‰ä¸‰ä½ä¸ºä¹¦å· */
      strcpy(booklist.item[i].bookname,buf);
      i++;
    }
    booklist.last=i;
-   printf("ÇëÊäÈëÊéÄ¿µÄ¹Ø¼ü´Ê(Ò»¸ö)");
+   printf("è¯·è¾“å…¥ä¹¦ç›®çš„å…³é”®è¯(ä¸€ä¸ª)");
    scanf("%s",buf);
    i=0;
    while(buf[i])
-     buf[i++]=tolower(buf[i]); /* ×ÖÄ¸×ªÎªĞ¡Ğ´ */
+     buf[i++]=tolower(buf[i]); /* å­—æ¯è½¬ä¸ºå°å†™ */
    StrAssign(&ch,buf);
    i=0;
    do
@@ -93,7 +93,7 @@
      k=StrCompare(ch,idxlist.item[i].key); /* bo4-2.c */
      i++;
    }while(k&&i<=idxlist.last);
-   if(!k) /* Ë÷Òı±íÖĞÓĞ´Ë¹Ø¼ü´Ê */
+   if(!k) /* ç´¢å¼•è¡¨ä¸­æœ‰æ­¤å…³é”®è¯ */
    {
      p=idxlist.item[i-1].bnolist.head->next;
      while(p)
@@ -107,5 +107,5 @@
      }
    }
    else
-     printf("Ã»ÕÒµ½\n");
+     printf("æ²¡æ‰¾åˆ°\n");
  }

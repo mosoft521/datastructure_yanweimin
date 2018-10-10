@@ -1,6 +1,6 @@
-/* algo10-1.c ¼ìÑébo10-1.cµÄ³ÌĞò */
+/* algo10-1.c æ£€éªŒbo10-1.cçš„ç¨‹åº */
 #include "../ch1/c1.h"
-typedef int InfoType; /* ¶¨ÒåÆäËüÊı¾İÏîµÄÀàĞÍ */
+typedef int InfoType; /* å®šä¹‰å…¶å®ƒæ•°æ®é¡¹çš„ç±»å‹ */
 #include "../ch9/c9.h"
 #include "c10-1.h"
 #include "bo10-1.c"
@@ -18,19 +18,19 @@ void main()
 	RedType d[N] = { {49,1},{38,2},{65,3},{97,4},{76,5},{13,6},{27,7},{49,8} };
 	SqList l1, l2, l3;
 	int i;
-	for (i = 0; i < N; i++) /* ¸øl1.r¸³Öµ */
+	for (i = 0; i < N; i++) /* ç»™l1.rèµ‹å€¼ */
 		l1.r[i + 1] = d[i];
 	l1.length = N;
-	l2 = l3 = l1; /* ¸´ÖÆË³Ğò±íl2¡¢l3Óël1ÏàÍ¬ */
-	printf("ÅÅĞòÇ°:\n");
+	l2 = l3 = l1; /* å¤åˆ¶é¡ºåºè¡¨l2ã€l3ä¸l1ç›¸åŒ */
+	printf("æ’åºå‰:\n");
 	print(l1);
 	InsertSort(&l1);
-	printf("Ö±½Ó²åÈëÅÅĞòºó:\n");
+	printf("ç›´æ¥æ’å…¥æ’åºå:\n");
 	print(l1);
 	BInsertSort(&l2);
-	printf("ÕÛ°ë²åÈëÅÅĞòºó:\n");
+	printf("æŠ˜åŠæ’å…¥æ’åºå:\n");
 	print(l2);
 	P2_InsertSort(&l3);
-	printf("2_Â·²åÈëÅÅĞòºó:\n");
+	printf("2_è·¯æ’å…¥æ’åºå:\n");
 	print(l3);
 }

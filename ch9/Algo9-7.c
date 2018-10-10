@@ -1,11 +1,11 @@
-/* algo9-7.c ¼ìÑébo9-5.cµÄ³ÌĞò */
+/* algo9-7.c æ£€éªŒbo9-5.cçš„ç¨‹åº */
 #include "../ch1/c1.h"
-#define N 16 /* Êı¾İÔªËØ¸öÊı */
+#define N 16 /* æ•°æ®å…ƒç´ ä¸ªæ•° */
 typedef struct
 {
 	int ord;
-}Others; /* ¼ÇÂ¼µÄÆäËü²¿·Ö */
-#define Nil ' ' /* ¶¨Òå½áÊø·ûÎª¿Õ¸ñ(Óë½Ì¿ÆÊé²»Í¬) */
+}Others; /* è®°å½•çš„å…¶å®ƒéƒ¨åˆ† */
+#define Nil ' ' /* å®šä¹‰ç»“æŸç¬¦ä¸ºç©ºæ ¼(ä¸æ•™ç§‘ä¹¦ä¸åŒ) */
 #include "c9-4.h"
 #include "bo9-5.c"
 
@@ -29,18 +29,18 @@ void main()
 				 {{"CHA"},5},{{"CHANG"},6},{{"WEN"},7},{{"CHAO"},8},
 				 {{"YUN"},9},{{"YANG"},10},{{"LONG"},11},{{"WANG"},12},
 				 {{"ZHAO"},13},{{"LIU"},14},{{"WU"},15},{{"CHEN"},16} };
-	/* Êı¾İÔªËØ(ÒÔ½Ì¿ÆÊéÊ½9-24ÎªÀı) */
+	/* æ•°æ®å…ƒç´ (ä»¥æ•™ç§‘ä¹¦å¼9-24ä¸ºä¾‹) */
 	InitDSTable(&t);
 	for (i = 0; i < N; i++)
 	{
 		r[i].key.num = strlen(r[i].key.ch);
 		p = SearchDLTree(t, r[i].key);
-		if (!p) /* tÖĞ²»´æÔÚ¹Ø¼ü×ÖÎªr[i].keyµÄÏî */
+		if (!p) /* tä¸­ä¸å­˜åœ¨å…³é”®å­—ä¸ºr[i].keyçš„é¡¹ */
 			InsertDSTable(&t, &r[i]);
 	}
-	printf("°´¹Ø¼ü×Ö·û´®µÄË³Ğò±éÀúË«Á´¼üÊ÷:\n");
+	printf("æŒ‰å…³é”®å­—ç¬¦ä¸²çš„é¡ºåºéå†åŒé“¾é”®æ ‘:\n");
 	TraverseDSTable(t, print);
-	printf("\nÇëÊäÈë´ı²éÕÒ¼ÇÂ¼µÄ¹Ø¼ü×Ö·û´®: ");
+	printf("\nè¯·è¾“å…¥å¾…æŸ¥æ‰¾è®°å½•çš„å…³é”®å­—ç¬¦ä¸²: ");
 	scanf("%s", s);
 	k.num = strlen(s);
 	strcpy(k.ch, s);
@@ -48,7 +48,7 @@ void main()
 	if (p)
 		print(*p);
 	else
-		printf("Ã»ÕÒµ½");
+		printf("æ²¡æ‰¾åˆ°");
 	printf("\n");
 	DestroyDSTable(&t);
 }

@@ -1,65 +1,65 @@
- /* bo2-7.c ¶àÏîÊ½(´æ´¢½á¹¹ÓÉc2-6.h¶¨Òå)µÄ»ù±¾²Ù×÷¼°Ëã·¨2.22¡¢2.23µÈ */
+ /* bo2-7.c å¤šé¡¹å¼(å­˜å‚¨ç»“æ„ç”±c2-6.hå®šä¹‰)çš„åŸºæœ¬æ“ä½œåŠç®—æ³•2.22ã€2.23ç­‰ */
  #include"c2-5.h"
  #include"bo2-6.c"
  typedef LinkList polynomial;
- #define DestroyPolyn DestroyList /* Óëbo2-6.cppÖĞµÄº¯ÊıÍ¬Òå²»Í¬Ãû */
- #define PolynLength ListLength /* Óëbo2-6.cppÖĞµÄº¯ÊıÍ¬Òå²»Í¬Ãû */
+ #define DestroyPolyn DestroyList /* ä¸bo2-6.cppä¸­çš„å‡½æ•°åŒä¹‰ä¸åŒå */
+ #define PolynLength ListLength /* ä¸bo2-6.cppä¸­çš„å‡½æ•°åŒä¹‰ä¸åŒå */
 
  Status OrderInsertMerge(LinkList *L,ElemType e,int(* compare)(term,term))
- { /* °´ÓĞĞòÅĞ¶¨º¯Êıcompare()µÄÔ¼¶¨£¬½«ÖµÎªeµÄ½áµã²åÈë»òºÏ²¢µ½ÉıĞòÁ´±íLµÄÊÊµ±Î»ÖÃ */
+ { /* æŒ‰æœ‰åºåˆ¤å®šå‡½æ•°compare()çš„çº¦å®šï¼Œå°†å€¼ä¸ºeçš„ç»“ç‚¹æ’å…¥æˆ–åˆå¹¶åˆ°å‡åºé“¾è¡¨Lçš„é€‚å½“ä½ç½® */
    Position q,s;
-   if(LocateElemP(*L,e,&q,compare)) /* LÖĞ´æÔÚ¸ÃÖ¸ÊıÏî */
+   if(LocateElemP(*L,e,&q,compare)) /* Lä¸­å­˜åœ¨è¯¥æŒ‡æ•°é¡¹ */
    {
-     q->data.coef+=e.coef; /* ¸Ä±äµ±Ç°½áµãÏµÊıµÄÖµ */
-     if(!q->data.coef) /* ÏµÊıÎª0 */
-     { /* É¾³ı¶àÏîÊ½LÖĞµ±Ç°½áµã */
-       s=PriorPos(*L,q); /* sÎªµ±Ç°½áµãµÄÇ°Çı */
-       if(!s) /* qÎŞÇ°Çı */
+     q->data.coef+=e.coef; /* æ”¹å˜å½“å‰ç»“ç‚¹ç³»æ•°çš„å€¼ */
+     if(!q->data.coef) /* ç³»æ•°ä¸º0 */
+     { /* åˆ é™¤å¤šé¡¹å¼Lä¸­å½“å‰ç»“ç‚¹ */
+       s=PriorPos(*L,q); /* sä¸ºå½“å‰ç»“ç‚¹çš„å‰é©± */
+       if(!s) /* qæ— å‰é©± */
          s=(*L).head;
        DelFirst(L,s,&q);
        FreeNode(&q);
      }
      return OK;
    }
-   else /* Éú³É¸ÃÖ¸ÊıÏî²¢²åÈëÁ´±í */
-     if(MakeNode(&s,e)) /* Éú³É½áµã³É¹¦ */
+   else /* ç”Ÿæˆè¯¥æŒ‡æ•°é¡¹å¹¶æ’å…¥é“¾è¡¨ */
+     if(MakeNode(&s,e)) /* ç”Ÿæˆç»“ç‚¹æˆåŠŸ */
      {
        InsFirst(L,q,s);
        return OK;
      }
-     else /* Éú³É½áµãÊ§°Ü */
+     else /* ç”Ÿæˆç»“ç‚¹å¤±è´¥ */
        return ERROR;
  }
 
- int cmp(term a,term b) /* CreatPolyn()µÄÊµ²Î */
- { /* ÒÀaµÄÖ¸ÊıÖµ<¡¢=»ò>bµÄÖ¸ÊıÖµ£¬·Ö±ğ·µ»Ø-1¡¢0»ò+1 */
+ int cmp(term a,term b) /* CreatPolyn()çš„å®å‚ */
+ { /* ä¾açš„æŒ‡æ•°å€¼<ã€=æˆ–>bçš„æŒ‡æ•°å€¼ï¼Œåˆ†åˆ«è¿”å›-1ã€0æˆ–+1 */
    if(a.expn==b.expn)
      return 0;
    else
      return (a.expn-b.expn)/abs(a.expn-b.expn);
  }
 
- void CreatPolyn(polynomial *P,int m) /* Ëã·¨2.22 */
- { /* ÊäÈëmÏîµÄÏµÊıºÍÖ¸Êı£¬½¨Á¢±íÊ¾Ò»Ôª¶àÏîÊ½µÄÓĞĞòÁ´±íP */
+ void CreatPolyn(polynomial *P,int m) /* ç®—æ³•2.22 */
+ { /* è¾“å…¥mé¡¹çš„ç³»æ•°å’ŒæŒ‡æ•°ï¼Œå»ºç«‹è¡¨ç¤ºä¸€å…ƒå¤šé¡¹å¼çš„æœ‰åºé“¾è¡¨P */
    Position q,s;
    term e;
    int i;
    InitList(P);
-   printf("ÇëÒÀ´ÎÊäÈë%d¸öÏµÊı£¬Ö¸Êı£º\n",m);
+   printf("è¯·ä¾æ¬¡è¾“å…¥%dä¸ªç³»æ•°ï¼ŒæŒ‡æ•°ï¼š\n",m);
    for(i=1;i<=m;++i)
-   { /* ÒÀ´ÎÊäÈëm¸ö·ÇÁãÏî£¨¿É°´ÈÎÒâË³Ğò£© */
+   { /* ä¾æ¬¡è¾“å…¥mä¸ªéé›¶é¡¹ï¼ˆå¯æŒ‰ä»»æ„é¡ºåºï¼‰ */
      scanf("%f,%d",&e.coef,&e.expn);
-     if(!LocateElemP(*P,e,&q,cmp)) /* µ±Ç°Á´±íÖĞ²»´æÔÚ¸ÃÖ¸ÊıÏî,cmpÊÇÊµ²Î */
-       if(MakeNode(&s,e)) /* Éú³É½áµã²¢²åÈëÁ´±í */
+     if(!LocateElemP(*P,e,&q,cmp)) /* å½“å‰é“¾è¡¨ä¸­ä¸å­˜åœ¨è¯¥æŒ‡æ•°é¡¹,cmpæ˜¯å®å‚ */
+       if(MakeNode(&s,e)) /* ç”Ÿæˆç»“ç‚¹å¹¶æ’å…¥é“¾è¡¨ */
          InsFirst(P,q,s);
    }
  }
 
  void PrintPolyn(polynomial P)
- { /* ´òÓ¡Êä³öÒ»Ôª¶àÏîÊ½P */
+ { /* æ‰“å°è¾“å‡ºä¸€å…ƒå¤šé¡¹å¼P */
    Link q;
-   q=P.head->next; /* qÖ¸ÏòµÚÒ»¸ö½áµã */
-   printf("  ÏµÊı    Ö¸Êı\n");
+   q=P.head->next; /* qæŒ‡å‘ç¬¬ä¸€ä¸ªç»“ç‚¹ */
+   printf("  ç³»æ•°    æŒ‡æ•°\n");
    while(q)
    {
      printf("%f  %d\n",q->data.coef,q->data.expn);
@@ -67,26 +67,26 @@
    }
  }
 
- void AddPolyn(polynomial *Pa,polynomial *Pb) /* Ëã·¨2.23 */
- { /* ¶àÏîÊ½¼Ó·¨:Pa=Pa+Pb,²¢Ïú»ÙÒ»Ôª¶àÏîÊ½Pb */
+ void AddPolyn(polynomial *Pa,polynomial *Pb) /* ç®—æ³•2.23 */
+ { /* å¤šé¡¹å¼åŠ æ³•:Pa=Pa+Pb,å¹¶é”€æ¯ä¸€å…ƒå¤šé¡¹å¼Pb */
    Position ha,hb,qa,qb;
    term a,b;
    ha=GetHead(*Pa);
-   hb=GetHead(*Pb); /* haºÍhb·Ö±ğÖ¸ÏòPaºÍPbµÄÍ·½áµã */
+   hb=GetHead(*Pb); /* haå’Œhbåˆ†åˆ«æŒ‡å‘Paå’ŒPbçš„å¤´ç»“ç‚¹ */
    qa=NextPos(ha);
-   qb=NextPos(hb); /* qaºÍqb·Ö±ğÖ¸ÏòPaºÍPbÖĞµ±Ç°½áµã£¨ÏÖÎªµÚÒ»¸ö½áµã£© */
+   qb=NextPos(hb); /* qaå’Œqbåˆ†åˆ«æŒ‡å‘Paå’ŒPbä¸­å½“å‰ç»“ç‚¹ï¼ˆç°ä¸ºç¬¬ä¸€ä¸ªç»“ç‚¹ï¼‰ */
    while(!ListEmpty(*Pa)&&!ListEmpty(*Pb)&&qa)
-   { /* PaºÍPb¾ù·Ç¿ÕÇÒhaÃ»Ö¸ÏòÎ²½áµã(qa!=0) */
+   { /* Paå’ŒPbå‡éç©ºä¸”haæ²¡æŒ‡å‘å°¾ç»“ç‚¹(qa!=0) */
      a=GetCurElem(qa);
-     b=GetCurElem(qb); /* aºÍbÎªÁ½±íÖĞµ±Ç°±È½ÏÔªËØ */
+     b=GetCurElem(qb); /* aå’Œbä¸ºä¸¤è¡¨ä¸­å½“å‰æ¯”è¾ƒå…ƒç´  */
      switch(cmp(a,b))
      {
-       case -1:ha=qa; /* ¶àÏîÊ½PaÖĞµ±Ç°½áµãµÄÖ¸ÊıÖµĞ¡ */
-               qa=NextPos(ha); /* haºÍqa¾ùÏòºóÒÆÒ»¸ö½áµã */
+       case -1:ha=qa; /* å¤šé¡¹å¼Paä¸­å½“å‰ç»“ç‚¹çš„æŒ‡æ•°å€¼å° */
+               qa=NextPos(ha); /* haå’Œqaå‡å‘åç§»ä¸€ä¸ªç»“ç‚¹ */
                break;
        case 0: qa->data.coef+=qb->data.coef;
-               /* Á½ÕßµÄÖ¸ÊıÖµÏàµÈ,ĞŞ¸ÄPaµ±Ç°½áµãµÄÏµÊıÖµ */
-               if(qa->data.coef==0) /* É¾³ı¶àÏîÊ½PaÖĞµ±Ç°½áµã */
+               /* ä¸¤è€…çš„æŒ‡æ•°å€¼ç›¸ç­‰,ä¿®æ”¹Paå½“å‰ç»“ç‚¹çš„ç³»æ•°å€¼ */
+               if(qa->data.coef==0) /* åˆ é™¤å¤šé¡¹å¼Paä¸­å½“å‰ç»“ç‚¹ */
                {
                  DelFirst(Pa,ha,&qa);
                  FreeNode(&qa);
@@ -98,7 +98,7 @@
                qb=NextPos(hb);
                qa=NextPos(ha);
                break;
-       case 1: DelFirst(Pb,hb,&qb); /* ¶àÏîÊ½PbÖĞµ±Ç°½áµãµÄÖ¸ÊıÖµĞ¡ */
+       case 1: DelFirst(Pb,hb,&qb); /* å¤šé¡¹å¼Pbä¸­å½“å‰ç»“ç‚¹çš„æŒ‡æ•°å€¼å° */
                InsFirst(Pa,ha,qb);
                ha=ha->next;
                qb=NextPos(hb);
@@ -107,28 +107,28 @@
    if(!ListEmpty(*Pb))
    {
      (*Pb).tail=hb;
-     Append(Pa,qb); /* Á´½ÓPbÖĞÊ£Óà½áµã */
+     Append(Pa,qb); /* é“¾æ¥Pbä¸­å‰©ä½™ç»“ç‚¹ */
    }
-   DestroyPolyn(Pb); /* Ïú»ÙPb */
+   DestroyPolyn(Pb); /* é”€æ¯Pb */
  }
 
  void AddPolyn1(polynomial *Pa,polynomial *Pb)
- { /* ÁíÒ»ÖÖ¶àÏîÊ½¼Ó·¨µÄËã·¨:Pa=Pa+Pb,²¢Ïú»ÙÒ»Ôª¶àÏîÊ½Pb */
+ { /* å¦ä¸€ç§å¤šé¡¹å¼åŠ æ³•çš„ç®—æ³•:Pa=Pa+Pb,å¹¶é”€æ¯ä¸€å…ƒå¤šé¡¹å¼Pb */
    Position qb;
    term b;
-   qb=GetHead(*Pb); /* qbÖ¸ÏòPbµÄÍ·½áµã */
-   qb=qb->next; /* qbÖ¸ÏòPbµÄµÚÒ»¸ö½áµã */
+   qb=GetHead(*Pb); /* qbæŒ‡å‘Pbçš„å¤´ç»“ç‚¹ */
+   qb=qb->next; /* qbæŒ‡å‘Pbçš„ç¬¬ä¸€ä¸ªç»“ç‚¹ */
    while(qb)
    {
      b=GetCurElem(qb);
      OrderInsertMerge(Pa,b,cmp);
      qb=qb->next;
    }
-   DestroyPolyn(Pb); /* Ïú»ÙPb */
+   DestroyPolyn(Pb); /* é”€æ¯Pb */
  }
 
  void Opposite(polynomial Pa)
- { /* Ò»Ôª¶àÏîÊ½ÏµÊıÈ¡·´ */
+ { /* ä¸€å…ƒå¤šé¡¹å¼ç³»æ•°å–å */
    Position p;
    p=Pa.head;
    while(p->next)
@@ -139,13 +139,13 @@
  }
 
  void SubtractPolyn(polynomial *Pa,polynomial *Pb)
- { /* ¶àÏîÊ½¼õ·¨:Pa=Pa-Pb,²¢Ïú»ÙÒ»Ôª¶àÏîÊ½Pb */
+ { /* å¤šé¡¹å¼å‡æ³•:Pa=Pa-Pb,å¹¶é”€æ¯ä¸€å…ƒå¤šé¡¹å¼Pb */
    Opposite(*Pb);
    AddPolyn(Pa,Pb);
  }
 
  void MultiplyPolyn(polynomial *Pa,polynomial *Pb)
- { /* ¶àÏîÊ½³Ë·¨:Pa=PaPb,²¢Ïú»ÙÒ»Ôª¶àÏîÊ½Pb */
+ { /* å¤šé¡¹å¼ä¹˜æ³•:Pa=PaPb,å¹¶é”€æ¯ä¸€å…ƒå¤šé¡¹å¼Pb */
    polynomial Pc;
    Position qa,qb;
    term a,b,c;
@@ -167,8 +167,8 @@
      }
      qa=qa->next;
    }
-   DestroyPolyn(Pb); /* Ïú»ÙPb */
-   ClearList(Pa); /* ½«PaÖØÖÃÎª¿Õ±í */
+   DestroyPolyn(Pb); /* é”€æ¯Pb */
+   ClearList(Pa); /* å°†Paé‡ç½®ä¸ºç©ºè¡¨ */
    (*Pa).head=Pc.head;
    (*Pa).tail=Pc.tail;
    (*Pa).len=Pc.len;

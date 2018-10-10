@@ -1,31 +1,31 @@
-/* algo9-1.c ¼ìÑébo9-1.c(Ë³Ğò±í²¿·Ö)µÄ³ÌĞò */
+/* algo9-1.c æ£€éªŒbo9-1.c(é¡ºåºè¡¨éƒ¨åˆ†)çš„ç¨‹åº */
 #include "../ch1/c1.h"
-#define N 5 /* Êı¾İÔªËØ¸öÊı */
-typedef int KeyType; /* Éè¹Ø¼ü×ÖÓòÎªÕûĞÍ */
-typedef struct /* Êı¾İÔªËØÀàĞÍ(ÒÔ½Ì¿ÆÊéÍ¼9.1¸ß¿¼³É¼¨ÎªÀı) */
+#define N 5 /* æ•°æ®å…ƒç´ ä¸ªæ•° */
+typedef int KeyType; /* è®¾å…³é”®å­—åŸŸä¸ºæ•´å‹ */
+typedef struct /* æ•°æ®å…ƒç´ ç±»å‹(ä»¥æ•™ç§‘ä¹¦å›¾9.1é«˜è€ƒæˆç»©ä¸ºä¾‹) */
 {
-	long number; /* ×¼¿¼Ö¤ºÅ */
-	char name[9]; /* ĞÕÃû(4¸öºº×Ö¼Ó1¸ö´®½áÊø±êÖ¾) */
-	int politics; /* ÕşÖÎ */
-	int Chinese; /* ÓïÎÄ */
-	int English; /* Ó¢Óï */
-	int math; /* ÊıÑ§ */
-	int physics; /* ÎïÀí */
-	int chemistry; /* »¯Ñ§ */
-	int biology; /* ÉúÎï */
-	KeyType key; /* ¹Ø¼ü×ÖÀàĞÍÓ¦ÎªKeyType,ÓòÃûÓ¦Îªkey,Óëbo9-1.cÖĞÒ»ÖÂ */
+	long number; /* å‡†è€ƒè¯å· */
+	char name[9]; /* å§“å(4ä¸ªæ±‰å­—åŠ 1ä¸ªä¸²ç»“æŸæ ‡å¿—) */
+	int politics; /* æ”¿æ²» */
+	int Chinese; /* è¯­æ–‡ */
+	int English; /* è‹±è¯­ */
+	int math; /* æ•°å­¦ */
+	int physics; /* ç‰©ç† */
+	int chemistry; /* åŒ–å­¦ */
+	int biology; /* ç”Ÿç‰© */
+	KeyType key; /* å…³é”®å­—ç±»å‹åº”ä¸ºKeyType,åŸŸååº”ä¸ºkey,ä¸bo9-1.cä¸­ä¸€è‡´ */
 } ElemType;
-ElemType r[N] = { {179324,"ºÎ·¼·¼",85,89,98,100,93,80,47},
-			   {179325,"³Âºì",85,86,88,100,92,90,45},
-			   {179326,"Â½»ª",78,75,90,80,95,88,37},
-			   {179327,"ÕÅÆ½",82,80,78,98,84,96,40},
-			   {179328,"ÕÔĞ¡âù",76,85,94,57,77,69,44} }; /* È«¾Ö±äÁ¿ */
-#define total key /* ¶¨Òå×Ü·Ö(total)Îª¹Ø¼ü×Ö */
+ElemType r[N] = { {179324,"ä½•èŠ³èŠ³",85,89,98,100,93,80,47},
+			   {179325,"é™ˆçº¢",85,86,88,100,92,90,45},
+			   {179326,"é™†å",78,75,90,80,95,88,37},
+			   {179327,"å¼ å¹³",82,80,78,98,84,96,40},
+			   {179328,"èµµå°æ€¡",76,85,94,57,77,69,44} }; /* å…¨å±€å˜é‡ */
+#define total key /* å®šä¹‰æ€»åˆ†(total)ä¸ºå…³é”®å­— */
 #include "c9.h"
 #include "c9-1.h"
 #include "bo9-1.c"
 
-void print(ElemType c) /* Traverse()µ÷ÓÃµÄº¯Êı */
+void print(ElemType c) /* Traverse()è°ƒç”¨çš„å‡½æ•° */
 {
 	printf("%-8ld%-8s%4d%5d%5d%5d%5d%5d%5d%5d\n", c.number, c.name, c.politics, c.Chinese, c.English, c.math, c.physics, c.chemistry, c.biology, c.total);
 }
@@ -34,17 +34,17 @@ void main()
 {
 	SSTable st;
 	int i, s;
-	for (i = 0; i < N; i++) /* ¼ÆËã×Ü·Ö */
+	for (i = 0; i < N; i++) /* è®¡ç®—æ€»åˆ† */
 		r[i].total = r[i].politics + r[i].Chinese + r[i].English + r[i].math + r[i].physics + r[i].chemistry + r[i].biology;
-	Creat_Seq(&st, N); /* ÓÉÈ«¾ÖÊı×é²úÉú¾²Ì¬²éÕÒ±íst */
-	printf("×¼¿¼Ö¤ºÅ  ĞÕÃû  ÕşÖÎ ÓïÎÄ ÍâÓï ÊıÑ§ ÎïÀí »¯Ñ§ ÉúÎï ×Ü·Ö\n");
-	Traverse(st, print); /* °´Ë³ĞòÊä³ö¾²Ì¬²éÕÒ±íst */
-	printf("ÇëÊäÈë´ı²éÕÒÈËµÄ×Ü·Ö: ");
+	Creat_Seq(&st, N); /* ç”±å…¨å±€æ•°ç»„äº§ç”Ÿé™æ€æŸ¥æ‰¾è¡¨st */
+	printf("å‡†è€ƒè¯å·  å§“å  æ”¿æ²» è¯­æ–‡ å¤–è¯­ æ•°å­¦ ç‰©ç† åŒ–å­¦ ç”Ÿç‰© æ€»åˆ†\n");
+	Traverse(st, print); /* æŒ‰é¡ºåºè¾“å‡ºé™æ€æŸ¥æ‰¾è¡¨st */
+	printf("è¯·è¾“å…¥å¾…æŸ¥æ‰¾äººçš„æ€»åˆ†: ");
 	scanf("%d", &s);
-	i = Search_Seq(st, s); /* Ë³Ğò²éÕÒ */
+	i = Search_Seq(st, s); /* é¡ºåºæŸ¥æ‰¾ */
 	if (i)
 		print(*(st.elem + i));
 	else
-		printf("Ã»ÕÒµ½\n");
+		printf("æ²¡æ‰¾åˆ°\n");
 	Destroy(&st);
 }

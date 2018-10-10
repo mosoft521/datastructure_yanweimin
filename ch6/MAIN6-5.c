@@ -1,7 +1,7 @@
-/* main6-5.c ¼ìÑébo6-5.cµÄÖ÷³ÌĞò */
+/* main6-5.c æ£€éªŒbo6-5.cçš„ä¸»ç¨‹åº */
 #include "../ch1/c1.h"
 typedef char TElemType;
-TElemType Nil = ' '; /* ÒÔ¿Õ¸ñ·ûÎª¿Õ */
+TElemType Nil = ' '; /* ä»¥ç©ºæ ¼ç¬¦ä¸ºç©º */
 #include "c6-5.h"
 #include "bo6-5.c"
 
@@ -16,33 +16,33 @@ void main()
 	CSTree T, p, q;
 	TElemType e, e1;
 	InitTree(&T);
-	printf("¹¹Ôì¿ÕÊ÷ºó,Ê÷¿Õ·ñ? %d(1:ÊÇ 0:·ñ) Ê÷¸ùÎª%c Ê÷µÄÉî¶ÈÎª%d\n", TreeEmpty(T), Root(T), TreeDepth(T));
+	printf("æ„é€ ç©ºæ ‘å,æ ‘ç©ºå¦? %d(1:æ˜¯ 0:å¦) æ ‘æ ¹ä¸º%c æ ‘çš„æ·±åº¦ä¸º%d\n", TreeEmpty(T), Root(T), TreeDepth(T));
 	CreateTree(&T);
-	printf("¹¹ÔìÊ÷Tºó,Ê÷¿Õ·ñ? %d(1:ÊÇ 0:·ñ) Ê÷¸ùÎª%c Ê÷µÄÉî¶ÈÎª%d\n", TreeEmpty(T), Root(T), TreeDepth(T));
-	printf("ÏÈ¸ù±éÀúÊ÷T:\n");
+	printf("æ„é€ æ ‘Tå,æ ‘ç©ºå¦? %d(1:æ˜¯ 0:å¦) æ ‘æ ¹ä¸º%c æ ‘çš„æ·±åº¦ä¸º%d\n", TreeEmpty(T), Root(T), TreeDepth(T));
+	printf("å…ˆæ ¹éå†æ ‘T:\n");
 	PreOrderTraverse(T, vi);
-	printf("\nÇëÊäÈë´ıĞŞ¸ÄµÄ½áµãµÄÖµ ĞÂÖµ: ");
+	printf("\nè¯·è¾“å…¥å¾…ä¿®æ”¹çš„ç»“ç‚¹çš„å€¼ æ–°å€¼: ");
 	scanf("%c%*c%c%*c", &e, &e1);
 	Assign(&T, e, e1);
-	printf("ºó¸ù±éÀúĞŞ¸ÄºóµÄÊ÷T:\n");
+	printf("åæ ¹éå†ä¿®æ”¹åçš„æ ‘T:\n");
 	PostOrderTraverse(T, vi);
-	printf("\n%cµÄË«Ç×ÊÇ%c,³¤×ÓÊÇ%c,ÏÂÒ»¸öĞÖµÜÊÇ%c\n", e1, Parent(T, e1), LeftChild(T, e1), RightSibling(T, e1));
-	printf("½¨Á¢Ê÷p:\n");
+	printf("\n%cçš„åŒäº²æ˜¯%c,é•¿å­æ˜¯%c,ä¸‹ä¸€ä¸ªå…„å¼Ÿæ˜¯%c\n", e1, Parent(T, e1), LeftChild(T, e1), RightSibling(T, e1));
+	printf("å»ºç«‹æ ‘p:\n");
 	InitTree(&p);
 	CreateTree(&p);
-	printf("²ãĞò±éÀúÊ÷p:\n");
+	printf("å±‚åºéå†æ ‘p:\n");
 	LevelOrderTraverse(p, vi);
-	printf("\n½«Ê÷p²åµ½Ê÷TÖĞ£¬ÇëÊäÈëTÖĞpµÄË«Ç×½áµã ×ÓÊ÷ĞòºÅ: ");
+	printf("\nå°†æ ‘pæ’åˆ°æ ‘Tä¸­ï¼Œè¯·è¾“å…¥Tä¸­pçš„åŒäº²ç»“ç‚¹ å­æ ‘åºå·: ");
 	scanf("%c%d%*c", &e, &i);
 	q = Point(T, e);
 	InsertChild(&T, q, i, p);
-	printf("²ãĞò±éÀúÊ÷T:\n");
+	printf("å±‚åºéå†æ ‘T:\n");
 	LevelOrderTraverse(T, vi);
-	printf("\nÉ¾³ıÊ÷TÖĞ½áµãeµÄµÚi¿Ã×ÓÊ÷£¬ÇëÊäÈëe i: ");
+	printf("\nåˆ é™¤æ ‘Tä¸­ç»“ç‚¹eçš„ç¬¬iæ£µå­æ ‘ï¼Œè¯·è¾“å…¥e i: ");
 	scanf("%c%d", &e, &i);
 	q = Point(T, e);
 	DeleteChild(&T, q, i);
-	printf("²ãĞò±éÀúÊ÷T:\n", e, i);
+	printf("å±‚åºéå†æ ‘T:\n", e, i);
 	LevelOrderTraverse(T, vi);
 	printf("\n");
 	DestroyTree(&T);

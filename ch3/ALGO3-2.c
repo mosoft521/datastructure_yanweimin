@@ -1,25 +1,25 @@
-/* algo3-2.c ¸ÄËã·¨3.1£¬10½øÖÆ¡ú16½øÖÆ */
-typedef int SElemType; /* ¶¨ÒåÕ»ÔªËØÀàÐÍÎªÕûÐÍ */
+/* algo3-2.c æ”¹ç®—æ³•3.1ï¼Œ10è¿›åˆ¶â†’16è¿›åˆ¶ */
+typedef int SElemType; /* å®šä¹‰æ ˆå…ƒç´ ç±»åž‹ä¸ºæ•´åž‹ */
 #include "../ch1/c1.h"
-#include "c3-1.h" /* ²ÉÓÃË³ÐòÕ» */
-#include "bo3-1.c" /* ÀûÓÃË³ÐòÕ»µÄ»ù±¾²Ù×÷ */
+#include "c3-1.h" /* é‡‡ç”¨é¡ºåºæ ˆ */
+#include "bo3-1.c" /* åˆ©ç”¨é¡ºåºæ ˆçš„åŸºæœ¬æ“ä½œ */
 
 void conversion()
-{ /* ¶ÔÓÚÊäÈëµÄÈÎÒâÒ»¸ö·Ç¸º10½øÖÆÕûÊý£¬´òÓ¡Êä³öÓëÆäµÈÖµµÄ16½øÖÆÊý */
+{ /* å¯¹äºŽè¾“å…¥çš„ä»»æ„ä¸€ä¸ªéžè´Ÿ10è¿›åˆ¶æ•´æ•°ï¼Œæ‰“å°è¾“å‡ºä¸Žå…¶ç­‰å€¼çš„16è¿›åˆ¶æ•° */
 	SqStack s;
-	unsigned n; /* ·Ç¸ºÕûÊý */
+	unsigned n; /* éžè´Ÿæ•´æ•° */
 	SElemType e;
-	InitStack(&s); /* ³õÊ¼»¯Õ» */
+	InitStack(&s); /* åˆå§‹åŒ–æ ˆ */
 	printf("n(>=0)=");
-	scanf("%u", &n); /* ÊäÈë·Ç¸ºÊ®½øÖÆÕûÊýn */
-	while (n) /* µ±n²»µÈÓÚ0 */
+	scanf("%u", &n); /* è¾“å…¥éžè´Ÿåè¿›åˆ¶æ•´æ•°n */
+	while (n) /* å½“nä¸ç­‰äºŽ0 */
 	{
-		Push(&s, n % 16); /* ÈëÕ»n³ýÒÔ16µÄÓàÊý(16½øÖÆµÄµÍÎ») */
+		Push(&s, n % 16); /* å…¥æ ˆné™¤ä»¥16çš„ä½™æ•°(16è¿›åˆ¶çš„ä½Žä½) */
 		n = n / 16;
 	}
-	while (!StackEmpty(s)) /* µ±Õ»²»¿Õ */
+	while (!StackEmpty(s)) /* å½“æ ˆä¸ç©º */
 	{
-		Pop(&s, &e); /* µ¯³öÕ»¶¥ÔªËØÇÒ¸³Öµ¸øe */
+		Pop(&s, &e); /* å¼¹å‡ºæ ˆé¡¶å…ƒç´ ä¸”èµ‹å€¼ç»™e */
 		if (e <= 9)
 			printf("%d", e);
 		else

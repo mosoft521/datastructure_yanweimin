@@ -1,5 +1,5 @@
- /* algo4-4.c Éú³ÉÊéÃû¹Ø¼ü´ÊË÷ÒıÎÄ¼şbookidx.txt£¬Ëã·¨4.9¡«4.14 */
- /* ÎªÔËĞĞalgo4-5.c×ö×¼±¸ */
+ /* algo4-4.c ç”Ÿæˆä¹¦åå…³é”®è¯ç´¢å¼•æ–‡ä»¶bookidx.txtï¼Œç®—æ³•4.9ï½4.14 */
+ /* ä¸ºè¿è¡Œalgo4-5.cåšå‡†å¤‡ */
 #include "../ch1/c1.h"
  typedef int ElemType;
  #include "../ch2/c2-5.h"
@@ -7,102 +7,102 @@
  #include "c4-2.h"
  #include "bo4-2.c"
 
- #define MaxKeyNum 25 /* Ë÷Òı±íµÄ×î´óÈİÁ¿(¹Ø¼ü´ÊµÄ×î´óÊı) */
- #define MaxLineLen 51 /* ÊéÄ¿´®(ÊéÃû+ÊéºÅ)bufµÄ×î´ó³¤¶È */
- #define MaxWordNum 10 /* ´Ê±í(Ò»±¾ÊéµÄ¹Ø¼ü´Ê)µÄ×î´óÈİÁ¿ */
- #define MaxNoIdx 10 /* ³£ÓÃ´Ê(½öÖ¸´óĞ´)µÄ×î´óÊı */
+ #define MaxKeyNum 25 /* ç´¢å¼•è¡¨çš„æœ€å¤§å®¹é‡(å…³é”®è¯çš„æœ€å¤§æ•°) */
+ #define MaxLineLen 51 /* ä¹¦ç›®ä¸²(ä¹¦å+ä¹¦å·)bufçš„æœ€å¤§é•¿åº¦ */
+ #define MaxWordNum 10 /* è¯è¡¨(ä¸€æœ¬ä¹¦çš„å…³é”®è¯)çš„æœ€å¤§å®¹é‡ */
+ #define MaxNoIdx 10 /* å¸¸ç”¨è¯(ä»…æŒ‡å¤§å†™)çš„æœ€å¤§æ•° */
  typedef struct
  {
-   char *item[MaxWordNum]; /* ´Ê±í(×Ö·û´®)Ö¸ÕëÊı×é */
-   int last; /* ´ÊµÄÊıÁ¿ */
- }WordListType; /* ´Ê±íÀàĞÍ(Ë³Ğò±í) */
+   char *item[MaxWordNum]; /* è¯è¡¨(å­—ç¬¦ä¸²)æŒ‡é’ˆæ•°ç»„ */
+   int last; /* è¯çš„æ•°é‡ */
+ }WordListType; /* è¯è¡¨ç±»å‹(é¡ºåºè¡¨) */
 
  typedef struct
  {
-   HString key; /* ¹Ø¼ü´Ê(¶Ñ·ÖÅäÀàĞÍ,c4-2.h) */
-   LinkList bnolist; /* ´æ·ÅÊéºÅË÷ÒıµÄÁ´±í(c2-5.h) */
- }IdxTermType; /* Ë÷ÒıÏîÀàĞÍ */
+   HString key; /* å…³é”®è¯(å †åˆ†é…ç±»å‹,c4-2.h) */
+   LinkList bnolist; /* å­˜æ”¾ä¹¦å·ç´¢å¼•çš„é“¾è¡¨(c2-5.h) */
+ }IdxTermType; /* ç´¢å¼•é¡¹ç±»å‹ */
 
  typedef struct
  {
    IdxTermType item[MaxKeyNum+1];
-   int last; /* ¹Ø¼ü´ÊµÄ¸öÊı */
- }IdxListType; /* Ë÷Òı±íÀàĞÍ(ÓĞĞò±í) */
+   int last; /* å…³é”®è¯çš„ä¸ªæ•° */
+ }IdxListType; /* ç´¢å¼•è¡¨ç±»å‹(æœ‰åºè¡¨) */
 
  typedef struct
  {
-   char *item[MaxNoIdx]; /* ³£ÓÃ´Ê±íÖ¸ÕëÊı×é */
-   int last; /* ³£ÓÃ´ÊµÄÊıÁ¿ */
- }NoIdxType; /* ³£ÓÃ´Ê±íÀàĞÍ(ÓĞĞò±í) */
+   char *item[MaxNoIdx]; /* å¸¸ç”¨è¯è¡¨æŒ‡é’ˆæ•°ç»„ */
+   int last; /* å¸¸ç”¨è¯çš„æ•°é‡ */
+ }NoIdxType; /* å¸¸ç”¨è¯è¡¨ç±»å‹(æœ‰åºè¡¨) */
 
- /* È«¾Ö±äÁ¿ */
- char buf[MaxLineLen+1]; /* µ±Ç°ÊéÄ¿´®(°üÀ¨'\0') */
- WordListType wdlist; /* Ôİ´æÒ»±¾ÊéµÄ´Ê±í */
- NoIdxType noidx; /* ³£ÓÃ´Ê±í */
+ /* å…¨å±€å˜é‡ */
+ char buf[MaxLineLen+1]; /* å½“å‰ä¹¦ç›®ä¸²(åŒ…æ‹¬'\0') */
+ WordListType wdlist; /* æš‚å­˜ä¸€æœ¬ä¹¦çš„è¯è¡¨ */
+ NoIdxType noidx; /* å¸¸ç”¨è¯è¡¨ */
 
  void InitIdxList(IdxListType *idxlist)
- { /* ³õÊ¼»¯²Ù×÷£¬ÖÃË÷Òı±íidxlistÎª¿Õ±í£¬ÇÒÔÚidxliat.item[0]ÉèÒ»¿Õ´® */
+ { /* åˆå§‹åŒ–æ“ä½œï¼Œç½®ç´¢å¼•è¡¨idxlistä¸ºç©ºè¡¨ï¼Œä¸”åœ¨idxliat.item[0]è®¾ä¸€ç©ºä¸² */
    (*idxlist).last=0;
    InitString(&(*idxlist).item[0].key); /* bo4-2.c */
    InitList(&(*idxlist).item[0].bnolist); /* bo2-6.c */
  }
 
  void ExtractKeyWord(int *BookNo)
- { /* ´ÓbufÖĞÌáÈ¡ÊéÃû¹Ø¼ü´Êµ½´Ê±íwdlist£¬ÊéºÅ´æÈëBookNo */
-   int i,l,f=1; /* fÊÇ×Ö·û´®½áÊø±êÖ¾ 0: ½áÊø 1: Î´½áÊø */
+ { /* ä»bufä¸­æå–ä¹¦åå…³é”®è¯åˆ°è¯è¡¨wdlistï¼Œä¹¦å·å­˜å…¥BookNo */
+   int i,l,f=1; /* fæ˜¯å­—ç¬¦ä¸²ç»“æŸæ ‡å¿— 0: ç»“æŸ 1: æœªç»“æŸ */
    char *s1,*s2;
-   if(buf[0]<'0'||buf[0]>'9') /* bufµÄÊ××ÖÄ¸²»ÊÇÊı×Ö */
+   if(buf[0]<'0'||buf[0]>'9') /* bufçš„é¦–å­—æ¯ä¸æ˜¯æ•°å­— */
      exit(OVERFLOW);
-   for(i=1;i<=wdlist.last;i++) /* ÊÍ·ÅÉÏÒ»¸öÊéÄ¿ÔÚ´Ê±íwdlistµÄ´æ´¢¿Õ¼ä */
+   for(i=1;i<=wdlist.last;i++) /* é‡Šæ”¾ä¸Šä¸€ä¸ªä¹¦ç›®åœ¨è¯è¡¨wdlistçš„å­˜å‚¨ç©ºé—´ */
    {
      free(wdlist.item[i]);
      wdlist.item[i]=NULL;
    }
    wdlist.last=0;
-   *BookNo=(buf[0]-'0')*100+(buf[1]-'0')*10+(buf[2]-'0'); /* Ç°ÈıÎ»ÎªÊéºÅ */
-   s2=&buf[2]; /* s1Ö¸ÏòÊéºÅµÄÎ²×Ö·û */
+   *BookNo=(buf[0]-'0')*100+(buf[1]-'0')*10+(buf[2]-'0'); /* å‰ä¸‰ä½ä¸ºä¹¦å· */
+   s2=&buf[2]; /* s1æŒ‡å‘ä¹¦å·çš„å°¾å­—ç¬¦ */
    do
-   { /* ÌáÈ¡ÊéÃû¹Ø¼ü´Êµ½´Ê±íwdlist */
-     s1=s2+1; /* s1ÏòºóÒÆ¶¯Ò»¸öµ¥´Ê */
-     s2=strchr(s1,' '); /* s2Ö¸Ïòs1µÄµÚÒ»¸ö¿Õ¸ñ,ÈçÃ»ÓĞ,·µ»ØNULL */
-     if(!s2) /* µ½´®Î² */
+   { /* æå–ä¹¦åå…³é”®è¯åˆ°è¯è¡¨wdlist */
+     s1=s2+1; /* s1å‘åç§»åŠ¨ä¸€ä¸ªå•è¯ */
+     s2=strchr(s1,' '); /* s2æŒ‡å‘s1çš„ç¬¬ä¸€ä¸ªç©ºæ ¼,å¦‚æ²¡æœ‰,è¿”å›NULL */
+     if(!s2) /* åˆ°ä¸²å°¾ */
      {
-       s2=strchr(s1,'\12'); /* s2Ö¸ÏòbufµÄ×îºóÒ»¸ö×Ö·û(»Ø³µ·û) */
+       s2=strchr(s1,'\12'); /* s2æŒ‡å‘bufçš„æœ€åä¸€ä¸ªå­—ç¬¦(å›è½¦ç¬¦) */
        f=0;
      }
-     l=s2-s1; /* µ¥´Ê³¤¶È */
-     if(s1[0]>='A'&&s1[0]<='Z') /* µ¥´ÊÊ××ÖÄ¸Îª´óĞ´ */
-     { /* Ğ´Èë´Ê±í */
+     l=s2-s1; /* å•è¯é•¿åº¦ */
+     if(s1[0]>='A'&&s1[0]<='Z') /* å•è¯é¦–å­—æ¯ä¸ºå¤§å†™ */
+     { /* å†™å…¥è¯è¡¨ */
        wdlist.item[wdlist.last]=(char *)malloc((l+1)*sizeof(char));
-       /* Éú³É´®¿Õ¼ä(°üÀ¨'\0') */
+       /* ç”Ÿæˆä¸²ç©ºé—´(åŒ…æ‹¬'\0') */
        for(i=0;i<l;i++)
-         wdlist.item[wdlist.last][i]=s1[i]; /* Ğ´Èë´Ê±í */
+         wdlist.item[wdlist.last][i]=s1[i]; /* å†™å…¥è¯è¡¨ */
        wdlist.item[wdlist.last][l]=0;
-       for(i=0;i<noidx.last;i++) /* ²éÕÒÊÇ·ñÎª³£ÓÃ´Ê */
+       for(i=0;i<noidx.last;i++) /* æŸ¥æ‰¾æ˜¯å¦ä¸ºå¸¸ç”¨è¯ */
          if(!strcmp(wdlist.item[wdlist.last],noidx.item[i]))
            break;
-       if(i!=noidx.last) /* ÊÇ³£ÓÃ´Ê */
+       if(i!=noidx.last) /* æ˜¯å¸¸ç”¨è¯ */
        {
-         free(wdlist.item[wdlist.last]); /* ´Ó´Ê±íÖĞÉ¾³ı¸Ã´Ê */
+         free(wdlist.item[wdlist.last]); /* ä»è¯è¡¨ä¸­åˆ é™¤è¯¥è¯ */
          wdlist.item[wdlist.last]=NULL;
        }
        else
-         wdlist.last++; /* ´Ê±í³¤¶È+1 */
+         wdlist.last++; /* è¯è¡¨é•¿åº¦+1 */
      }
    }while(f);
  }
 
  void GetWord(int i,HString *wd)
- { /* ÓÃwd·µ»Ø´Ê±íwdlistÖĞµÚi¸ö¹Ø¼ü´Ê */
-   StrAssign(wd,wdlist.item[i]); /* Éú³É¹Ø¼ü×Ö×Ö·û´® bo4-2.c */
+ { /* ç”¨wdè¿”å›è¯è¡¨wdlistä¸­ç¬¬iä¸ªå…³é”®è¯ */
+   StrAssign(wd,wdlist.item[i]); /* ç”Ÿæˆå…³é”®å­—å­—ç¬¦ä¸² bo4-2.c */
  }
 
  int Locate(IdxListType *idxlist,HString wd,Status *b)
- { /* ÔÚË÷Òı±íidxlistÖĞ²éÑ¯ÊÇ·ñ´æÔÚÓëwdÏàµÈµÄ¹Ø¼ü´Ê¡£Èô´æÔÚ,Ôò·µ»ØÆä */
-   /* ÔÚË÷Òı±íÖĞµÄÎ»ÖÃ,ÇÒbÈ¡ÖµTRUE;·ñÔò·µ»Ø²åÈëÎ»ÖÃ,ÇÒbÈ¡ÖµFALSE */
+ { /* åœ¨ç´¢å¼•è¡¨idxlistä¸­æŸ¥è¯¢æ˜¯å¦å­˜åœ¨ä¸wdç›¸ç­‰çš„å…³é”®è¯ã€‚è‹¥å­˜åœ¨,åˆ™è¿”å›å…¶ */
+   /* åœ¨ç´¢å¼•è¡¨ä¸­çš„ä½ç½®,ä¸”bå–å€¼TRUE;å¦åˆ™è¿”å›æ’å…¥ä½ç½®,ä¸”bå–å€¼FALSE */
    int i,m;
    for(i=(*idxlist).last;(m=StrCompare((*idxlist).item[i].key,wd))>0;--i); /* bo4-2.c */
-   if(m==0) /* ÕÒµ½ */
+   if(m==0) /* æ‰¾åˆ° */
    {
      *b=TRUE;
      return i;
@@ -115,28 +115,28 @@
  }
 
  void InsertNewKey(IdxListType *idxlist,int i,HString wd)
- { /* ÔÚË÷Òı±íidxlistµÄµÚiÏîÉÏ²åÈëĞÂ¹Ø¼ü´Êwd,²¢³õÊ¼»¯ÊéºÅË÷ÒıµÄÁ´±íÎª¿Õ±í */
+ { /* åœ¨ç´¢å¼•è¡¨idxlistçš„ç¬¬ié¡¹ä¸Šæ’å…¥æ–°å…³é”®è¯wd,å¹¶åˆå§‹åŒ–ä¹¦å·ç´¢å¼•çš„é“¾è¡¨ä¸ºç©ºè¡¨ */
    int j;
    InitList(&(*idxlist).item[(*idxlist).last+1].bnolist); /* bo2-6.c */
-   for(j=(*idxlist).last;j>=i;--j) /* ºóÒÆË÷ÒıÏî */
+   for(j=(*idxlist).last;j>=i;--j) /* åç§»ç´¢å¼•é¡¹ */
      (*idxlist).item[j+1]=(*idxlist).item[j];
    InitString(&(*idxlist).item[i].key); /* bo4-2.c */
-   StrCopy(&(*idxlist).item[i].key,wd); /* ´®¿½±´²åÈëĞÂµÄË÷ÒıÏî bo4-2.c */
-   InitList(&(*idxlist).item[i].bnolist); /* ³õÊ¼»¯ÊéºÅË÷Òı±íÎª¿Õ±í bo2-6.c */
+   StrCopy(&(*idxlist).item[i].key,wd); /* ä¸²æ‹·è´æ’å…¥æ–°çš„ç´¢å¼•é¡¹ bo4-2.c */
+   InitList(&(*idxlist).item[i].bnolist); /* åˆå§‹åŒ–ä¹¦å·ç´¢å¼•è¡¨ä¸ºç©ºè¡¨ bo2-6.c */
    (*idxlist).last++;
  }
 
  void InsertBook(IdxListType *idxlist,int i,int bno)
- { /* ÔÚË÷Òı±íidxlistµÄµÚiÏîÖĞ²åÈëÊéºÅÎªbnoµÄË÷Òı */
+ { /* åœ¨ç´¢å¼•è¡¨idxlistçš„ç¬¬ié¡¹ä¸­æ’å…¥ä¹¦å·ä¸ºbnoçš„ç´¢å¼• */
    Link p;
-   if(!MakeNode(&p,bno)) /* ·ÖÅäÊ§°Ü bo2-6.c */
+   if(!MakeNode(&p,bno)) /* åˆ†é…å¤±è´¥ bo2-6.c */
      exit(OVERFLOW);
    p->next=NULL;
-   Append(&(*idxlist).item[i].bnolist,p); /* ²åÈëĞÂµÄÊéºÅË÷Òı bo2-6.c */
+   Append(&(*idxlist).item[i].bnolist,p); /* æ’å…¥æ–°çš„ä¹¦å·ç´¢å¼• bo2-6.c */
  }
 
  void InsIdxList(IdxListType *idxlist,int bno)
- { /* ½«ÊéºÅÎªbnoµÄ¹Ø¼ü´Ê²åÈëË÷Òı±í */
+ { /* å°†ä¹¦å·ä¸ºbnoçš„å…³é”®è¯æ’å…¥ç´¢å¼•è¡¨ */
    int i,j;
    Status b;
    HString wd;
@@ -146,13 +146,13 @@
      GetWord(i,&wd);
      j=Locate(idxlist,wd,&b);
      if(!b)
-       InsertNewKey(idxlist,j,wd); /* ²åÈëĞÂµÄË÷ÒıÏî */
-     InsertBook(idxlist,j,bno); /* ²åÈëÊéºÅË÷Òı */
+       InsertNewKey(idxlist,j,wd); /* æ’å…¥æ–°çš„ç´¢å¼•é¡¹ */
+     InsertBook(idxlist,j,bno); /* æ’å…¥ä¹¦å·ç´¢å¼• */
    }
  }
 
  void PutText(FILE *f,IdxListType idxlist)
- { /* ½«Éú³ÉµÄË÷Òı±íidxlistÊä³öµ½ÎÄ¼şf */
+ { /* å°†ç”Ÿæˆçš„ç´¢å¼•è¡¨idxlistè¾“å‡ºåˆ°æ–‡ä»¶f */
    int i,j;
    Link p;
    fprintf(f,"%d\n",idxlist.last);
@@ -173,15 +173,15 @@
 
  void main()
  {
-   FILE *f; /* ÈÎºÎÊ±¼ä×î¶à´ò¿ªÒ»¸öÎÄ¼ş */
-   IdxListType idxlist; /* Ë÷Òı±í */
-   int BookNo; /* ÊéºÅ±äÁ¿ */
+   FILE *f; /* ä»»ä½•æ—¶é—´æœ€å¤šæ‰“å¼€ä¸€ä¸ªæ–‡ä»¶ */
+   IdxListType idxlist; /* ç´¢å¼•è¡¨ */
+   int BookNo; /* ä¹¦å·å˜é‡ */
    int k,l;
-   f=fopen("NoIdx.txt","r"); /* ´ò¿ª³£ÓÃ´ÊÎÄ¼ş */
+   f=fopen("NoIdx.txt","r"); /* æ‰“å¼€å¸¸ç”¨è¯æ–‡ä»¶ */
    if(!f)
      exit(OVERFLOW);
-   fscanf(f,"%d",&noidx.last); /* ³£ÓÃ´Ê¸öÊı */
-   for(k=0;k<noidx.last;k++) /* °Ñ³£ÓÃ´ÊÎÄ¼şµÄÄÚÈİ¿½µ½noidxÖĞ */
+   fscanf(f,"%d",&noidx.last); /* å¸¸ç”¨è¯ä¸ªæ•° */
+   for(k=0;k<noidx.last;k++) /* æŠŠå¸¸ç”¨è¯æ–‡ä»¶çš„å†…å®¹æ‹·åˆ°noidxä¸­ */
    {
      fscanf(f,"%s",buf);
      l=strlen(buf);
@@ -189,24 +189,24 @@
      strcpy(noidx.item[k],buf);
    }
    fclose(f);
-   f=fopen("BookInfo.txt","r"); /* ´ò¿ªÊéÄ¿ÎÄ¼ş */
+   f=fopen("BookInfo.txt","r"); /* æ‰“å¼€ä¹¦ç›®æ–‡ä»¶ */
    if(!f)
      exit(FALSE);
-   InitIdxList(&idxlist); /* ³õÊ¼»¯Ë÷Òı±íidxlistÎª¿Õ */
-   wdlist.last=0; /* ´Ê±í³¤¶È³õÖµÎª0 */
+   InitIdxList(&idxlist); /* åˆå§‹åŒ–ç´¢å¼•è¡¨idxlistä¸ºç©º */
+   wdlist.last=0; /* è¯è¡¨é•¿åº¦åˆå€¼ä¸º0 */
    while(!feof(f))
    {
      fgets(buf,MaxLineLen,f);
      l=strlen(buf);
      if(l<=1)
        break;
-     ExtractKeyWord(&BookNo); /* ´ÓbufÖĞÌáÈ¡¹Ø¼ü´Êµ½´Ê±í£¬ÊéºÅ´æÈëBookNo */
+     ExtractKeyWord(&BookNo); /* ä»bufä¸­æå–å…³é”®è¯åˆ°è¯è¡¨ï¼Œä¹¦å·å­˜å…¥BookNo */
      InsIdxList(&idxlist,BookNo);
    }
    fclose(f);
    f=fopen("BookIdx.txt","w");
    if(!f)
      exit(INFEASIBLE);
-   PutText(f,idxlist); /* ½«Éú³ÉµÄË÷Òı±íidxlistÊä³öµ½ÎÄ¼şf */
+   PutText(f,idxlist); /* å°†ç”Ÿæˆçš„ç´¢å¼•è¡¨idxlistè¾“å‡ºåˆ°æ–‡ä»¶f */
    fclose(f);
  }

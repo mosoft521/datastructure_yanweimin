@@ -1,8 +1,8 @@
- /* c6-1.h ¶ş²æÊ÷µÄË³Ğò´æ´¢±íÊ¾ */
- #define MAX_TREE_SIZE 100 /* ¶ş²æÊ÷µÄ×î´ó½áµãÊı */
- typedef TElemType SqBiTree[MAX_TREE_SIZE]; /* 0ºÅµ¥Ôª´æ´¢¸ù½áµã */
+ /* c6-1.h äºŒå‰æ ‘çš„é¡ºåºå­˜å‚¨è¡¨ç¤º */
+ #define MAX_TREE_SIZE 100 /* äºŒå‰æ ‘çš„æœ€å¤§ç»“ç‚¹æ•° */
+ typedef TElemType SqBiTree[MAX_TREE_SIZE]; /* 0å·å•å…ƒå­˜å‚¨æ ¹ç»“ç‚¹ */
 
  typedef struct
  {
-   int level,order; /* ½áµãµÄ²ã,±¾²ãĞòºÅ(°´Âú¶ş²æÊ÷¼ÆËã) */
+   int level,order; /* ç»“ç‚¹çš„å±‚,æœ¬å±‚åºå·(æŒ‰æ»¡äºŒå‰æ ‘è®¡ç®—) */
  }position;

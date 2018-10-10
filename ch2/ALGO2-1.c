@@ -1,28 +1,28 @@
-/* algo2-1.c ÊµÏÖËã·¨2.1µÄ³ÌĞò */
+/* algo2-1.c å®ç°ç®—æ³•2.1çš„ç¨‹åº */
 #include "../ch1/c1.h"
 typedef int ElemType;
-#include "c2-1.h" /* ²ÉÓÃÏßĞÔ±íµÄ¶¯Ì¬·ÖÅäË³Ğò´æ´¢½á¹¹ */
-#include "bo2-1.c" /* ¿ÉÒÔÊ¹ÓÃbo2-1.cÖĞµÄ»ù±¾²Ù×÷ */
+#include "c2-1.h" /* é‡‡ç”¨çº¿æ€§è¡¨çš„åŠ¨æ€åˆ†é…é¡ºåºå­˜å‚¨ç»“æ„ */
+#include "bo2-1.c" /* å¯ä»¥ä½¿ç”¨bo2-1.cä¸­çš„åŸºæœ¬æ“ä½œ */
 
 Status equal(ElemType c1, ElemType c2)
-{ /* ÅĞ¶ÏÊÇ·ñÏàµÈµÄº¯Êı£¬Union()ÓÃµ½ */
+{ /* åˆ¤æ–­æ˜¯å¦ç›¸ç­‰çš„å‡½æ•°ï¼ŒUnion()ç”¨åˆ° */
 	if (c1 == c2)
 		return TRUE;
 	else
 		return FALSE;
 }
 
-void Union(SqList *La, SqList Lb) /* Ëã·¨2.1 */
-{ /* ½«ËùÓĞÔÚÏßĞÔ±íLbÖĞµ«²»ÔÚLaÖĞµÄÊı¾İÔªËØ²åÈëµ½LaÖĞ */
+void Union(SqList *La, SqList Lb) /* ç®—æ³•2.1 */
+{ /* å°†æ‰€æœ‰åœ¨çº¿æ€§è¡¨Lbä¸­ä½†ä¸åœ¨Laä¸­çš„æ•°æ®å…ƒç´ æ’å…¥åˆ°Laä¸­ */
 	ElemType e;
 	int La_len, Lb_len;
 	int i;
-	La_len = ListLength(*La); /* ÇóÏßĞÔ±íµÄ³¤¶È */
+	La_len = ListLength(*La); /* æ±‚çº¿æ€§è¡¨çš„é•¿åº¦ */
 	Lb_len = ListLength(Lb);
 	for (i = 1; i <= Lb_len; i++)
 	{
-		GetElem(Lb, i, &e); /* È¡LbÖĞµÚi¸öÊı¾İÔªËØ¸³¸øe */
-		if (!LocateElem(*La, e, equal)) /* LaÖĞ²»´æÔÚºÍeÏàÍ¬µÄÔªËØ,Ôò²åÈëÖ® */
+		GetElem(Lb, i, &e); /* å–Lbä¸­ç¬¬iä¸ªæ•°æ®å…ƒç´ èµ‹ç»™e */
+		if (!LocateElem(*La, e, equal)) /* Laä¸­ä¸å­˜åœ¨å’Œeç›¸åŒçš„å…ƒç´ ,åˆ™æ’å…¥ä¹‹ */
 			ListInsert(La, ++La_len, e);
 	}
 }
@@ -38,17 +38,17 @@ void main()
 	Status i;
 	int j;
 	i = InitList(&La);
-	if (i == 1) /* ´´½¨¿Õ±íLa³É¹¦ */
-		for (j = 1; j <= 5; j++) /* ÔÚ±íLaÖĞ²åÈë5¸öÔªËØ */
+	if (i == 1) /* åˆ›å»ºç©ºè¡¨LaæˆåŠŸ */
+		for (j = 1; j <= 5; j++) /* åœ¨è¡¨Laä¸­æ’å…¥5ä¸ªå…ƒç´  */
 			i = ListInsert(&La, j, j);
-	printf("La= "); /* Êä³ö±íLaµÄÄÚÈİ */
+	printf("La= "); /* è¾“å‡ºè¡¨Laçš„å†…å®¹ */
 	ListTraverse(La, print);
-	InitList(&Lb); /* Ò²¿É²»ÅĞ¶ÏÊÇ·ñ´´½¨³É¹¦ */
-	for (j = 1; j <= 5; j++) /* ÔÚ±íLbÖĞ²åÈë5¸öÔªËØ */
+	InitList(&Lb); /* ä¹Ÿå¯ä¸åˆ¤æ–­æ˜¯å¦åˆ›å»ºæˆåŠŸ */
+	for (j = 1; j <= 5; j++) /* åœ¨è¡¨Lbä¸­æ’å…¥5ä¸ªå…ƒç´  */
 		i = ListInsert(&Lb, j, 2 * j);
-	printf("Lb= "); /* Êä³ö±íLbµÄÄÚÈİ */
+	printf("Lb= "); /* è¾“å‡ºè¡¨Lbçš„å†…å®¹ */
 	ListTraverse(Lb, print);
 	Union(&La, Lb);
-	printf("new La= "); /* Êä³öĞÂ±íLaµÄÄÚÈİ */
+	printf("new La= "); /* è¾“å‡ºæ–°è¡¨Laçš„å†…å®¹ */
 	ListTraverse(La, print);
 }

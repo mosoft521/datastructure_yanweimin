@@ -1,19 +1,19 @@
- /* c10-3.h »ùÊıÅÅĞòµÄÊı¾İÀàĞÍ */
- #define MAX_NUM_OF_KEY 8 /* ¹Ø¼ü×ÖÏîÊıµÄ×î´óÖµ */
- #define RADIX 10 /* ¹Ø¼ü×Ö»ùÊı£¬´ËÊ±ÊÇÊ®½øÖÆÕûÊıµÄ»ùÊı */
+ /* c10-3.h åŸºæ•°æ’åºçš„æ•°æ®ç±»å‹ */
+ #define MAX_NUM_OF_KEY 8 /* å…³é”®å­—é¡¹æ•°çš„æœ€å¤§å€¼ */
+ #define RADIX 10 /* å…³é”®å­—åŸºæ•°ï¼Œæ­¤æ—¶æ˜¯åè¿›åˆ¶æ•´æ•°çš„åŸºæ•° */
  #define MAX_SPACE 1000
  typedef struct
  {
-   KeysType keys[MAX_NUM_OF_KEY]; /* ¹Ø¼ü×Ö */
-   InfoType otheritems; /* ÆäËüÊı¾İÏî */
+   KeysType keys[MAX_NUM_OF_KEY]; /* å…³é”®å­— */
+   InfoType otheritems; /* å…¶å®ƒæ•°æ®é¡¹ */
    int next;
- }SLCell; /* ¾²Ì¬Á´±íµÄ½áµãÀàĞÍ */
+ }SLCell; /* é™æ€é“¾è¡¨çš„ç»“ç‚¹ç±»å‹ */
 
  typedef struct
  {
-   SLCell r[MAX_SPACE]; /* ¾²Ì¬Á´±íµÄ¿ÉÀûÓÃ¿Õ¼ä£¬r[0]ÎªÍ·½áµã */
-   int keynum; /* ¼ÇÂ¼µÄµ±Ç°¹Ø¼ü×Ö¸öÊı */
-   int recnum; /*  ¾²Ì¬Á´±íµÄµ±Ç°³¤¶È */
- }SLList; /* ¾²Ì¬Á´±íÀàĞÍ */
+   SLCell r[MAX_SPACE]; /* é™æ€é“¾è¡¨çš„å¯åˆ©ç”¨ç©ºé—´ï¼Œr[0]ä¸ºå¤´ç»“ç‚¹ */
+   int keynum; /* è®°å½•çš„å½“å‰å…³é”®å­—ä¸ªæ•° */
+   int recnum; /*  é™æ€é“¾è¡¨çš„å½“å‰é•¿åº¦ */
+ }SLList; /* é™æ€é“¾è¡¨ç±»å‹ */
 
- typedef int ArrType[RADIX]; /* Ö¸ÕëÊı×éÀàĞÍ */
+ typedef int ArrType[RADIX]; /* æŒ‡é’ˆæ•°ç»„ç±»å‹ */

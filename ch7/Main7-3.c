@@ -1,8 +1,8 @@
-/* main7-3.c ¼ìÑébo7-3.cµÄÖ÷³ÌĞò */
+/* main7-3.c æ£€éªŒbo7-3.cçš„ä¸»ç¨‹åº */
 #include "../ch1/c1.h"
 typedef char InfoType;
-#define MAX_Info 80 /* ĞÅÏ¢×Ö·û´®×î´ó³¤¶È+1 */
-#define MAX_VERTEX_NAME 3  /* ¶¥µã×Ö·û´®×î´ó³¤¶È+1 */
+#define MAX_Info 80 /* ä¿¡æ¯å­—ç¬¦ä¸²æœ€å¤§é•¿åº¦+1 */
+#define MAX_VERTEX_NAME 3  /* é¡¶ç‚¹å­—ç¬¦ä¸²æœ€å¤§é•¿åº¦+1 */
 typedef char  VertexType[MAX_VERTEX_NAME];
 #include "c7-3.h"
 #include "bo7-3.c"
@@ -19,17 +19,17 @@ void main()
 	VertexType v1, v2;
 	CreateDG(&g);
 	Display(g);
-	printf("ĞŞ¸Ä¶¥µãµÄÖµ£¬ÇëÊäÈëÔ­Öµ ĞÂÖµ: ");
+	printf("ä¿®æ”¹é¡¶ç‚¹çš„å€¼ï¼Œè¯·è¾“å…¥åŸå€¼ æ–°å€¼: ");
 	scanf("%s%s", v1, v2);
 	PutVex(&g, v1, v2);
-	printf("²åÈëĞÂ¶¥µã£¬ÇëÊäÈë¶¥µãµÄÖµ: ");
+	printf("æ’å…¥æ–°é¡¶ç‚¹ï¼Œè¯·è¾“å…¥é¡¶ç‚¹çš„å€¼: ");
 	scanf("%s", v1);
 	InsertVex(&g, v1);
-	printf("²åÈëÓëĞÂ¶¥µãÓĞ¹ØµÄ»¡£¬ÇëÊäÈë»¡Êı: ");
+	printf("æ’å…¥ä¸æ–°é¡¶ç‚¹æœ‰å…³çš„å¼§ï¼Œè¯·è¾“å…¥å¼§æ•°: ");
 	scanf("%d", &n);
 	for (k = 0; k < n; k++)
 	{
-		printf("ÇëÊäÈëÁíÒ»¶¥µãµÄÖµ ÁíÒ»¶¥µãµÄ·½Ïò(0:»¡Í· 1:»¡Î²): ");
+		printf("è¯·è¾“å…¥å¦ä¸€é¡¶ç‚¹çš„å€¼ å¦ä¸€é¡¶ç‚¹çš„æ–¹å‘(0:å¼§å¤´ 1:å¼§å°¾): ");
 		scanf("%s%d", v2, &j);
 		if (j)
 			InsertArc(&g, v2, v1);
@@ -37,17 +37,17 @@ void main()
 			InsertArc(&g, v1, v2);
 	}
 	Display(g);
-	printf("É¾³ıÒ»Ìõ»¡£¬ÇëÊäÈë´ıÉ¾³ı»¡µÄ»¡Î² »¡Í·£º");
+	printf("åˆ é™¤ä¸€æ¡å¼§ï¼Œè¯·è¾“å…¥å¾…åˆ é™¤å¼§çš„å¼§å°¾ å¼§å¤´ï¼š");
 	scanf("%s%s", v1, v2);
 	DeleteArc(&g, v1, v2);
 	Display(g);
-	printf("É¾³ı¶¥µã¼°Ïà¹ØµÄ»¡£¬ÇëÊäÈë¶¥µãµÄÖµ: ");
+	printf("åˆ é™¤é¡¶ç‚¹åŠç›¸å…³çš„å¼§ï¼Œè¯·è¾“å…¥é¡¶ç‚¹çš„å€¼: ");
 	scanf("%s", v1);
 	DeleteVex(&g, v1);
 	Display(g);
-	printf("Éî¶ÈÓÅÏÈËÑË÷µÄ½á¹û:\n");
+	printf("æ·±åº¦ä¼˜å…ˆæœç´¢çš„ç»“æœ:\n");
 	DFSTraverse(g, visit);
-	printf("¹ã¶ÈÓÅÏÈËÑË÷µÄ½á¹û:\n");
+	printf("å¹¿åº¦ä¼˜å…ˆæœç´¢çš„ç»“æœ:\n");
 	BFSTraverse(g, visit);
 	DestroyGraph(&g);
 }

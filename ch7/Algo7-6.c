@@ -1,7 +1,7 @@
-/* algo7-6.c ÊµÏÖËã·¨7.15µÄ³ÌĞò¡£µÏ½ÜË¹ÌØÀ­Ëã·¨µÄÊµÏÖ */
+/* algo7-6.c å®ç°ç®—æ³•7.15çš„ç¨‹åºã€‚è¿ªæ°æ–¯ç‰¹æ‹‰ç®—æ³•çš„å®ç° */
 #include "../ch1/c1.h"
-#define MAX_NAME 5 /* ¶¥µã×Ö·û´®µÄ×î´ó³¤¶È+1 */
-#define MAX_INFO 20 /* Ïà¹ØĞÅÏ¢×Ö·û´®µÄ×î´ó³¤¶È+1 */
+#define MAX_NAME 5 /* é¡¶ç‚¹å­—ç¬¦ä¸²çš„æœ€å¤§é•¿åº¦+1 */
+#define MAX_INFO 20 /* ç›¸å…³ä¿¡æ¯å­—ç¬¦ä¸²çš„æœ€å¤§é•¿åº¦+1 */
 typedef int VRType;
 typedef char InfoType;
 typedef char VertexType[MAX_NAME];
@@ -11,9 +11,9 @@ typedef int ShortPathTable[MAX_VERTEX_NUM];
 #include "bo7-1.c"
 
 void ShortestPath_DIJ(MGraph G, int v0, PathMatrix *P, ShortPathTable *D)
-{ /* ÓÃDijkstraËã·¨ÇóÓĞÏòÍøGµÄv0¶¥µãµ½ÆäÓà¶¥µãvµÄ×î¶ÌÂ·¾¶P[v]¼°´øÈ¨³¤¶È */
-  /* D[v]¡£ÈôP[v][w]ÎªTRUE,ÔòwÊÇ´Óv0µ½vµ±Ç°ÇóµÃ×î¶ÌÂ·¾¶ÉÏµÄ¶¥µã¡£ */
-  /* final[v]ÎªTRUEµ±ÇÒ½öµ±v¡ÊS,¼´ÒÑ¾­ÇóµÃ´Óv0µ½vµÄ×î¶ÌÂ·¾¶ Ëã·¨7.15 */
+{ /* ç”¨Dijkstraç®—æ³•æ±‚æœ‰å‘ç½‘Gçš„v0é¡¶ç‚¹åˆ°å…¶ä½™é¡¶ç‚¹vçš„æœ€çŸ­è·¯å¾„P[v]åŠå¸¦æƒé•¿åº¦ */
+  /* D[v]ã€‚è‹¥P[v][w]ä¸ºTRUE,åˆ™wæ˜¯ä»v0åˆ°vå½“å‰æ±‚å¾—æœ€çŸ­è·¯å¾„ä¸Šçš„é¡¶ç‚¹ã€‚ */
+  /* final[v]ä¸ºTRUEå½“ä¸”ä»…å½“vâˆˆS,å³å·²ç»æ±‚å¾—ä»v0åˆ°vçš„æœ€çŸ­è·¯å¾„ ç®—æ³•7.15 */
 	int v, w, i, j, min;
 	Status final[MAX_VERTEX_NUM];
 	for (v = 0; v < G.vexnum; ++v)
@@ -21,7 +21,7 @@ void ShortestPath_DIJ(MGraph G, int v0, PathMatrix *P, ShortPathTable *D)
 		final[v] = FALSE;
 		(*D)[v] = G.arcs[v0][v].adj;
 		for (w = 0; w < G.vexnum; ++w)
-			(*P)[v][w] = FALSE; /* Éè¿ÕÂ·¾¶ */
+			(*P)[v][w] = FALSE; /* è®¾ç©ºè·¯å¾„ */
 		if ((*D)[v] < INFINITY)
 		{
 			(*P)[v][v0] = TRUE;
@@ -29,22 +29,22 @@ void ShortestPath_DIJ(MGraph G, int v0, PathMatrix *P, ShortPathTable *D)
 		}
 	}
 	(*D)[v0] = 0;
-	final[v0] = TRUE; /* ³õÊ¼»¯,v0¶¥µãÊôÓÚS¼¯ */
-	for (i = 1; i < G.vexnum; ++i) /* ÆäÓàG.vexnum-1¸ö¶¥µã */
-	{ /* ¿ªÊ¼Ö÷Ñ­»·,Ã¿´ÎÇóµÃv0µ½Ä³¸öv¶¥µãµÄ×î¶ÌÂ·¾¶,²¢¼Óvµ½S¼¯ */
-		min = INFINITY; /* µ±Ç°ËùÖªÀëv0¶¥µãµÄ×î½ü¾àÀë */
+	final[v0] = TRUE; /* åˆå§‹åŒ–,v0é¡¶ç‚¹å±äºSé›† */
+	for (i = 1; i < G.vexnum; ++i) /* å…¶ä½™G.vexnum-1ä¸ªé¡¶ç‚¹ */
+	{ /* å¼€å§‹ä¸»å¾ªç¯,æ¯æ¬¡æ±‚å¾—v0åˆ°æŸä¸ªvé¡¶ç‚¹çš„æœ€çŸ­è·¯å¾„,å¹¶åŠ våˆ°Sé›† */
+		min = INFINITY; /* å½“å‰æ‰€çŸ¥ç¦»v0é¡¶ç‚¹çš„æœ€è¿‘è·ç¦» */
 		for (w = 0; w < G.vexnum; ++w)
-			if (!final[w]) /* w¶¥µãÔÚV-SÖĞ */
+			if (!final[w]) /* wé¡¶ç‚¹åœ¨V-Sä¸­ */
 				if ((*D)[w] < min)
 				{
 					v = w;
 					min = (*D)[w];
-				} /* w¶¥µãÀëv0¶¥µã¸ü½ü */
-		final[v] = TRUE; /* Àëv0¶¥µã×î½üµÄv¼ÓÈëS¼¯ */
-		for (w = 0; w < G.vexnum; ++w) /* ¸üĞÂµ±Ç°×î¶ÌÂ·¾¶¼°¾àÀë */
+				} /* wé¡¶ç‚¹ç¦»v0é¡¶ç‚¹æ›´è¿‘ */
+		final[v] = TRUE; /* ç¦»v0é¡¶ç‚¹æœ€è¿‘çš„våŠ å…¥Sé›† */
+		for (w = 0; w < G.vexnum; ++w) /* æ›´æ–°å½“å‰æœ€çŸ­è·¯å¾„åŠè·ç¦» */
 		{
 			if (!final[w] && min < INFINITY&&G.arcs[v][w].adj < INFINITY && (min + G.arcs[v][w].adj < (*D)[w]))
-			{ /* ĞŞ¸ÄD[w]ºÍP[w],w¡ÊV-S */
+			{ /* ä¿®æ”¹D[w]å’ŒP[w],wâˆˆV-S */
 				(*D)[w] = min + G.arcs[v][w].adj;
 				for (j = 0; j < G.vexnum; ++j)
 					(*P)[w][j] = (*P)[v][j];
@@ -56,20 +56,20 @@ void ShortestPath_DIJ(MGraph G, int v0, PathMatrix *P, ShortPathTable *D)
 
 void main()
 {
-	int i, j, v0 = 0; /* v0ÎªÔ´µã */
+	int i, j, v0 = 0; /* v0ä¸ºæºç‚¹ */
 	MGraph g;
 	PathMatrix p;
 	ShortPathTable d;
 	CreateDN(&g);
 	ShortestPath_DIJ(g, v0, &p, &d);
-	printf("×î¶ÌÂ·¾¶Êı×ép[i][j]ÈçÏÂ:\n");
+	printf("æœ€çŸ­è·¯å¾„æ•°ç»„p[i][j]å¦‚ä¸‹:\n");
 	for (i = 0; i < g.vexnum; ++i)
 	{
 		for (j = 0; j < g.vexnum; ++j)
 			printf("%2d", p[i][j]);
 		printf("\n");
 	}
-	printf("%sµ½¸÷¶¥µãµÄ×î¶ÌÂ·¾¶³¤¶ÈÎª£º\n", g.vexs[0]);
+	printf("%såˆ°å„é¡¶ç‚¹çš„æœ€çŸ­è·¯å¾„é•¿åº¦ä¸ºï¼š\n", g.vexs[0]);
 	for (i = 1; i < g.vexnum; ++i)
 		printf("%s-%s:%d\n", g.vexs[0], g.vexs[i], d[i]);
 }

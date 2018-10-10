@@ -1,20 +1,20 @@
- /* c7-2.h Í¼µÄÁÚ½Ó±í´æ´¢±íÊ¾ */
+ /* c7-2.h å›¾çš„é‚»æ¥è¡¨å­˜å‚¨è¡¨ç¤º */
  #define MAX_VERTEX_NUM 20
- typedef enum{DG,DN,AG,AN}GraphKind; /* {ÓĞÏòÍ¼,ÓĞÏòÍø,ÎŞÏòÍ¼,ÎŞÏòÍø} */
+ typedef enum{DG,DN,AG,AN}GraphKind; /* {æœ‰å‘å›¾,æœ‰å‘ç½‘,æ— å‘å›¾,æ— å‘ç½‘} */
  typedef struct ArcNode
  {
-   int adjvex; /* ¸Ã»¡ËùÖ¸ÏòµÄ¶¥µãµÄÎ»ÖÃ */
-   struct ArcNode *nextarc; /* Ö¸ÏòÏÂÒ»Ìõ»¡µÄÖ¸Õë */
-   InfoType *info; /* ÍøµÄÈ¨ÖµÖ¸Õë£© */
- }ArcNode; /* ±í½áµã */
+   int adjvex; /* è¯¥å¼§æ‰€æŒ‡å‘çš„é¡¶ç‚¹çš„ä½ç½® */
+   struct ArcNode *nextarc; /* æŒ‡å‘ä¸‹ä¸€æ¡å¼§çš„æŒ‡é’ˆ */
+   InfoType *info; /* ç½‘çš„æƒå€¼æŒ‡é’ˆï¼‰ */
+ }ArcNode; /* è¡¨ç»“ç‚¹ */
  typedef struct
  {
-   VertexType data; /* ¶¥µãĞÅÏ¢ */
-   ArcNode *firstarc; /* µÚÒ»¸ö±í½áµãµÄµØÖ·,Ö¸ÏòµÚÒ»ÌõÒÀ¸½¸Ã¶¥µãµÄ»¡µÄÖ¸Õë */
- }VNode,AdjList[MAX_VERTEX_NUM]; /* Í·½áµã */
+   VertexType data; /* é¡¶ç‚¹ä¿¡æ¯ */
+   ArcNode *firstarc; /* ç¬¬ä¸€ä¸ªè¡¨ç»“ç‚¹çš„åœ°å€,æŒ‡å‘ç¬¬ä¸€æ¡ä¾é™„è¯¥é¡¶ç‚¹çš„å¼§çš„æŒ‡é’ˆ */
+ }VNode,AdjList[MAX_VERTEX_NUM]; /* å¤´ç»“ç‚¹ */
  typedef struct
  {
    AdjList vertices;
-   int vexnum,arcnum; /* Í¼µÄµ±Ç°¶¥µãÊıºÍ»¡Êı */
-   int kind; /* Í¼µÄÖÖÀà±êÖ¾ */
+   int vexnum,arcnum; /* å›¾çš„å½“å‰é¡¶ç‚¹æ•°å’Œå¼§æ•° */
+   int kind; /* å›¾çš„ç§ç±»æ ‡å¿— */
  }ALGraph;

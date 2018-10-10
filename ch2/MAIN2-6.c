@@ -1,9 +1,9 @@
-/* main2-6.c ¼ìÑébo2-6.cppµÄÖ÷³ÌĞò */
+/* main2-6.c æ£€éªŒbo2-6.cppçš„ä¸»ç¨‹åº */
 #include "../ch1/c1.h"
 typedef int ElemType;
 #include "c2-5.h"
 #include "bo2-6.c"
-Status compare(ElemType c1, ElemType c2) /* c1µÈÓÚc2 */
+Status compare(ElemType c1, ElemType c2) /* c1ç­‰äºc2 */
 {
 	if (c1 == c2)
 		return TRUE;
@@ -12,7 +12,7 @@ Status compare(ElemType c1, ElemType c2) /* c1µÈÓÚc2 */
 }
 
 int cmp(ElemType a, ElemType b)
-{ /* ¸ù¾İa<¡¢=»ò>b,·Ö±ğ·µ»Ø-1¡¢0»ò1 */
+{ /* æ ¹æ®a<ã€=æˆ–>b,åˆ†åˆ«è¿”å›-1ã€0æˆ–1 */
 	if (a == b)
 		return 0;
 	else
@@ -31,95 +31,95 @@ void main()
 	Status i;
 	int j, k;
 	i = InitList(&L);
-	if (!i) /* ³õÊ¼»¯¿ÕµÄÏßĞÔ±íL²»³É¹¦ */
-		exit(FALSE); /* ÍË³ö³ÌĞòÔËĞĞ */
+	if (!i) /* åˆå§‹åŒ–ç©ºçš„çº¿æ€§è¡¨Lä¸æˆåŠŸ */
+		exit(FALSE); /* é€€å‡ºç¨‹åºè¿è¡Œ */
 	for (j = 1; j <= 2; j++)
 	{
-		MakeNode(&p, j); /* Éú³ÉÓÉpÖ¸Ïò¡¢ÖµÎªjµÄ½áµã */
-		InsFirst(&L, L.tail, p); /* ²åÔÚ±íÎ² */
+		MakeNode(&p, j); /* ç”Ÿæˆç”±pæŒ‡å‘ã€å€¼ä¸ºjçš„ç»“ç‚¹ */
+		InsFirst(&L, L.tail, p); /* æ’åœ¨è¡¨å°¾ */
 	}
-	OrderInsert(&L, 0, cmp); /* °´ÉıĞò²åÔÚÓĞĞò±íÍ· */
+	OrderInsert(&L, 0, cmp); /* æŒ‰å‡åºæ’åœ¨æœ‰åºè¡¨å¤´ */
 	for (j = 0; j <= 3; j++)
 	{
 		i = LocateElemP(L, j, &p, cmp);
 		if (i)
-			printf("Á´±íÖĞÓĞÖµÎª%dµÄÔªËØ¡£\n", p->data);
+			printf("é“¾è¡¨ä¸­æœ‰å€¼ä¸º%dçš„å…ƒç´ ã€‚\n", p->data);
 		else
-			printf("Á´±íÖĞÃ»ÓĞÖµÎª%dµÄÔªËØ¡£\n", j);
+			printf("é“¾è¡¨ä¸­æ²¡æœ‰å€¼ä¸º%dçš„å…ƒç´ ã€‚\n", j);
 	}
-	printf("Êä³öÁ´±í£º");
-	ListTraverse(L, visit); /* Êä³öL */
+	printf("è¾“å‡ºé“¾è¡¨ï¼š");
+	ListTraverse(L, visit); /* è¾“å‡ºL */
 	for (j = 1; j <= 4; j++)
 	{
-		printf("É¾³ı±íÍ·½áµã£º");
-		DelFirst(&L, L.head, &p); /* É¾³ıLµÄÊ×½áµã£¬²¢ÒÔp·µ»Ø */
+		printf("åˆ é™¤è¡¨å¤´ç»“ç‚¹ï¼š");
+		DelFirst(&L, L.head, &p); /* åˆ é™¤Lçš„é¦–ç»“ç‚¹ï¼Œå¹¶ä»¥pè¿”å› */
 		if (p)
 			printf("%d\n", GetCurElem(p));
 		else
-			printf("±í¿Õ£¬ÎŞ·¨É¾³ı p=%u\n", p);
+			printf("è¡¨ç©ºï¼Œæ— æ³•åˆ é™¤ p=%u\n", p);
 	}
-	printf("LÖĞ½áµã¸öÊı=%d LÊÇ·ñ¿Õ %d(1:¿Õ 0:·ñ)\n", ListLength(L), ListEmpty(L));
+	printf("Lä¸­ç»“ç‚¹ä¸ªæ•°=%d Læ˜¯å¦ç©º %d(1:ç©º 0:å¦)\n", ListLength(L), ListEmpty(L));
 	MakeNode(&p, 10);
-	p->next = NULL; /* Î²½áµã */
+	p->next = NULL; /* å°¾ç»“ç‚¹ */
 	for (j = 4; j >= 1; j--)
 	{
 		MakeNode(&h, j * 2);
 		h->next = p;
 		p = h;
-	} /* hÖ¸ÏòÒ»´®5¸ö½áµã£¬ÆäÖµÒÀ´ÎÊÇ2 4 6 8 10 */
-	Append(&L, h); /* °Ñ½áµãhÁ´½ÓÔÚÏßĞÔÁ´±íLµÄ×îºóÒ»¸ö½áµãÖ®ºó */
-	OrderInsert(&L, 12, cmp); /* °´ÉıĞò²åÔÚÓĞĞò±íÎ²Í· */
-	OrderInsert(&L, 7, cmp); /* °´ÉıĞò²åÔÚÓĞĞò±íÖĞ¼ä */
-	printf("Êä³öÁ´±í£º");
-	ListTraverse(L, visit); /* Êä³öL */
+	} /* hæŒ‡å‘ä¸€ä¸²5ä¸ªç»“ç‚¹ï¼Œå…¶å€¼ä¾æ¬¡æ˜¯2 4 6 8 10 */
+	Append(&L, h); /* æŠŠç»“ç‚¹hé“¾æ¥åœ¨çº¿æ€§é“¾è¡¨Lçš„æœ€åä¸€ä¸ªç»“ç‚¹ä¹‹å */
+	OrderInsert(&L, 12, cmp); /* æŒ‰å‡åºæ’åœ¨æœ‰åºè¡¨å°¾å¤´ */
+	OrderInsert(&L, 7, cmp); /* æŒ‰å‡åºæ’åœ¨æœ‰åºè¡¨ä¸­é—´ */
+	printf("è¾“å‡ºé“¾è¡¨ï¼š");
+	ListTraverse(L, visit); /* è¾“å‡ºL */
 	for (j = 1; j <= 2; j++)
 	{
 		p = LocateElem(L, j * 5, compare);
 		if (p)
-			printf("LÖĞ´æÔÚÖµÎª%dµÄ½áµã¡£\n", j * 5);
+			printf("Lä¸­å­˜åœ¨å€¼ä¸º%dçš„ç»“ç‚¹ã€‚\n", j * 5);
 		else
-			printf("LÖĞ²»´æÔÚÖµÎª%dµÄ½áµã¡£\n", j * 5);
+			printf("Lä¸­ä¸å­˜åœ¨å€¼ä¸º%dçš„ç»“ç‚¹ã€‚\n", j * 5);
 	}
 	for (j = 1; j <= 2; j++)
 	{
-		LocatePos(L, j, &p); /* pÖ¸ÏòLµÄµÚj¸ö½áµã */
-		h = PriorPos(L, p); /* hÖ¸ÏòpµÄÇ°Çı */
+		LocatePos(L, j, &p); /* pæŒ‡å‘Lçš„ç¬¬jä¸ªç»“ç‚¹ */
+		h = PriorPos(L, p); /* hæŒ‡å‘pçš„å‰é©± */
 		if (h)
-			printf("%dµÄÇ°ÇıÊÇ%d¡£\n", p->data, h->data);
+			printf("%dçš„å‰é©±æ˜¯%dã€‚\n", p->data, h->data);
 		else
-			printf("%dÃ»Ç°Çı¡£\n", p->data);
+			printf("%dæ²¡å‰é©±ã€‚\n", p->data);
 	}
 	k = ListLength(L);
 	for (j = k - 1; j <= k; j++)
 	{
-		LocatePos(L, j, &p); /* pÖ¸ÏòLµÄµÚj¸ö½áµã */
-		h = NextPos(p); /* hÖ¸ÏòpµÄºó¼Ì */
+		LocatePos(L, j, &p); /* pæŒ‡å‘Lçš„ç¬¬jä¸ªç»“ç‚¹ */
+		h = NextPos(p); /* hæŒ‡å‘pçš„åç»§ */
 		if (h)
-			printf("%dµÄºó¼ÌÊÇ%d¡£\n", p->data, h->data);
+			printf("%dçš„åç»§æ˜¯%dã€‚\n", p->data, h->data);
 		else
-			printf("%dÃ»ºó¼Ì¡£\n", p->data);
+			printf("%dæ²¡åç»§ã€‚\n", p->data);
 	}
-	printf("LÖĞ½áµã¸öÊı=%d LÊÇ·ñ¿Õ %d(1:¿Õ 0:·ñ)\n", ListLength(L), ListEmpty(L));
-	p = GetLast(L); /* pÖ¸Ïò×îºóÒ»¸ö½áµã */
-	SetCurElem(p, 15); /* ½«×îºóÒ»¸ö½áµãµÄÖµ±äÎª15 */
-	printf("µÚ1¸öÔªËØÎª%d ×îºó1¸öÔªËØÎª%d\n", GetCurElem(GetHead(L)->next), GetCurElem(p));
+	printf("Lä¸­ç»“ç‚¹ä¸ªæ•°=%d Læ˜¯å¦ç©º %d(1:ç©º 0:å¦)\n", ListLength(L), ListEmpty(L));
+	p = GetLast(L); /* pæŒ‡å‘æœ€åä¸€ä¸ªç»“ç‚¹ */
+	SetCurElem(p, 15); /* å°†æœ€åä¸€ä¸ªç»“ç‚¹çš„å€¼å˜ä¸º15 */
+	printf("ç¬¬1ä¸ªå…ƒç´ ä¸º%d æœ€å1ä¸ªå…ƒç´ ä¸º%d\n", GetCurElem(GetHead(L)->next), GetCurElem(p));
 	MakeNode(&h, 10);
-	InsBefore(&L, &p, h); /* ½«10²åµ½Î²½áµãÖ®Ç°£¬pÖ¸ÏòĞÂ½áµã */
-	p = p->next; /* p»Ö¸´ÎªÎ²½áµã */
+	InsBefore(&L, &p, h); /* å°†10æ’åˆ°å°¾ç»“ç‚¹ä¹‹å‰ï¼ŒpæŒ‡å‘æ–°ç»“ç‚¹ */
+	p = p->next; /* pæ¢å¤ä¸ºå°¾ç»“ç‚¹ */
 	MakeNode(&h, 20);
-	InsAfter(&L, &p, h); /* ½«20²åµ½Î²½áµãÖ®ºó */
+	InsAfter(&L, &p, h); /* å°†20æ’åˆ°å°¾ç»“ç‚¹ä¹‹å */
 	k = ListLength(L);
-	printf("ÒÀ´ÎÉ¾³ı±íÎ²½áµã²¢Êä³öÆäÖµ£º");
+	printf("ä¾æ¬¡åˆ é™¤è¡¨å°¾ç»“ç‚¹å¹¶è¾“å‡ºå…¶å€¼ï¼š");
 	for (j = 0; j <= k; j++)
 	{
 		i = Remove(&L, &p);
-		if (!i) /* É¾³ı²»³É¹¦ */
-			printf("É¾³ı²»³É¹¦ p=%u\n", p);
+		if (!i) /* åˆ é™¤ä¸æˆåŠŸ */
+			printf("åˆ é™¤ä¸æˆåŠŸ p=%u\n", p);
 		else
 			printf("%d ", p->data);
 	}
-	MakeNode(&p, 29); /* ÖØ½¨¾ßÓĞ1¸ö½áµã(29)µÄÁ´±í */
+	MakeNode(&p, 29); /* é‡å»ºå…·æœ‰1ä¸ªç»“ç‚¹(29)çš„é“¾è¡¨ */
 	InsFirst(&L, L.head, p);
-	DestroyList(&L); /* Ïú»ÙÏßĞÔÁ´±íL */
-	printf("Ïú»ÙÏßĞÔÁ´±íLÖ®ºó: L.head=%u L.tail=%u L.len=%d\n", L.head, L.tail, L.len);
+	DestroyList(&L); /* é”€æ¯çº¿æ€§é“¾è¡¨L */
+	printf("é”€æ¯çº¿æ€§é“¾è¡¨Lä¹‹å: L.head=%u L.tail=%u L.len=%d\n", L.head, L.tail, L.len);
 }

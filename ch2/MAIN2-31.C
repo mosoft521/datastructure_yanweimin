@@ -1,8 +1,8 @@
-/* main2-31.c ¼ìÑébo2-3.cºÍbo2-31.cppµÄÖ÷³ÌĞò */
+/* main2-31.c æ£€éªŒbo2-3.cå’Œbo2-31.cppçš„ä¸»ç¨‹åº */
 #include "../ch1/c1.h"
 typedef int ElemType;
 #include "c2-3.h"
-#include "bo2-3.c" /* Á½ÖÖ·½·¨¶¼ÊÊÓÃµÄº¯ÊıÔÚ´ËÎÄ¼şÖĞ */
+#include "bo2-3.c" /* ä¸¤ç§æ–¹æ³•éƒ½é€‚ç”¨çš„å‡½æ•°åœ¨æ­¤æ–‡ä»¶ä¸­ */
 #include "bo2-31.c"
 
 void visit(ElemType c)
@@ -19,56 +19,56 @@ void main()
 	InitList(L);
 	for (j = 1; j <= 5; j++)
 		i = ListInsert(L, 1, j);
-	printf("ÔÚLµÄ±íÍ·ÒÀ´Î²åÈë1¡«5ºó£ºL=");
+	printf("åœ¨Lçš„è¡¨å¤´ä¾æ¬¡æ’å…¥1ï½5åï¼šL=");
 	ListTraverse(L, visit);
 	i = ListEmpty(L);
-	printf("LÊÇ·ñ¿Õ:i=%d(1:ÊÇ 0:·ñ)±íLµÄ³¤¶È=%d\n", i, ListLength(L));
+	printf("Læ˜¯å¦ç©º:i=%d(1:æ˜¯ 0:å¦)è¡¨Lçš„é•¿åº¦=%d\n", i, ListLength(L));
 	i = ClearList(L);
-	printf("Çå¿ÕLºó£ºL=");
+	printf("æ¸…ç©ºLåï¼šL=");
 	ListTraverse(L, visit);
 	i = ListEmpty(L);
-	printf("LÊÇ·ñ¿Õ:i=%d(1:ÊÇ 0:·ñ)±íLµÄ³¤¶È=%d\n", i, ListLength(L));
+	printf("Læ˜¯å¦ç©º:i=%d(1:æ˜¯ 0:å¦)è¡¨Lçš„é•¿åº¦=%d\n", i, ListLength(L));
 	for (j = 1; j <= 10; j++)
 		ListInsert(L, j, j);
-	printf("ÔÚLµÄ±íÎ²ÒÀ´Î²åÈë1¡«10ºó£ºL=");
+	printf("åœ¨Lçš„è¡¨å°¾ä¾æ¬¡æ’å…¥1ï½10åï¼šL=");
 	ListTraverse(L, visit);
 	GetElem(L, 5, &e);
-	printf("µÚ5¸öÔªËØµÄÖµÎª£º%d\n", e);
+	printf("ç¬¬5ä¸ªå…ƒç´ çš„å€¼ä¸ºï¼š%d\n", e);
 	for (j = 0; j <= 1; j++)
 	{
 		k = LocateElem(L, j);
 		if (k)
-			printf("ÖµÎª%dµÄÔªËØÔÚ¾²Ì¬Á´±íÖĞµÄÎ»ĞòÎª%d\n", j, k);
+			printf("å€¼ä¸º%dçš„å…ƒç´ åœ¨é™æ€é“¾è¡¨ä¸­çš„ä½åºä¸º%d\n", j, k);
 		else
-			printf("Ã»ÓĞÖµÎª%dµÄÔªËØ\n", j);
+			printf("æ²¡æœ‰å€¼ä¸º%dçš„å…ƒç´ \n", j);
 	}
-	for (j = 1; j <= 2; j++) /* ²âÊÔÍ·Á½¸öÊı¾İ */
+	for (j = 1; j <= 2; j++) /* æµ‹è¯•å¤´ä¸¤ä¸ªæ•°æ® */
 	{
-		GetElem(L, j, &e0); /* °ÑµÚj¸öÊı¾İ¸³¸øe0 */
-		i = PriorElem(L, e0, &e); /* Çóe0µÄÇ°Çı */
+		GetElem(L, j, &e0); /* æŠŠç¬¬jä¸ªæ•°æ®èµ‹ç»™e0 */
+		i = PriorElem(L, e0, &e); /* æ±‚e0çš„å‰é©± */
 		if (!i)
-			printf("ÔªËØ%dÎŞÇ°Çı\n", e0);
+			printf("å…ƒç´ %dæ— å‰é©±\n", e0);
 		else
-			printf("ÔªËØ%dµÄÇ°ÇıÎª£º%d\n", e0, e);
+			printf("å…ƒç´ %dçš„å‰é©±ä¸ºï¼š%d\n", e0, e);
 	}
-	for (j = ListLength(L) - 1; j <= ListLength(L); j++) /* ×îºóÁ½¸öÊı¾İ */
+	for (j = ListLength(L) - 1; j <= ListLength(L); j++) /* æœ€åä¸¤ä¸ªæ•°æ® */
 	{
-		GetElem(L, j, &e0); /* °ÑµÚj¸öÊı¾İ¸³¸øe0 */
-		i = NextElem(L, e0, &e); /* Çóe0µÄºó¼Ì */
+		GetElem(L, j, &e0); /* æŠŠç¬¬jä¸ªæ•°æ®èµ‹ç»™e0 */
+		i = NextElem(L, e0, &e); /* æ±‚e0çš„åç»§ */
 		if (!i)
-			printf("ÔªËØ%dÎŞºó¼Ì\n", e0);
+			printf("å…ƒç´ %dæ— åç»§\n", e0);
 		else
-			printf("ÔªËØ%dµÄºó¼ÌÎª£º%d\n", e0, e);
+			printf("å…ƒç´ %dçš„åç»§ä¸ºï¼š%d\n", e0, e);
 	}
-	k = ListLength(L); /* kÎª±í³¤ */
+	k = ListLength(L); /* kä¸ºè¡¨é•¿ */
 	for (j = k + 1; j >= k; j--)
 	{
-		i = ListDelete(L, j, &e); /* É¾³ıµÚj¸öÊı¾İ */
+		i = ListDelete(L, j, &e); /* åˆ é™¤ç¬¬jä¸ªæ•°æ® */
 		if (i)
-			printf("É¾³ıµÄÔªËØÎª£º%d\n", e);
+			printf("åˆ é™¤çš„å…ƒç´ ä¸ºï¼š%d\n", e);
 		else
-			printf("É¾³ıµÚ%d¸öÊı¾İÊ§°Ü\n", j);
+			printf("åˆ é™¤ç¬¬%dä¸ªæ•°æ®å¤±è´¥\n", j);
 	}
-	printf("ÒÀ´ÎÊä³öLµÄÔªËØ£º");
-	ListTraverse(L, visit); /* ÒÀ´Î¶ÔÔªËØµ÷ÓÃvisit()£¬Êä³öÔªËØµÄÖµ */
+	printf("ä¾æ¬¡è¾“å‡ºLçš„å…ƒç´ ï¼š");
+	ListTraverse(L, visit); /* ä¾æ¬¡å¯¹å…ƒç´ è°ƒç”¨visit()ï¼Œè¾“å‡ºå…ƒç´ çš„å€¼ */
 }

@@ -1,77 +1,77 @@
- /* bo5-3.c ĞĞÂß¼­Á´½ÓÏ¡Êè¾ØÕó(´æ´¢½á¹¹ÓÉc5-3.h¶¨Òå)µÄ»ù±¾²Ù×÷(8¸ö) */
+ /* bo5-3.c è¡Œé€»è¾‘é“¾æ¥ç¨€ç–çŸ©é˜µ(å­˜å‚¨ç»“æ„ç”±c5-3.hå®šä¹‰)çš„åŸºæœ¬æ“ä½œ(8ä¸ª) */
  Status CreateSMatrix(RLSMatrix *M)
- { /* ´´½¨Ï¡Êè¾ØÕóM */
+ { /* åˆ›å»ºç¨€ç–çŸ©é˜µM */
    int i;
    Triple T;
    Status k;
-   printf("ÇëÊäÈë¾ØÕóµÄĞĞÊı,ÁĞÊı,·ÇÁãÔªËØÊı£º");
+   printf("è¯·è¾“å…¥çŸ©é˜µçš„è¡Œæ•°,åˆ—æ•°,éé›¶å…ƒç´ æ•°ï¼š");
    scanf("%d,%d,%d",&(*M).mu,&(*M).nu,&(*M).tu);
-   (*M).data[0].i=0; /* ÎªÒÔÏÂ±È½Ï×ö×¼±¸ */
+   (*M).data[0].i=0; /* ä¸ºä»¥ä¸‹æ¯”è¾ƒåšå‡†å¤‡ */
    for(i=1;i<=(*M).tu;i++)
    {
      do
      {
-       printf("Çë°´ĞĞĞòË³ĞòÊäÈëµÚ%d¸ö·ÇÁãÔªËØËùÔÚµÄĞĞ(1¡«%d),ÁĞ(1¡«%d),ÔªËØÖµ£º",i,(*M).mu,(*M).nu);
+       printf("è¯·æŒ‰è¡Œåºé¡ºåºè¾“å…¥ç¬¬%dä¸ªéé›¶å…ƒç´ æ‰€åœ¨çš„è¡Œ(1ï½%d),åˆ—(1ï½%d),å…ƒç´ å€¼ï¼š",i,(*M).mu,(*M).nu);
        scanf("%d,%d,%d",&T.i,&T.j,&T.e);
        k=0;
-       if(T.i<1||T.i>(*M).mu||T.j<1||T.j>(*M).nu) /* ĞĞ¡¢ÁĞ³¬³ö·¶Î§ */
+       if(T.i<1||T.i>(*M).mu||T.j<1||T.j>(*M).nu) /* è¡Œã€åˆ—è¶…å‡ºèŒƒå›´ */
          k=1;
-       if(T.i<(*M).data[i-1].i||T.i==(*M).data[i-1].i&&T.j<=(*M).data[i-1].j) /* Ã»ÓĞ°´Ë³ĞòÊäÈë·ÇÁãÔªËØ */
+       if(T.i<(*M).data[i-1].i||T.i==(*M).data[i-1].i&&T.j<=(*M).data[i-1].j) /* æ²¡æœ‰æŒ‰é¡ºåºè¾“å…¥éé›¶å…ƒç´  */
          k=1;
-     }while(k); /* µ±ÊäÈëÓĞÎó,ÖØĞÂÊäÈë */
+     }while(k); /* å½“è¾“å…¥æœ‰è¯¯,é‡æ–°è¾“å…¥ */
      (*M).data[i]=T;
    }
-   for(i=1;i<=(*M).tu;i++) /* ¼ÆËãrpos[] */
+   for(i=1;i<=(*M).tu;i++) /* è®¡ç®—rpos[] */
      if((*M).data[i].i>(*M).data[i-1].i)
        for(T.i=0;T.i<(*M).data[i].i-(*M).data[i-1].i;T.i++)
          (*M).rpos[(*M).data[i].i-T.i]=i;
-   for(i=(*M).data[(*M).tu].i+1;i<=(*M).mu;i++) /* ¸ø×îºóÃ»ÓĞ·ÇÁãÔªËØµÄ¼¸ĞĞ¸³Öµ */
+   for(i=(*M).data[(*M).tu].i+1;i<=(*M).mu;i++) /* ç»™æœ€åæ²¡æœ‰éé›¶å…ƒç´ çš„å‡ è¡Œèµ‹å€¼ */
      (*M).rpos[i]=(*M).tu+1;
    return OK;
  }
 
  void DestroySMatrix(RLSMatrix *M)
- { /* Ïú»ÙÏ¡Êè¾ØÕóM(Ê¹MÎª0ĞĞ0ÁĞ0¸ö·ÇÁãÔªËØµÄ¾ØÕó) */
+ { /* é”€æ¯ç¨€ç–çŸ©é˜µM(ä½¿Mä¸º0è¡Œ0åˆ—0ä¸ªéé›¶å…ƒç´ çš„çŸ©é˜µ) */
    (*M).mu=0;
    (*M).nu=0;
    (*M).tu=0;
  }
 
  void PrintSMatrix(RLSMatrix M)
- { /* Êä³öÏ¡Êè¾ØÕóM */
+ { /* è¾“å‡ºç¨€ç–çŸ©é˜µM */
    int i;
-   printf("%dĞĞ%dÁĞ%d¸ö·ÇÁãÔªËØ¡£\n",M.mu,M.nu,M.tu);
-   printf("ĞĞ  ÁĞ  ÔªËØÖµ\n");
+   printf("%dè¡Œ%dåˆ—%dä¸ªéé›¶å…ƒç´ ã€‚\n",M.mu,M.nu,M.tu);
+   printf("è¡Œ  åˆ—  å…ƒç´ å€¼\n");
    for(i=1;i<=M.tu;i++)
      printf("%2d%4d%8d\n",M.data[i].i,M.data[i].j,M.data[i].e);
    for(i=1;i<=M.mu;i++)
-     printf("µÚ%dĞĞµÄµÚÒ»¸ö·ÇÁãÔªËØÊÇ±¾¾ØÕóµÚ%d¸öÔªËØ\n",i,M.rpos[i]);
+     printf("ç¬¬%dè¡Œçš„ç¬¬ä¸€ä¸ªéé›¶å…ƒç´ æ˜¯æœ¬çŸ©é˜µç¬¬%dä¸ªå…ƒç´ \n",i,M.rpos[i]);
  }
 
  Status CopySMatrix(RLSMatrix M,RLSMatrix *T)
- { /* ÓÉÏ¡Êè¾ØÕóM¸´ÖÆµÃµ½T */
+ { /* ç”±ç¨€ç–çŸ©é˜µMå¤åˆ¶å¾—åˆ°T */
    *T=M;
    return OK;
  }
 
  Status AddSMatrix(RLSMatrix M,RLSMatrix N,RLSMatrix *Q)
- { /* ÇóÏ¡Êè¾ØÕóµÄºÍQ=M+N */
+ { /* æ±‚ç¨€ç–çŸ©é˜µçš„å’ŒQ=M+N */
    int k,p,q;
    if(M.mu!=N.mu||M.nu!=N.nu)
      return ERROR;
    (*Q).mu=M.mu;
    (*Q).nu=M.nu;
    (*Q).tu=0;
-   M.rpos[M.mu+1]=M.tu+1; /* Îª·½±ãºóÃæµÄwhileÑ­»·ÁÙÊ±ÉèÖÃ */
+   M.rpos[M.mu+1]=M.tu+1; /* ä¸ºæ–¹ä¾¿åé¢çš„whileå¾ªç¯ä¸´æ—¶è®¾ç½® */
    N.rpos[N.mu+1]=N.tu+1;
-   for(k=1;k<=M.mu;++k) /* ¶ÔÓÚÃ¿Ò»ĞĞ£¬kÖ¸Ê¾ĞĞºÅ */
+   for(k=1;k<=M.mu;++k) /* å¯¹äºæ¯ä¸€è¡Œï¼ŒkæŒ‡ç¤ºè¡Œå· */
    {
      (*Q).rpos[k]=(*Q).tu+1;
-     p=M.rpos[k]; /* pÖ¸Ê¾M¾ØÕóµÚkĞĞµ±Ç°ÔªËØµÄĞòºÅ */
-     q=N.rpos[k]; /* qÖ¸Ê¾N¾ØÕóµÚkĞĞµ±Ç°ÔªËØµÄĞòºÅ */
+     p=M.rpos[k]; /* pæŒ‡ç¤ºMçŸ©é˜µç¬¬kè¡Œå½“å‰å…ƒç´ çš„åºå· */
+     q=N.rpos[k]; /* qæŒ‡ç¤ºNçŸ©é˜µç¬¬kè¡Œå½“å‰å…ƒç´ çš„åºå· */
      while(p<M.rpos[k+1]&&q<N.rpos[k+1])
-     { /* M,N¾ØÕó¾ùÓĞµÚkĞĞÔªËØÎ´´¦Àí */
-       if(M.data[p].j==N.data[q].j) /* M¾ØÕóµ±Ç°ÔªËØºÍN¾ØÕóµ±Ç°ÔªËØµÄÁĞÏàÍ¬ */
+     { /* M,NçŸ©é˜µå‡æœ‰ç¬¬kè¡Œå…ƒç´ æœªå¤„ç† */
+       if(M.data[p].j==N.data[q].j) /* MçŸ©é˜µå½“å‰å…ƒç´ å’ŒNçŸ©é˜µå½“å‰å…ƒç´ çš„åˆ—ç›¸åŒ */
        {
          (*Q).data[(*Q).tu+1].e=M.data[p].e+N.data[q].e;
          if((*Q).data[(*Q).tu+1].e!=0)
@@ -84,14 +84,14 @@
          ++q;
        }
        else if(M.data[p].j<N.data[q].j)
-       { /* M¾ØÕóµ±Ç°ÔªËØµÄÁĞ<N¾ØÕóµ±Ç°ÔªËØµÄÁĞ */
+       { /* MçŸ©é˜µå½“å‰å…ƒç´ çš„åˆ—<NçŸ©é˜µå½“å‰å…ƒç´ çš„åˆ— */
          ++(*Q).tu;
          (*Q).data[(*Q).tu].e=M.data[p].e;
          (*Q).data[(*Q).tu].i=k;
          (*Q).data[(*Q).tu].j=M.data[p].j;
          ++p;
        }
-       else /* M¾ØÕóµ±Ç°ÔªËØµÄÁĞ>N¾ØÕóµ±Ç°ÔªËØµÄÁĞ */
+       else /* MçŸ©é˜µå½“å‰å…ƒç´ çš„åˆ—>NçŸ©é˜µå½“å‰å…ƒç´ çš„åˆ— */
        {
          ++(*Q).tu;
          (*Q).data[(*Q).tu].e=N.data[q].e;
@@ -100,7 +100,7 @@
          ++q;
        }
      }
-     while(p<M.rpos[k+1]) /* M¾ØÕó»¹ÓĞkĞĞµÄÔªËØÎ´´¦Àí */
+     while(p<M.rpos[k+1]) /* MçŸ©é˜µè¿˜æœ‰kè¡Œçš„å…ƒç´ æœªå¤„ç† */
      {
        ++(*Q).tu;
        (*Q).data[(*Q).tu].e=M.data[p].e;
@@ -108,7 +108,7 @@
        (*Q).data[(*Q).tu].j=M.data[p].j;
        ++p;
      }
-     while(q<N.rpos[k+1]) /* N¾ØÕó»¹ÓĞkĞĞµÄÔªËØÎ´´¦Àí */
+     while(q<N.rpos[k+1]) /* NçŸ©é˜µè¿˜æœ‰kè¡Œçš„å…ƒç´ æœªå¤„ç† */
      {
        ++(*Q).tu;
        (*Q).data[(*Q).tu].e=N.data[q].e;
@@ -121,43 +121,43 @@
  }
 
  Status SubtSMatrix(RLSMatrix M,RLSMatrix N,RLSMatrix *Q)
- { /* ÇóÏ¡Êè¾ØÕóµÄ²îQ=M-N */
+ { /* æ±‚ç¨€ç–çŸ©é˜µçš„å·®Q=M-N */
    int i;
    if(M.mu!=N.mu||M.nu!=N.nu)
      return ERROR;
-   for(i=1;i<=N.tu;++i) /* ¶ÔÓÚNµÄÃ¿Ò»ÔªËØ,ÆäÖµ³ËÒÔ-1 */
+   for(i=1;i<=N.tu;++i) /* å¯¹äºNçš„æ¯ä¸€å…ƒç´ ,å…¶å€¼ä¹˜ä»¥-1 */
      N.data[i].e*=-1;
    AddSMatrix(M,N,Q); /* Q=M+(-N) */
    return OK;
  }
 
  Status MultSMatrix(RLSMatrix M,RLSMatrix N,RLSMatrix *Q)
- { /* ÇóÏ¡Êè¾ØÕó³Ë»ıQ=M£ªN¡£Ëã·¨5.3 */
+ { /* æ±‚ç¨€ç–çŸ©é˜µä¹˜ç§¯Q=Mï¼ŠNã€‚ç®—æ³•5.3 */
    int arow,brow,p,q,ccol,ctemp[MAXRC+1];
-   if(M.nu!=N.mu) /* ¾ØÕóMµÄÁĞÊıÓ¦ºÍ¾ØÕóNµÄĞĞÊıÏàµÈ */
+   if(M.nu!=N.mu) /* çŸ©é˜µMçš„åˆ—æ•°åº”å’ŒçŸ©é˜µNçš„è¡Œæ•°ç›¸ç­‰ */
      return ERROR;
-   (*Q).mu=M.mu; /* Q³õÊ¼»¯ */
+   (*Q).mu=M.mu; /* Qåˆå§‹åŒ– */
    (*Q).nu=N.nu;
    (*Q).tu=0;
-   M.rpos[M.mu+1]=M.tu+1; /* Îª·½±ãºóÃæµÄwhileÑ­»·ÁÙÊ±ÉèÖÃ */
+   M.rpos[M.mu+1]=M.tu+1; /* ä¸ºæ–¹ä¾¿åé¢çš„whileå¾ªç¯ä¸´æ—¶è®¾ç½® */
    N.rpos[N.mu+1]=N.tu+1;
-   if(M.tu*N.tu!=0) /* MºÍN¶¼ÊÇ·ÇÁã¾ØÕó */
+   if(M.tu*N.tu!=0) /* Må’ŒNéƒ½æ˜¯éé›¶çŸ©é˜µ */
    {
      for(arow=1;arow<=M.mu;++arow)
-     { /* ´ÓMµÄµÚÒ»ĞĞ¿ªÊ¼£¬µ½×îºóÒ»ĞĞ£¬arowÊÇMµÄµ±Ç°ĞĞ */
+     { /* ä»Mçš„ç¬¬ä¸€è¡Œå¼€å§‹ï¼Œåˆ°æœ€åä¸€è¡Œï¼Œarowæ˜¯Mçš„å½“å‰è¡Œ */
        for(ccol=1;ccol<=(*Q).nu;++ccol)
-         ctemp[ccol]=0; /* QµÄµ±Ç°ĞĞµÄ¸÷ÁĞÔªËØÀÛ¼ÓÆ÷ÇåÁã */
-       (*Q).rpos[arow]=(*Q).tu+1; /* Qµ±Ç°ĞĞµÄµÚ1¸öÔªËØÎ»ÓÚÉÏ1ĞĞ×îºó1¸öÔªËØÖ®ºó */
+         ctemp[ccol]=0; /* Qçš„å½“å‰è¡Œçš„å„åˆ—å…ƒç´ ç´¯åŠ å™¨æ¸…é›¶ */
+       (*Q).rpos[arow]=(*Q).tu+1; /* Qå½“å‰è¡Œçš„ç¬¬1ä¸ªå…ƒç´ ä½äºä¸Š1è¡Œæœ€å1ä¸ªå…ƒç´ ä¹‹å */
        for(p=M.rpos[arow];p<M.rpos[arow+1];++p)
-       { /* ¶ÔMµ±Ç°ĞĞÖĞÃ¿Ò»¸ö·ÇÁãÔª */
-         brow=M.data[p].j; /* ÕÒµ½¶ÔÓ¦ÔªÔÚNÖĞµÄĞĞºÅ(Mµ±Ç°ÔªµÄÁĞºÅ) */
+       { /* å¯¹Må½“å‰è¡Œä¸­æ¯ä¸€ä¸ªéé›¶å…ƒ */
+         brow=M.data[p].j; /* æ‰¾åˆ°å¯¹åº”å…ƒåœ¨Nä¸­çš„è¡Œå·(Må½“å‰å…ƒçš„åˆ—å·) */
          for(q=N.rpos[brow];q<N.rpos[brow+1];++q)
 	 {
-           ccol=N.data[q].j; /* ³Ë»ıÔªËØÔÚQÖĞÁĞºÅ */
+           ccol=N.data[q].j; /* ä¹˜ç§¯å…ƒç´ åœ¨Qä¸­åˆ—å· */
            ctemp[ccol]+=M.data[p].e*N.data[q].e;
          }
-       } /* ÇóµÃQÖĞµÚarowĞĞµÄ·ÇÁãÔª */
-       for(ccol=1;ccol<=(*Q).nu;++ccol) /* Ñ¹Ëõ´æ´¢¸ÃĞĞ·ÇÁãÔª */
+       } /* æ±‚å¾—Qä¸­ç¬¬arowè¡Œçš„éé›¶å…ƒ */
+       for(ccol=1;ccol<=(*Q).nu;++ccol) /* å‹ç¼©å­˜å‚¨è¯¥è¡Œéé›¶å…ƒ */
          if(ctemp[ccol])
          {
            if(++(*Q).tu>MAXSIZE)
@@ -172,7 +172,7 @@
  }
 
  Status TransposeSMatrix(RLSMatrix M,RLSMatrix *T)
- { /* ÇóÏ¡Êè¾ØÕóMµÄ×ªÖÃ¾ØÕóT */
+ { /* æ±‚ç¨€ç–çŸ©é˜µMçš„è½¬ç½®çŸ©é˜µT */
    int p,q,t,col,*num;
    num=(int *)malloc((M.nu+1)*sizeof(int));
    (*T).mu=M.nu;
@@ -181,11 +181,11 @@
    if((*T).tu)
    {
      for(col=1;col<=M.nu;++col)
-       num[col]=0;  /* Éè³õÖµ */
-     for(t=1;t<=M.tu;++t) /* ÇóMÖĞÃ¿Ò»ÁĞ·ÇÁãÔª¸öÊı */
+       num[col]=0;  /* è®¾åˆå€¼ */
+     for(t=1;t<=M.tu;++t) /* æ±‚Mä¸­æ¯ä¸€åˆ—éé›¶å…ƒä¸ªæ•° */
        ++num[M.data[t].j];
      (*T).rpos[1]=1;
-     for(col=2;col<=M.nu;++col) /* ÇóMÖĞµÚcolÖĞµÚÒ»¸ö·ÇÁãÔªÔÚ(*T).dataÖĞµÄĞòºÅ */
+     for(col=2;col<=M.nu;++col) /* æ±‚Mä¸­ç¬¬colä¸­ç¬¬ä¸€ä¸ªéé›¶å…ƒåœ¨(*T).dataä¸­çš„åºå· */
        (*T).rpos[col]=(*T).rpos[col-1]+num[col-1];
      for(col=1;col<=M.nu;++col)
        num[col]=(*T).rpos[col];

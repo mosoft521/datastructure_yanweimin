@@ -1,4 +1,4 @@
-/* algo2-10.c Á½¸ö½öÉè±íÎ²Ö¸ÕëµÄÑ­»·Á´±íµÄºÏ²¢£¨½Ì¿ÆÊéÍ¼2.13£© */
+/* algo2-10.c ä¸¤ä¸ªä»…è®¾è¡¨å°¾æŒ‡é’ˆçš„å¾ªç¯é“¾è¡¨çš„åˆå¹¶ï¼ˆæ•™ç§‘ä¹¦å›¾2.13ï¼‰ */
 #include "../ch1/c1.h"
 
 typedef int ElemType;
@@ -26,14 +26,14 @@ void main()
 	InitList_CL(&La);
 	for (i = 1; i <= n; i++)
 		ListInsert_CL(&La, i, i);
-	printf("La="); /* Êä³öÁ´±íLaµÄÄÚÈİ */
+	printf("La="); /* è¾“å‡ºé“¾è¡¨Laçš„å†…å®¹ */
 	ListTraverse_CL(La, visit);
 	InitList_CL(&Lb);
 	for (i = 1; i <= n; i++)
 		ListInsert_CL(&Lb, 1, i * 2);
-	printf("Lb="); /* Êä³öÁ´±íLbµÄÄÚÈİ */
+	printf("Lb="); /* è¾“å‡ºé“¾è¡¨Lbçš„å†…å®¹ */
 	ListTraverse_CL(Lb, visit);
 	MergeList_CL(&La, Lb);
-	printf("La+Lb="); /* Êä³öºÏ²¢ºóµÄÁ´±íµÄÄÚÈİ */
+	printf("La+Lb="); /* è¾“å‡ºåˆå¹¶åçš„é“¾è¡¨çš„å†…å®¹ */
 	ListTraverse_CL(La, visit);
 }

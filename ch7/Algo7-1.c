@@ -1,6 +1,6 @@
-/* algo7-1.c µ÷ÓÃËã·¨7.7¡¢7.8 */
+/* algo7-1.c è°ƒç”¨ç®—æ³•7.7ã€7.8 */
 #include "../ch1/c1.h"
-#define MAX_NAME 2 /* ¶¥µã×Ö·û´®µÄ×î´ó³¤¶È+1 */
+#define MAX_NAME 2 /* é¡¶ç‚¹å­—ç¬¦ä¸²çš„æœ€å¤§é•¿åº¦+1 */
 typedef char ElemType[MAX_NAME];
 typedef ElemType TElemType;
 #include "../ch6/c6-5.h"
@@ -10,62 +10,62 @@ typedef char VertexType[MAX_NAME];
 #include "bo7-2.c"
 
 void DFSTree(ALGraph G, int v, CSTree *T)
-{ /* ´ÓµÚv¸ö¶¥µã³ö·¢Éî¶ÈÓÅÏÈ±éÀúÍ¼G,½¨Á¢ÒÔTÎª¸ùµÄÉú³ÉÊ÷¡£Ëã·¨7.8 */
+{ /* ä»Žç¬¬vä¸ªé¡¶ç‚¹å‡ºå‘æ·±åº¦ä¼˜å…ˆéåŽ†å›¾G,å»ºç«‹ä»¥Tä¸ºæ ¹çš„ç”Ÿæˆæ ‘ã€‚ç®—æ³•7.8 */
 	Boolean first = TRUE;
 	int w;
 	CSTree p, q;
 	VertexType v1, w1;
 	visited[v] = TRUE;
 	strcpy(v1, *GetVex(G, v));
-	for (w = FirstAdjVex(G, v1); w >= 0; w = NextAdjVex(G, v1, strcpy(w1, *GetVex(G, w)))) /* wÒÀ´ÎÎªvµÄÁÚ½Ó¶¥µã */
-		if (!visited[w]) /* w¶¥µã²»Ôø±»·ÃÎÊ */
+	for (w = FirstAdjVex(G, v1); w >= 0; w = NextAdjVex(G, v1, strcpy(w1, *GetVex(G, w)))) /* wä¾æ¬¡ä¸ºvçš„é‚»æŽ¥é¡¶ç‚¹ */
+		if (!visited[w]) /* wé¡¶ç‚¹ä¸æ›¾è¢«è®¿é—® */
 		{
-			p = (CSTree)malloc(sizeof(CSNode)); /* ·ÖÅäº¢×Ó½áµã */
+			p = (CSTree)malloc(sizeof(CSNode)); /* åˆ†é…å­©å­ç»“ç‚¹ */
 			strcpy(p->data, *GetVex(G, w));
 			p->firstchild = NULL;
 			p->nextsibling = NULL;
 			if (first)
-			{ /* wÊÇvµÄµÚÒ»¸öÎ´±»·ÃÎÊµÄÁÚ½Ó¶¥µã */
+			{ /* wæ˜¯vçš„ç¬¬ä¸€ä¸ªæœªè¢«è®¿é—®çš„é‚»æŽ¥é¡¶ç‚¹ */
 				(*T)->firstchild = p;
-				first = FALSE; /* ÊÇ¸ùµÄµÚÒ»¸öº¢×Ó½áµã */
+				first = FALSE; /* æ˜¯æ ¹çš„ç¬¬ä¸€ä¸ªå­©å­ç»“ç‚¹ */
 			}
-			else /* wÊÇvµÄÆäËüÎ´±»·ÃÎÊµÄÁÚ½Ó¶¥µã */
-				q->nextsibling = p; /* ÊÇÉÏÒ»ÁÚ½Ó¶¥µãµÄÐÖµÜ½ãÃÃ½áµã */
+			else /* wæ˜¯vçš„å…¶å®ƒæœªè¢«è®¿é—®çš„é‚»æŽ¥é¡¶ç‚¹ */
+				q->nextsibling = p; /* æ˜¯ä¸Šä¸€é‚»æŽ¥é¡¶ç‚¹çš„å…„å¼Ÿå§å¦¹ç»“ç‚¹ */
 			q = p;
-			DFSTree(G, w, &q); /* ´ÓµÚw¸ö¶¥µã³ö·¢Éî¶ÈÓÅÏÈ±éÀúÍ¼G,½¨Á¢×ÓÉú³ÉÊ÷q */
+			DFSTree(G, w, &q); /* ä»Žç¬¬wä¸ªé¡¶ç‚¹å‡ºå‘æ·±åº¦ä¼˜å…ˆéåŽ†å›¾G,å»ºç«‹å­ç”Ÿæˆæ ‘q */
 		}
 }
 
 void DFSForest(ALGraph G, CSTree *T)
-{ /* ½¨Á¢ÎÞÏòÍ¼GµÄÉî¶ÈÓÅÏÈÉú³ÉÉ­ÁÖµÄ(×î×ó)º¢×Ó(ÓÒ)ÐÖµÜÁ´±íT¡£Ëã·¨7.7 */
+{ /* å»ºç«‹æ— å‘å›¾Gçš„æ·±åº¦ä¼˜å…ˆç”Ÿæˆæ£®æž—çš„(æœ€å·¦)å­©å­(å³)å…„å¼Ÿé“¾è¡¨Tã€‚ç®—æ³•7.7 */
 	CSTree p, q = NULL;
 	int v;
 	*T = NULL;
 	for (v = 0; v < G.vexnum; ++v)
-		visited[v] = FALSE; /* ¸³³õÖµ */
-	for (v = 0; v < G.vexnum; ++v) /* ´ÓµÚ0¸ö¶¥µãÕÒÆð */
+		visited[v] = FALSE; /* èµ‹åˆå€¼ */
+	for (v = 0; v < G.vexnum; ++v) /* ä»Žç¬¬0ä¸ªé¡¶ç‚¹æ‰¾èµ· */
 		if (!visited[v])
-		{ /* µÚv¶¥µãÎªÐÂµÄÉú³ÉÊ÷µÄ¸ù½áµã */
-			p = (CSTree)malloc(sizeof(CSNode)); /* ·ÖÅä¸ù½áµã */
+		{ /* ç¬¬vé¡¶ç‚¹ä¸ºæ–°çš„ç”Ÿæˆæ ‘çš„æ ¹ç»“ç‚¹ */
+			p = (CSTree)malloc(sizeof(CSNode)); /* åˆ†é…æ ¹ç»“ç‚¹ */
 			strcpy(p->data, *GetVex(G, v));
 			p->firstchild = NULL;
 			p->nextsibling = NULL;
-			if (!*T) /* ÊÇµÚÒ»¿ÃÉú³ÉÊ÷µÄ¸ù(TµÄ¸ù) */
+			if (!*T) /* æ˜¯ç¬¬ä¸€æ£µç”Ÿæˆæ ‘çš„æ ¹(Tçš„æ ¹) */
 				*T = p;
-			else /* ÊÇÆäËüÉú³ÉÊ÷µÄ¸ù(Ç°Ò»¿ÃµÄ¸ùµÄ£¢ÐÖµÜ£¢) */
+			else /* æ˜¯å…¶å®ƒç”Ÿæˆæ ‘çš„æ ¹(å‰ä¸€æ£µçš„æ ¹çš„ï¼‚å…„å¼Ÿï¼‚) */
 				q->nextsibling = p;
-			q = p; /* qÖ¸Ê¾µ±Ç°Éú³ÉÊ÷µÄ¸ù */
-			DFSTree(G, v, &p); /* ½¨Á¢ÒÔpÎª¸ùµÄÉú³ÉÊ÷ */
+			q = p; /* qæŒ‡ç¤ºå½“å‰ç”Ÿæˆæ ‘çš„æ ¹ */
+			DFSTree(G, v, &p); /* å»ºç«‹ä»¥pä¸ºæ ¹çš„ç”Ÿæˆæ ‘ */
 		}
 }
 
 void PreOrderTraverse(CSTree T, void(*Visit)(TElemType))
-{ /* ÏÈ¸ù±éÀúº¢×Ó£­ÐÖµÜ¶þ²æÁ´±í½á¹¹µÄÊ÷T(bo6-5.c¸Ä) */
+{ /* å…ˆæ ¹éåŽ†å­©å­ï¼å…„å¼ŸäºŒå‰é“¾è¡¨ç»“æž„çš„æ ‘T(bo6-5.cæ”¹) */
 	if (T)
 	{
-		Visit(T->data); /* ÏÈ·ÃÎÊ¸ù½áµã */
-		PreOrderTraverse(T->firstchild, Visit); /* ÔÙÏÈ¸ù±éÀú³¤×Ó×ÓÊ÷ */
-		PreOrderTraverse(T->nextsibling, Visit); /* ×îºóÏÈ¸ù±éÀúÏÂÒ»¸öÐÖµÜ×ÓÊ÷ */
+		Visit(T->data); /* å…ˆè®¿é—®æ ¹ç»“ç‚¹ */
+		PreOrderTraverse(T->firstchild, Visit); /* å†å…ˆæ ¹éåŽ†é•¿å­å­æ ‘ */
+		PreOrderTraverse(T->nextsibling, Visit); /* æœ€åŽå…ˆæ ¹éåŽ†ä¸‹ä¸€ä¸ªå…„å¼Ÿå­æ ‘ */
 	}
 }
 
@@ -78,11 +78,11 @@ void main()
 {
 	ALGraph g;
 	CSTree t;
-	printf("ÇëÑ¡ÔñÎÞÏòÍ¼\n");
+	printf("è¯·é€‰æ‹©æ— å‘å›¾\n");
 	CreateGraph(&g);
 	Display(g);
 	DFSForest(g, &t);
-	printf("ÏÈ¸ù±éÀúÉú³ÉÉ­ÁÖ£º\n");
+	printf("å…ˆæ ¹éåŽ†ç”Ÿæˆæ£®æž—ï¼š\n");
 	PreOrderTraverse(t, print);
 	printf("\n");
 }

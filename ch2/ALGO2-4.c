@@ -1,5 +1,5 @@
-/* algo2-4.c ĞŞ¸ÄËã·¨2.7µÄµÚÒ»¸öÑ­»·Óï¾äÖĞµÄÌõ¼şÓï¾äÎª¿ª¹ØÓï¾ä£¬ÇÒµ± */
-/* *pa=*pbÊ±£¬Ö»½«Á½ÕßÖĞÖ®Ò»²åÈëLc¡£´Ë²Ù×÷µÄ½á¹ûºÍËã·¨2.1ÏàÍ¬ */
+/* algo2-4.c ä¿®æ”¹ç®—æ³•2.7çš„ç¬¬ä¸€ä¸ªå¾ªç¯è¯­å¥ä¸­çš„æ¡ä»¶è¯­å¥ä¸ºå¼€å…³è¯­å¥ï¼Œä¸”å½“ */
+/* *pa=*pbæ—¶ï¼Œåªå°†ä¸¤è€…ä¸­ä¹‹ä¸€æ’å…¥Lcã€‚æ­¤æ“ä½œçš„ç»“æœå’Œç®—æ³•2.1ç›¸åŒ */
 #include "../ch1/c1.h"
 typedef int ElemType;
 #include "c2-1.h"
@@ -18,29 +18,29 @@ int comp(ElemType c1, ElemType c2)
 }
 
 void MergeList(SqList La, SqList Lb, SqList *Lc)
-{ /* ÁíÒ»ÖÖºÏ²¢ÏßĞÔ±íµÄ·½·¨£¨¸ù¾İËã·¨2.7ÏÂµÄÒªÇóĞŞ¸ÄËã·¨2.7£© */
+{ /* å¦ä¸€ç§åˆå¹¶çº¿æ€§è¡¨çš„æ–¹æ³•ï¼ˆæ ¹æ®ç®—æ³•2.7ä¸‹çš„è¦æ±‚ä¿®æ”¹ç®—æ³•2.7ï¼‰ */
 	ElemType  *pa, *pa_last, *pb, *pb_last, *pc;
 	pa = La.elem;
 	pb = Lb.elem;
-	(*Lc).listsize = La.length + Lb.length; /* ´Ë¾äÓëËã·¨2.7²»Í¬ */
+	(*Lc).listsize = La.length + Lb.length; /* æ­¤å¥ä¸ç®—æ³•2.7ä¸åŒ */
 	pc = (*Lc).elem = (ElemType *)malloc((*Lc).listsize*sizeof(ElemType));
 	if (!(*Lc).elem)
 		exit(OVERFLOW);
 	pa_last = La.elem + La.length - 1;
 	pb_last = Lb.elem + Lb.length - 1;
-	while (pa <= pa_last&&pb <= pb_last) /* ±íLaºÍ±íLb¾ù·Ç¿Õ */
-		switch (comp(*pa, *pb)) /* ´Ë¾äÓëËã·¨2.7²»Í¬ */
+	while (pa <= pa_last&&pb <= pb_last) /* è¡¨Laå’Œè¡¨Lbå‡éç©º */
+		switch (comp(*pa, *pb)) /* æ­¤å¥ä¸ç®—æ³•2.7ä¸åŒ */
 		{
 		case  0: pb++;
 		case  1: *pc++ = *pa++;
 			break;
 		case -1: *pc++ = *pb++;
 		}
-	while (pa <= pa_last) /* ±íLa·Ç¿ÕÇÒ±íLb¿Õ */
+	while (pa <= pa_last) /* è¡¨Laéç©ºä¸”è¡¨Lbç©º */
 		*pc++ = *pa++;
-	while (pb <= pb_last) /* ±íLb·Ç¿ÕÇÒ±íLa¿Õ */
+	while (pb <= pb_last) /* è¡¨Lbéç©ºä¸”è¡¨Laç©º */
 		*pc++ = *pb++;
-	(*Lc).length = pc - (*Lc).elem; /* ¼Ó´Ë¾ä */
+	(*Lc).length = pc - (*Lc).elem; /* åŠ æ­¤å¥ */
 }
 
 void print(ElemType *c)
@@ -52,17 +52,17 @@ void main()
 {
 	SqList La, Lb, Lc;
 	int j;
-	InitList(&La); /* ´´½¨¿Õ±íLa */
-	for (j = 1; j <= 5; j++) /* ÔÚ±íLaÖĞ²åÈë5¸öÔªËØ */
+	InitList(&La); /* åˆ›å»ºç©ºè¡¨La */
+	for (j = 1; j <= 5; j++) /* åœ¨è¡¨Laä¸­æ’å…¥5ä¸ªå…ƒç´  */
 		ListInsert(&La, j, j);
-	printf("La= "); /* Êä³ö±íLaµÄÄÚÈİ */
+	printf("La= "); /* è¾“å‡ºè¡¨Laçš„å†…å®¹ */
 	ListTraverse(La, print);
-	InitList(&Lb); /* ´´½¨¿Õ±íLb */
-	for (j = 1; j <= 5; j++) /* ÔÚ±íLbÖĞ²åÈë5¸öÔªËØ */
+	InitList(&Lb); /* åˆ›å»ºç©ºè¡¨Lb */
+	for (j = 1; j <= 5; j++) /* åœ¨è¡¨Lbä¸­æ’å…¥5ä¸ªå…ƒç´  */
 		ListInsert(&Lb, j, 2 * j);
-	printf("Lb= "); /* Êä³ö±íLbµÄÄÚÈİ */
+	printf("Lb= "); /* è¾“å‡ºè¡¨Lbçš„å†…å®¹ */
 	ListTraverse(Lb, print);
 	MergeList(La, Lb, &Lc);
-	printf("Lc= "); /* Êä³ö±íLcµÄÄÚÈİ */
+	printf("Lc= "); /* è¾“å‡ºè¡¨Lcçš„å†…å®¹ */
 	ListTraverse(Lc, print);
 }

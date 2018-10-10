@@ -1,4 +1,4 @@
-/* algo1-2.cpp ¼ÆËã1-1/x+1/x*x¡­µÄ¸ü¿ì½İµÄËã·¨ */
+/* algo1-2.cpp è®¡ç®—1-1/x+1/x*xâ€¦çš„æ›´å¿«æ·çš„ç®—æ³• */
 #define _CRT_SECURE_NO_DEPRECATE
 
 #include<stdio.h>
@@ -9,15 +9,15 @@ void main()
 	long t = 0;
 	double x, sum1 = 1, sum = 1;
 	int i, n;
-	printf("ÇëÊäÈëx n: ");
+	printf("è¯·è¾“å…¥x n: ");
 	scanf("%lf%d", &x, &n);
-	ftime(&t1); /* ÇóµÃµ±Ç°Ê±¼ä */
+	ftime(&t1); /* æ±‚å¾—å½“å‰æ—¶é—´ */
 	for (i = 1; i <= n; i++)
 	{
 		sum1 = -sum1 / x;
 		sum += sum1;
 	}
-	ftime(&t2); /* ÇóµÃµ±Ç°Ê±¼ä */
-	t = (t2.time - t1.time) * 1000 + (t2.millitm - t1.millitm); /* ¼ÆËãÊ±¼ä²î */
-	printf("sum=%lf ÓÃÊ±%ldºÁÃë\n", sum, t);
+	ftime(&t2); /* æ±‚å¾—å½“å‰æ—¶é—´ */
+	t = (t2.time - t1.time) * 1000 + (t2.millitm - t1.millitm); /* è®¡ç®—æ—¶é—´å·® */
+	printf("sum=%lf ç”¨æ—¶%ldæ¯«ç§’\n", sum, t);
 }

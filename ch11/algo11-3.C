@@ -1,9 +1,9 @@
-/* algo11-3.c ½«algo11-2.c²úÉúµÄÓĞĞò×ÓÎÄ¼şf0,f1,f2¹é²¢³É1¸öÓĞĞòµÄ´óÎÄ¼şout */
+/* algo11-3.c å°†algo11-2.cäº§ç”Ÿçš„æœ‰åºå­æ–‡ä»¶f0,f1,f2å½’å¹¶æˆ1ä¸ªæœ‰åºçš„å¤§æ–‡ä»¶out */
 #include "../ch1/c1.h"
-typedef int InfoType; /* ¶¨ÒåÆäËüÊı¾İÏîµÄÀàĞÍ */
-#include "../ch10/c10-1.h" /* ¶¨ÒåKeyType¡¢RedType¼°SqList */
-#define k 3 /* kÂ·¹é²¢ */
-#define M 10 /* ÉèÊä³öM¸öÊı¾İ»»ĞĞ */
+typedef int InfoType; /* å®šä¹‰å…¶å®ƒæ•°æ®é¡¹çš„ç±»å‹ */
+#include "../ch10/c10-1.h" /* å®šä¹‰KeyTypeã€RedTypeåŠSqList */
+#define k 3 /* kè·¯å½’å¹¶ */
+#define M 10 /* è®¾è¾“å‡ºMä¸ªæ•°æ®æ¢è¡Œ */
 #include "bo11-1.c"
 
 void print(RedType t)
@@ -18,36 +18,36 @@ void main()
 	char fname[k][4], fout[5] = "out", s[3];
 	LoserTree ls;
 	for (i = 0; i < k; i++)
-	{ /* ÒÀ´Î´ò¿ªf0,f1,f2,¡­,k¸öÎÄ¼ş */
-		_itoa(i, s, 10); /* Éú³Ék¸öÎÄ¼şÃûf0,f1,f2,¡­ */
+	{ /* ä¾æ¬¡æ‰“å¼€f0,f1,f2,â€¦,kä¸ªæ–‡ä»¶ */
+		_itoa(i, s, 10); /* ç”Ÿæˆkä¸ªæ–‡ä»¶åf0,f1,f2,â€¦ */
 		strcpy(fname[i], "f");
 		strcat(fname[i], s);
-		fp[i] = fopen(fname[i], "rb"); /* ÒÔ¶ÁµÄ·½Ê½´ò¿ªÎÄ¼şf0,f1,¡­ */
-		printf("ÓĞĞò×ÓÎÄ¼şf%dµÄ¼ÇÂ¼Îª:\n", i);
+		fp[i] = fopen(fname[i], "rb"); /* ä»¥è¯»çš„æ–¹å¼æ‰“å¼€æ–‡ä»¶f0,f1,â€¦ */
+		printf("æœ‰åºå­æ–‡ä»¶f%dçš„è®°å½•ä¸º:\n", i);
 		do
 		{
-			j = fread(&r, sizeof(RedType), 1, fp[i]); /* ÒÀ´Î½«f0,f1,¡­µÄÊı¾İ¶ÁÈër */
+			j = fread(&r, sizeof(RedType), 1, fp[i]); /* ä¾æ¬¡å°†f0,f1,â€¦çš„æ•°æ®è¯»å…¥r */
 			if (j == 1)
-				print(r); /* Êä³örµÄÄÚÈİ */
+				print(r); /* è¾“å‡ºrçš„å†…å®¹ */
 		} while (j == 1);
 		printf("\n");
-		rewind(fp[i]); /* Ê¹fp[i]µÄÖ¸ÕëÖØĞÂ·µ»Øf0,f1,¡­µÄÆğÊ¼Î»ÖÃ£¬ÒÔ±ãÖØĞÂ¶ÁÈëÄÚ´æ */
+		rewind(fp[i]); /* ä½¿fp[i]çš„æŒ‡é’ˆé‡æ–°è¿”å›f0,f1,â€¦çš„èµ·å§‹ä½ç½®ï¼Œä»¥ä¾¿é‡æ–°è¯»å…¥å†…å­˜ */
 	}
-	fp[k] = fopen(fout, "wb"); /* ÒÔĞ´µÄ·½Ê½´ò¿ª´óÎÄ¼şfout */
-	K_Merge(ls, b); /* ÀûÓÃ°ÜÕßÊ÷ls½«k¸öÊäÈë¹é²¢¶ÎÖĞµÄ¼ÇÂ¼¹é²¢µ½Êä³ö¹é²¢¶Î£¬¼´´óÎÄ¼şfout */
+	fp[k] = fopen(fout, "wb"); /* ä»¥å†™çš„æ–¹å¼æ‰“å¼€å¤§æ–‡ä»¶fout */
+	K_Merge(ls, b); /* åˆ©ç”¨è´¥è€…æ ‘lså°†kä¸ªè¾“å…¥å½’å¹¶æ®µä¸­çš„è®°å½•å½’å¹¶åˆ°è¾“å‡ºå½’å¹¶æ®µï¼Œå³å¤§æ–‡ä»¶fout */
 	for (i = 0; i <= k; i++)
-		fclose(fp[i]); /* ¹Ø±ÕÎÄ¼şf0,f1,¡­ºÍÎÄ¼şfout */
-	fp[k] = fopen(fout, "rb"); /* ÒÔ¶ÁµÄ·½Ê½ÖØĞÂ´ò¿ª´óÎÄ¼şfoutÑéÖ¤ÅÅĞò */
-	printf("ÅÅĞòºóµÄ´óÎÄ¼şµÄ¼ÇÂ¼Îª:\n");
+		fclose(fp[i]); /* å…³é—­æ–‡ä»¶f0,f1,â€¦å’Œæ–‡ä»¶fout */
+	fp[k] = fopen(fout, "rb"); /* ä»¥è¯»çš„æ–¹å¼é‡æ–°æ‰“å¼€å¤§æ–‡ä»¶foutéªŒè¯æ’åº */
+	printf("æ’åºåçš„å¤§æ–‡ä»¶çš„è®°å½•ä¸º:\n");
 	i = 1;
 	do
 	{
-		j = fread(&r, sizeof(RedType), 1, fp[k]); /* ½«foutµÄÊı¾İ¶ÁÈër */
+		j = fread(&r, sizeof(RedType), 1, fp[k]); /* å°†foutçš„æ•°æ®è¯»å…¥r */
 		if (j == 1)
-			print(r); /* Êä³örµÄÄÚÈİ */
+			print(r); /* è¾“å‡ºrçš„å†…å®¹ */
 		if (i++%M == 0)
-			printf("\n"); /* »»ĞĞ */
+			printf("\n"); /* æ¢è¡Œ */
 	} while (j == 1);
 	printf("\n");
-	fclose(fp[k]); /* ¹Ø±Õ´óÎÄ¼şfout */
+	fclose(fp[k]); /* å…³é—­å¤§æ–‡ä»¶fout */
 }

@@ -1,21 +1,21 @@
-/* bo4-3.c ´®²ÉÓÃ¿éÁ´´æ´¢½á¹¹(ÓÉc4-3.h¶¨Òå)µÄ»ù±¾²Ù×÷(16¸ö) */
+/* bo4-3.c ä¸²é‡‡ç”¨å—é“¾å­˜å‚¨ç»“æ„(ç”±c4-3.hå®šä¹‰)çš„åŸºæœ¬æ“ä½œ(16ä¸ª) */
 void InitString(LString *T)
-{ /* ³õÊ¼»¯(²úÉú¿Õ´®)×Ö·û´®T¡£Áí¼Ó */
+{ /* åˆå§‹åŒ–(äº§ç”Ÿç©ºä¸²)å­—ç¬¦ä¸²Tã€‚å¦åŠ  */
 	(*T).curlen = 0;
 	(*T).head = NULL;
 	(*T).tail = NULL;
 }
 
 Status StrAssign(LString *T, char *chars)
-{ /* Éú³ÉÒ»¸öÆäÖµµÈÓÚcharsµÄ´®T(ÒªÇócharsÖĞ²»°üº¬Ìî²¹¿ÕÓàµÄ×Ö·û) */
-  /* ³É¹¦·µ»ØOK£¬·ñÔò·µ»ØERROR */
+{ /* ç”Ÿæˆä¸€ä¸ªå…¶å€¼ç­‰äºcharsçš„ä¸²T(è¦æ±‚charsä¸­ä¸åŒ…å«å¡«è¡¥ç©ºä½™çš„å­—ç¬¦) */
+  /* æˆåŠŸè¿”å›OKï¼Œå¦åˆ™è¿”å›ERROR */
 	int i, j, k, l;
 	Chunk *p, *q=NULL;
-	i = strlen(chars); /* iÎª´®µÄ³¤¶È */
-	if (!i || strchr(chars, blank)) /* ´®³¤Îª0»òcharsÖĞ°üº¬Ìî²¹¿ÕÓàµÄ×Ö·û */
+	i = strlen(chars); /* iä¸ºä¸²çš„é•¿åº¦ */
+	if (!i || strchr(chars, blank)) /* ä¸²é•¿ä¸º0æˆ–charsä¸­åŒ…å«å¡«è¡¥ç©ºä½™çš„å­—ç¬¦ */
 		return ERROR;
 	(*T).curlen = i;
-	j = i / CHUNKSIZE; /* jÎª¿éÁ´µÄ½áµãÊı */
+	j = i / CHUNKSIZE; /* jä¸ºå—é“¾çš„ç»“ç‚¹æ•° */
 	if (i%CHUNKSIZE)
 		j++;
 	for (k = 0; k < j; k++)
@@ -23,7 +23,7 @@ Status StrAssign(LString *T, char *chars)
 		p = (Chunk*)malloc(sizeof(Chunk));
 		if (!p)
 			return ERROR;
-		if (k == 0) /* µÚÒ»¸öÁ´¿é */
+		if (k == 0) /* ç¬¬ä¸€ä¸ªé“¾å— */
 			(*T).head = q = p;
 		else
 		{
@@ -32,11 +32,11 @@ Status StrAssign(LString *T, char *chars)
 		}
 		for (l = 0; l < CHUNKSIZE&&*chars; l++)
 			*(q->ch + l) = *chars++;
-		if (!*chars) /* ×îºóÒ»¸öÁ´¿é */
+		if (!*chars) /* æœ€åä¸€ä¸ªé“¾å— */
 		{
 			(*T).tail = q;
 			q->next = NULL;
-			for (; l < CHUNKSIZE; l++) /* ÓÃÌî²¹¿ÕÓàµÄ×Ö·ûÌîÂúÁ´±í */
+			for (; l < CHUNKSIZE; l++) /* ç”¨å¡«è¡¥ç©ºä½™çš„å­—ç¬¦å¡«æ»¡é“¾è¡¨ */
 				*(q->ch + l) = blank;
 		}
 	}
@@ -44,13 +44,13 @@ Status StrAssign(LString *T, char *chars)
 }
 
 Status StrCopy(LString *T, LString S)
-{ /* ³õÊ¼Ìõ¼ş:´®S´æÔÚ¡£²Ù×÷½á¹û:ÓÉ´®S¸´ÖÆµÃ´®T(Á¬Ìî²¹¿ÕÓàµÄ×Ö·ûÒ»¿é¿½±´) */
+{ /* åˆå§‹æ¡ä»¶:ä¸²Så­˜åœ¨ã€‚æ“ä½œç»“æœ:ç”±ä¸²Så¤åˆ¶å¾—ä¸²T(è¿å¡«è¡¥ç©ºä½™çš„å­—ç¬¦ä¸€å—æ‹·è´) */
 	Chunk *h = S.head, *p, *q;
 	(*T).curlen = S.curlen;
 	if (h)
 	{
 		p = (*T).head = (Chunk*)malloc(sizeof(Chunk));
-		*p = *h; /* ¸´ÖÆ1¸ö½áµã */
+		*p = *h; /* å¤åˆ¶1ä¸ªç»“ç‚¹ */
 		h = h->next;
 		while (h)
 		{
@@ -69,22 +69,22 @@ Status StrCopy(LString *T, LString S)
 }
 
 Status StrEmpty(LString S)
-{ /* ³õÊ¼Ìõ¼ş:´®S´æÔÚ¡£²Ù×÷½á¹û:ÈôSÎª¿Õ´®,Ôò·µ»ØTRUE,·ñÔò·µ»ØFALSE */
-	if (S.curlen) /* ·Ç¿Õ */
+{ /* åˆå§‹æ¡ä»¶:ä¸²Så­˜åœ¨ã€‚æ“ä½œç»“æœ:è‹¥Sä¸ºç©ºä¸²,åˆ™è¿”å›TRUE,å¦åˆ™è¿”å›FALSE */
+	if (S.curlen) /* éç©º */
 		return FALSE;
 	else
 		return TRUE;
 }
 
 int StrCompare(LString S, LString T)
-{ /* ÈôS>T,Ôò·µ»ØÖµ>0;ÈôS=T,Ôò·µ»ØÖµ=0;ÈôS<T,Ôò·µ»ØÖµ<0 */
-	int i = 0; /* iÎªµ±Ç°´ı±È½Ï×Ö·ûÔÚS,T´®ÖĞµÄÎ»ÖÃ */
-	Chunk *ps = S.head, *pt = T.head; /* ps,pt·Ö±ğÖ¸ÏòSºÍTµÄ´ı±È½Ï¿é */
-	int js = 0, jt = 0; /* js,jt·Ö±ğÖ¸Ê¾SºÍTµÄ´ı±È½Ï×Ö·ûÔÚ¿éÖĞµÄÎ»Ğò */
+{ /* è‹¥S>T,åˆ™è¿”å›å€¼>0;è‹¥S=T,åˆ™è¿”å›å€¼=0;è‹¥S<T,åˆ™è¿”å›å€¼<0 */
+	int i = 0; /* iä¸ºå½“å‰å¾…æ¯”è¾ƒå­—ç¬¦åœ¨S,Tä¸²ä¸­çš„ä½ç½® */
+	Chunk *ps = S.head, *pt = T.head; /* ps,ptåˆ†åˆ«æŒ‡å‘Så’ŒTçš„å¾…æ¯”è¾ƒå— */
+	int js = 0, jt = 0; /* js,jtåˆ†åˆ«æŒ‡ç¤ºSå’ŒTçš„å¾…æ¯”è¾ƒå­—ç¬¦åœ¨å—ä¸­çš„ä½åº */
 	while (i < S.curlen&&i < T.curlen)
 	{
-		i++; /* ·Ö±ğÕÒSºÍTµÄµÚi¸ö×Ö·û */
-		while (*(ps->ch + js) == blank) /* Ìø¹ıÌî²¹¿ÕÓàµÄ×Ö·û */
+		i++; /* åˆ†åˆ«æ‰¾Så’ŒTçš„ç¬¬iä¸ªå­—ç¬¦ */
+		while (*(ps->ch + js) == blank) /* è·³è¿‡å¡«è¡¥ç©ºä½™çš„å­—ç¬¦ */
 		{
 			js++;
 			if (js == CHUNKSIZE)
@@ -92,8 +92,8 @@ int StrCompare(LString S, LString T)
 				ps = ps->next;
 				js = 0;
 			}
-		}; /* *(ps->ch+js)ÎªSµÄµÚi¸öÓĞĞ§×Ö·û */
-		while (*(pt->ch + jt) == blank) /* Ìø¹ıÌî²¹¿ÕÓàµÄ×Ö·û */
+		}; /* *(ps->ch+js)ä¸ºSçš„ç¬¬iä¸ªæœ‰æ•ˆå­—ç¬¦ */
+		while (*(pt->ch + jt) == blank) /* è·³è¿‡å¡«è¡¥ç©ºä½™çš„å­—ç¬¦ */
 		{
 			jt++;
 			if (jt == CHUNKSIZE)
@@ -101,10 +101,10 @@ int StrCompare(LString S, LString T)
 				pt = pt->next;
 				jt = 0;
 			}
-		}; /* *(pt->ch+jt)ÎªTµÄµÚi¸öÓĞĞ§×Ö·û */
+		}; /* *(pt->ch+jt)ä¸ºTçš„ç¬¬iä¸ªæœ‰æ•ˆå­—ç¬¦ */
 		if (*(ps->ch + js) != *(pt->ch + jt))
 			return *(ps->ch + js) - *(pt->ch + jt);
-		else /* ¼ÌĞø±È½ÏÏÂÒ»¸ö×Ö·û */
+		else /* ç»§ç»­æ¯”è¾ƒä¸‹ä¸€ä¸ªå­—ç¬¦ */
 		{
 			js++;
 			if (js == CHUNKSIZE)
@@ -124,12 +124,12 @@ int StrCompare(LString S, LString T)
 }
 
 int StrLength(LString S)
-{ /* ·µ»ØSµÄÔªËØ¸öÊı,³ÆÎª´®µÄ³¤¶È */
+{ /* è¿”å›Sçš„å…ƒç´ ä¸ªæ•°,ç§°ä¸ºä¸²çš„é•¿åº¦ */
 	return S.curlen;
 }
 
 Status ClearString(LString *S)
-{ /* ³õÊ¼Ìõ¼ş: ´®S´æÔÚ¡£²Ù×÷½á¹û: ½«SÇåÎª¿Õ´® */
+{ /* åˆå§‹æ¡ä»¶: ä¸²Så­˜åœ¨ã€‚æ“ä½œç»“æœ: å°†Sæ¸…ä¸ºç©ºä¸² */
 	Chunk *p, *q;
 	p = (*S).head;
 	while (p)
@@ -145,7 +145,7 @@ Status ClearString(LString *S)
 }
 
 Status Concat(LString *T, LString S1, LString S2)
-{ /* ÓÃT·µ»ØÓÉS1ºÍS2Áª½Ó¶ø³ÉµÄĞÂ´® */
+{ /* ç”¨Tè¿”å›ç”±S1å’ŒS2è”æ¥è€Œæˆçš„æ–°ä¸² */
 	LString a1, a2;
 	InitString(&a1);
 	InitString(&a2);
@@ -159,15 +159,15 @@ Status Concat(LString *T, LString S1, LString S2)
 }
 
 Status SubString(LString *Sub, LString S, int pos, int len)
-{ /* ÓÃSub·µ»Ø´®SµÄµÚpos¸ö×Ö·ûÆğ³¤¶ÈÎªlenµÄ×Ó´®¡£ */
-  /* ÆäÖĞ,1¡Üpos¡ÜStrLength(S)ÇÒ0¡Ülen¡ÜStrLength(S)-pos+1 */
+{ /* ç”¨Subè¿”å›ä¸²Sçš„ç¬¬posä¸ªå­—ç¬¦èµ·é•¿åº¦ä¸ºlençš„å­ä¸²ã€‚ */
+  /* å…¶ä¸­,1â‰¤posâ‰¤StrLength(S)ä¸”0â‰¤lenâ‰¤StrLength(S)-pos+1 */
 	Chunk *p, *q;
 	int i, k, n, flag = 1;
 	if (pos<1 || pos>S.curlen || len<0 || len>S.curlen - pos + 1)
 		return ERROR;
-	n = len / CHUNKSIZE; /* Éú³É¿ÕµÄSub´® */
+	n = len / CHUNKSIZE; /* ç”Ÿæˆç©ºçš„Subä¸² */
 	if (len%CHUNKSIZE)
-		n++; /* nÎª¿éµÄ¸öÊı */
+		n++; /* nä¸ºå—çš„ä¸ªæ•° */
 	p = (Chunk*)malloc(sizeof(Chunk));
 	(*Sub).head = p;
 	for (i = 1; i < n; i++)
@@ -180,27 +180,27 @@ Status SubString(LString *Sub, LString S, int pos, int len)
 	(*Sub).tail = p;
 	(*Sub).curlen = len;
 	for (i = len%CHUNKSIZE; i < CHUNKSIZE; i++)
-		*(p->ch + i) = blank; /* Ìî³äSubÎ²²¿µÄ¶àÓà¿Õ¼ä */
-	q = (*Sub).head; /* qÖ¸ÏòSub´®¼´½«¸´ÖÆµÄ¿é */
-	i = 0; /* iÖ¸Ê¾¼´½«¸´ÖÆµÄ×Ö·ûÔÚ¿éÖĞµÄÎ»ÖÃ */
-	p = S.head; /* pÖ¸ÏòS´®µÄµ±Ç°¿é */
-	n = 0; /* nÖ¸Ê¾µ±Ç°×Ö·ûÔÚ´®ÖĞµÄĞòºÅ */
+		*(p->ch + i) = blank; /* å¡«å……Subå°¾éƒ¨çš„å¤šä½™ç©ºé—´ */
+	q = (*Sub).head; /* qæŒ‡å‘Subä¸²å³å°†å¤åˆ¶çš„å— */
+	i = 0; /* iæŒ‡ç¤ºå³å°†å¤åˆ¶çš„å­—ç¬¦åœ¨å—ä¸­çš„ä½ç½® */
+	p = S.head; /* pæŒ‡å‘Sä¸²çš„å½“å‰å— */
+	n = 0; /* næŒ‡ç¤ºå½“å‰å­—ç¬¦åœ¨ä¸²ä¸­çš„åºå· */
 	while (flag)
 	{
-		for (k = 0; k < CHUNKSIZE; k++) /* kÖ¸Ê¾µ±Ç°×Ö·ûÔÚ¿éÖĞµÄÎ»ÖÃ */
+		for (k = 0; k < CHUNKSIZE; k++) /* kæŒ‡ç¤ºå½“å‰å­—ç¬¦åœ¨å—ä¸­çš„ä½ç½® */
 			if (*(p->ch + k) != blank)
 			{
 				n++;
-				if (n >= pos&&n <= pos + len - 1) /* ¸´ÖÆ */
+				if (n >= pos&&n <= pos + len - 1) /* å¤åˆ¶ */
 				{
 					if (i == CHUNKSIZE)
-					{ /* µ½ÏÂÒ»¿é */
+					{ /* åˆ°ä¸‹ä¸€å— */
 						q = q->next;
 						i = 0;
 					}
 					*(q->ch + i) = *(p->ch + k);
 					i++;
-					if (n == pos + len - 1) /* ¸´ÖÆ½áÊø */
+					if (n == pos + len - 1) /* å¤åˆ¶ç»“æŸ */
 					{
 						flag = 0;
 						break;
@@ -213,19 +213,19 @@ Status SubString(LString *Sub, LString S, int pos, int len)
 }
 
 int Index(LString S, LString T, int pos)
-{ /* TÎª·Ç¿Õ´®¡£ÈôÖ÷´®SÖĞµÚpos¸ö×Ö·ûÖ®ºó´æÔÚÓëTÏàµÈµÄ×Ó´®, */
-  /* Ôò·µ»ØµÚÒ»¸öÕâÑùµÄ×Ó´®ÔÚSÖĞµÄÎ»ÖÃ,·ñÔò·µ»Ø0 */
+{ /* Tä¸ºéç©ºä¸²ã€‚è‹¥ä¸»ä¸²Sä¸­ç¬¬posä¸ªå­—ç¬¦ä¹‹åå­˜åœ¨ä¸Tç›¸ç­‰çš„å­ä¸², */
+  /* åˆ™è¿”å›ç¬¬ä¸€ä¸ªè¿™æ ·çš„å­ä¸²åœ¨Sä¸­çš„ä½ç½®,å¦åˆ™è¿”å›0 */
 	int i, n, m;
 	LString sub;
-	if (pos >= 1 && pos <= StrLength(S)) /* posÂú×ãÌõ¼ş */
+	if (pos >= 1 && pos <= StrLength(S)) /* posæ»¡è¶³æ¡ä»¶ */
 	{
-		n = StrLength(S); /* Ö÷´®³¤¶È */
-		m = StrLength(T); /* T´®³¤¶È */
+		n = StrLength(S); /* ä¸»ä¸²é•¿åº¦ */
+		m = StrLength(T); /* Tä¸²é•¿åº¦ */
 		i = pos;
 		while (i <= n - m + 1)
 		{
-			SubString(&sub, S, i, m); /* subÎª´ÓSµÄµÚi¸ö×Ö·ûÆğ,³¤¶ÈÎªmµÄ×Ó´® */
-			if (StrCompare(sub, T) != 0) /* sub²»µÈÓÚT */
+			SubString(&sub, S, i, m); /* subä¸ºä»Sçš„ç¬¬iä¸ªå­—ç¬¦èµ·,é•¿åº¦ä¸ºmçš„å­ä¸² */
+			if (StrCompare(sub, T) != 0) /* subä¸ç­‰äºT */
 				++i;
 			else
 				return i;
@@ -235,12 +235,12 @@ int Index(LString S, LString T, int pos)
 }
 
 void Zip(LString *S)
-{ /* Ñ¹Ëõ´®(Çå³ı¿éÖĞ²»±ØÒªµÄÌî²¹¿ÕÓàµÄ×Ö·û)¡£¼Ó */
+{ /* å‹ç¼©ä¸²(æ¸…é™¤å—ä¸­ä¸å¿…è¦çš„å¡«è¡¥ç©ºä½™çš„å­—ç¬¦)ã€‚åŠ  */
 	int j, n = 0;
 	Chunk *h = (*S).head;
 	char *q;
 	q = (char*)malloc(((*S).curlen + 1)*sizeof(char));
-	while (h) /* ½«LStringÀàĞÍµÄ×Ö·û´®×ª»»Îªchar[]ÀàĞÍµÄ×Ö·û´® */
+	while (h) /* å°†LStringç±»å‹çš„å­—ç¬¦ä¸²è½¬æ¢ä¸ºchar[]ç±»å‹çš„å­—ç¬¦ä¸² */
 	{
 		for (j = 0; j < CHUNKSIZE; j++)
 			if (*(h->ch + j) != blank)
@@ -250,49 +250,49 @@ void Zip(LString *S)
 			}
 		h = h->next;
 	}
-	*(q + n) = 0; /* ´®½áÊø·û */
-	ClearString(S); /* Çå¿ÕS */
-	StrAssign(S, q); /* ÖØĞÂÉú³ÉS */
+	*(q + n) = 0; /* ä¸²ç»“æŸç¬¦ */
+	ClearString(S); /* æ¸…ç©ºS */
+	StrAssign(S, q); /* é‡æ–°ç”ŸæˆS */
 }
 
 Status StrInsert(LString *S, int pos, LString T)
-{ /* 1¡Üpos¡ÜStrLength(S)+1¡£ÔÚ´®SµÄµÚpos¸ö×Ö·ûÖ®Ç°²åÈë´®T */
+{ /* 1â‰¤posâ‰¤StrLength(S)+1ã€‚åœ¨ä¸²Sçš„ç¬¬posä¸ªå­—ç¬¦ä¹‹å‰æ’å…¥ä¸²T */
 	int i, j, k;
 	Chunk *p, *q;
 	LString t;
-	if (pos<1 || pos>StrLength(*S) + 1) /* pos³¬³ö·¶Î§ */
+	if (pos<1 || pos>StrLength(*S) + 1) /* posè¶…å‡ºèŒƒå›´ */
 		return ERROR;
-	StrCopy(&t, T); /* ¸´ÖÆTÎªt */
-	Zip(S); /* È¥µôSÖĞ¶àÓàµÄÌî²¹¿ÕÓàµÄ×Ö·û */
-	i = (pos - 1) / CHUNKSIZE; /* µ½´ï²åÈëµãÒªÒÆ¶¯µÄ¿éÊı */
-	j = (pos - 1) % CHUNKSIZE; /* µ½´ï²åÈëµãÔÚ×îºóÒ»¿éÉÏÒªÒÆ¶¯µÄ×Ö·ûÊı */
+	StrCopy(&t, T); /* å¤åˆ¶Tä¸ºt */
+	Zip(S); /* å»æ‰Sä¸­å¤šä½™çš„å¡«è¡¥ç©ºä½™çš„å­—ç¬¦ */
+	i = (pos - 1) / CHUNKSIZE; /* åˆ°è¾¾æ’å…¥ç‚¹è¦ç§»åŠ¨çš„å—æ•° */
+	j = (pos - 1) % CHUNKSIZE; /* åˆ°è¾¾æ’å…¥ç‚¹åœ¨æœ€åä¸€å—ä¸Šè¦ç§»åŠ¨çš„å­—ç¬¦æ•° */
 	p = (*S).head;
-	if (pos == 1) /* ²åÔÚS´®Ç° */
+	if (pos == 1) /* æ’åœ¨Sä¸²å‰ */
 	{
 		t.tail->next = (*S).head;
 		(*S).head = t.head;
 	}
-	else if (j == 0) /* ²åÔÚ¿éÖ®¼ä */
+	else if (j == 0) /* æ’åœ¨å—ä¹‹é—´ */
 	{
 		for (k = 1; k < i; k++)
-			p = p->next; /* pÖ¸Ïò²åÈëµãµÄ×ó¿é */
-		q = p->next; /* qÖ¸Ïò²åÈëµãµÄÓÒ¿é */
-		p->next = t.head; /* ²åÈët */
+			p = p->next; /* pæŒ‡å‘æ’å…¥ç‚¹çš„å·¦å— */
+		q = p->next; /* qæŒ‡å‘æ’å…¥ç‚¹çš„å³å— */
+		p->next = t.head; /* æ’å…¥t */
 		t.tail->next = q;
-		if (q == NULL) /* ²åÔÚS´®ºó */
-			(*S).tail = t.tail; /* ¸Ä±äÎ²Ö¸Õë */
+		if (q == NULL) /* æ’åœ¨Sä¸²å */
+			(*S).tail = t.tail; /* æ”¹å˜å°¾æŒ‡é’ˆ */
 	}
-	else /* ²åÔÚÒ»¿éÄÚµÄÁ½¸ö×Ö·ûÖ®¼ä */
+	else /* æ’åœ¨ä¸€å—å†…çš„ä¸¤ä¸ªå­—ç¬¦ä¹‹é—´ */
 	{
 		for (k = 1; k <= i; k++)
-			p = p->next; /* pÖ¸Ïò²åÈëµãËùÔÚ¿é */
-		q = (Chunk*)malloc(sizeof(Chunk)); /* Éú³ÉĞÂ¿é */
+			p = p->next; /* pæŒ‡å‘æ’å…¥ç‚¹æ‰€åœ¨å— */
+		q = (Chunk*)malloc(sizeof(Chunk)); /* ç”Ÿæˆæ–°å— */
 		for (i = 0; i < j; i++)
-			*(q->ch + i) = blank; /* ¿éqµÄÇ°j¸ö×Ö·ûÎªÌî²¹¿ÕÓàµÄ×Ö·û */
+			*(q->ch + i) = blank; /* å—qçš„å‰jä¸ªå­—ç¬¦ä¸ºå¡«è¡¥ç©ºä½™çš„å­—ç¬¦ */
 		for (i = j; i < CHUNKSIZE; i++)
 		{
-			*(q->ch + i) = *(p->ch + i); /* ¸´ÖÆ²åÈëµãºóµÄ×Ö·ûµ½q */
-			*(p->ch + i) = blank; /* pµÄ¸Ã×Ö·ûÎªÌî²¹¿ÕÓàµÄ×Ö·û */
+			*(q->ch + i) = *(p->ch + i); /* å¤åˆ¶æ’å…¥ç‚¹åçš„å­—ç¬¦åˆ°q */
+			*(p->ch + i) = blank; /* pçš„è¯¥å­—ç¬¦ä¸ºå¡«è¡¥ç©ºä½™çš„å­—ç¬¦ */
 		}
 		q->next = p->next;
 		p->next = t.head;
@@ -304,83 +304,83 @@ Status StrInsert(LString *S, int pos, LString T)
 }
 
 Status StrDelete(LString *S, int pos, int len)
-{ /* ´Ó´®SÖĞÉ¾³ıµÚpos¸ö×Ö·ûÆğ³¤¶ÈÎªlenµÄ×Ó´® */
-	int i = 1; /* µ±Ç°×Ö·ûÊÇS´®µÄµÚi¸ö×Ö·û(1¡«S.curlen) */
-	Chunk *p = (*S).head; /* pÖ¸ÏòSµÄµ±Ç°¿é */
-	int j = 0; /* µ±Ç°×Ö·ûÔÚµ±Ç°¿éÖĞµÄÎ»Ğò(0¡«CHUNKSIZE-1) */
-	if (pos<1 || pos>(*S).curlen - len + 1 || len < 0) /* pos,lenµÄÖµ³¬³ö·¶Î§ */
+{ /* ä»ä¸²Sä¸­åˆ é™¤ç¬¬posä¸ªå­—ç¬¦èµ·é•¿åº¦ä¸ºlençš„å­ä¸² */
+	int i = 1; /* å½“å‰å­—ç¬¦æ˜¯Sä¸²çš„ç¬¬iä¸ªå­—ç¬¦(1ï½S.curlen) */
+	Chunk *p = (*S).head; /* pæŒ‡å‘Sçš„å½“å‰å— */
+	int j = 0; /* å½“å‰å­—ç¬¦åœ¨å½“å‰å—ä¸­çš„ä½åº(0ï½CHUNKSIZE-1) */
+	if (pos<1 || pos>(*S).curlen - len + 1 || len < 0) /* pos,lençš„å€¼è¶…å‡ºèŒƒå›´ */
 		return ERROR;
-	while (i < pos) /* ÕÒµÚpos¸ö×Ö·û */
+	while (i < pos) /* æ‰¾ç¬¬posä¸ªå­—ç¬¦ */
 	{
-		while (*(p->ch + j) == blank) /* Ìø¹ıÌî²¹¿ÕÓàµÄ×Ö·û */
+		while (*(p->ch + j) == blank) /* è·³è¿‡å¡«è¡¥ç©ºä½™çš„å­—ç¬¦ */
 		{
 			j++;
-			if (j == CHUNKSIZE) /* Ó¦×ªÏòÏÂÒ»¿é */
+			if (j == CHUNKSIZE) /* åº”è½¬å‘ä¸‹ä¸€å— */
 			{
 				p = p->next;
 				j = 0;
 			}
 		}
-		i++; /* µ±Ç°×Ö·ûÊÇSµÄµÚi¸ö×Ö·û */
+		i++; /* å½“å‰å­—ç¬¦æ˜¯Sçš„ç¬¬iä¸ªå­—ç¬¦ */
 		j++;
-		if (j == CHUNKSIZE) /* Ó¦×ªÏòÏÂÒ»¿é */
+		if (j == CHUNKSIZE) /* åº”è½¬å‘ä¸‹ä¸€å— */
 		{
 			p = p->next;
 			j = 0;
 		}
-	}; /* i=pos,*(p->ch+j)ÎªSµÄµÚpos¸öÓĞĞ§×Ö·û */
-	while (i < pos + len) /* É¾³ı´ÓµÚpos¸ö×Ö·ûÆğµ½µÚpos+len-1¸ö×Ö·û */
+	}; /* i=pos,*(p->ch+j)ä¸ºSçš„ç¬¬posä¸ªæœ‰æ•ˆå­—ç¬¦ */
+	while (i < pos + len) /* åˆ é™¤ä»ç¬¬posä¸ªå­—ç¬¦èµ·åˆ°ç¬¬pos+len-1ä¸ªå­—ç¬¦ */
 	{
-		while (*(p->ch + j) == blank) /* Ìø¹ıÌî²¹¿ÕÓàµÄ×Ö·û */
+		while (*(p->ch + j) == blank) /* è·³è¿‡å¡«è¡¥ç©ºä½™çš„å­—ç¬¦ */
 		{
 			j++;
-			if (j == CHUNKSIZE) /* Ó¦×ªÏòÏÂÒ»¿é */
+			if (j == CHUNKSIZE) /* åº”è½¬å‘ä¸‹ä¸€å— */
 			{
 				p = p->next;
 				j = 0;
 			}
 		}
-		*(p->ch + j) = blank; /* °Ñ×Ö·û¸Ä³ÉÌî²¹¿ÕÓàµÄ×Ö·ûÀ´£¢É¾³ı£¢µÚi¸ö×Ö·û */
-		i++; /* µ½ÏÂÒ»¸ö×Ö·û */
+		*(p->ch + j) = blank; /* æŠŠå­—ç¬¦æ”¹æˆå¡«è¡¥ç©ºä½™çš„å­—ç¬¦æ¥ï¼‚åˆ é™¤ï¼‚ç¬¬iä¸ªå­—ç¬¦ */
+		i++; /* åˆ°ä¸‹ä¸€ä¸ªå­—ç¬¦ */
 		j++;
-		if (j == CHUNKSIZE) /* Ó¦×ªÏòÏÂÒ»¿é */
+		if (j == CHUNKSIZE) /* åº”è½¬å‘ä¸‹ä¸€å— */
 		{
 			p = p->next;
 			j = 0;
 		}
 	};
-	(*S).curlen -= len; /* ´®µÄµ±Ç°³¤¶È */
+	(*S).curlen -= len; /* ä¸²çš„å½“å‰é•¿åº¦ */
 	return OK;
 }
 
 Status Replace(LString *S, LString T, LString V)
-{ /* ³õÊ¼Ìõ¼ş: ´®S,TºÍV´æÔÚ,TÊÇ·Ç¿Õ´®£¨´Ëº¯ÊıÓë´®µÄ´æ´¢½á¹¹ÎŞ¹Ø£© */
-  /* ²Ù×÷½á¹û: ÓÃVÌæ»»Ö÷´®SÖĞ³öÏÖµÄËùÓĞÓëTÏàµÈµÄ²»ÖØµşµÄ×Ó´® */
-	int i = 1; /* ´Ó´®SµÄµÚÒ»¸ö×Ö·ûÆğ²éÕÒ´®T */
-	if (StrEmpty(T)) /* TÊÇ¿Õ´® */
+{ /* åˆå§‹æ¡ä»¶: ä¸²S,Tå’ŒVå­˜åœ¨,Tæ˜¯éç©ºä¸²ï¼ˆæ­¤å‡½æ•°ä¸ä¸²çš„å­˜å‚¨ç»“æ„æ— å…³ï¼‰ */
+  /* æ“ä½œç»“æœ: ç”¨Væ›¿æ¢ä¸»ä¸²Sä¸­å‡ºç°çš„æ‰€æœ‰ä¸Tç›¸ç­‰çš„ä¸é‡å çš„å­ä¸² */
+	int i = 1; /* ä»ä¸²Sçš„ç¬¬ä¸€ä¸ªå­—ç¬¦èµ·æŸ¥æ‰¾ä¸²T */
+	if (StrEmpty(T)) /* Tæ˜¯ç©ºä¸² */
 		return ERROR;
 	do
 	{
-		i = Index(*S, T, i); /* ½á¹ûiÎª´ÓÉÏÒ»¸öiÖ®ºóÕÒµ½µÄ×Ó´®TµÄÎ»ÖÃ */
-		if (i) /* ´®SÖĞ´æÔÚ´®T */
+		i = Index(*S, T, i); /* ç»“æœiä¸ºä»ä¸Šä¸€ä¸ªiä¹‹åæ‰¾åˆ°çš„å­ä¸²Tçš„ä½ç½® */
+		if (i) /* ä¸²Sä¸­å­˜åœ¨ä¸²T */
 		{
-			StrDelete(S, i, StrLength(T)); /* É¾³ı¸Ã´®T */
-			StrInsert(S, i, V); /* ÔÚÔ­´®TµÄÎ»ÖÃ²åÈë´®V */
-			i += StrLength(V); /* ÔÚ²åÈëµÄ´®VºóÃæ¼ÌĞø²éÕÒ´®T */
+			StrDelete(S, i, StrLength(T)); /* åˆ é™¤è¯¥ä¸²T */
+			StrInsert(S, i, V); /* åœ¨åŸä¸²Tçš„ä½ç½®æ’å…¥ä¸²V */
+			i += StrLength(V); /* åœ¨æ’å…¥çš„ä¸²Våé¢ç»§ç»­æŸ¥æ‰¾ä¸²T */
 		}
 	} while (i);
 	return OK;
 }
 
 void StrPrint(LString T)
-{ /* Êä³ö×Ö·û´®T¡£Áí¼Ó */
+{ /* è¾“å‡ºå­—ç¬¦ä¸²Tã€‚å¦åŠ  */
 	int i = 0, j;
 	Chunk *h;
 	h = T.head;
 	while (i < T.curlen)
 	{
 		for (j = 0; j < CHUNKSIZE; j++)
-			if (*(h->ch + j) != blank) /* ²»ÊÇÌî²¹¿ÕÓàµÄ×Ö·û */
+			if (*(h->ch + j) != blank) /* ä¸æ˜¯å¡«è¡¥ç©ºä½™çš„å­—ç¬¦ */
 			{
 				printf("%c", *(h->ch + j));
 				i++;
@@ -391,5 +391,5 @@ void StrPrint(LString T)
 }
 
 void DestroyString()
-{ /* ¿éÁ´ÀàĞÍµÄ×Ö·û´®ÎŞ·¨Ïú»Ù */
+{ /* å—é“¾ç±»å‹çš„å­—ç¬¦ä¸²æ— æ³•é”€æ¯ */
 }

@@ -1,69 +1,69 @@
-/* main2-9.c ¼ìÑébo2-9.cµÄÖ÷³ÌĞò(³ıÊä³öÓï¾äÍâ£¬ºÍmain2-8.cºÜÏñ) */
+/* main2-9.c æ£€éªŒbo2-9.cçš„ä¸»ç¨‹åº(é™¤è¾“å‡ºè¯­å¥å¤–ï¼Œå’Œmain2-8.cå¾ˆåƒ) */
 #include "../ch1/c1.h"
 typedef int ElemType;
-#include "c2-2.h" /* ´Ë¾äºÍmain2-8.c²»Í¬ */
-#include "bo2-2.c" /* ¼Ó´Ë¾ä */
-#include "bo2-9.c" /* ´Ë¾äºÍmain2-8.c²»Í¬ */
+#include "c2-2.h" /* æ­¤å¥å’Œmain2-8.cä¸åŒ */
+#include "bo2-2.c" /* åŠ æ­¤å¥ */
+#include "bo2-9.c" /* æ­¤å¥å’Œmain2-8.cä¸åŒ */
 
-void visit(ElemType c) /* ListTraverse()µ÷ÓÃµÄº¯Êı(ÀàĞÍÒªÒ»ÖÂ) */
+void visit(ElemType c) /* ListTraverse()è°ƒç”¨çš„å‡½æ•°(ç±»å‹è¦ä¸€è‡´) */
 {
 	printf("%d ", c);
 }
 
 void main()
 {
-	LinkList L; /* ´Ë¾äºÍmain2-8.c²»Í¬ */
+	LinkList L; /* æ­¤å¥å’Œmain2-8.cä¸åŒ */
 	ElemType d, e;
 	Status i;
 	int n;
-	printf("°´·Ç½µĞò½¨Á¢n¸öÔªËØµÄÏßĞÔ±íL,ÇëÊäÈëÔªËØ¸öÊın: ");
+	printf("æŒ‰éé™åºå»ºç«‹nä¸ªå…ƒç´ çš„çº¿æ€§è¡¨L,è¯·è¾“å…¥å…ƒç´ ä¸ªæ•°n: ");
 	scanf("%d", &n);
 	CreatAscend(&L, n);
-	printf("ÒÀ´ÎÊä³öLµÄÔªËØ£º");
+	printf("ä¾æ¬¡è¾“å‡ºLçš„å…ƒç´ ï¼š");
 	ListTraverse(L, visit);
-	InsertAscend(L, 10); /* °´·Ç½µĞò²åÈëÔªËØ10 */
-	printf("°´·Ç½µĞò²åÈëÔªËØ10ºó£¬ÏßĞÔ±íLÎª£º");
+	InsertAscend(L, 10); /* æŒ‰éé™åºæ’å…¥å…ƒç´ 10 */
+	printf("æŒ‰éé™åºæ’å…¥å…ƒç´ 10åï¼Œçº¿æ€§è¡¨Lä¸ºï¼š");
 	ListTraverse(L, visit);
-	HeadInsert(L, 12); /* ÔÚLµÄÍ·²¿²åÈë12 */
-	EndInsert(L, 9); /* ÔÚLµÄÎ²²¿²åÈë9 */
-	printf("ÔÚLµÄÍ·²¿²åÈë12£¬Î²²¿²åÈë9ºó£¬ÏßĞÔ±íLÎª£º");
+	HeadInsert(L, 12); /* åœ¨Lçš„å¤´éƒ¨æ’å…¥12 */
+	EndInsert(L, 9); /* åœ¨Lçš„å°¾éƒ¨æ’å…¥9 */
+	printf("åœ¨Lçš„å¤´éƒ¨æ’å…¥12ï¼Œå°¾éƒ¨æ’å…¥9åï¼Œçº¿æ€§è¡¨Lä¸ºï¼š");
 	ListTraverse(L, visit);
-	i = GetFirstElem(L, &e); /* ´Ë¾ä¼Ó */
-	printf("µÚ1¸öÔªËØÊÇ: %d\n", e); /* ´Ë¾ä¼Ó */
-	printf("ÇëÊäÈëÒªÉ¾³ıµÄÔªËØµÄÖµ: ");
+	i = GetFirstElem(L, &e); /* æ­¤å¥åŠ  */
+	printf("ç¬¬1ä¸ªå…ƒç´ æ˜¯: %d\n", e); /* æ­¤å¥åŠ  */
+	printf("è¯·è¾“å…¥è¦åˆ é™¤çš„å…ƒç´ çš„å€¼: ");
 	scanf("%d", &e);
 	i = DeleteElem(L, e);
 	if (i)
-		printf("³É¹¦É¾³ı%d!\n", e);
+		printf("æˆåŠŸåˆ é™¤%d!\n", e);
 	else
-		printf("²»´æÔÚÔªËØ%d!\n", e);
-	printf("ÏßĞÔ±íLÎª£º");
+		printf("ä¸å­˜åœ¨å…ƒç´ %d!\n", e);
+	printf("çº¿æ€§è¡¨Lä¸ºï¼š");
 	ListTraverse(L, visit);
-	printf("ÇëÊäÈëÒªÈ¡´úµÄÔªËØµÄĞòºÅ ÔªËØµÄĞÂÖµ: ");
+	printf("è¯·è¾“å…¥è¦å–ä»£çš„å…ƒç´ çš„åºå· å…ƒç´ çš„æ–°å€¼: ");
 	scanf("%d%d", &n, &e);
 	ReplaceElem(L, n, e);
-	printf("ÏßĞÔ±íLÎª£º");
+	printf("çº¿æ€§è¡¨Lä¸ºï¼š");
 	ListTraverse(L, visit);
 	DestroyList(&L);
-	printf("Ïú»ÙLºó,°´·ÇÉıĞòÖØĞÂ½¨Á¢n¸öÔªËØµÄÏßĞÔ±íL,ÇëÊäÈëÔªËØ¸öÊın(>2): ");
+	printf("é”€æ¯Lå,æŒ‰éå‡åºé‡æ–°å»ºç«‹nä¸ªå…ƒç´ çš„çº¿æ€§è¡¨L,è¯·è¾“å…¥å…ƒç´ ä¸ªæ•°n(>2): ");
 	scanf("%d", &n);
 	CreatDescend(&L, n);
-	printf("ÒÀ´ÎÊä³öLµÄÔªËØ£º");
+	printf("ä¾æ¬¡è¾“å‡ºLçš„å…ƒç´ ï¼š");
 	ListTraverse(L, visit);
-	InsertDescend(L, 10); /* °´·ÇÉıĞò²åÈëÔªËØ10 */
-	printf("°´·ÇÉıĞò²åÈëÔªËØ10ºó£¬ÏßĞÔ±íLÎª£º");
+	InsertDescend(L, 10); /* æŒ‰éå‡åºæ’å…¥å…ƒç´ 10 */
+	printf("æŒ‰éå‡åºæ’å…¥å…ƒç´ 10åï¼Œçº¿æ€§è¡¨Lä¸ºï¼š");
 	ListTraverse(L, visit);
-	printf("ÇëÊäÈëÒªÉ¾³ıµÄÔªËØµÄÖµ: ");
+	printf("è¯·è¾“å…¥è¦åˆ é™¤çš„å…ƒç´ çš„å€¼: ");
 	scanf("%d", &e);
 	i = DeleteElem(L, e);
 	if (i)
-		printf("³É¹¦É¾³ı%d!\n", e);
+		printf("æˆåŠŸåˆ é™¤%d!\n", e);
 	else
-		printf("²»´æÔÚÔªËØ%d!\n", e);
-	printf("ÏßĞÔ±íLÎª£º");
+		printf("ä¸å­˜åœ¨å…ƒç´ %d!\n", e);
+	printf("çº¿æ€§è¡¨Lä¸ºï¼š");
 	ListTraverse(L, visit);
 	DeleteFirst(L, &e);
 	DeleteTail(L, &d);
-	printf("É¾³ı±íÍ·ÔªËØ%dºÍ±íÎ²ÔªËØ%dºó,ÏßĞÔ±íLÎª£º", e, d);
+	printf("åˆ é™¤è¡¨å¤´å…ƒç´ %då’Œè¡¨å°¾å…ƒç´ %då,çº¿æ€§è¡¨Lä¸ºï¼š", e, d);
 	ListTraverse(L, visit);
 }

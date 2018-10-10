@@ -1,11 +1,11 @@
- /* bo5-52.c π„“Â±Ìµƒ È–¥–Œ Ω¥ÆŒ™HString¿‡–Õ */
- #include "../ch4/c4-2.h" /* ∂®“ÂHString¿‡–Õ */
- #include "../ch4/bo4-2.c" /* HString¿‡–Õµƒª˘±æ≤Ÿ◊˜ */
+ /* bo5-52.c Âπø‰πâË°®ÁöÑ‰π¶ÂÜôÂΩ¢Âºè‰∏≤‰∏∫HStringÁ±ªÂûã */
+ #include "../ch4/c4-2.h" /* ÂÆö‰πâHStringÁ±ªÂûã */
+ #include "../ch4/bo4-2.c" /* HStringÁ±ªÂûãÁöÑÂü∫Êú¨Êìç‰Ωú */
  Status sever(HString *str,HString *hstr)
- { /* Ω´∑«ø’¥Æstr∑÷∏Ó≥…¡Ω≤ø∑÷:hstrŒ™µ⁄“ª∏ˆ','÷Æ«∞µƒ◊”¥Æ,strŒ™÷Æ∫Ûµƒ◊”¥Æ */
-   int n,i=1,k=0; /* kº«…–Œ¥≈‰∂‘µƒ◊Û¿®∫≈∏ˆ ˝ */
+ { /* Â∞ÜÈùûÁ©∫‰∏≤strÂàÜÂâ≤Êàê‰∏§ÈÉ®ÂàÜ:hstr‰∏∫Á¨¨‰∏Ä‰∏™','‰πãÂâçÁöÑÂ≠ê‰∏≤,str‰∏∫‰πãÂêéÁöÑÂ≠ê‰∏≤ */
+   int n,i=1,k=0; /* kËÆ∞Â∞öÊú™ÈÖçÂØπÁöÑÂ∑¶Êã¨Âè∑‰∏™Êï∞ */
    HString ch,c1,c2,c3;
-   InitString(&ch); /* ≥ı ºªØHString¿‡–Õµƒ±‰¡ø */
+   InitString(&ch); /* ÂàùÂßãÂåñHStringÁ±ªÂûãÁöÑÂèòÈáè */
    InitString(&c1);
    InitString(&c2);
    InitString(&c3);
@@ -37,21 +37,21 @@
  }
 
  Status CreateGList(GList *L,HString S)
- { /* ≤…”√Õ∑Œ≤¡¥±Ì¥Ê¥¢Ω·ππ,”…π„“Â±Ìµƒ È–¥–Œ Ω¥ÆS¥¥Ω®π„“Â±ÌL°£…Ëemp="()" */
+ { /* ÈááÁî®Â§¥Â∞æÈìæË°®Â≠òÂÇ®ÁªìÊûÑ,Áî±Âπø‰πâË°®ÁöÑ‰π¶ÂÜôÂΩ¢Âºè‰∏≤SÂàõÂª∫Âπø‰πâË°®L„ÄÇËÆæemp="()" */
    HString emp,sub,hsub;
    GList p,q;
    InitString(&emp);
    InitString(&sub);
    InitString(&hsub);
    StrAssign(&emp,"()");
-   if(!StrCompare(S,emp)) /* ¥¥Ω®ø’±Ì */
+   if(!StrCompare(S,emp)) /* ÂàõÂª∫Á©∫Ë°® */
      *L=NULL;
    else
    {
      *L=(GList)malloc(sizeof(GLNode));
-     if(!*L) /* Ω®±ÌΩ·µ„≤ª≥…π¶ */
+     if(!*L) /* Âª∫Ë°®ÁªìÁÇπ‰∏çÊàêÂäü */
        exit(OVERFLOW);
-     if(StrLength(S)==1) /* ¥¥Ω®µ•‘≠◊”π„“Â±Ì */
+     if(StrLength(S)==1) /* ÂàõÂª∫ÂçïÂéüÂ≠êÂπø‰πâË°® */
      {
        (*L)->tag=ATOM;
        (*L)->a.atom=S.ch[0];
@@ -60,13 +60,13 @@
      {
        (*L)->tag=LIST;
        p=*L;
-       SubString(&sub,S,2,StrLength(S)-2); /* Õ—Õ‚≤„¿®∫≈ */
-       do /* ÷ÿ∏¥Ω®n∏ˆ◊”±Ì */
+       SubString(&sub,S,2,StrLength(S)-2); /* ËÑ±Â§ñÂ±ÇÊã¨Âè∑ */
+       do /* ÈáçÂ§çÂª∫n‰∏™Â≠êË°® */
        {
-         sever(&sub,&hsub); /* ¥”sub÷–∑÷¿Î≥ˆ±ÌÕ∑¥Æhsub */
+         sever(&sub,&hsub); /* ‰ªésub‰∏≠ÂàÜÁ¶ªÂá∫Ë°®Â§¥‰∏≤hsub */
          CreateGList(&p->a.ptr.hp,hsub);
          q=p;
-         if(!StrEmpty(sub)) /* ±ÌŒ≤≤ªø’ */
+         if(!StrEmpty(sub)) /* Ë°®Â∞æ‰∏çÁ©∫ */
          {
            p=(GList)malloc(sizeof(GLNode));
            if(!p)

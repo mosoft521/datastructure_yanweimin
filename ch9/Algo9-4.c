@@ -1,12 +1,12 @@
-/* algo9-4.c ¼ìÑébo9-2.cµÄ³ÌĞò */
+/* algo9-4.c æ£€éªŒbo9-2.cçš„ç¨‹åº */
 #include "../ch1/c1.h"
-#define N 10 /* Êı¾İÔªËØ¸öÊı */
-typedef int KeyType; /* Éè¹Ø¼ü×ÖÓòÎªÕûĞÍ */
+#define N 10 /* æ•°æ®å…ƒç´ ä¸ªæ•° */
+typedef int KeyType; /* è®¾å…³é”®å­—åŸŸä¸ºæ•´å‹ */
 typedef struct
 {
 	KeyType key;
 	int others;
-} ElemType; /* Êı¾İÔªËØÀàĞÍ */
+} ElemType; /* æ•°æ®å…ƒç´ ç±»å‹ */
 #include "c9.h"
 #include "bo9-2.c"
 
@@ -20,23 +20,23 @@ void main()
 	BiTree dt, p;
 	int i;
 	KeyType j;
-	ElemType r[N] = { {45,1},{12,2},{53,3},{3,4},{37,5},{24,6},{100,7},{61,8},{90,9},{78,10} }; /* ÒÔ½Ì¿ÆÊéÍ¼9.7(a)ÎªÀı */
-	InitDSTable(&dt); /* ¹¹Ôì¿Õ±í */
+	ElemType r[N] = { {45,1},{12,2},{53,3},{3,4},{37,5},{24,6},{100,7},{61,8},{90,9},{78,10} }; /* ä»¥æ•™ç§‘ä¹¦å›¾9.7(a)ä¸ºä¾‹ */
+	InitDSTable(&dt); /* æ„é€ ç©ºè¡¨ */
 	for (i = 0; i < N; i++)
-		InsertBST(&dt, r[i]); /* ÒÀ´Î²åÈëÊı¾İÔªËØ */
+		InsertBST(&dt, r[i]); /* ä¾æ¬¡æ’å…¥æ•°æ®å…ƒç´  */
 	TraverseDSTable(dt, print);
-	printf("\nÇëÊäÈë´ı²éÕÒµÄÖµ: ");
+	printf("\nè¯·è¾“å…¥å¾…æŸ¥æ‰¾çš„å€¼: ");
 	scanf("%d", &j);
 	p = SearchBST(dt, j);
 	if (p)
 	{
-		printf("±íÖĞ´æÔÚ´ËÖµ¡£");
+		printf("è¡¨ä¸­å­˜åœ¨æ­¤å€¼ã€‚");
 		DeleteBST(&dt, j);
-		printf("É¾³ı´ËÖµºó:\n");
+		printf("åˆ é™¤æ­¤å€¼å:\n");
 		TraverseDSTable(dt, print);
 		printf("\n");
 	}
 	else
-		printf("±íÖĞ²»´æÔÚ´ËÖµ\n");
+		printf("è¡¨ä¸­ä¸å­˜åœ¨æ­¤å€¼\n");
 	DestroyDSTable(&dt);
 }

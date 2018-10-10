@@ -1,4 +1,4 @@
-/* main2-4.c µ¥Ñ­»·Á´±í,¼ìÑébo2-4.cµÄÖ÷³ÌĞò */
+/* main2-4.c å•å¾ªç¯é“¾è¡¨,æ£€éªŒbo2-4.cçš„ä¸»ç¨‹åº */
 #include "../ch1/c1.h"
 typedef int ElemType;
 #include "c2-2.h"
@@ -23,37 +23,37 @@ void main()
 	ElemType e;
 	int j;
 	Status i;
-	i = InitList_CL(&L); /* ³õÊ¼»¯µ¥Ñ­»·Á´±íL */
-	printf("³õÊ¼»¯µ¥Ñ­»·Á´±íL i=%d (1:³õÊ¼»¯³É¹¦)\n", i);
+	i = InitList_CL(&L); /* åˆå§‹åŒ–å•å¾ªç¯é“¾è¡¨L */
+	printf("åˆå§‹åŒ–å•å¾ªç¯é“¾è¡¨L i=%d (1:åˆå§‹åŒ–æˆåŠŸ)\n", i);
 	i = ListEmpty_CL(L);
-	printf("LÊÇ·ñ¿Õ i=%d(1:¿Õ 0:·ñ)\n", i);
-	ListInsert_CL(&L, 1, 3); /* ÔÚLÖĞÒÀ´Î²åÈë3,5 */
+	printf("Læ˜¯å¦ç©º i=%d(1:ç©º 0:å¦)\n", i);
+	ListInsert_CL(&L, 1, 3); /* åœ¨Lä¸­ä¾æ¬¡æ’å…¥3,5 */
 	ListInsert_CL(&L, 2, 5);
 	i = GetElem_CL(L, 1, &e);
 	j = ListLength_CL(L);
-	printf("LÖĞÊı¾İÔªËØ¸öÊı=%d,µÚ1¸öÔªËØµÄÖµÎª%d¡£\n", j, e);
-	printf("LÖĞµÄÊı¾İÔªËØÒÀ´ÎÎª£º");
+	printf("Lä¸­æ•°æ®å…ƒç´ ä¸ªæ•°=%d,ç¬¬1ä¸ªå…ƒç´ çš„å€¼ä¸º%dã€‚\n", j, e);
+	printf("Lä¸­çš„æ•°æ®å…ƒç´ ä¾æ¬¡ä¸ºï¼š");
 	ListTraverse_CL(L, visit);
-	PriorElem_CL(L, 5, &e); /* ÇóÔªËØ5µÄÇ°Çı */
-	printf("5Ç°ÃæµÄÔªËØµÄÖµÎª%d¡£\n", e);
-	NextElem_CL(L, 3, &e); /* ÇóÔªËØ3µÄºó¼Ì */
-	printf("3ºóÃæµÄÔªËØµÄÖµÎª%d¡£\n", e);
-	printf("LÊÇ·ñ¿Õ %d(1:¿Õ 0:·ñ)\n", ListEmpty_CL(L));
+	PriorElem_CL(L, 5, &e); /* æ±‚å…ƒç´ 5çš„å‰é©± */
+	printf("5å‰é¢çš„å…ƒç´ çš„å€¼ä¸º%dã€‚\n", e);
+	NextElem_CL(L, 3, &e); /* æ±‚å…ƒç´ 3çš„åç»§ */
+	printf("3åé¢çš„å…ƒç´ çš„å€¼ä¸º%dã€‚\n", e);
+	printf("Læ˜¯å¦ç©º %d(1:ç©º 0:å¦)\n", ListEmpty_CL(L));
 	j = LocateElem_CL(L, 5, compare);
 	if (j)
-		printf("LµÄµÚ%d¸öÔªËØÎª5¡£\n", j);
+		printf("Lçš„ç¬¬%dä¸ªå…ƒç´ ä¸º5ã€‚\n", j);
 	else
-		printf("²»´æÔÚÖµÎª5µÄÔªËØ\n");
+		printf("ä¸å­˜åœ¨å€¼ä¸º5çš„å…ƒç´ \n");
 	i = ListDelete_CL(&L, 2, &e);
-	printf("É¾³ıLµÄµÚ2¸öÔªËØ£º\n");
+	printf("åˆ é™¤Lçš„ç¬¬2ä¸ªå…ƒç´ ï¼š\n");
 	if (i)
 	{
-		printf("É¾³ıµÄÔªËØÖµÎª%d,ÏÖÔÚLÖĞµÄÊı¾İÔªËØÒÀ´ÎÎª£º", e);
+		printf("åˆ é™¤çš„å…ƒç´ å€¼ä¸º%d,ç°åœ¨Lä¸­çš„æ•°æ®å…ƒç´ ä¾æ¬¡ä¸ºï¼š", e);
 		ListTraverse_CL(L, visit);
 	}
 	else
-		printf("É¾³ı²»³É¹¦£¡\n");
-	printf("Çå¿ÕL£º%d(1: ³É¹¦)\n", ClearList_CL(&L));
-	printf("Çå¿ÕLºó£¬LÊÇ·ñ¿Õ£º%d(1:¿Õ 0:·ñ)\n", ListEmpty_CL(L));
-	printf("Ïú»ÙL£º%d(1: ³É¹¦)\n", DestroyList_CL(&L));
+		printf("åˆ é™¤ä¸æˆåŠŸï¼\n");
+	printf("æ¸…ç©ºLï¼š%d(1: æˆåŠŸ)\n", ClearList_CL(&L));
+	printf("æ¸…ç©ºLåï¼ŒLæ˜¯å¦ç©ºï¼š%d(1:ç©º 0:å¦)\n", ListEmpty_CL(L));
+	printf("é”€æ¯Lï¼š%d(1: æˆåŠŸ)\n", DestroyList_CL(&L));
 }

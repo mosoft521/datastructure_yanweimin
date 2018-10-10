@@ -1,18 +1,18 @@
- /* bo5-6.c ¹ãÒå±íµÄÀ©Õ¹ÏßÐÔÁ´±í´æ´¢(´æ´¢½á¹¹ÓÉc5-6.h¶¨Òå)µÄ»ù±¾²Ù×÷(13¸ö) */
- #include "../ch4/c4-2.h" /* ¶¨ÒåHStringÀàÐÍ */
- #include "../ch4/bo4-2.c" /* HStringÀàÐÍµÄ»ù±¾²Ù×÷ */
- /* ¹ãÒå±íµÄÊéÐ´ÐÎÊ½´®ÎªHStringÀàÐÍ */
+ /* bo5-6.c å¹¿ä¹‰è¡¨çš„æ‰©å±•çº¿æ€§é“¾è¡¨å­˜å‚¨(å­˜å‚¨ç»“æž„ç”±c5-6.hå®šä¹‰)çš„åŸºæœ¬æ“ä½œ(13ä¸ª) */
+ #include "../ch4/c4-2.h" /* å®šä¹‰HStringç±»åž‹ */
+ #include "../ch4/bo4-2.c" /* HStringç±»åž‹çš„åŸºæœ¬æ“ä½œ */
+ /* å¹¿ä¹‰è¡¨çš„ä¹¦å†™å½¢å¼ä¸²ä¸ºHStringç±»åž‹ */
  Status InitGList(GList *L)
- { /* ´´½¨¿ÕµÄ¹ãÒå±íL */
+ { /* åˆ›å»ºç©ºçš„å¹¿ä¹‰è¡¨L */
    *L=NULL;
    return OK;
  }
 
- Status sever(HString *str,HString *hstr) /* Í¬bo5-52.c */
- { /* ½«·Ç¿Õ´®str·Ö¸î³ÉÁ½²¿·Ö:hstrÎªµÚÒ»¸ö','Ö®Ç°µÄ×Ó´®,strÎªÖ®ºóµÄ×Ó´® */
-   int n,i=1,k=0; /* k¼ÇÉÐÎ´Åä¶ÔµÄ×óÀ¨ºÅ¸öÊý */
+ Status sever(HString *str,HString *hstr) /* åŒbo5-52.c */
+ { /* å°†éžç©ºä¸²stråˆ†å‰²æˆä¸¤éƒ¨åˆ†:hsträ¸ºç¬¬ä¸€ä¸ª','ä¹‹å‰çš„å­ä¸²,strä¸ºä¹‹åŽçš„å­ä¸² */
+   int n,i=1,k=0; /* kè®°å°šæœªé…å¯¹çš„å·¦æ‹¬å·ä¸ªæ•° */
    HString ch,c1,c2,c3;
-   InitString(&ch); /* ³õÊ¼»¯HStringÀàÐÍµÄ±äÁ¿ */
+   InitString(&ch); /* åˆå§‹åŒ–HStringç±»åž‹çš„å˜é‡ */
    InitString(&c1);
    InitString(&c2);
    InitString(&c3);
@@ -44,39 +44,39 @@
  }
 
  Status CreateGList(GList *L,HString S)
- { /* ³õÊ¼Ìõ¼þ: SÊÇ¹ãÒå±íµÄÊéÐ´ÐÎÊ½´®¡£²Ù×÷½á¹û: ÓÉS´´½¨¹ãÒå±íL */
+ { /* åˆå§‹æ¡ä»¶: Sæ˜¯å¹¿ä¹‰è¡¨çš„ä¹¦å†™å½¢å¼ä¸²ã€‚æ“ä½œç»“æžœ: ç”±Såˆ›å»ºå¹¿ä¹‰è¡¨L */
    HString emp,sub,hsub;
    GList p;
    InitString(&emp);
    InitString(&sub);
    InitString(&hsub);
-   StrAssign(&emp,"()"); /* Éèemp="()" */
+   StrAssign(&emp,"()"); /* è®¾emp="()" */
    *L=(GList)malloc(sizeof(GLNode));
-   if(!*L) /* ½¨±í½áµã²»³É¹¦ */
+   if(!*L) /* å»ºè¡¨ç»“ç‚¹ä¸æˆåŠŸ */
      exit(OVERFLOW);
-   if(!StrCompare(S,emp)) /* ´´½¨¿Õ±í */
+   if(!StrCompare(S,emp)) /* åˆ›å»ºç©ºè¡¨ */
    {
      (*L)->tag=LIST;
      (*L)->a.hp=NULL;
      (*L)->tp=NULL;
    }
-   else if(StrLength(S)==1) /* ´´½¨µ¥Ô­×Ó¹ãÒå±í */
+   else if(StrLength(S)==1) /* åˆ›å»ºå•åŽŸå­å¹¿ä¹‰è¡¨ */
    {
      (*L)->tag=ATOM;
      (*L)->a.atom=S.ch[0];
      (*L)->tp=NULL;
    }
-   else /* ´´½¨Ò»°ã±í */
+   else /* åˆ›å»ºä¸€èˆ¬è¡¨ */
    {
      (*L)->tag=LIST;
      (*L)->tp=NULL;
-     SubString(&sub,S,2,StrLength(S)-2); /* ÍÑÍâ²ãÀ¨ºÅ */
-     sever(&sub,&hsub); /* ´ÓsubÖÐ·ÖÀë³ö±íÍ·´®hsub */
+     SubString(&sub,S,2,StrLength(S)-2); /* è„±å¤–å±‚æ‹¬å· */
+     sever(&sub,&hsub); /* ä»Žsubä¸­åˆ†ç¦»å‡ºè¡¨å¤´ä¸²hsub */
      CreateGList(&(*L)->a.hp,hsub);
      p=(*L)->a.hp;
-     while(!StrEmpty(sub)) /* ±íÎ²²»¿Õ,ÔòÖØ¸´½¨n¸ö×Ó±í */
+     while(!StrEmpty(sub)) /* è¡¨å°¾ä¸ç©º,åˆ™é‡å¤å»ºnä¸ªå­è¡¨ */
      {
-       sever(&sub,&hsub); /* ´ÓsubÖÐ·ÖÀë³ö±íÍ·´®hsub */
+       sever(&sub,&hsub); /* ä»Žsubä¸­åˆ†ç¦»å‡ºè¡¨å¤´ä¸²hsub */
        CreateGList(&p->tp,hsub);
        p=p->tp;
      };
@@ -85,25 +85,25 @@
  }
 
  void DestroyGList(GList *L)
- { /* ³õÊ¼Ìõ¼þ: ¹ãÒå±íL´æÔÚ¡£²Ù×÷½á¹û: Ïú»Ù¹ãÒå±íL */
+ { /* åˆå§‹æ¡ä»¶: å¹¿ä¹‰è¡¨Lå­˜åœ¨ã€‚æ“ä½œç»“æžœ: é”€æ¯å¹¿ä¹‰è¡¨L */
    GList ph,pt;
-   if(*L) /* L²»Îª¿Õ±í */
-   { /* ÓÉphºÍpt½ÓÌæLµÄÁ½¸öÖ¸Õë */
-     if((*L)->tag) /* ÊÇ×Ó±í */
+   if(*L) /* Lä¸ä¸ºç©ºè¡¨ */
+   { /* ç”±phå’ŒptæŽ¥æ›¿Lçš„ä¸¤ä¸ªæŒ‡é’ˆ */
+     if((*L)->tag) /* æ˜¯å­è¡¨ */
        ph=(*L)->a.hp;
-     else /* ÊÇÔ­×Ó */
+     else /* æ˜¯åŽŸå­ */
        ph=NULL;
      pt=(*L)->tp;
-     free(*L); /* ÊÍ·ÅLËùÖ¸½áµã */
-     *L=NULL; /* ÁîLÎª¿Õ */
-     DestroyGList(&ph); /* µÝ¹éÏú»Ù±íph */
-     DestroyGList(&pt); /* µÝ¹éÏú»Ù±ípt */
+     free(*L); /* é‡Šæ”¾Læ‰€æŒ‡ç»“ç‚¹ */
+     *L=NULL; /* ä»¤Lä¸ºç©º */
+     DestroyGList(&ph); /* é€’å½’é”€æ¯è¡¨ph */
+     DestroyGList(&pt); /* é€’å½’é”€æ¯è¡¨pt */
    }
  }
 
  Status CopyGList(GList *T,GList L)
- { /* ³õÊ¼Ìõ¼þ: ¹ãÒå±íL´æÔÚ¡£²Ù×÷½á¹û: ÓÉ¹ãÒå±íL¸´ÖÆµÃµ½¹ãÒå±íT */
-   if(!L) /* L¿Õ */
+ { /* åˆå§‹æ¡ä»¶: å¹¿ä¹‰è¡¨Lå­˜åœ¨ã€‚æ“ä½œç»“æžœ: ç”±å¹¿ä¹‰è¡¨Lå¤åˆ¶å¾—åˆ°å¹¿ä¹‰è¡¨T */
+   if(!L) /* Lç©º */
    {
      *T=NULL;
      return OK;
@@ -111,27 +111,27 @@
    *T=(GList)malloc(sizeof(GLNode));
    if(!*T)
      exit(OVERFLOW);
-   (*T)->tag=L->tag; /* ¸´ÖÆÃ¶¾Ù±äÁ¿ */
-   if(L->tag==ATOM) /* ¸´ÖÆ¹²ÓÃÌå²¿·Ö */
-     (*T)->a.atom=L->a.atom; /* ¸´ÖÆµ¥Ô­×Ó */
+   (*T)->tag=L->tag; /* å¤åˆ¶æžšä¸¾å˜é‡ */
+   if(L->tag==ATOM) /* å¤åˆ¶å…±ç”¨ä½“éƒ¨åˆ† */
+     (*T)->a.atom=L->a.atom; /* å¤åˆ¶å•åŽŸå­ */
    else
-     CopyGList(&(*T)->a.hp,L->a.hp); /* ¸´ÖÆ×Ó±í */
-   if(L->tp==NULL) /* µ½±íÎ² */
+     CopyGList(&(*T)->a.hp,L->a.hp); /* å¤åˆ¶å­è¡¨ */
+   if(L->tp==NULL) /* åˆ°è¡¨å°¾ */
      (*T)->tp=L->tp;
    else
-     CopyGList(&(*T)->tp,L->tp); /* ¸´ÖÆ×Ó±í */
+     CopyGList(&(*T)->tp,L->tp); /* å¤åˆ¶å­è¡¨ */
    return OK;
  }
 
  int GListLength(GList L)
- { /* ³õÊ¼Ìõ¼þ: ¹ãÒå±íL´æÔÚ¡£²Ù×÷½á¹û: Çó¹ãÒå±íLµÄ³¤¶È,¼´ÔªËØ¸öÊý */
+ { /* åˆå§‹æ¡ä»¶: å¹¿ä¹‰è¡¨Lå­˜åœ¨ã€‚æ“ä½œç»“æžœ: æ±‚å¹¿ä¹‰è¡¨Lçš„é•¿åº¦,å³å…ƒç´ ä¸ªæ•° */
    int len=0;
    GList p;
-   if(L->tag==LIST&&!L->a.hp) /* ¿Õ±í */
-     return 0; /* ¿Õ±í·µ»Ø0 */
-   else if(L->tag==ATOM) /* µ¥Ô­×Ó±í */
+   if(L->tag==LIST&&!L->a.hp) /* ç©ºè¡¨ */
+     return 0; /* ç©ºè¡¨è¿”å›ž0 */
+   else if(L->tag==ATOM) /* å•åŽŸå­è¡¨ */
      return 1;
-   else /* Ò»°ã±í */
+   else /* ä¸€èˆ¬è¡¨ */
    {
      p=L->a.hp;
      do
@@ -144,25 +144,25 @@
  }
 
  int GListDepth(GList L)
- { /* ³õÊ¼Ìõ¼þ: ¹ãÒå±íL´æÔÚ¡£²Ù×÷½á¹û: Çó¹ãÒå±íLµÄÉî¶È */
+ { /* åˆå§‹æ¡ä»¶: å¹¿ä¹‰è¡¨Lå­˜åœ¨ã€‚æ“ä½œç»“æžœ: æ±‚å¹¿ä¹‰è¡¨Lçš„æ·±åº¦ */
    int max,dep;
    GList pp;
    if(L==NULL||L->tag==LIST&&!L->a.hp)
-     return 1; /* ¿Õ±íÉî¶ÈÎª1 */
+     return 1; /* ç©ºè¡¨æ·±åº¦ä¸º1 */
    else if(L->tag==ATOM)
-     return 0; /* µ¥Ô­×Ó±íÉî¶ÈÎª0 */
-   else /* ÇóÒ»°ã±íµÄÉî¶È */
+     return 0; /* å•åŽŸå­è¡¨æ·±åº¦ä¸º0 */
+   else /* æ±‚ä¸€èˆ¬è¡¨çš„æ·±åº¦ */
      for(max=0,pp=L->a.hp;pp;pp=pp->tp)
      {
-       dep=GListDepth(pp); /* ÇóÒÔppÎªÍ·Ö¸ÕëµÄ×Ó±íÉî¶È */
+       dep=GListDepth(pp); /* æ±‚ä»¥ppä¸ºå¤´æŒ‡é’ˆçš„å­è¡¨æ·±åº¦ */
        if(dep>max)
          max=dep;
      }
-   return max+1; /* ·Ç¿Õ±íµÄÉî¶ÈÊÇ¸÷ÔªËØµÄÉî¶ÈµÄ×î´óÖµ¼Ó1 */
+   return max+1; /* éžç©ºè¡¨çš„æ·±åº¦æ˜¯å„å…ƒç´ çš„æ·±åº¦çš„æœ€å¤§å€¼åŠ 1 */
  }
 
  Status GListEmpty(GList L)
- { /* ³õÊ¼Ìõ¼þ: ¹ãÒå±íL´æÔÚ¡£²Ù×÷½á¹û: ÅÐ¶¨¹ãÒå±íLÊÇ·ñÎª¿Õ */
+ { /* åˆå§‹æ¡ä»¶: å¹¿ä¹‰è¡¨Lå­˜åœ¨ã€‚æ“ä½œç»“æžœ: åˆ¤å®šå¹¿ä¹‰è¡¨Læ˜¯å¦ä¸ºç©º */
    if(!L||L->tag==LIST&&!L->a.hp)
      return OK;
    else
@@ -170,12 +170,12 @@
  }
 
  GList GetHead(GList L)
- { /* ³õÊ¼Ìõ¼þ: ¹ãÒå±íL´æÔÚ¡£²Ù×÷½á¹û: È¡¹ãÒå±íLµÄÍ· */
+ { /* åˆå§‹æ¡ä»¶: å¹¿ä¹‰è¡¨Lå­˜åœ¨ã€‚æ“ä½œç»“æžœ: å–å¹¿ä¹‰è¡¨Lçš„å¤´ */
    GList h;
    InitGList(&h);
    if(!L||L->tag==LIST&&!L->a.hp)
    {
-     printf("\n¿Õ±íÎÞ±íÍ·!");
+     printf("\nç©ºè¡¨æ— è¡¨å¤´!");
      exit(0);
    }
    h=(GList)malloc(sizeof(GLNode));
@@ -191,11 +191,11 @@
  }
 
  GList GetTail(GList L)
- { /* ³õÊ¼Ìõ¼þ: ¹ãÒå±íL´æÔÚ¡£²Ù×÷½á¹û: È¡¹ãÒå±íLµÄÎ² */
+ { /* åˆå§‹æ¡ä»¶: å¹¿ä¹‰è¡¨Lå­˜åœ¨ã€‚æ“ä½œç»“æžœ: å–å¹¿ä¹‰è¡¨Lçš„å°¾ */
    GList T;
    if(!L)
    {
-     printf("\n¿Õ±íÎÞ±íÎ²!");
+     printf("\nç©ºè¡¨æ— è¡¨å°¾!");
      exit(0);
    }
    T=(GList)malloc(sizeof(GLNode));
@@ -208,8 +208,8 @@
  }
 
  Status InsertFirst_GL(GList *L,GList e)
- { /* ³õÊ¼Ìõ¼þ: ¹ãÒå±í´æÔÚ */
-   /* ²Ù×÷½á¹û: ²åÈëÔªËØe×÷Îª¹ãÒå±íLµÄµÚÒ»ÔªËØ(±íÍ·,Ò²¿ÉÄÜÊÇ×Ó±í) */
+ { /* åˆå§‹æ¡ä»¶: å¹¿ä¹‰è¡¨å­˜åœ¨ */
+   /* æ“ä½œç»“æžœ: æ’å…¥å…ƒç´ eä½œä¸ºå¹¿ä¹‰è¡¨Lçš„ç¬¬ä¸€å…ƒç´ (è¡¨å¤´,ä¹Ÿå¯èƒ½æ˜¯å­è¡¨) */
    GList p=(*L)->a.hp;
    (*L)->a.hp=e;
    e->tp=p;
@@ -217,7 +217,7 @@
  }
 
  Status DeleteFirst_GL(GList *L,GList *e)
- { /* ³õÊ¼Ìõ¼þ:¹ãÒå±íL´æÔÚ¡£²Ù×÷½á¹û:É¾³ý¹ãÒå±íLµÄµÚÒ»ÔªËØ,²¢ÓÃe·µ»ØÆäÖµ */
+ { /* åˆå§‹æ¡ä»¶:å¹¿ä¹‰è¡¨Lå­˜åœ¨ã€‚æ“ä½œç»“æžœ:åˆ é™¤å¹¿ä¹‰è¡¨Lçš„ç¬¬ä¸€å…ƒç´ ,å¹¶ç”¨eè¿”å›žå…¶å€¼ */
    if(*L)
    {
      *e=(*L)->a.hp;
@@ -230,16 +230,16 @@
  }
 
  void Traverse_GL(GList L,void(*v)(AtomType))
- { /* ÀûÓÃµÝ¹éËã·¨±éÀú¹ãÒå±íL */
+ { /* åˆ©ç”¨é€’å½’ç®—æ³•éåŽ†å¹¿ä¹‰è¡¨L */
    GList hp;
-   if(L) /* L²»¿Õ */
+   if(L) /* Lä¸ç©º */
    {
-     if(L->tag==ATOM) /* LÎªµ¥Ô­×Ó */
+     if(L->tag==ATOM) /* Lä¸ºå•åŽŸå­ */
      {
        v(L->a.atom);
        hp=NULL;
      }
-     else /* LÎª×Ó±í */
+     else /* Lä¸ºå­è¡¨ */
        hp=L->a.hp;
      Traverse_GL(hp,v);
      Traverse_GL(L->tp,v);

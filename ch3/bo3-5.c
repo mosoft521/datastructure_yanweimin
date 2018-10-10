@@ -1,9 +1,9 @@
- /* bo3-5.c Á´Õ»(´æ´¢½á¹¹ÓÉc2-2.h¶¨Òå)µÄ»ù±¾²Ù×÷(9¸ö) */
- /* ´ó²¿·Ö»ù±¾²Ù×÷ÊÇÓÉbo2-2.cºÍbo2-9.cppÖÐµÄº¯Êý¸ÄÃûµÃÀ´ */
- typedef SElemType ElemType; /* Õ»½áµãÀàÐÍºÍÁ´±í½áµãÀàÐÍÒ»ÖÂ */
+ /* bo3-5.c é“¾æ ˆ(å­˜å‚¨ç»“æž„ç”±c2-2.hå®šä¹‰)çš„åŸºæœ¬æ“ä½œ(9ä¸ª) */
+ /* å¤§éƒ¨åˆ†åŸºæœ¬æ“ä½œæ˜¯ç”±bo2-2.cå’Œbo2-9.cppä¸­çš„å‡½æ•°æ”¹åå¾—æ¥ */
+ typedef SElemType ElemType; /* æ ˆç»“ç‚¹ç±»åž‹å’Œé“¾è¡¨ç»“ç‚¹ç±»åž‹ä¸€è‡´ */
  #include "../ch2/c2-2.h"
- typedef LinkList LinkStack; /* LinkStackÊÇÖ¸ÏòÕ»½áµãµÄÖ¸ÕëÀàÐÍ */
- #define InitStack InitList /* InitStack()ÓëInitList()×÷ÓÃÏàÍ¬£¬ÏÂÍ¬ */
+ typedef LinkList LinkStack; /* LinkStackæ˜¯æŒ‡å‘æ ˆç»“ç‚¹çš„æŒ‡é’ˆç±»åž‹ */
+ #define InitStack InitList /* InitStack()ä¸ŽInitList()ä½œç”¨ç›¸åŒï¼Œä¸‹åŒ */
  #define DestroyStack DestroyList
  #define ClearStack ClearList
  #define StackEmpty ListEmpty
@@ -14,10 +14,10 @@
  #include "../ch2/bo2-2.c"
  #include "../ch2/bo2-9.c"
  Status StackTraverse(LinkStack S,void(*visit)(SElemType))
- { /* ´ÓÕ»µ×µ½Õ»¶¥ÒÀ´Î¶ÔÕ»ÖÐÃ¿¸öÔªËØµ÷ÓÃº¯Êývisit()¡£ */
+ { /* ä»Žæ ˆåº•åˆ°æ ˆé¡¶ä¾æ¬¡å¯¹æ ˆä¸­æ¯ä¸ªå…ƒç´ è°ƒç”¨å‡½æ•°visit()ã€‚ */
    SElemType e;
    LinkStack temp,p=S;
-   InitStack(&temp); /* ³õÊ¼»¯tempÕ» */
+   InitStack(&temp); /* åˆå§‹åŒ–tempæ ˆ */
    while(p->next)
    {
      GetTop(p,&e);

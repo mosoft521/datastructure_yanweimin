@@ -1,6 +1,6 @@
-/* algo7-7.c ÊµÏÖËã·¨7.16µÄ³ÌĞò */
-#define MAX_NAME 5 /* ¶¥µã×Ö·û´®µÄ×î´ó³¤¶È+1 */
-#define MAX_INFO 20 /* Ïà¹ØĞÅÏ¢×Ö·û´®µÄ×î´ó³¤¶È+1 */
+/* algo7-7.c å®ç°ç®—æ³•7.16çš„ç¨‹åº */
+#define MAX_NAME 5 /* é¡¶ç‚¹å­—ç¬¦ä¸²çš„æœ€å¤§é•¿åº¦+1 */
+#define MAX_INFO 20 /* ç›¸å…³ä¿¡æ¯å­—ç¬¦ä¸²çš„æœ€å¤§é•¿åº¦+1 */
 typedef int VRType;
 typedef char VertexType[MAX_NAME];
 typedef char InfoType;
@@ -11,17 +11,17 @@ typedef int PathMatrix[MAX_VERTEX_NUM][MAX_VERTEX_NUM][MAX_VERTEX_NUM];
 typedef int DistancMatrix[MAX_VERTEX_NUM][MAX_VERTEX_NUM];
 
 void ShortestPath_FLOYD(MGraph G, PathMatrix *P, DistancMatrix *D)
-{ /* ÓÃFloydËã·¨ÇóÓĞÏòÍøGÖĞ¸÷¶Ô¶¥µãvºÍwÖ®¼äµÄ×î¶ÌÂ·¾¶P[v][w]¼°Æä */
-  /* ´øÈ¨³¤¶ÈD[v][w]¡£ÈôP[v][w][u]ÎªTRUE,ÔòuÊÇ´Óvµ½wµ±Ç°ÇóµÃ×î¶Ì */
-  /* Â·¾¶ÉÏµÄ¶¥µã¡£Ëã·¨7.16 */
+{ /* ç”¨Floydç®—æ³•æ±‚æœ‰å‘ç½‘Gä¸­å„å¯¹é¡¶ç‚¹vå’Œwä¹‹é—´çš„æœ€çŸ­è·¯å¾„P[v][w]åŠå…¶ */
+  /* å¸¦æƒé•¿åº¦D[v][w]ã€‚è‹¥P[v][w][u]ä¸ºTRUE,åˆ™uæ˜¯ä»våˆ°wå½“å‰æ±‚å¾—æœ€çŸ­ */
+  /* è·¯å¾„ä¸Šçš„é¡¶ç‚¹ã€‚ç®—æ³•7.16 */
 	int u, v, w, i;
-	for (v = 0; v < G.vexnum; v++) /* ¸÷¶Ô½áµãÖ®¼ä³õÊ¼ÒÑÖªÂ·¾¶¼°¾àÀë */
+	for (v = 0; v < G.vexnum; v++) /* å„å¯¹ç»“ç‚¹ä¹‹é—´åˆå§‹å·²çŸ¥è·¯å¾„åŠè·ç¦» */
 		for (w = 0; w < G.vexnum; w++)
 		{
 			(*D)[v][w] = G.arcs[v][w].adj;
 			for (u = 0; u < G.vexnum; u++)
 				(*P)[v][w][u] = FALSE;
-			if ((*D)[v][w] < INFINITY) /* ´Óvµ½wÓĞÖ±½ÓÂ·¾¶ */
+			if ((*D)[v][w] < INFINITY) /* ä»våˆ°wæœ‰ç›´æ¥è·¯å¾„ */
 			{
 				(*P)[v][w][v] = TRUE;
 				(*P)[v][w][w] = TRUE;
@@ -30,7 +30,7 @@ void ShortestPath_FLOYD(MGraph G, PathMatrix *P, DistancMatrix *D)
 	for (u = 0; u < G.vexnum; u++)
 		for (v = 0; v < G.vexnum; v++)
 			for (w = 0; w < G.vexnum; w++)
-				if ((*D)[v][u] + (*D)[u][w] < (*D)[v][w]) /* ´Óv¾­uµ½wµÄÒ»ÌõÂ·¾¶¸ü¶Ì */
+				if ((*D)[v][u] + (*D)[u][w] < (*D)[v][w]) /* ä»vç»uåˆ°wçš„ä¸€æ¡è·¯å¾„æ›´çŸ­ */
 				{
 					(*D)[v][w] = (*D)[v][u] + (*D)[u][w];
 					for (i = 0; i < G.vexnum; i++)
@@ -46,8 +46,8 @@ void main()
 	DistancMatrix d;
 	CreateDN(&g);
 	for (i = 0; i < g.vexnum; i++)
-		g.arcs[i][i].adj = 0; /* ShortestPath_FLOYD()ÒªÇó¶Ô½ÇÔªËØÖµÎª0 */
-	printf("ÁÚ½Ó¾ØÕó:\n");
+		g.arcs[i][i].adj = 0; /* ShortestPath_FLOYD()è¦æ±‚å¯¹è§’å…ƒç´ å€¼ä¸º0 */
+	printf("é‚»æ¥çŸ©é˜µ:\n");
 	for (i = 0; i < g.vexnum; i++)
 	{
 		for (j = 0; j < g.vexnum; j++)
@@ -55,7 +55,7 @@ void main()
 		printf("\n");
 	}
 	ShortestPath_FLOYD(g, &p, &d);
-	printf("d¾ØÕó:\n");
+	printf("dçŸ©é˜µ:\n");
 	for (i = 0; i < g.vexnum; i++)
 	{
 		for (j = 0; j < g.vexnum; j++)
@@ -64,28 +64,28 @@ void main()
 	}
 	for (i = 0; i < g.vexnum; i++)
 		for (j = 0; j < g.vexnum; j++)
-			printf("%sµ½%sµÄ×î¶Ì¾àÀëÎª%d\n", g.vexs[i], g.vexs[j], d[i][j]);
-	printf("p¾ØÕó:\n");
-	l = strlen(g.vexs[0]); /* ¶¥µãÏòÁ¿×Ö·û´®µÄ³¤¶È */
+			printf("%såˆ°%sçš„æœ€çŸ­è·ç¦»ä¸º%d\n", g.vexs[i], g.vexs[j], d[i][j]);
+	printf("pçŸ©é˜µ:\n");
+	l = strlen(g.vexs[0]); /* é¡¶ç‚¹å‘é‡å­—ç¬¦ä¸²çš„é•¿åº¦ */
 	for (i = 0; i < g.vexnum; i++)
 	{
 		for (j = 0; j < g.vexnum; j++)
 		{
 			if (i != j)
 			{
-				m = 0; /* Õ¼Î»¿Õ¸ñ */
+				m = 0; /* å ä½ç©ºæ ¼ */
 				for (k = 0; k < g.vexnum; k++)
 					if (p[i][j][k] == 1)
 						printf("%s", g.vexs[k]);
 					else
 						m++;
-				for (n = 0; n < m*l; n++) /* Êä³öÕ¼Î»¿Õ¸ñ */
+				for (n = 0; n < m*l; n++) /* è¾“å‡ºå ä½ç©ºæ ¼ */
 					printf(" ");
 			}
 			else
-				for (k = 0; k < g.vexnum*l; k++) /* Êä³öÕ¼Î»¿Õ¸ñ */
+				for (k = 0; k < g.vexnum*l; k++) /* è¾“å‡ºå ä½ç©ºæ ¼ */
 					printf(" ");
-			printf("   "); /* Êä³ö¾ØÕóÔªËØÖ®¼äµÄ¼ä¾à */
+			printf("   "); /* è¾“å‡ºçŸ©é˜µå…ƒç´ ä¹‹é—´çš„é—´è· */
 		}
 		printf("\n");
 	}

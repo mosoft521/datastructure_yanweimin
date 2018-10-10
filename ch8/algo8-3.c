@@ -1,45 +1,45 @@
-/* algo8-3.c ÊµÏÖËã·¨8.3µÄ³ÌĞò */
+/* algo8-3.c å®ç°ç®—æ³•8.3çš„ç¨‹åº */
 #include "../ch1/c1.h"
-typedef char AtomType; /* ¶¨ÒåÔ­×ÓÀàĞÍÎª×Ö·ûĞÍ */
+typedef char AtomType; /* å®šä¹‰åŸå­ç±»å‹ä¸ºå­—ç¬¦å‹ */
 #include "c8-3.h"
 #include "../ch5/bo5-51.c"
 
-Status CreateMarkGList(GList *L, SString S) /* ÓÉbo5-51.c¸Ä */
-{ /* ²ÉÓÃÍ·Î²Á´±í´æ´¢½á¹¹,ÓÉ¹ãÒå±íµÄÊéĞ´ĞÎÊ½´®S´´½¨¹ãÒå±íL¡£Éèemp="()" */
+Status CreateMarkGList(GList *L, SString S) /* ç”±bo5-51.cæ”¹ */
+{ /* é‡‡ç”¨å¤´å°¾é“¾è¡¨å­˜å‚¨ç»“æ„,ç”±å¹¿ä¹‰è¡¨çš„ä¹¦å†™å½¢å¼ä¸²Såˆ›å»ºå¹¿ä¹‰è¡¨Lã€‚è®¾emp="()" */
 	SString sub, hsub, emp;
 	GList p, q;
 	StrAssign(emp, "()");
 	if (!StrCompare(S, emp))
-		*L = NULL; /* ´´½¨¿Õ±í */
+		*L = NULL; /* åˆ›å»ºç©ºè¡¨ */
 	else
 	{
 		*L = (GList)malloc(sizeof(GLNode));
-		if (!*L) /* ½¨±í½áµã */
+		if (!*L) /* å»ºè¡¨ç»“ç‚¹ */
 			exit(OVERFLOW);
-		if (StrLength(S) == 1) /* SÎªµ¥Ô­×Ó */
+		if (StrLength(S) == 1) /* Sä¸ºå•åŸå­ */
 		{
 			(*L)->tag = ATOM;
-			(*L)->a.atom = S[1]; /* ´´½¨µ¥Ô­×Ó¹ãÒå±í */
-			(*L)->mark = 0; /* ¼Ó */
+			(*L)->a.atom = S[1]; /* åˆ›å»ºå•åŸå­å¹¿ä¹‰è¡¨ */
+			(*L)->mark = 0; /* åŠ  */
 		}
 		else
 		{
 			(*L)->tag = LIST;
-			(*L)->mark = 0; /* ¼Ó */
+			(*L)->mark = 0; /* åŠ  */
 			p = *L;
-			SubString(sub, S, 2, StrLength(S) - 2); /* ÍÑÍâ²ãÀ¨ºÅ */
+			SubString(sub, S, 2, StrLength(S) - 2); /* è„±å¤–å±‚æ‹¬å· */
 			do
-			{ /* ÖØ¸´½¨n¸ö×Ó±í */
-				sever(sub, hsub); /* ´ÓsubÖĞ·ÖÀë³ö±íÍ·´®hsub */
-				CreateMarkGList(&p->a.ptr.hp, hsub); /* ¸Ä */
+			{ /* é‡å¤å»ºnä¸ªå­è¡¨ */
+				sever(sub, hsub); /* ä»subä¸­åˆ†ç¦»å‡ºè¡¨å¤´ä¸²hsub */
+				CreateMarkGList(&p->a.ptr.hp, hsub); /* æ”¹ */
 				q = p;
-				if (!StrEmpty(sub)) /* ±íÎ²²»¿Õ */
+				if (!StrEmpty(sub)) /* è¡¨å°¾ä¸ç©º */
 				{
 					p = (GLNode *)malloc(sizeof(GLNode));
 					if (!p)
 						exit(OVERFLOW);
 					p->tag = LIST;
-					p->mark = 0; /* ¼Ó */
+					p->mark = 0; /* åŠ  */
 					q->a.ptr.tp = p;
 				}
 			} while (!StrEmpty(sub));
@@ -49,42 +49,42 @@ Status CreateMarkGList(GList *L, SString S) /* ÓÉbo5-51.c¸Ä */
 	return OK;
 }
 
-void MarkList(GList GL) /* Ëã·¨8.3 */
-{ /* ±éÀú·Ç¿Õ¹ãÒå±íGL(GL!=NULLÇÒGL->mark==0),¶Ô±íÖĞËùÓĞÎ´¼Ó±êÖ¾µÄ½áµã¼Ó±êÖ¾¡£*/
+void MarkList(GList GL) /* ç®—æ³•8.3 */
+{ /* éå†éç©ºå¹¿ä¹‰è¡¨GL(GL!=NULLä¸”GL->mark==0),å¯¹è¡¨ä¸­æ‰€æœ‰æœªåŠ æ ‡å¿—çš„ç»“ç‚¹åŠ æ ‡å¿—ã€‚*/
 	GList t, p, q;
 	Status finished;
 	if (GL != NULL&&GL->mark == 0)
 	{
-		t = NULL; /* tÖ¸Ê¾pµÄÄ¸±í */
+		t = NULL; /* tæŒ‡ç¤ºpçš„æ¯è¡¨ */
 		p = GL;
 		finished = FALSE;
 		while (!finished)
 		{
 			while (p->mark == 0)
 			{
-				p->mark = 1; /* MarkHead(p)µÄÏ¸»¯ */
-				q = p->a.ptr.hp; /* qÖ¸Ïò*pµÄ±íÍ· */
+				p->mark = 1; /* MarkHead(p)çš„ç»†åŒ– */
+				q = p->a.ptr.hp; /* qæŒ‡å‘*pçš„è¡¨å¤´ */
 				if (q&&q->mark == 0)
 					if (q->tag == 0)
-						q->mark = 1; /* ATOM,±íÍ·ÎªÔ­×Ó½áµã */
+						q->mark = 1; /* ATOM,è¡¨å¤´ä¸ºåŸå­ç»“ç‚¹ */
 					else
-					{ /* ¼ÌĞø±éÀú×Ó±í */
+					{ /* ç»§ç»­éå†å­è¡¨ */
 						p->a.ptr.hp = t;
 						p->tag = ATOM;
 						t = p;
 						p = q;
 					}
-			} /* Íê³É¶Ô±íÍ·µÄ±êÖ¾ */
-			q = p->a.ptr.tp; /* qÖ¸Ïò*pµÄ±íÎ² */
+			} /* å®Œæˆå¯¹è¡¨å¤´çš„æ ‡å¿— */
+			q = p->a.ptr.tp; /* qæŒ‡å‘*pçš„è¡¨å°¾ */
 			if (q&&q->mark == 0)
-			{ /* ¼ÌĞø±éÀú±íÎ² */
+			{ /* ç»§ç»­éå†è¡¨å°¾ */
 				p->a.ptr.tp = t;
 				t = p;
 				p = q;
 			}
-			else /* BackTrack(finished)µÄÏ¸»¯ */
+			else /* BackTrack(finished)çš„ç»†åŒ– */
 			{
-				while (t&&t->tag == 1) /* LIST,±í½áµã,´Ó±íÎ²»ØËİ */
+				while (t&&t->tag == 1) /* LIST,è¡¨ç»“ç‚¹,ä»è¡¨å°¾å›æº¯ */
 				{
 					q = t;
 					t = q->a.ptr.tp;
@@ -92,26 +92,26 @@ void MarkList(GList GL) /* Ëã·¨8.3 */
 					p = q;
 				}
 				if (!t)
-					finished = TRUE; /* ½áÊø */
+					finished = TRUE; /* ç»“æŸ */
 				else
-				{ /* ´Ó±íÍ·»ØËİ */
+				{ /* ä»è¡¨å¤´å›æº¯ */
 					q = t;
 					t = q->a.ptr.hp;
 					q->a.ptr.hp = p;
 					p = q;
 					p->tag = LIST;
-				} /* ¼ÌĞø±éÀú±íÎ² */
+				} /* ç»§ç»­éå†è¡¨å°¾ */
 			}
 		}
 	}
 }
 
 void Traverse_GL(GList L, void(*v)(GList))
-{ /* ÀûÓÃµİ¹éËã·¨±éÀú¹ãÒå±íL,ÓÉbo5-5.c¸Ä */
-	if (L) /* L²»¿Õ */
-		if (L->tag == ATOM) /* LÎªµ¥Ô­×Ó */
+{ /* åˆ©ç”¨é€’å½’ç®—æ³•éå†å¹¿ä¹‰è¡¨L,ç”±bo5-5.cæ”¹ */
+	if (L) /* Lä¸ç©º */
+		if (L->tag == ATOM) /* Lä¸ºå•åŸå­ */
 			v(L);
-		else /* LÎª¹ãÒå±í */
+		else /* Lä¸ºå¹¿ä¹‰è¡¨ */
 		{
 			v(L);
 			Traverse_GL(L->a.ptr.hp, v);
@@ -132,12 +132,12 @@ void main()
 	char p[80];
 	SString t;
 	GList l;
-	printf("ÇëÊäÈë¹ãÒå±íl(ÊéĞ´ĞÎÊ½£º¿Õ±í:(),µ¥Ô­×Ó:a,ÆäËü:(a,(b),b)):\n");
+	printf("è¯·è¾“å…¥å¹¿ä¹‰è¡¨l(ä¹¦å†™å½¢å¼ï¼šç©ºè¡¨:(),å•åŸå­:a,å…¶å®ƒ:(a,(b),b)):\n");
 	gets(p);
 	StrAssign(t, p);
 	CreateMarkGList(&l, t);
 	Traverse_GL(l, visit);
 	MarkList(l);
-	printf("¼Ó±êÖ¾ºó:\n");
+	printf("åŠ æ ‡å¿—å:\n");
 	Traverse_GL(l, visit);
 }

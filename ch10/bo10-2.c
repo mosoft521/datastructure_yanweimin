@@ -1,17 +1,17 @@
- /* bo10-2.c ©ЛкыеепР╣д╨╞йЩ */
+ /* bo10-2.c Е©╚И─÷Ф▌▓Е╨▐Г └Е┤╫Ф∙╟ */
  void QSort(SqList *L,int low,int high)
- { /* ╤ткЁпР╠МLжп╣двспРапL.r[low..high]вВ©ЛкыеепР║ёкЦ╥╗10.7 */
+ { /* Е╞╧И║╨Е╨▐Х║╗LД╦╜Г └Е╜░Е╨▐Е┬≈L.r[low..high]Д╫°Е©╚И─÷Ф▌▓Е╨▐Ц─┌Г╝≈ФЁ∙10.7 */
    int pivotloc;
    if(low<high)
-   { /* Ё╓╤х╢Ссз1 */
-     pivotloc=Partition(L,low,high); /* ╫╚L.r[low..high]р╩╥жн╙╤Ч */
-     QSort(L,low,pivotloc-1); /* ╤т╣мвс╠М╣щ╧ИеепРё╛pivotlocйгйЮжАн╩жц */
-     QSort(L,pivotloc+1,high); /* ╤т╦ъвс╠М╣щ╧ИеепР */
+   { /* И∙©Е╨╕Е╓╖Д╨▌1 */
+     pivotloc=Partition(L,low,high); /* Е╟├L.r[low..high]Д╦─Е┬├Д╦╨Д╨▄ */
+     QSort(L,low,pivotloc-1); /* Е╞╧Д╫▌Е╜░Х║╗И─▓Е╫▓Ф▌▓Е╨▐О╪▄pivotlocФ≤╞Ф·╒Х╫╢Д╫█Г╫╝ */
+     QSort(L,pivotloc+1,high); /* Е╞╧И╚≤Е╜░Х║╗И─▓Е╫▓Ф▌▓Е╨▐ */
    }
  }
 
  void QuickSort(SqList *L)
- { /* ╤ткЁпР╠МLвВ©ЛкыеепР║ёкЦ╥╗10.8 */
+ { /* Е╞╧И║╨Е╨▐Х║╗LД╫°Е©╚И─÷Ф▌▓Е╨▐Ц─┌Г╝≈ФЁ∙10.8 */
    QSort(L,1,(*L).length);
  }
 

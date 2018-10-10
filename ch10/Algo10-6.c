@@ -1,24 +1,24 @@
-/* algo10-6.c �����㷨10.6(b)�ĳ���(�㷨10.6(a)�ĸĽ�) */
+/* algo10-6.c 调用算法10.6(b)的程序(算法10.6(a)的改进) */
 #include<stdio.h>
-typedef int InfoType; /* ������������������� */
+typedef int InfoType; /* 定义其它数据项的类型 */
 #include "c10-1.h"
 int Partition(SqList *L, int low, int high)
-{ /* ����˳���L���ӱ�r[low..high]�ļ�¼�������¼��λ���������� */
-  /* ����λ�ã���ʱ����֮ǰ���󣩵ļ�¼������С���������㷨10.6(b) */
+{ /* 交换顺序表L中子表r[low..high]的记录，枢轴记录到位，并返回其 */
+  /* 所在位置，此时在它之前（后）的记录均不大（小）于它。算法10.6(b) */
 	KeyType pivotkey;
-	(*L).r[0] = (*L).r[low]; /* ���ӱ��ĵ�һ����¼�������¼ */
-	pivotkey = (*L).r[low].key; /* �����¼�ؼ��� */
+	(*L).r[0] = (*L).r[low]; /* 用子表的第一个记录作枢轴记录 */
+	pivotkey = (*L).r[low].key; /* 枢轴记录关键字 */
 	while (low < high)
-	{ /* �ӱ������˽�������м�ɨ�� */
+	{ /* 从表的两端交替地向中间扫描 */
 		while (low < high && (*L).r[high].key >= pivotkey)
 			--high;
-		(*L).r[low] = (*L).r[high]; /* ���������¼С�ļ�¼�Ƶ��Ͷ� */
+		(*L).r[low] = (*L).r[high]; /* 将比枢轴记录小的记录移到低端 */
 		while (low < high && (*L).r[low].key <= pivotkey)
 			++low;
-		(*L).r[high] = (*L).r[low]; /* ���������¼��ļ�¼�Ƶ��߶� */
+		(*L).r[high] = (*L).r[low]; /* 将比枢轴记录大的记录移到高端 */
 	}
-	(*L).r[low] = (*L).r[0]; /* �����¼��λ */
-	return low; /* ��������λ�� */
+	(*L).r[low] = (*L).r[0]; /* 枢轴记录到位 */
+	return low; /* 返回枢轴位置 */
 }
 
 #include "bo10-2.c"
@@ -31,9 +31,9 @@ void main()
 	for (i = 0; i < N; i++)
 		l.r[i + 1] = d[i];
 	l.length = N;
-	printf("����ǰ:\n");
+	printf("排序前:\n");
 	print(l);
 	QuickSort(&l);
-	printf("�����:\n");
+	printf("排序后:\n");
 	print(l);
 }

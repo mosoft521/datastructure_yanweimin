@@ -1,19 +1,19 @@
-/* algo7-5.c Çó¹Ø¼üÂ·¾¶¡£ÊµÏÖËã·¨7.13¡¢7.14µÄ³ÌĞò */
+/* algo7-5.c æ±‚å…³é”®è·¯å¾„ã€‚å®ç°ç®—æ³•7.13ã€7.14çš„ç¨‹åº */
 #include "../ch1/c1.h"
-#define MAX_NAME 5 /* ¶¥µã×Ö·û´®µÄ×î´ó³¤¶È+1 */
+#define MAX_NAME 5 /* é¡¶ç‚¹å­—ç¬¦ä¸²çš„æœ€å¤§é•¿åº¦+1 */
 typedef int InfoType;
-typedef char VertexType[MAX_NAME]; /* ×Ö·û´®ÀàĞÍ */
+typedef char VertexType[MAX_NAME]; /* å­—ç¬¦ä¸²ç±»å‹ */
 #include "c7-2.h"
 #include "bo7-2.c"
 
-int ve[MAX_VERTEX_NUM]; /* È«¾Ö±äÁ¿(ÓÃÓÚËã·¨7.13ºÍËã·¨7.14) */
+int ve[MAX_VERTEX_NUM]; /* å…¨å±€å˜é‡(ç”¨äºç®—æ³•7.13å’Œç®—æ³•7.14) */
 
 void FindInDegree(ALGraph G, int indegree[])
-{ /* Çó¶¥µãµÄÈë¶È£¬Ëã·¨7.12¡¢7.13µ÷ÓÃ */
+{ /* æ±‚é¡¶ç‚¹çš„å…¥åº¦ï¼Œç®—æ³•7.12ã€7.13è°ƒç”¨ */
 	int i;
 	ArcNode *p;
 	for (i = 0; i < G.vexnum; i++)
-		indegree[i] = 0; /* ¸³³õÖµ */
+		indegree[i] = 0; /* èµ‹åˆå€¼ */
 	for (i = 0; i < G.vexnum; i++)
 	{
 		p = G.vertices[i].firstarc;
@@ -25,34 +25,34 @@ void FindInDegree(ALGraph G, int indegree[])
 	}
 }
 
-typedef int SElemType; /* Õ»ÀàĞÍ */
+typedef int SElemType; /* æ ˆç±»å‹ */
 #include "../ch3/c3-1.h"
 #include "../ch3/bo3-1.c"
 Status TopologicalOrder(ALGraph G, SqStack *T)
-{ /* Ëã·¨7.13  ÓĞÏòÍøG²ÉÓÃÁÚ½Ó±í´æ´¢½á¹¹,Çó¸÷¶¥µãÊÂ¼şµÄ×îÔç·¢ÉúÊ±¼äve */
-  /* (È«¾Ö±äÁ¿)¡£TÎªÍØÆËĞòÁĞ¶¥µãÕ»,SÎªÁãÈë¶È¶¥µãÕ»¡£ÈôGÎŞ»ØÂ·,ÔòÓÃÕ»T */
-  /* ·µ»ØGµÄÒ»¸öÍØÆËĞòÁĞ,ÇÒº¯ÊıÖµÎªOK,·ñÔòÎªERROR */
+{ /* ç®—æ³•7.13  æœ‰å‘ç½‘Gé‡‡ç”¨é‚»æ¥è¡¨å­˜å‚¨ç»“æ„,æ±‚å„é¡¶ç‚¹äº‹ä»¶çš„æœ€æ—©å‘ç”Ÿæ—¶é—´ve */
+  /* (å…¨å±€å˜é‡)ã€‚Tä¸ºæ‹“æ‰‘åºåˆ—é¡¶ç‚¹æ ˆ,Sä¸ºé›¶å…¥åº¦é¡¶ç‚¹æ ˆã€‚è‹¥Gæ— å›è·¯,åˆ™ç”¨æ ˆT */
+  /* è¿”å›Gçš„ä¸€ä¸ªæ‹“æ‰‘åºåˆ—,ä¸”å‡½æ•°å€¼ä¸ºOK,å¦åˆ™ä¸ºERROR */
 	int j, k, count, indegree[MAX_VERTEX_NUM];
 	SqStack S;
 	ArcNode *p;
-	FindInDegree(G, indegree);/*¶Ô¸÷¶¥µãÇóÈë¶Èindegree[0..vernum-1] */
-	InitStack(&S); /* ³õÊ¼»¯Õ» */
-	for (j = 0; j < G.vexnum; ++j) /* ½¨ÁãÈë¶È¶¥µãÕ»S */
+	FindInDegree(G, indegree);/*å¯¹å„é¡¶ç‚¹æ±‚å…¥åº¦indegree[0..vernum-1] */
+	InitStack(&S); /* åˆå§‹åŒ–æ ˆ */
+	for (j = 0; j < G.vexnum; ++j) /* å»ºé›¶å…¥åº¦é¡¶ç‚¹æ ˆS */
 		if (!indegree[j])
-			Push(&S, j); /* Èë¶ÈÎª0Õß½øÕ» */
-	InitStack(T); /* ³õÊ¼»¯ÍØÆËĞòÁĞ¶¥µãÕ» */
-	count = 0; /* ¶ÔÊä³ö¶¥µã¼ÆÊı */
-	for (j = 0; j<G.vexnum; ++j) /* ³õÊ¼»¯ve[]=0 (×îĞ¡Öµ) */
+			Push(&S, j); /* å…¥åº¦ä¸º0è€…è¿›æ ˆ */
+	InitStack(T); /* åˆå§‹åŒ–æ‹“æ‰‘åºåˆ—é¡¶ç‚¹æ ˆ */
+	count = 0; /* å¯¹è¾“å‡ºé¡¶ç‚¹è®¡æ•° */
+	for (j = 0; j<G.vexnum; ++j) /* åˆå§‹åŒ–ve[]=0 (æœ€å°å€¼) */
 		ve[j] = 0;
 	while (!StackEmpty(S))
-	{ /* Õ»²»¿Õ */
+	{ /* æ ˆä¸ç©º */
 		Pop(&S, &j);
-		Push(T, j); /* jºÅ¶¥µãÈëTÕ»²¢¼ÆÊı */
+		Push(T, j); /* jå·é¡¶ç‚¹å…¥Tæ ˆå¹¶è®¡æ•° */
 		++count;
 		for (p = G.vertices[j].firstarc; p; p = p->nextarc)
-		{ /* ¶ÔjºÅ¶¥µãµÄÃ¿¸öÁÚ½ÓµãµÄÈë¶È¼õ1 */
+		{ /* å¯¹jå·é¡¶ç‚¹çš„æ¯ä¸ªé‚»æ¥ç‚¹çš„å…¥åº¦å‡1 */
 			k = p->adjvex;
-			if (--indegree[k] == 0) /* ÈôÈë¶È¼õÎª0,ÔòÈëÕ» */
+			if (--indegree[k] == 0) /* è‹¥å…¥åº¦å‡ä¸º0,åˆ™å…¥æ ˆ */
 				Push(&S, k);
 			if (ve[j] + *(p->info)>ve[k])
 				ve[k] = ve[j] + *(p->info);
@@ -60,7 +60,7 @@ Status TopologicalOrder(ALGraph G, SqStack *T)
 	}
 	if (count < G.vexnum)
 	{
-		printf("´ËÓĞÏòÍøÓĞ»ØÂ·\n");
+		printf("æ­¤æœ‰å‘ç½‘æœ‰å›è·¯\n");
 		return ERROR;
 	}
 	else
@@ -68,21 +68,21 @@ Status TopologicalOrder(ALGraph G, SqStack *T)
 }
 
 Status CriticalPath(ALGraph G)
-{ /* Ëã·¨7.14 GÎªÓĞÏòÍø,Êä³öGµÄ¸÷Ïî¹Ø¼ü»î¶¯ */
+{ /* ç®—æ³•7.14 Gä¸ºæœ‰å‘ç½‘,è¾“å‡ºGçš„å„é¡¹å…³é”®æ´»åŠ¨ */
 	int vl[MAX_VERTEX_NUM];
 	SqStack T;
 	int i, j, k, ee, el;
 	ArcNode *p;
 	char dut, tag;
-	if (!TopologicalOrder(G, &T)) /* ²úÉúÓĞÏò»· */
+	if (!TopologicalOrder(G, &T)) /* äº§ç”Ÿæœ‰å‘ç¯ */
 		return ERROR;
 	j = ve[0];
-	for (i = 1; i<G.vexnum; i++) /* j=Max(ve[]) Íê³ÉµãµÄÖµ */
+	for (i = 1; i<G.vexnum; i++) /* j=Max(ve[]) å®Œæˆç‚¹çš„å€¼ */
 		if (ve[i]>j)
 			j = ve[i];
-	for (i = 0; i < G.vexnum; i++) /* ³õÊ¼»¯¶¥µãÊÂ¼şµÄ×î³Ù·¢ÉúÊ±¼ä(×î´óÖµ) */
-		vl[i] = j; /* Íê³ÉµãµÄ×îÔç·¢ÉúÊ±¼ä */
-	while (!StackEmpty(T)) /* °´ÍØÆËÄæĞòÇó¸÷¶¥µãµÄvlÖµ */
+	for (i = 0; i < G.vexnum; i++) /* åˆå§‹åŒ–é¡¶ç‚¹äº‹ä»¶çš„æœ€è¿Ÿå‘ç”Ÿæ—¶é—´(æœ€å¤§å€¼) */
+		vl[i] = j; /* å®Œæˆç‚¹çš„æœ€æ—©å‘ç”Ÿæ—¶é—´ */
+	while (!StackEmpty(T)) /* æŒ‰æ‹“æ‰‘é€†åºæ±‚å„é¡¶ç‚¹çš„vlå€¼ */
 		for (Pop(&T, &j), p = G.vertices[j].firstarc; p; p = p->nextarc)
 		{
 			k = p->adjvex;
@@ -91,7 +91,7 @@ Status CriticalPath(ALGraph G)
 				vl[j] = vl[k] - dut;
 		}
 	printf(" j  k  dut  ee  el  tag\n");
-	for (j = 0; j < G.vexnum; ++j) /* Çóee,elºÍ¹Ø¼ü»î¶¯ */
+	for (j = 0; j < G.vexnum; ++j) /* æ±‚ee,elå’Œå…³é”®æ´»åŠ¨ */
 		for (p = G.vertices[j].firstarc; p; p = p->nextarc)
 		{
 			k = p->adjvex;
@@ -99,16 +99,16 @@ Status CriticalPath(ALGraph G)
 			ee = ve[j];
 			el = vl[k] - dut;
 			tag = (ee == el) ? '*' : ' ';
-			printf("%2d %2d %3d %3d %3d    %c\n", j, k, dut, ee, el, tag); /* Êä³ö¹Ø¼ü»î¶¯ */
+			printf("%2d %2d %3d %3d %3d    %c\n", j, k, dut, ee, el, tag); /* è¾“å‡ºå…³é”®æ´»åŠ¨ */
 		}
-	printf("¹Ø¼ü»î¶¯Îª:\n");
-	for (j = 0; j < G.vexnum; ++j) /* Í¬ÉÏ */
+	printf("å…³é”®æ´»åŠ¨ä¸º:\n");
+	for (j = 0; j < G.vexnum; ++j) /* åŒä¸Š */
 		for (p = G.vertices[j].firstarc; p; p = p->nextarc)
 		{
 			k = p->adjvex;
 			dut = *(p->info);
 			if (ve[j] == vl[k] - dut)
-				printf("%s¡ú%s\n", G.vertices[j].data, G.vertices[k].data); /* Êä³ö¹Ø¼ü»î¶¯ */
+				printf("%sâ†’%s\n", G.vertices[j].data, G.vertices[k].data); /* è¾“å‡ºå…³é”®æ´»åŠ¨ */
 		}
 	return OK;
 }
@@ -116,7 +116,7 @@ Status CriticalPath(ALGraph G)
 void main()
 {
 	ALGraph h;
-	printf("ÇëÑ¡ÔñÓĞÏòÍø\n");
+	printf("è¯·é€‰æ‹©æœ‰å‘ç½‘\n");
 	CreateGraph(&h);
 	Display(h);
 	CriticalPath(h);

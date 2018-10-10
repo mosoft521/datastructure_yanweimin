@@ -1,6 +1,6 @@
-/* main3-5.c ¼ìÑébo3-5.cppµÄÖ÷³ÌĞò */
+/* main3-5.c æ£€éªŒbo3-5.cppçš„ä¸»ç¨‹åº */
 #include "../ch1/c1.h"
-typedef int SElemType; /* ¶¨ÒåÕ»ÔªËØµÄÀàĞÍ */
+typedef int SElemType; /* å®šä¹‰æ ˆå…ƒç´ çš„ç±»å‹ */
 #include "bo3-5.c"
 
 void print(SElemType c)
@@ -16,14 +16,14 @@ void main()
 	if (InitStack(&s))
 		for (j = 1; j <= 5; j++)
 			Push(s, 2 * j);
-	printf("Õ»ÖĞµÄÔªËØ´ÓÕ»µ×µ½Õ»¶¥ÒÀ´ÎÎª: ");
+	printf("æ ˆä¸­çš„å…ƒç´ ä»æ ˆåº•åˆ°æ ˆé¡¶ä¾æ¬¡ä¸º: ");
 	StackTraverse(s, print);
 	Pop(s, &e);
-	printf("µ¯³öµÄÕ»¶¥ÔªËØÎª%d\n", e);
-	printf("Õ»¿Õ·ñ: %d(1:¿Õ 0:·ñ)\n", StackEmpty(s));
+	printf("å¼¹å‡ºçš„æ ˆé¡¶å…ƒç´ ä¸º%d\n", e);
+	printf("æ ˆç©ºå¦: %d(1:ç©º 0:å¦)\n", StackEmpty(s));
 	GetTop(s, &e);
-	printf("µ±Ç°Õ»¶¥ÔªËØÎª%d£¬Õ»µÄ³¤¶ÈÎª%d\n", e, StackLength(s));
+	printf("å½“å‰æ ˆé¡¶å…ƒç´ ä¸º%dï¼Œæ ˆçš„é•¿åº¦ä¸º%d\n", e, StackLength(s));
 	ClearStack(s);
-	printf("Çå¿ÕÕ»ºó£¬Õ»¿Õ·ñ: %d(1:¿Õ 0:·ñ)£¬Õ»µÄ³¤¶ÈÎª%d\n", StackEmpty(s), StackLength(s));
-	printf("ÊÇ·ñÏú»ÙÕ»ÁË: %d(1:ÊÇ 0:·ñ)\n", DestroyStack(&s));
+	printf("æ¸…ç©ºæ ˆåï¼Œæ ˆç©ºå¦: %d(1:ç©º 0:å¦)ï¼Œæ ˆçš„é•¿åº¦ä¸º%d\n", StackEmpty(s), StackLength(s));
+	printf("æ˜¯å¦é”€æ¯æ ˆäº†: %d(1:æ˜¯ 0:å¦)\n", DestroyStack(&s));
 }

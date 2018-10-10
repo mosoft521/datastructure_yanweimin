@@ -1,7 +1,7 @@
- /* c9-2.h Æ½ºâ¶ş²æÊ÷µÄÀàĞÍ */
+ /* c9-2.h å¹³è¡¡äºŒå‰æ ‘çš„ç±»å‹ */
  typedef struct BSTNode
  {
    ElemType data;
-   int bf; /* ½áµãµÄÆ½ºâÒò×Ó */
-   struct BSTNode *lchild,*rchild; /* ×ó¡¢ÓÒº¢×ÓÖ¸Õë */
+   int bf; /* ç»“ç‚¹çš„å¹³è¡¡å› å­ */
+   struct BSTNode *lchild,*rchild; /* å·¦ã€å³å­©å­æŒ‡é’ˆ */
  }BSTNode,*BSTree;

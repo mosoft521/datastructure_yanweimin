@@ -1,26 +1,26 @@
- /* bo6-2.c ¶þ²æÊ÷µÄ¶þ²æÁ´±í´æ´¢(´æ´¢½á¹¹ÓÉc6-2.h¶¨Òå)µÄ»ù±¾²Ù×÷(22¸ö) */
+ /* bo6-2.c äºŒå‰æ ‘çš„äºŒå‰é“¾è¡¨å­˜å‚¨(å­˜å‚¨ç»“æž„ç”±c6-2.hå®šä¹‰)çš„åŸºæœ¬æ“ä½œ(22ä¸ª) */
  Status InitBiTree(BiTree *T)
- { /* ²Ù×÷½á¹û: ¹¹Ôì¿Õ¶þ²æÊ÷T */
+ { /* æ“ä½œç»“æžœ: æž„é€ ç©ºäºŒå‰æ ‘T */
    *T=NULL;
    return OK;
  }
 
  void DestroyBiTree(BiTree *T)
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ¡£²Ù×÷½á¹û: Ïú»Ù¶þ²æÊ÷T */
-   if(*T) /* ·Ç¿ÕÊ÷ */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨ã€‚æ“ä½œç»“æžœ: é”€æ¯äºŒå‰æ ‘T */
+   if(*T) /* éžç©ºæ ‘ */
    {
-     if((*T)->lchild) /* ÓÐ×óº¢×Ó */
-       DestroyBiTree(&(*T)->lchild); /* Ïú»Ù×óº¢×Ó×ÓÊ÷ */
-     if((*T)->rchild) /* ÓÐÓÒº¢×Ó */
-       DestroyBiTree(&(*T)->rchild); /* Ïú»ÙÓÒº¢×Ó×ÓÊ÷ */
-     free(*T); /* ÊÍ·Å¸ù½áµã */
-     *T=NULL; /* ¿ÕÖ¸Õë¸³0 */
+     if((*T)->lchild) /* æœ‰å·¦å­©å­ */
+       DestroyBiTree(&(*T)->lchild); /* é”€æ¯å·¦å­©å­å­æ ‘ */
+     if((*T)->rchild) /* æœ‰å³å­©å­ */
+       DestroyBiTree(&(*T)->rchild); /* é”€æ¯å³å­©å­å­æ ‘ */
+     free(*T); /* é‡Šæ”¾æ ¹ç»“ç‚¹ */
+     *T=NULL; /* ç©ºæŒ‡é’ˆèµ‹0 */
    }
  }
 
  void CreateBiTree(BiTree *T)
- { /* Ëã·¨6.4:°´ÏÈÐò´ÎÐòÊäÈë¶þ²æÊ÷ÖÐ½áµãµÄÖµ£¨¿ÉÎª×Ö·ûÐÍ»òÕûÐÍ£¬ÔÚÖ÷³ÌÖÐ */
-   /* ¶¨Òå£©£¬¹¹Ôì¶þ²æÁ´±í±íÊ¾µÄ¶þ²æÊ÷T¡£±äÁ¿Nil±íÊ¾¿Õ£¨×Ó£©Ê÷¡£ÓÐ¸Ä¶¯ */
+ { /* ç®—æ³•6.4:æŒ‰å…ˆåºæ¬¡åºè¾“å…¥äºŒå‰æ ‘ä¸­ç»“ç‚¹çš„å€¼ï¼ˆå¯ä¸ºå­—ç¬¦åž‹æˆ–æ•´åž‹ï¼Œåœ¨ä¸»ç¨‹ä¸­ */
+   /* å®šä¹‰ï¼‰ï¼Œæž„é€ äºŒå‰é“¾è¡¨è¡¨ç¤ºçš„äºŒå‰æ ‘Tã€‚å˜é‡Nilè¡¨ç¤ºç©ºï¼ˆå­ï¼‰æ ‘ã€‚æœ‰æ”¹åŠ¨ */
    TElemType ch;
  #ifdef CHAR
    scanf("%c",&ch);
@@ -28,22 +28,22 @@
  #ifdef INT
    scanf("%d",&ch);
  #endif
-   if(ch==Nil) /* ¿Õ */
+   if(ch==Nil) /* ç©º */
      *T=NULL;
    else
    {
      *T=(BiTree)malloc(sizeof(BiTNode));
      if(!*T)
        exit(OVERFLOW);
-     (*T)->data=ch; /* Éú³É¸ù½áµã */
-     CreateBiTree(&(*T)->lchild); /* ¹¹Ôì×ó×ÓÊ÷ */
-     CreateBiTree(&(*T)->rchild); /* ¹¹ÔìÓÒ×ÓÊ÷ */
+     (*T)->data=ch; /* ç”Ÿæˆæ ¹ç»“ç‚¹ */
+     CreateBiTree(&(*T)->lchild); /* æž„é€ å·¦å­æ ‘ */
+     CreateBiTree(&(*T)->rchild); /* æž„é€ å³å­æ ‘ */
    }
  }
 
  Status BiTreeEmpty(BiTree T)
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ */
-   /* ²Ù×÷½á¹û: ÈôTÎª¿Õ¶þ²æÊ÷,Ôò·µ»ØTRUE,·ñÔòFALSE */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨ */
+   /* æ“ä½œç»“æžœ: è‹¥Tä¸ºç©ºäºŒå‰æ ‘,åˆ™è¿”å›žTRUE,å¦åˆ™FALSE */
    if(T)
      return FALSE;
    else
@@ -53,7 +53,7 @@
  #define ClearBiTree DestroyBiTree
 
  int BiTreeDepth(BiTree T)
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ¡£²Ù×÷½á¹û: ·µ»ØTµÄÉî¶È */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨ã€‚æ“ä½œç»“æžœ: è¿”å›žTçš„æ·±åº¦ */
    int i,j;
    if(!T)
      return 0;
@@ -69,7 +69,7 @@
  }
 
  TElemType Root(BiTree T)
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ¡£²Ù×÷½á¹û: ·µ»ØTµÄ¸ù */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨ã€‚æ“ä½œç»“æžœ: è¿”å›žTçš„æ ¹ */
    if(BiTreeEmpty(T))
      return Nil;
    else
@@ -77,35 +77,35 @@
  }
 
  TElemType Value(BiTree p)
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ£¬pÖ¸ÏòTÖÐÄ³¸ö½áµã */
-   /* ²Ù×÷½á¹û: ·µ»ØpËùÖ¸½áµãµÄÖµ */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨ï¼ŒpæŒ‡å‘Tä¸­æŸä¸ªç»“ç‚¹ */
+   /* æ“ä½œç»“æžœ: è¿”å›žpæ‰€æŒ‡ç»“ç‚¹çš„å€¼ */
    return p->data;
  }
 
  void Assign(BiTree p,TElemType value)
- { /* ¸øpËùÖ¸½áµã¸³ÖµÎªvalue */
+ { /* ç»™pæ‰€æŒ‡ç»“ç‚¹èµ‹å€¼ä¸ºvalue */
    p->data=value;
  }
 
- typedef BiTree QElemType; /* Éè¶ÓÁÐÔªËØÎª¶þ²æÊ÷µÄÖ¸ÕëÀàÐÍ */
+ typedef BiTree QElemType; /* è®¾é˜Ÿåˆ—å…ƒç´ ä¸ºäºŒå‰æ ‘çš„æŒ‡é’ˆç±»åž‹ */
  #include "../ch3/c3-2.h"
  #include "../ch3/bo3-2.c"
  TElemType Parent(BiTree T,TElemType e)
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ,eÊÇTÖÐÄ³¸ö½áµã */
-   /* ²Ù×÷½á¹û: ÈôeÊÇTµÄ·Ç¸ù½áµã,Ôò·µ»ØËüµÄË«Ç×,·ñÔò·µ»Ø£¢¿Õ£¢ */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨,eæ˜¯Tä¸­æŸä¸ªç»“ç‚¹ */
+   /* æ“ä½œç»“æžœ: è‹¥eæ˜¯Tçš„éžæ ¹ç»“ç‚¹,åˆ™è¿”å›žå®ƒçš„åŒäº²,å¦åˆ™è¿”å›žï¼‚ç©ºï¼‚ */
    LinkQueue q;
    QElemType a;
-   if(T) /* ·Ç¿ÕÊ÷ */
+   if(T) /* éžç©ºæ ‘ */
    {
-     InitQueue(&q); /* ³õÊ¼»¯¶ÓÁÐ */
-     EnQueue(&q,T); /* Ê÷¸ùÈë¶Ó */
-     while(!QueueEmpty(q)) /* ¶Ó²»¿Õ */
+     InitQueue(&q); /* åˆå§‹åŒ–é˜Ÿåˆ— */
+     EnQueue(&q,T); /* æ ‘æ ¹å…¥é˜Ÿ */
+     while(!QueueEmpty(q)) /* é˜Ÿä¸ç©º */
      {
-       DeQueue(&q,&a); /* ³ö¶Ó,¶ÓÁÐÔªËØ¸³¸øa */
+       DeQueue(&q,&a); /* å‡ºé˜Ÿ,é˜Ÿåˆ—å…ƒç´ èµ‹ç»™a */
        if(a->lchild&&a->lchild->data==e||a->rchild&&a->rchild->data==e)
-       /* ÕÒµ½e(ÊÇÆä×ó»òÓÒº¢×Ó) */
-         return a->data; /* ·µ»ØeµÄË«Ç×µÄÖµ */
-       else /* Ã»ÕÒµ½e,ÔòÈë¶ÓÆä×óÓÒº¢×ÓÖ¸Õë(Èç¹û·Ç¿Õ) */
+       /* æ‰¾åˆ°e(æ˜¯å…¶å·¦æˆ–å³å­©å­) */
+         return a->data; /* è¿”å›žeçš„åŒäº²çš„å€¼ */
+       else /* æ²¡æ‰¾åˆ°e,åˆ™å…¥é˜Ÿå…¶å·¦å³å­©å­æŒ‡é’ˆ(å¦‚æžœéžç©º) */
        {
          if(a->lchild)
            EnQueue(&q,a->lchild);
@@ -114,93 +114,93 @@
        }
      }
    }
-   return Nil; /* Ê÷¿Õ»òÃ»ÕÒµ½e */
+   return Nil; /* æ ‘ç©ºæˆ–æ²¡æ‰¾åˆ°e */
  }
 
  BiTree Point(BiTree T,TElemType s)
- { /* ·µ»Ø¶þ²æÊ÷TÖÐÖ¸ÏòÔªËØÖµÎªsµÄ½áµãµÄÖ¸Õë¡£Áí¼Ó */
+ { /* è¿”å›žäºŒå‰æ ‘Tä¸­æŒ‡å‘å…ƒç´ å€¼ä¸ºsçš„ç»“ç‚¹çš„æŒ‡é’ˆã€‚å¦åŠ  */
    LinkQueue q;
    QElemType a;
-   if(T) /* ·Ç¿ÕÊ÷ */
+   if(T) /* éžç©ºæ ‘ */
    {
-     InitQueue(&q); /* ³õÊ¼»¯¶ÓÁÐ */
-     EnQueue(&q,T); /* ¸ù½áµãÈë¶Ó */
-     while(!QueueEmpty(q)) /* ¶Ó²»¿Õ */
+     InitQueue(&q); /* åˆå§‹åŒ–é˜Ÿåˆ— */
+     EnQueue(&q,T); /* æ ¹ç»“ç‚¹å…¥é˜Ÿ */
+     while(!QueueEmpty(q)) /* é˜Ÿä¸ç©º */
      {
-       DeQueue(&q,&a); /* ³ö¶Ó,¶ÓÁÐÔªËØ¸³¸øa */
+       DeQueue(&q,&a); /* å‡ºé˜Ÿ,é˜Ÿåˆ—å…ƒç´ èµ‹ç»™a */
        if(a->data==s)
          return a;
-       if(a->lchild) /* ÓÐ×óº¢×Ó */
-         EnQueue(&q,a->lchild); /* Èë¶Ó×óº¢×Ó */
-       if(a->rchild) /* ÓÐÓÒº¢×Ó */
-         EnQueue(&q,a->rchild); /* Èë¶ÓÓÒº¢×Ó */
+       if(a->lchild) /* æœ‰å·¦å­©å­ */
+         EnQueue(&q,a->lchild); /* å…¥é˜Ÿå·¦å­©å­ */
+       if(a->rchild) /* æœ‰å³å­©å­ */
+         EnQueue(&q,a->rchild); /* å…¥é˜Ÿå³å­©å­ */
      }
    }
    return NULL;
  }
 
  TElemType LeftChild(BiTree T,TElemType e)
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ,eÊÇTÖÐÄ³¸ö½áµã */
-   /* ²Ù×÷½á¹û: ·µ»ØeµÄ×óº¢×Ó¡£ÈôeÎÞ×óº¢×Ó,Ôò·µ»Ø£¢¿Õ£¢ */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨,eæ˜¯Tä¸­æŸä¸ªç»“ç‚¹ */
+   /* æ“ä½œç»“æžœ: è¿”å›žeçš„å·¦å­©å­ã€‚è‹¥eæ— å·¦å­©å­,åˆ™è¿”å›žï¼‚ç©ºï¼‚ */
    BiTree a;
-   if(T) /* ·Ç¿ÕÊ÷ */
+   if(T) /* éžç©ºæ ‘ */
    {
-     a=Point(T,e); /* aÊÇ½áµãeµÄÖ¸Õë */
-     if(a&&a->lchild) /* TÖÐ´æÔÚ½áµãeÇÒe´æÔÚ×óº¢×Ó */
-       return a->lchild->data; /* ·µ»ØeµÄ×óº¢×ÓµÄÖµ */
+     a=Point(T,e); /* aæ˜¯ç»“ç‚¹eçš„æŒ‡é’ˆ */
+     if(a&&a->lchild) /* Tä¸­å­˜åœ¨ç»“ç‚¹eä¸”eå­˜åœ¨å·¦å­©å­ */
+       return a->lchild->data; /* è¿”å›žeçš„å·¦å­©å­çš„å€¼ */
    }
-   return Nil; /* ÆäÓàÇé¿ö·µ»Ø¿Õ */
+   return Nil; /* å…¶ä½™æƒ…å†µè¿”å›žç©º */
  }
 
  TElemType RightChild(BiTree T,TElemType e)
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ,eÊÇTÖÐÄ³¸ö½áµã */
-   /* ²Ù×÷½á¹û: ·µ»ØeµÄÓÒº¢×Ó¡£ÈôeÎÞÓÒº¢×Ó,Ôò·µ»Ø£¢¿Õ£¢ */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨,eæ˜¯Tä¸­æŸä¸ªç»“ç‚¹ */
+   /* æ“ä½œç»“æžœ: è¿”å›žeçš„å³å­©å­ã€‚è‹¥eæ— å³å­©å­,åˆ™è¿”å›žï¼‚ç©ºï¼‚ */
    BiTree a;
-   if(T) /* ·Ç¿ÕÊ÷ */
+   if(T) /* éžç©ºæ ‘ */
    {
-     a=Point(T,e); /* aÊÇ½áµãeµÄÖ¸Õë */
-     if(a&&a->rchild) /* TÖÐ´æÔÚ½áµãeÇÒe´æÔÚÓÒº¢×Ó */
-       return a->rchild->data; /* ·µ»ØeµÄÓÒº¢×ÓµÄÖµ */
+     a=Point(T,e); /* aæ˜¯ç»“ç‚¹eçš„æŒ‡é’ˆ */
+     if(a&&a->rchild) /* Tä¸­å­˜åœ¨ç»“ç‚¹eä¸”eå­˜åœ¨å³å­©å­ */
+       return a->rchild->data; /* è¿”å›žeçš„å³å­©å­çš„å€¼ */
    }
-   return Nil; /* ÆäÓàÇé¿ö·µ»Ø¿Õ */
+   return Nil; /* å…¶ä½™æƒ…å†µè¿”å›žç©º */
  }
 
  TElemType LeftSibling(BiTree T,TElemType e)
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ,eÊÇTÖÐÄ³¸ö½áµã */
-   /* ²Ù×÷½á¹û: ·µ»ØeµÄ×óÐÖµÜ¡£ÈôeÊÇTµÄ×óº¢×Ó»òÎÞ×óÐÖµÜ,Ôò·µ»Ø£¢¿Õ£¢ */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨,eæ˜¯Tä¸­æŸä¸ªç»“ç‚¹ */
+   /* æ“ä½œç»“æžœ: è¿”å›žeçš„å·¦å…„å¼Ÿã€‚è‹¥eæ˜¯Tçš„å·¦å­©å­æˆ–æ— å·¦å…„å¼Ÿ,åˆ™è¿”å›žï¼‚ç©ºï¼‚ */
    TElemType a;
    BiTree p;
-   if(T) /* ·Ç¿ÕÊ÷ */
+   if(T) /* éžç©ºæ ‘ */
    {
-     a=Parent(T,e); /* aÎªeµÄË«Ç× */
-     p=Point(T,a); /* pÎªÖ¸Ïò½áµãaµÄÖ¸Õë */
-     if(p->lchild&&p->rchild&&p->rchild->data==e) /* p´æÔÚ×óÓÒº¢×ÓÇÒÓÒº¢×ÓÊÇe */
-       return p->lchild->data; /* ·µ»ØpµÄ×óº¢×Ó(eµÄ×óÐÖµÜ) */
+     a=Parent(T,e); /* aä¸ºeçš„åŒäº² */
+     p=Point(T,a); /* pä¸ºæŒ‡å‘ç»“ç‚¹açš„æŒ‡é’ˆ */
+     if(p->lchild&&p->rchild&&p->rchild->data==e) /* på­˜åœ¨å·¦å³å­©å­ä¸”å³å­©å­æ˜¯e */
+       return p->lchild->data; /* è¿”å›žpçš„å·¦å­©å­(eçš„å·¦å…„å¼Ÿ) */
    }
-   return Nil; /* Ê÷¿Õ»òÃ»ÕÒµ½eµÄ×óÐÖµÜ */
+   return Nil; /* æ ‘ç©ºæˆ–æ²¡æ‰¾åˆ°eçš„å·¦å…„å¼Ÿ */
  }
 
  TElemType RightSibling(BiTree T,TElemType e)
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ,eÊÇTÖÐÄ³¸ö½áµã */
-   /* ²Ù×÷½á¹û: ·µ»ØeµÄÓÒÐÖµÜ¡£ÈôeÊÇTµÄÓÒº¢×Ó»òÎÞÓÒÐÖµÜ,Ôò·µ»Ø£¢¿Õ£¢ */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨,eæ˜¯Tä¸­æŸä¸ªç»“ç‚¹ */
+   /* æ“ä½œç»“æžœ: è¿”å›žeçš„å³å…„å¼Ÿã€‚è‹¥eæ˜¯Tçš„å³å­©å­æˆ–æ— å³å…„å¼Ÿ,åˆ™è¿”å›žï¼‚ç©ºï¼‚ */
    TElemType a;
    BiTree p;
-   if(T) /* ·Ç¿ÕÊ÷ */
+   if(T) /* éžç©ºæ ‘ */
    {
-     a=Parent(T,e); /* aÎªeµÄË«Ç× */
-     p=Point(T,a); /* pÎªÖ¸Ïò½áµãaµÄÖ¸Õë */
-     if(p->lchild&&p->rchild&&p->lchild->data==e) /* p´æÔÚ×óÓÒº¢×ÓÇÒ×óº¢×ÓÊÇe */
-       return p->rchild->data; /* ·µ»ØpµÄÓÒº¢×Ó(eµÄÓÒÐÖµÜ) */
+     a=Parent(T,e); /* aä¸ºeçš„åŒäº² */
+     p=Point(T,a); /* pä¸ºæŒ‡å‘ç»“ç‚¹açš„æŒ‡é’ˆ */
+     if(p->lchild&&p->rchild&&p->lchild->data==e) /* på­˜åœ¨å·¦å³å­©å­ä¸”å·¦å­©å­æ˜¯e */
+       return p->rchild->data; /* è¿”å›žpçš„å³å­©å­(eçš„å³å…„å¼Ÿ) */
    }
-   return Nil; /* Ê÷¿Õ»òÃ»ÕÒµ½eµÄÓÒÐÖµÜ */
+   return Nil; /* æ ‘ç©ºæˆ–æ²¡æ‰¾åˆ°eçš„å³å…„å¼Ÿ */
  }
 
- Status InsertChild(BiTree p,int LR,BiTree c) /* ÐÎ²ÎTÎÞÓÃ */
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ,pÖ¸ÏòTÖÐÄ³¸ö½áµã,LRÎª0»ò1,·Ç¿Õ¶þ²æÊ÷cÓëT */
-   /*           ²»Ïà½»ÇÒÓÒ×ÓÊ÷Îª¿Õ */
-   /* ²Ù×÷½á¹û: ¸ù¾ÝLRÎª0»ò1,²åÈëcÎªTÖÐpËùÖ¸½áµãµÄ×ó»òÓÒ×ÓÊ÷¡£pËùÖ¸½áµãµÄ */
-   /*           Ô­ÓÐ×ó»òÓÒ×ÓÊ÷Ôò³ÉÎªcµÄÓÒ×ÓÊ÷ */
-   if(p) /* p²»¿Õ */
+ Status InsertChild(BiTree p,int LR,BiTree c) /* å½¢å‚Tæ— ç”¨ */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨,pæŒ‡å‘Tä¸­æŸä¸ªç»“ç‚¹,LRä¸º0æˆ–1,éžç©ºäºŒå‰æ ‘cä¸ŽT */
+   /*           ä¸ç›¸äº¤ä¸”å³å­æ ‘ä¸ºç©º */
+   /* æ“ä½œç»“æžœ: æ ¹æ®LRä¸º0æˆ–1,æ’å…¥cä¸ºTä¸­pæ‰€æŒ‡ç»“ç‚¹çš„å·¦æˆ–å³å­æ ‘ã€‚pæ‰€æŒ‡ç»“ç‚¹çš„ */
+   /*           åŽŸæœ‰å·¦æˆ–å³å­æ ‘åˆ™æˆä¸ºcçš„å³å­æ ‘ */
+   if(p) /* pä¸ç©º */
    {
      if(LR==0)
      {
@@ -214,62 +214,62 @@
      }
      return OK;
    }
-   return ERROR; /* p¿Õ */
+   return ERROR; /* pç©º */
  }
 
- Status DeleteChild(BiTree p,int LR) /* ÐÎ²ÎTÎÞÓÃ */
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ,pÖ¸ÏòTÖÐÄ³¸ö½áµã,LRÎª0»ò1 */
-   /* ²Ù×÷½á¹û: ¸ù¾ÝLRÎª0»ò1,É¾³ýTÖÐpËùÖ¸½áµãµÄ×ó»òÓÒ×ÓÊ÷ */
-   if(p) /* p²»¿Õ */
+ Status DeleteChild(BiTree p,int LR) /* å½¢å‚Tæ— ç”¨ */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨,pæŒ‡å‘Tä¸­æŸä¸ªç»“ç‚¹,LRä¸º0æˆ–1 */
+   /* æ“ä½œç»“æžœ: æ ¹æ®LRä¸º0æˆ–1,åˆ é™¤Tä¸­pæ‰€æŒ‡ç»“ç‚¹çš„å·¦æˆ–å³å­æ ‘ */
+   if(p) /* pä¸ç©º */
    {
-     if(LR==0) /* É¾³ý×ó×ÓÊ÷ */
+     if(LR==0) /* åˆ é™¤å·¦å­æ ‘ */
        ClearBiTree(&p->lchild);
-     else /* É¾³ýÓÒ×ÓÊ÷ */
+     else /* åˆ é™¤å³å­æ ‘ */
        ClearBiTree(&p->rchild);
      return OK;
    }
-   return ERROR; /* p¿Õ */
+   return ERROR; /* pç©º */
  }
 
  void PreOrderTraverse(BiTree T,Status(*Visit)(TElemType))
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ,VisitÊÇ¶Ô½áµã²Ù×÷µÄÓ¦ÓÃº¯Êý¡£Ëã·¨6.1£¬ÓÐ¸Ä¶¯ */
-   /* ²Ù×÷½á¹û: ÏÈÐòµÝ¹é±éÀúT,¶ÔÃ¿¸ö½áµãµ÷ÓÃº¯ÊýVisitÒ»´ÎÇÒ½öÒ»´Î */
-   if(T) /* T²»¿Õ */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨,Visitæ˜¯å¯¹ç»“ç‚¹æ“ä½œçš„åº”ç”¨å‡½æ•°ã€‚ç®—æ³•6.1ï¼Œæœ‰æ”¹åŠ¨ */
+   /* æ“ä½œç»“æžœ: å…ˆåºé€’å½’éåŽ†T,å¯¹æ¯ä¸ªç»“ç‚¹è°ƒç”¨å‡½æ•°Visitä¸€æ¬¡ä¸”ä»…ä¸€æ¬¡ */
+   if(T) /* Tä¸ç©º */
    {
-     Visit(T->data); /* ÏÈ·ÃÎÊ¸ù½áµã */
-     PreOrderTraverse(T->lchild,Visit); /* ÔÙÏÈÐò±éÀú×ó×ÓÊ÷ */
-     PreOrderTraverse(T->rchild,Visit); /* ×îºóÏÈÐò±éÀúÓÒ×ÓÊ÷ */
+     Visit(T->data); /* å…ˆè®¿é—®æ ¹ç»“ç‚¹ */
+     PreOrderTraverse(T->lchild,Visit); /* å†å…ˆåºéåŽ†å·¦å­æ ‘ */
+     PreOrderTraverse(T->rchild,Visit); /* æœ€åŽå…ˆåºéåŽ†å³å­æ ‘ */
    }
  }
 
  void InOrderTraverse(BiTree T,Status(*Visit)(TElemType))
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ,VisitÊÇ¶Ô½áµã²Ù×÷µÄÓ¦ÓÃº¯Êý */
-   /* ²Ù×÷½á¹û: ÖÐÐòµÝ¹é±éÀúT,¶ÔÃ¿¸ö½áµãµ÷ÓÃº¯ÊýVisitÒ»´ÎÇÒ½öÒ»´Î */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨,Visitæ˜¯å¯¹ç»“ç‚¹æ“ä½œçš„åº”ç”¨å‡½æ•° */
+   /* æ“ä½œç»“æžœ: ä¸­åºé€’å½’éåŽ†T,å¯¹æ¯ä¸ªç»“ç‚¹è°ƒç”¨å‡½æ•°Visitä¸€æ¬¡ä¸”ä»…ä¸€æ¬¡ */
    if(T)
    {
-     InOrderTraverse(T->lchild,Visit); /* ÏÈÖÐÐò±éÀú×ó×ÓÊ÷ */
-     Visit(T->data); /* ÔÙ·ÃÎÊ¸ù½áµã */
-     InOrderTraverse(T->rchild,Visit); /* ×îºóÖÐÐò±éÀúÓÒ×ÓÊ÷ */
+     InOrderTraverse(T->lchild,Visit); /* å…ˆä¸­åºéåŽ†å·¦å­æ ‘ */
+     Visit(T->data); /* å†è®¿é—®æ ¹ç»“ç‚¹ */
+     InOrderTraverse(T->rchild,Visit); /* æœ€åŽä¸­åºéåŽ†å³å­æ ‘ */
    }
  }
 
- typedef BiTree SElemType; /* ÉèÕ»ÔªËØÎª¶þ²æÊ÷µÄÖ¸ÕëÀàÐÍ */
+ typedef BiTree SElemType; /* è®¾æ ˆå…ƒç´ ä¸ºäºŒå‰æ ‘çš„æŒ‡é’ˆç±»åž‹ */
  #include "../ch3/c3-1.h"
  #include "../ch3/bo3-1.c"
  Status InOrderTraverse1(BiTree T,Status(*Visit)(TElemType))
- { /* ²ÉÓÃ¶þ²æÁ´±í´æ´¢½á¹¹£¬VisitÊÇ¶ÔÊý¾ÝÔªËØ²Ù×÷µÄÓ¦ÓÃº¯Êý¡£Ëã·¨6.3 */
-   /* ÖÐÐò±éÀú¶þ²æÊ÷TµÄ·ÇµÝ¹éËã·¨(ÀûÓÃÕ»)£¬¶ÔÃ¿¸öÊý¾ÝÔªËØµ÷ÓÃº¯ÊýVisit */
+ { /* é‡‡ç”¨äºŒå‰é“¾è¡¨å­˜å‚¨ç»“æž„ï¼ŒVisitæ˜¯å¯¹æ•°æ®å…ƒç´ æ“ä½œçš„åº”ç”¨å‡½æ•°ã€‚ç®—æ³•6.3 */
+   /* ä¸­åºéåŽ†äºŒå‰æ ‘Tçš„éžé€’å½’ç®—æ³•(åˆ©ç”¨æ ˆ)ï¼Œå¯¹æ¯ä¸ªæ•°æ®å…ƒç´ è°ƒç”¨å‡½æ•°Visit */
    SqStack S;
    InitStack(&S);
    while(T||!StackEmpty(S))
    {
      if(T)
-     { /* ¸ùÖ¸Õë½øÕ»,±éÀú×ó×ÓÊ÷ */
+     { /* æ ¹æŒ‡é’ˆè¿›æ ˆ,éåŽ†å·¦å­æ ‘ */
        Push(&S,T);
        T=T->lchild;
      }
      else
-     { /* ¸ùÖ¸ÕëÍËÕ»,·ÃÎÊ¸ù½áµã,±éÀúÓÒ×ÓÊ÷ */
+     { /* æ ¹æŒ‡é’ˆé€€æ ˆ,è®¿é—®æ ¹ç»“ç‚¹,éåŽ†å³å­æ ‘ */
        Pop(&S,&T);
        if(!Visit(T->data))
          return ERROR;
@@ -281,19 +281,19 @@
  }
 
  Status InOrderTraverse2(BiTree T,Status(*Visit)(TElemType))
- { /* ²ÉÓÃ¶þ²æÁ´±í´æ´¢½á¹¹£¬VisitÊÇ¶ÔÊý¾ÝÔªËØ²Ù×÷µÄÓ¦ÓÃº¯Êý¡£Ëã·¨6.2 */
-   /* ÖÐÐò±éÀú¶þ²æÊ÷TµÄ·ÇµÝ¹éËã·¨(ÀûÓÃÕ»)£¬¶ÔÃ¿¸öÊý¾ÝÔªËØµ÷ÓÃº¯ÊýVisit */
+ { /* é‡‡ç”¨äºŒå‰é“¾è¡¨å­˜å‚¨ç»“æž„ï¼ŒVisitæ˜¯å¯¹æ•°æ®å…ƒç´ æ“ä½œçš„åº”ç”¨å‡½æ•°ã€‚ç®—æ³•6.2 */
+   /* ä¸­åºéåŽ†äºŒå‰æ ‘Tçš„éžé€’å½’ç®—æ³•(åˆ©ç”¨æ ˆ)ï¼Œå¯¹æ¯ä¸ªæ•°æ®å…ƒç´ è°ƒç”¨å‡½æ•°Visit */
    SqStack S;
    BiTree p;
    InitStack(&S);
-   Push(&S,T); /* ¸ùÖ¸Õë½øÕ» */
+   Push(&S,T); /* æ ¹æŒ‡é’ˆè¿›æ ˆ */
    while(!StackEmpty(S))
    {
      while(GetTop(S,&p)&&p)
-       Push(&S,p->lchild); /* Ïò×ó×ßµ½¾¡Í· */
-     Pop(&S,&p); /* ¿ÕÖ¸ÕëÍËÕ» */
+       Push(&S,p->lchild); /* å‘å·¦èµ°åˆ°å°½å¤´ */
+     Pop(&S,&p); /* ç©ºæŒ‡é’ˆé€€æ ˆ */
      if(!StackEmpty(S))
-     { /* ·ÃÎÊ½áµã,ÏòÓÒÒ»²½ */
+     { /* è®¿é—®ç»“ç‚¹,å‘å³ä¸€æ­¥ */
        Pop(&S,&p);
        if(!Visit(p->data))
          return ERROR;
@@ -305,19 +305,19 @@
  }
 
  void PostOrderTraverse(BiTree T,Status(*Visit)(TElemType))
- { /* ³õÊ¼Ìõ¼þ: ¶þ²æÊ÷T´æÔÚ,VisitÊÇ¶Ô½áµã²Ù×÷µÄÓ¦ÓÃº¯Êý */
-   /* ²Ù×÷½á¹û: ºóÐòµÝ¹é±éÀúT,¶ÔÃ¿¸ö½áµãµ÷ÓÃº¯ÊýVisitÒ»´ÎÇÒ½öÒ»´Î */
-   if(T) /* T²»¿Õ */
+ { /* åˆå§‹æ¡ä»¶: äºŒå‰æ ‘Tå­˜åœ¨,Visitæ˜¯å¯¹ç»“ç‚¹æ“ä½œçš„åº”ç”¨å‡½æ•° */
+   /* æ“ä½œç»“æžœ: åŽåºé€’å½’éåŽ†T,å¯¹æ¯ä¸ªç»“ç‚¹è°ƒç”¨å‡½æ•°Visitä¸€æ¬¡ä¸”ä»…ä¸€æ¬¡ */
+   if(T) /* Tä¸ç©º */
    {
-     PostOrderTraverse(T->lchild,Visit); /* ÏÈºóÐò±éÀú×ó×ÓÊ÷ */
-     PostOrderTraverse(T->rchild,Visit); /* ÔÙºóÐò±éÀúÓÒ×ÓÊ÷ */
-     Visit(T->data); /* ×îºó·ÃÎÊ¸ù½áµã */
+     PostOrderTraverse(T->lchild,Visit); /* å…ˆåŽåºéåŽ†å·¦å­æ ‘ */
+     PostOrderTraverse(T->rchild,Visit); /* å†åŽåºéåŽ†å³å­æ ‘ */
+     Visit(T->data); /* æœ€åŽè®¿é—®æ ¹ç»“ç‚¹ */
    }
  }
 
  void LevelOrderTraverse(BiTree T,Status(*Visit)(TElemType))
- { /* ³õÊ¼Ìõ¼þ£º¶þ²æÊ÷T´æÔÚ,VisitÊÇ¶Ô½áµã²Ù×÷µÄÓ¦ÓÃº¯Êý */
-   /* ²Ù×÷½á¹û£º²ãÐòµÝ¹é±éÀúT(ÀûÓÃ¶ÓÁÐ),¶ÔÃ¿¸ö½áµãµ÷ÓÃº¯ÊýVisitÒ»´ÎÇÒ½öÒ»´Î */
+ { /* åˆå§‹æ¡ä»¶ï¼šäºŒå‰æ ‘Tå­˜åœ¨,Visitæ˜¯å¯¹ç»“ç‚¹æ“ä½œçš„åº”ç”¨å‡½æ•° */
+   /* æ“ä½œç»“æžœï¼šå±‚åºé€’å½’éåŽ†T(åˆ©ç”¨é˜Ÿåˆ—),å¯¹æ¯ä¸ªç»“ç‚¹è°ƒç”¨å‡½æ•°Visitä¸€æ¬¡ä¸”ä»…ä¸€æ¬¡ */
    LinkQueue q;
    QElemType a;
    if(T)

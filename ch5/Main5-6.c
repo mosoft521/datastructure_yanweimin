@@ -1,8 +1,8 @@
-/* main5-6.c ¼ìÑébo5-6.c(×Ö·û´®ÎªHStringÀàĞÍ)µÄÖ÷³ÌĞò */
-#include "../ch1/c1.h"/* ´Ë³ÌĞòÓëmain5-52.cÖ»ÓĞÁ½¾ä²»Í¬ */
-typedef char AtomType; /* ¶¨ÒåÔ­×ÓÀàĞÍÎª×Ö·ûĞÍ */
-#include "c5-6.h" /* ¶¨Òå¹ãÒå±íµÄÀ©Õ¹ÏßĞÔÁ´±í´æ´¢,Óëmain5-52.c²»Í¬ */
-#include "bo5-6.c" /* Óëmain5-52.c²»Í¬ */
+/* main5-6.c æ£€éªŒbo5-6.c(å­—ç¬¦ä¸²ä¸ºHStringç±»å‹)çš„ä¸»ç¨‹åº */
+#include "../ch1/c1.h"/* æ­¤ç¨‹åºä¸main5-52.cåªæœ‰ä¸¤å¥ä¸åŒ */
+typedef char AtomType; /* å®šä¹‰åŸå­ç±»å‹ä¸ºå­—ç¬¦å‹ */
+#include "c5-6.h" /* å®šä¹‰å¹¿ä¹‰è¡¨çš„æ‰©å±•çº¿æ€§é“¾è¡¨å­˜å‚¨,ä¸main5-52.cä¸åŒ */
+#include "bo5-6.c" /* ä¸main5-52.cä¸åŒ */
 
 void visit(AtomType e)
 {
@@ -17,34 +17,34 @@ void main()
 	InitString(&t);
 	InitGList(&l);
 	InitGList(&m);
-	printf("¿Õ¹ãÒå±ílµÄÉî¶È=%d lÊÇ·ñ¿Õ£¿%d(1:ÊÇ 0:·ñ)\n", GListDepth(l), GListEmpty(l));
-	printf("ÇëÊäÈë¹ãÒå±íl(ÊéĞ´ĞÎÊ½£º¿Õ±í:(),µ¥Ô­×Ó:a,ÆäËü:(a,(b),b)):\n");
+	printf("ç©ºå¹¿ä¹‰è¡¨lçš„æ·±åº¦=%d læ˜¯å¦ç©ºï¼Ÿ%d(1:æ˜¯ 0:å¦)\n", GListDepth(l), GListEmpty(l));
+	printf("è¯·è¾“å…¥å¹¿ä¹‰è¡¨l(ä¹¦å†™å½¢å¼ï¼šç©ºè¡¨:(),å•åŸå­:a,å…¶å®ƒ:(a,(b),b)):\n");
 	gets(p);
 	StrAssign(&t, p);
 	CreateGList(&l, t);
-	printf("¹ãÒå±ílµÄ³¤¶È=%d\n", GListLength(l));
-	printf("¹ãÒå±ílµÄÉî¶È=%d lÊÇ·ñ¿Õ£¿%d(1:ÊÇ 0:·ñ)\n", GListDepth(l), GListEmpty(l));
-	printf("±éÀú¹ãÒå±íl£º\n");
+	printf("å¹¿ä¹‰è¡¨lçš„é•¿åº¦=%d\n", GListLength(l));
+	printf("å¹¿ä¹‰è¡¨lçš„æ·±åº¦=%d læ˜¯å¦ç©ºï¼Ÿ%d(1:æ˜¯ 0:å¦)\n", GListDepth(l), GListEmpty(l));
+	printf("éå†å¹¿ä¹‰è¡¨lï¼š\n");
 	Traverse_GL(l, visit);
-	printf("\n¸´ÖÆ¹ãÒå±ím=l\n");
+	printf("\nå¤åˆ¶å¹¿ä¹‰è¡¨m=l\n");
 	CopyGList(&m, l);
-	printf("¹ãÒå±ímµÄ³¤¶È=%d\n", GListLength(m));
-	printf("¹ãÒå±ímµÄÉî¶È=%d\n", GListDepth(m));
-	printf("±éÀú¹ãÒå±ím£º\n");
+	printf("å¹¿ä¹‰è¡¨mçš„é•¿åº¦=%d\n", GListLength(m));
+	printf("å¹¿ä¹‰è¡¨mçš„æ·±åº¦=%d\n", GListDepth(m));
+	printf("éå†å¹¿ä¹‰è¡¨mï¼š\n");
 	Traverse_GL(m, visit);
 	DestroyGList(&m);
 	m = GetHead(l);
-	printf("\nmÊÇlµÄ±íÍ·£¬±éÀú¹ãÒå±ím£º\n");
+	printf("\nmæ˜¯lçš„è¡¨å¤´ï¼Œéå†å¹¿ä¹‰è¡¨mï¼š\n");
 	Traverse_GL(m, visit);
 	DestroyGList(&m);
 	m = GetTail(l);
-	printf("\nmÊÇlµÄ±íÎ²£¬±éÀú¹ãÒå±ím£º\n");
+	printf("\nmæ˜¯lçš„è¡¨å°¾ï¼Œéå†å¹¿ä¹‰è¡¨mï¼š\n");
 	Traverse_GL(m, visit);
 	InsertFirst_GL(&m, l);
-	printf("\n²åÈëlÎªmµÄ±íÍ·£¬±éÀú¹ãÒå±ím£º\n");
+	printf("\næ’å…¥lä¸ºmçš„è¡¨å¤´ï¼Œéå†å¹¿ä¹‰è¡¨mï¼š\n");
 	Traverse_GL(m, visit);
 	DeleteFirst_GL(&m, &l);
-	printf("\nÉ¾³ımµÄ±íÍ·£¬±éÀú¹ãÒå±ím£º\n");
+	printf("\nåˆ é™¤mçš„è¡¨å¤´ï¼Œéå†å¹¿ä¹‰è¡¨mï¼š\n");
 	Traverse_GL(m, visit);
 	printf("\n");
 	DestroyGList(&m);

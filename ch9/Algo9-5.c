@@ -1,12 +1,12 @@
-/* algo9-5.c ¼ìÑébo9-3.cµÄ³ÌĞò */
+/* algo9-5.c æ£€éªŒbo9-3.cçš„ç¨‹åº */
 #include "../ch1/c1.h"
-#define N 5 /* Êı¾İÔªËØ¸öÊı */
-typedef char KeyType; /* Éè¹Ø¼ü×ÖÓòÎª×Ö·ûĞÍ */
+#define N 5 /* æ•°æ®å…ƒç´ ä¸ªæ•° */
+typedef char KeyType; /* è®¾å…³é”®å­—åŸŸä¸ºå­—ç¬¦å‹ */
 typedef struct
 {
 	KeyType key;
 	int order;
-}ElemType; /* Êı¾İÔªËØÀàĞÍ */
+}ElemType; /* æ•°æ®å…ƒç´ ç±»å‹ */
 
 #include "c9.h"
 #include "c9-2.h"
@@ -23,18 +23,18 @@ void main()
 	Status k;
 	int i;
 	KeyType j;
-	ElemType r[N] = { {13,1},{24,2},{37,3},{90,4},{53,5} }; /* (ÒÔ½Ì¿ÆÊéÍ¼9.12ÎªÀı) */
-	InitDSTable(&dt); /* ³õÊ¼»¯¿ÕÊ÷ */
+	ElemType r[N] = { {13,1},{24,2},{37,3},{90,4},{53,5} }; /* (ä»¥æ•™ç§‘ä¹¦å›¾9.12ä¸ºä¾‹) */
+	InitDSTable(&dt); /* åˆå§‹åŒ–ç©ºæ ‘ */
 	for (i = 0; i < N; i++)
-		InsertAVL(&dt, r[i], &k); /* ½¨Æ½ºâ¶ş²æÊ÷ */
-	TraverseDSTable(dt, print); /* °´¹Ø¼ü×ÖË³Ğò±éÀú¶ş²æÊ÷ */
-	printf("\nÇëÊäÈë´ı²éÕÒµÄ¹Ø¼ü×Ö: ");
+		InsertAVL(&dt, r[i], &k); /* å»ºå¹³è¡¡äºŒå‰æ ‘ */
+	TraverseDSTable(dt, print); /* æŒ‰å…³é”®å­—é¡ºåºéå†äºŒå‰æ ‘ */
+	printf("\nè¯·è¾“å…¥å¾…æŸ¥æ‰¾çš„å…³é”®å­—: ");
 	scanf("%d", &j);
-	p = SearchBST(dt, j); /* ²éÕÒ¸ø¶¨¹Ø¼ü×ÖµÄ¼ÇÂ¼ */
+	p = SearchBST(dt, j); /* æŸ¥æ‰¾ç»™å®šå…³é”®å­—çš„è®°å½• */
 	if (p)
 		print(p->data);
 	else
-		printf("±íÖĞ²»´æÔÚ´ËÖµ");
+		printf("è¡¨ä¸­ä¸å­˜åœ¨æ­¤å€¼");
 	printf("\n");
 	DestroyDSTable(&dt);
 }

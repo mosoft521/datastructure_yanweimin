@@ -1,4 +1,4 @@
-/* main5-1.c ¼ìÑébo5-1.cµÄÖ÷³ÌĞò */
+/* main5-1.c æ£€éªŒbo5-1.cçš„ä¸»ç¨‹åº */
 #include "../ch1/c1.h"
 typedef int ElemType;
 #include "c5-1.h"
@@ -7,27 +7,27 @@ typedef int ElemType;
 void main()
 {
 	Array A;
-	int i, j, k, *p, dim = 3, bound1 = 3, bound2 = 4, bound3 = 2; /* a[3][4][2]Êı×é */
+	int i, j, k, *p, dim = 3, bound1 = 3, bound2 = 4, bound3 = 2; /* a[3][4][2]æ•°ç»„ */
 	ElemType e, *p1;
-	InitArray(&A, dim, bound1, bound2, bound3); /* ¹¹Ôì3£ª4£ª2µÄ3Î¬Êı×éA */
+	InitArray(&A, dim, bound1, bound2, bound3); /* æ„é€ 3ï¼Š4ï¼Š2çš„3ç»´æ•°ç»„A */
 	p = A.bounds;
 	printf("A.bounds=");
-	for (i = 0; i < dim; i++) /* Ë³ĞòÊä³öA.bounds */
+	for (i = 0; i < dim; i++) /* é¡ºåºè¾“å‡ºA.bounds */
 		printf("%d ", *(p + i));
 	p = A.constants;
 	printf("\nA.constants=");
-	for (i = 0; i < dim; i++) /* Ë³ĞòÊä³öA.constants */
+	for (i = 0; i < dim; i++) /* é¡ºåºè¾“å‡ºA.constants */
 		printf("%d ", *(p + i));
-	printf("\n%dÒ³%dĞĞ%dÁĞ¾ØÕóÔªËØÈçÏÂ:\n", bound1, bound2, bound3);
+	printf("\n%dé¡µ%dè¡Œ%dåˆ—çŸ©é˜µå…ƒç´ å¦‚ä¸‹:\n", bound1, bound2, bound3);
 	for (i = 0; i < bound1; i++)
 	{
 		for (j = 0; j < bound2; j++)
 		{
 			for (k = 0; k < bound3; k++)
 			{
-				Assign(&A, i * 100 + j * 10 + k, i, j, k); /* ½«i*100+j*10+k¸³Öµ¸øA[i][j][k] */
-				Value(&e, A, i, j, k); /* ½«A[i][j][k]µÄÖµ¸³¸øe */
-				printf("A[%d][%d][%d]=%2d ", i, j, k, e); /* Êä³öA[i][j][k] */
+				Assign(&A, i * 100 + j * 10 + k, i, j, k); /* å°†i*100+j*10+kèµ‹å€¼ç»™A[i][j][k] */
+				Value(&e, A, i, j, k); /* å°†A[i][j][k]çš„å€¼èµ‹ç»™e */
+				printf("A[%d][%d][%d]=%2d ", i, j, k, e); /* è¾“å‡ºA[i][j][k] */
 			}
 			printf("\n");
 		}
@@ -35,7 +35,7 @@ void main()
 	}
 	p1 = A.base;
 	printf("A.base=\n");
-	for (i = 0; i < bound1*bound2*bound3; i++) /* Ë³ĞòÊä³öA.base */
+	for (i = 0; i < bound1*bound2*bound3; i++) /* é¡ºåºè¾“å‡ºA.base */
 	{
 		printf("%4d", *(p1 + i));
 		if (i % (bound2*bound3) == bound2*bound3 - 1)

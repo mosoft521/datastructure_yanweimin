@@ -1,15 +1,15 @@
-/* algo10-7.c ¼òµ¥Ñ¡ÔñÅÅĞò */
+/* algo10-7.c ç®€å•é€‰æ‹©æ’åº */
 #include<stdio.h>
-typedef int InfoType; /* ¶¨ÒåÆäËüÊı¾İÏîµÄÀàĞÍ */
+typedef int InfoType; /* å®šä¹‰å…¶å®ƒæ•°æ®é¡¹çš„ç±»å‹ */
 #include "c10-1.h"
 int SelectMinKey(SqList L, int i)
-{ /* ·µ»ØÔÚL.r[i..L.length]ÖĞkey×îĞ¡µÄ¼ÇÂ¼µÄĞòºÅ */
+{ /* è¿”å›åœ¨L.r[i..L.length]ä¸­keyæœ€å°çš„è®°å½•çš„åºå· */
 	KeyType min;
 	int j, k;
-	k = i; /* ÉèµÚi¸öÎª×îĞ¡ */
+	k = i; /* è®¾ç¬¬iä¸ªä¸ºæœ€å° */
 	min = L.r[i].key;
 	for (j = i + 1; j <= L.length; j++)
-		if (L.r[j].key < min) /* ÕÒµ½¸üĞ¡µÄ */
+		if (L.r[j].key < min) /* æ‰¾åˆ°æ›´å°çš„ */
 		{
 			k = j;
 			min = L.r[j].key;
@@ -18,14 +18,14 @@ int SelectMinKey(SqList L, int i)
 }
 
 void SelectSort(SqList *L)
-{ /* ¶ÔË³Ğò±íL×÷¼òµ¥Ñ¡ÔñÅÅĞò¡£Ëã·¨10.9 */
+{ /* å¯¹é¡ºåºè¡¨Lä½œç®€å•é€‰æ‹©æ’åºã€‚ç®—æ³•10.9 */
 	int i, j;
 	RedType t;
 	for (i = 1; i < (*L).length; ++i)
-	{ /*  Ñ¡ÔñµÚiĞ¡µÄ¼ÇÂ¼£¬²¢½»»»µ½Î» */
-		j = SelectMinKey(*L, i); /* ÔÚL.r[i..L.length]ÖĞÑ¡Ôñkey×îĞ¡µÄ¼ÇÂ¼ */
+	{ /*  é€‰æ‹©ç¬¬iå°çš„è®°å½•ï¼Œå¹¶äº¤æ¢åˆ°ä½ */
+		j = SelectMinKey(*L, i); /* åœ¨L.r[i..L.length]ä¸­é€‰æ‹©keyæœ€å°çš„è®°å½• */
 		if (i != j)
-		{ /* ÓëµÚi¸ö¼ÇÂ¼½»»» */
+		{ /* ä¸ç¬¬iä¸ªè®°å½•äº¤æ¢ */
 			t = (*L).r[i];
 			(*L).r[i] = (*L).r[j];
 			(*L).r[j] = t;
@@ -50,9 +50,9 @@ void main()
 	for (i = 0; i < N; i++)
 		l.r[i + 1] = d[i];
 	l.length = N;
-	printf("ÅÅĞòÇ°:\n");
+	printf("æ’åºå‰:\n");
 	print(l);
 	SelectSort(&l);
-	printf("ÅÅĞòºó:\n");
+	printf("æ’åºå:\n");
 	print(l);
 }

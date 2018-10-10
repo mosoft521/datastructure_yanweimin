@@ -1,4 +1,4 @@
-/* main3-2.c ¼ìÑébo3-2.cµÄÖ÷³ÌĞò */
+/* main3-2.c æ£€éªŒbo3-2.cçš„ä¸»ç¨‹åº */
 #include "../ch1/c1.h"
 typedef int QElemType;
 #include "c3-2.h"
@@ -16,26 +16,26 @@ void main()
 	LinkQueue q;
 	i = InitQueue(&q);
 	if (i)
-		printf("³É¹¦µØ¹¹ÔìÁËÒ»¸ö¿Õ¶ÓÁĞ!\n");
-	printf("ÊÇ·ñ¿Õ¶ÓÁĞ£¿%d(1:¿Õ 0:·ñ)  ", QueueEmpty(q));
-	printf("¶ÓÁĞµÄ³¤¶ÈÎª%d\n", QueueLength(q));
+		printf("æˆåŠŸåœ°æ„é€ äº†ä¸€ä¸ªç©ºé˜Ÿåˆ—!\n");
+	printf("æ˜¯å¦ç©ºé˜Ÿåˆ—ï¼Ÿ%d(1:ç©º 0:å¦)  ", QueueEmpty(q));
+	printf("é˜Ÿåˆ—çš„é•¿åº¦ä¸º%d\n", QueueLength(q));
 	EnQueue(&q, -5);
 	EnQueue(&q, 5);
 	EnQueue(&q, 10);
-	printf("²åÈë3¸öÔªËØ(-5,5,10)ºó,¶ÓÁĞµÄ³¤¶ÈÎª%d\n", QueueLength(q));
-	printf("ÊÇ·ñ¿Õ¶ÓÁĞ£¿%d(1:¿Õ 0:·ñ)  ", QueueEmpty(q));
-	printf("¶ÓÁĞµÄÔªËØÒÀ´ÎÎª£º");
+	printf("æ’å…¥3ä¸ªå…ƒç´ (-5,5,10)å,é˜Ÿåˆ—çš„é•¿åº¦ä¸º%d\n", QueueLength(q));
+	printf("æ˜¯å¦ç©ºé˜Ÿåˆ—ï¼Ÿ%d(1:ç©º 0:å¦)  ", QueueEmpty(q));
+	printf("é˜Ÿåˆ—çš„å…ƒç´ ä¾æ¬¡ä¸ºï¼š");
 	QueueTraverse(q, visit);
 	i = GetHead_Q(q, &d);
 	if (i == OK)
-		printf("¶ÓÍ·ÔªËØÊÇ£º%d\n", d);
+		printf("é˜Ÿå¤´å…ƒç´ æ˜¯ï¼š%d\n", d);
 	DeQueue(&q, &d);
-	printf("É¾³ıÁË¶ÓÍ·ÔªËØ%d\n", d);
+	printf("åˆ é™¤äº†é˜Ÿå¤´å…ƒç´ %d\n", d);
 	i = GetHead_Q(q, &d);
 	if (i == OK)
-		printf("ĞÂµÄ¶ÓÍ·ÔªËØÊÇ£º%d\n", d);
+		printf("æ–°çš„é˜Ÿå¤´å…ƒç´ æ˜¯ï¼š%d\n", d);
 	ClearQueue(&q);
-	printf("Çå¿Õ¶ÓÁĞºó,q.front=%u q.rear=%u q.front->next=%u\n", q.front, q.rear, q.front->next);
+	printf("æ¸…ç©ºé˜Ÿåˆ—å,q.front=%u q.rear=%u q.front->next=%u\n", q.front, q.rear, q.front->next);
 	DestroyQueue(&q);
-	printf("Ïú»Ù¶ÓÁĞºó,q.front=%u q.rear=%u\n", q.front, q.rear);
+	printf("é”€æ¯é˜Ÿåˆ—å,q.front=%u q.rear=%u\n", q.front, q.rear);
 }

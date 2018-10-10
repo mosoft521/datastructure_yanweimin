@@ -1,25 +1,25 @@
-/* algo5-1.c ÊµÏÖËã·¨5.2µÄ³ÌĞò */
+/* algo5-1.c å®ç°ç®—æ³•5.2çš„ç¨‹åº */
 #include "../ch1/c1.h"
 typedef int ElemType;
 #include "c5-2.h"
 #include "bo5-2.c"
 
 Status FastTransposeSMatrix(TSMatrix M, TSMatrix *T)
-{ /* ¿ìËÙÇóÏ¡Êè¾ØÕóMµÄ×ªÖÃ¾ØÕóT¡£Ëã·¨5.2 */
+{ /* å¿«é€Ÿæ±‚ç¨€ç–çŸ©é˜µMçš„è½¬ç½®çŸ©é˜µTã€‚ç®—æ³•5.2 */
 	int p, q, t, col, *num, *cpot;
-	num = (int *)malloc((M.nu + 1)*sizeof(int)); /* Éú³ÉÊı×é£¨[0]²»ÓÃ£© */
-	cpot = (int *)malloc((M.nu + 1)*sizeof(int)); /* Éú³ÉÊı×é£¨[0]²»ÓÃ£© */
+	num = (int *)malloc((M.nu + 1)*sizeof(int)); /* ç”Ÿæˆæ•°ç»„ï¼ˆ[0]ä¸ç”¨ï¼‰ */
+	cpot = (int *)malloc((M.nu + 1)*sizeof(int)); /* ç”Ÿæˆæ•°ç»„ï¼ˆ[0]ä¸ç”¨ï¼‰ */
 	(*T).mu = M.nu;
 	(*T).nu = M.mu;
 	(*T).tu = M.tu;
 	if ((*T).tu)
 	{
 		for (col = 1; col <= M.nu; ++col)
-			num[col] = 0; /* Éè³õÖµ */
-		for (t = 1; t <= M.tu; ++t) /* ÇóMÖĞÃ¿Ò»ÁĞº¬·ÇÁãÔªËØ¸öÊı */
+			num[col] = 0; /* è®¾åˆå€¼ */
+		for (t = 1; t <= M.tu; ++t) /* æ±‚Mä¸­æ¯ä¸€åˆ—å«éé›¶å…ƒç´ ä¸ªæ•° */
 			++num[M.data[t].j];
 		cpot[1] = 1;
-		for (col = 2; col <= M.nu; ++col) /* ÇóµÚcolÁĞÖĞµÚÒ»¸ö·ÇÁãÔªÔÚ(*T).dataÖĞµÄĞòºÅ */
+		for (col = 2; col <= M.nu; ++col) /* æ±‚ç¬¬colåˆ—ä¸­ç¬¬ä¸€ä¸ªéé›¶å…ƒåœ¨(*T).dataä¸­çš„åºå· */
 			cpot[col] = cpot[col - 1] + num[col - 1];
 		for (p = 1; p <= M.tu; ++p)
 		{
@@ -39,11 +39,11 @@ Status FastTransposeSMatrix(TSMatrix M, TSMatrix *T)
 void main()
 {
 	TSMatrix A, B;
-	printf("´´½¨¾ØÕóA: ");
+	printf("åˆ›å»ºçŸ©é˜µA: ");
 	CreateSMatrix(&A);
 	PrintSMatrix(A);
 	FastTransposeSMatrix(A, &B);
-	printf("¾ØÕóB(AµÄ¿ìËÙ×ªÖÃ): ");
+	printf("çŸ©é˜µB(Açš„å¿«é€Ÿè½¬ç½®): ");
 	PrintSMatrix(B);
 	DestroySMatrix(&A);
 	DestroySMatrix(&B);

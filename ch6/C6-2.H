@@ -1,6 +1,6 @@
- /* c6-2.h 二叉树的二叉链表存储表示 */
+ /* c6-2.h 浜屽弶鏍戠殑浜屽弶閾捐〃瀛樺偍琛ㄧず */
  typedef struct BiTNode
  {
    TElemType data;
-   struct BiTNode *lchild,*rchild; /* 左右孩子指针 */
+   struct BiTNode *lchild,*rchild; /* 宸﹀彸瀛╁瓙鎸囬拡 */
  }BiTNode,*BiTree;

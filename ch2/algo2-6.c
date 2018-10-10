@@ -1,8 +1,8 @@
- /* algo2-6.c ÀûÓÃµ¥Á´±í½á¹¹´¦Àí½Ì¿ÆÊéÍ¼2.1(Ñ§Éú½¡¿µµÇ¼Ç±í) */
+ /* algo2-6.c åˆ©ç”¨å•é“¾è¡¨ç»“æ„å¤„ç†æ•™ç§‘ä¹¦å›¾2.1(å­¦ç”Ÿå¥åº·ç™»è®°è¡¨) */
 #include "../ch1/c1.h"
- #define NAMELEN 8 /* ĞÕÃû×î´ó³¤¶È */
- #define CLASSLEN 4 /* °à¼¶Ãû×î´ó³¤¶È */
- struct stud /* ¼ÇÂ¼µÄ½á¹¹ */
+ #define NAMELEN 8 /* å§“åæœ€å¤§é•¿åº¦ */
+ #define CLASSLEN 4 /* ç­çº§åæœ€å¤§é•¿åº¦ */
+ struct stud /* è®°å½•çš„ç»“æ„ */
  {
    char name[NAMELEN+1];
    long num;
@@ -11,23 +11,23 @@
    char Class[CLASSLEN+1];
    int health;
  };
- typedef struct stud ElemType; /* Á´±í½áµãÔªËØÀàĞÍÎª½á¹¹Ìå */
+ typedef struct stud ElemType; /* é“¾è¡¨ç»“ç‚¹å…ƒç´ ç±»å‹ä¸ºç»“æ„ä½“ */
  #include "c2-2.h"
- char sta[3][9]={"½¡¿µ  ","Ò»°ã  ","Éñ¾­Ë¥Èõ"}; /* ½¡¿µ×´¿ö(3Àà) */
+ char sta[3][9]={"å¥åº·  ","ä¸€èˆ¬  ","ç¥ç»è¡°å¼±"}; /* å¥åº·çŠ¶å†µ(3ç±») */
  FILE *fp;
 
- Status InitList(LinkList *L) /* ¿½×Ôbo2-2.c */
- { /* ²Ù×÷½á¹û£º¹¹ÔìÒ»¸ö¿ÕµÄÏßĞÔ±íL */
-   *L=(LinkList)malloc(sizeof(struct LNode)); /* ²úÉúÍ·½áµã,²¢Ê¹LÖ¸Ïò´ËÍ·½áµã */
-   if(!*L) /* ´æ´¢·ÖÅäÊ§°Ü */
+ Status InitList(LinkList *L) /* æ‹·è‡ªbo2-2.c */
+ { /* æ“ä½œç»“æœï¼šæ„é€ ä¸€ä¸ªç©ºçš„çº¿æ€§è¡¨L */
+   *L=(LinkList)malloc(sizeof(struct LNode)); /* äº§ç”Ÿå¤´ç»“ç‚¹,å¹¶ä½¿LæŒ‡å‘æ­¤å¤´ç»“ç‚¹ */
+   if(!*L) /* å­˜å‚¨åˆ†é…å¤±è´¥ */
      exit(OVERFLOW);
-   (*L)->next=NULL; /* Ö¸ÕëÓòÎª¿Õ */
+   (*L)->next=NULL; /* æŒ‡é’ˆåŸŸä¸ºç©º */
    return OK;
  }
 
- Status ListTraverse(LinkList L,void(*vi)(ElemType)) /* ¿½×Ôbo2-2.c */
- { /* ³õÊ¼Ìõ¼ş£ºÏßĞÔ±íLÒÑ´æÔÚ */
-   /* ²Ù×÷½á¹û:ÒÀ´Î¶ÔLµÄÃ¿¸öÊı¾İÔªËØµ÷ÓÃº¯Êıvi()¡£Ò»µ©vi()Ê§°Ü,Ôò²Ù×÷Ê§°Ü */
+ Status ListTraverse(LinkList L,void(*vi)(ElemType)) /* æ‹·è‡ªbo2-2.c */
+ { /* åˆå§‹æ¡ä»¶ï¼šçº¿æ€§è¡¨Lå·²å­˜åœ¨ */
+   /* æ“ä½œç»“æœ:ä¾æ¬¡å¯¹Lçš„æ¯ä¸ªæ•°æ®å…ƒç´ è°ƒç”¨å‡½æ•°vi()ã€‚ä¸€æ—¦vi()å¤±è´¥,åˆ™æ“ä½œå¤±è´¥ */
    LinkList p=L->next;
    while(p)
    {
@@ -38,71 +38,71 @@
    return OK;
  }
 
- void InsertAscend(LinkList L,ElemType e) /* ´Ëº¯ÊıÊÇÓÉbo2-9.cÖĞµÄÍ¬Ãûº¯Êı¸ÄĞ´ */
- { /* °´Ñ§ºÅ·Ç½µĞò²åÈë */
+ void InsertAscend(LinkList L,ElemType e) /* æ­¤å‡½æ•°æ˜¯ç”±bo2-9.cä¸­çš„åŒåå‡½æ•°æ”¹å†™ */
+ { /* æŒ‰å­¦å·éé™åºæ’å…¥ */
    LinkList q=L,p=L->next;
    while(p&&e.num>p->data.num)
    {
      q=p;
      p=p->next;
    }
-   q->next=(LinkList)malloc(sizeof(struct LNode)); /* ²åÔÚqºó */
+   q->next=(LinkList)malloc(sizeof(struct LNode)); /* æ’åœ¨qå */
    q->next->data=e;
    q->next->next=p;
  }
 
  void Print(struct stud e)
- { /* ÏÔÊ¾¼ÇÂ¼eµÄÄÚÈİ */
+ { /* æ˜¾ç¤ºè®°å½•eçš„å†…å®¹ */
    printf("%-8s %6ld",e.name,e.num);
    if(e.sex=='m')
-     printf(" ÄĞ");
+     printf(" ç”·");
    else
-     printf(" Å®");
+     printf(" å¥³");
    printf("%5d  %-4s",e.age,e.Class);
    printf("%9s\n",sta[e.health]);
  }
 
  void ReadIn(struct stud *e)
- { /* ÓÉ¼üÅÌÊäÈë½áµãĞÅÏ¢ */
-   printf("ÇëÊäÈëĞÕÃû(<=%d¸ö×Ö·û): ",NAMELEN);
+ { /* ç”±é”®ç›˜è¾“å…¥ç»“ç‚¹ä¿¡æ¯ */
+   printf("è¯·è¾“å…¥å§“å(<=%dä¸ªå­—ç¬¦): ",NAMELEN);
    scanf("%s",e->name);
-   printf("ÇëÊäÈëÑ§ºÅ: ");
+   printf("è¯·è¾“å…¥å­¦å·: ");
    scanf("%ld",&e->num);
-   printf("ÇëÊäÈëĞÔ±ğ(m:ÄĞ f:Å®): ");
+   printf("è¯·è¾“å…¥æ€§åˆ«(m:ç”· f:å¥³): ");
    scanf("%*c%c",&e->sex);
-   printf("ÇëÊäÈëÄêÁä: ");
+   printf("è¯·è¾“å…¥å¹´é¾„: ");
    scanf("%d",&e->age);
-   printf("ÇëÊäÈë°à¼¶(<=%d¸ö×Ö·û): ",CLASSLEN);
+   printf("è¯·è¾“å…¥ç­çº§(<=%dä¸ªå­—ç¬¦): ",CLASSLEN);
    scanf("%s",e->Class);
-   printf("ÇëÊäÈë½¡¿µ×´¿ö(0:%s 1:%s 2:%s):",sta[0],sta[1],sta[2]);
+   printf("è¯·è¾“å…¥å¥åº·çŠ¶å†µ(0:%s 1:%s 2:%s):",sta[0],sta[1],sta[2]);
    scanf("%d",&e->health);
  }
 
  void WriteToFile(struct stud e)
- { /* ½«½áµãĞÅÏ¢Ğ´ÈëfpÖ¸¶¨µÄÎÄ¼ş */
+ { /* å°†ç»“ç‚¹ä¿¡æ¯å†™å…¥fpæŒ‡å®šçš„æ–‡ä»¶ */
    fwrite(&e,sizeof(struct stud),1,fp);
  }
 
  Status ReadFromFile(struct stud *e)
- { /* ÓÉfpÖ¸¶¨µÄÎÄ¼ş¶ÁÈ¡½áµãĞÅÏ¢µ½e */
+ { /* ç”±fpæŒ‡å®šçš„æ–‡ä»¶è¯»å–ç»“ç‚¹ä¿¡æ¯åˆ°e */
    int i;
    i=fread(e,sizeof(struct stud),1,fp);
-   if(i==1) /* ¶ÁÈ¡ÎÄ¼ş³É¹¦ */
+   if(i==1) /* è¯»å–æ–‡ä»¶æˆåŠŸ */
      return OK;
    else
      return ERROR;
  }
 
  Status FindFromNum(LinkList L,long num,LinkList *p,LinkList *q)
- { /* ²éÕÒ±íÖĞÑ§ºÅÎªnumµÄ½áµã,ÈçÕÒµ½,qÖ¸Ïò´Ë½áµã,pÖ¸ÏòqµÄÇ°Çı, */
-   /* ²¢·µ»ØTRUE;ÈçÎŞ´ËÔªËØ,Ôò·µ»ØFALSE */
+ { /* æŸ¥æ‰¾è¡¨ä¸­å­¦å·ä¸ºnumçš„ç»“ç‚¹,å¦‚æ‰¾åˆ°,qæŒ‡å‘æ­¤ç»“ç‚¹,pæŒ‡å‘qçš„å‰é©±, */
+   /* å¹¶è¿”å›TRUE;å¦‚æ— æ­¤å…ƒç´ ,åˆ™è¿”å›FALSE */
    *p=L;
    while(*p)
    {
      *q=(*p)->next;
-     if(*q&&(*q)->data.num>num) /* ÒòÎªÊÇ°´Ñ§ºÅ·Ç½µĞòÅÅÁĞ */
+     if(*q&&(*q)->data.num>num) /* å› ä¸ºæ˜¯æŒ‰å­¦å·éé™åºæ’åˆ— */
        break;
-     if(*q&&(*q)->data.num==num) /* ÕÒµ½¸ÃÑ§ºÅ */
+     if(*q&&(*q)->data.num==num) /* æ‰¾åˆ°è¯¥å­¦å· */
        return TRUE;
      *p=*q;
    }
@@ -110,13 +110,13 @@
  }
 
  Status FindFromName(LinkList L,char name[],LinkList *p,LinkList *q)
- { /* ²éÕÒ±íÖĞĞÕÃûÎªnameµÄ½áµã,ÈçÕÒµ½,qÖ¸Ïò´Ë½áµã,pÖ¸ÏòqµÄÇ°Çı, */
-   /* ²¢·µ»ØTRUE;ÈçÎŞ´ËÔªËØ,Ôò·µ»ØFALSE */
+ { /* æŸ¥æ‰¾è¡¨ä¸­å§“åä¸ºnameçš„ç»“ç‚¹,å¦‚æ‰¾åˆ°,qæŒ‡å‘æ­¤ç»“ç‚¹,pæŒ‡å‘qçš„å‰é©±, */
+   /* å¹¶è¿”å›TRUE;å¦‚æ— æ­¤å…ƒç´ ,åˆ™è¿”å›FALSE */
    *p=L;
    while(*p)
    {
      *q=(*p)->next;
-     if(*q&&!strcmp((*q)->data.name,name)) /* ÕÒµ½¸ÃĞÕÃû */
+     if(*q&&!strcmp((*q)->data.name,name)) /* æ‰¾åˆ°è¯¥å§“å */
        return TRUE;
      *p=*q;
    }
@@ -124,9 +124,9 @@
  }
 
  Status DeleteElemNum(LinkList L,long num)
- { /* É¾³ı±íÖĞÑ§ºÅÎªnumµÄÔªËØ£¬²¢·µ»ØTRUE£»ÈçÎŞ´ËÔªËØ£¬Ôò·µ»ØFALSE */
+ { /* åˆ é™¤è¡¨ä¸­å­¦å·ä¸ºnumçš„å…ƒç´ ï¼Œå¹¶è¿”å›TRUEï¼›å¦‚æ— æ­¤å…ƒç´ ï¼Œåˆ™è¿”å›FALSE */
    LinkList p,q;
-   if(FindFromNum(L,num,&p,&q)) /* ÕÒµ½´Ë½áµã,ÇÒqÖ¸ÏòÆä,pÖ¸ÏòÆäÇ°Çı */
+   if(FindFromNum(L,num,&p,&q)) /* æ‰¾åˆ°æ­¤ç»“ç‚¹,ä¸”qæŒ‡å‘å…¶,pæŒ‡å‘å…¶å‰é©± */
    {
      p->next=q->next;
      free(q);
@@ -136,9 +136,9 @@
  }
 
  Status DeleteElemName(LinkList L,char name[])
- { /* É¾³ı±íÖĞĞÕÃûÎªnameµÄÔªËØ£¬²¢·µ»ØTRUE£»ÈçÎŞ´ËÔªËØ£¬Ôò·µ»ØFALSE */
+ { /* åˆ é™¤è¡¨ä¸­å§“åä¸ºnameçš„å…ƒç´ ï¼Œå¹¶è¿”å›TRUEï¼›å¦‚æ— æ­¤å…ƒç´ ï¼Œåˆ™è¿”å›FALSE */
    LinkList p,q;
-   if(FindFromName(L,name,&p,&q)) /* ÕÒµ½´Ë½áµã,ÇÒqÖ¸ÏòÆä,pÖ¸ÏòÆäÇ°Çı */
+   if(FindFromName(L,name,&p,&q)) /* æ‰¾åˆ°æ­¤ç»“ç‚¹,ä¸”qæŒ‡å‘å…¶,pæŒ‡å‘å…¶å‰é©± */
    {
      p->next=q->next;
      free(q);
@@ -148,72 +148,72 @@
  }
 
  void Modify(ElemType *e)
- { /* ĞŞ¸Ä½áµãÄÚÈİ */
+ { /* ä¿®æ”¹ç»“ç‚¹å†…å®¹ */
    char s[80];
-   Print(*e); /* ÏÔÊ¾Ô­ÄÚÈİ */
-   printf("ÇëÊäÈë´ıĞŞ¸ÄÏîµÄÄÚÈİ£¬²»ĞŞ¸ÄµÄÏî°´»Ø³µ¼ü±£³ÖÔ­Öµ:\n");
-   printf("ÇëÊäÈëĞÕÃû(<=%d¸ö×Ö·û): ",NAMELEN);
+   Print(*e); /* æ˜¾ç¤ºåŸå†…å®¹ */
+   printf("è¯·è¾“å…¥å¾…ä¿®æ”¹é¡¹çš„å†…å®¹ï¼Œä¸ä¿®æ”¹çš„é¡¹æŒ‰å›è½¦é”®ä¿æŒåŸå€¼:\n");
+   printf("è¯·è¾“å…¥å§“å(<=%dä¸ªå­—ç¬¦): ",NAMELEN);
    gets(s);
    if(strlen(s))
      strcpy(e->name,s);
-   printf("ÇëÊäÈëÑ§ºÅ: ");
+   printf("è¯·è¾“å…¥å­¦å·: ");
    gets(s);
    if(strlen(s))
      e->num=atol(s);
-   printf("ÇëÊäÈëĞÔ±ğ(m:ÄĞ f:Å®): ");
+   printf("è¯·è¾“å…¥æ€§åˆ«(m:ç”· f:å¥³): ");
    gets(s);
    if(strlen(s))
      e->sex=s[0];
-   printf("ÇëÊäÈëÄêÁä: ");
+   printf("è¯·è¾“å…¥å¹´é¾„: ");
    gets(s);
    if(strlen(s))
      e->age=atoi(s);
-   printf("ÇëÊäÈë°à¼¶(<=%d¸ö×Ö·û): ",CLASSLEN);
+   printf("è¯·è¾“å…¥ç­çº§(<=%dä¸ªå­—ç¬¦): ",CLASSLEN);
    gets(s);
    if(strlen(s))
      strcpy(e->Class,s);
-   printf("ÇëÊäÈë½¡¿µ×´¿ö(0:%s 1:%s 2:%s):",sta[0],sta[1],sta[2]);
+   printf("è¯·è¾“å…¥å¥åº·çŠ¶å†µ(0:%s 1:%s 2:%s):",sta[0],sta[1],sta[2]);
    gets(s);
    if(strlen(s))
-     e->health=atoi(s); /* ĞŞ¸ÄÍê±Ï */
+     e->health=atoi(s); /* ä¿®æ”¹å®Œæ¯• */
  }
 
- #define N 4 /* student¼ÇÂ¼µÄ¸öÊı */
+ #define N 4 /* studentè®°å½•çš„ä¸ªæ•° */
  void main()
  {
-   struct stud student[N]={{"ÍõĞ¡ÁÖ",790631,'m',18,"¼Æ91",0},
-                           {"³Âºì",790632,'f',20,"¼Æ91",1},
-                           {"Áõ½¨Æ½",790633,'m',21,"¼Æ91",0},
-                           {"ÕÅÁ¢Á¢",790634,'m',17,"¼Æ91",2}}; /* ±íµÄ³õÊ¼¼ÇÂ¼ */
+   struct stud student[N]={{"ç‹å°æ—",790631,'m',18,"è®¡91",0},
+                           {"é™ˆçº¢",790632,'f',20,"è®¡91",1},
+                           {"åˆ˜å»ºå¹³",790633,'m',21,"è®¡91",0},
+                           {"å¼ ç«‹ç«‹",790634,'m',17,"è®¡91",2}}; /* è¡¨çš„åˆå§‹è®°å½• */
    int i,j,flag=1;
    long num;
    char filename[13],name[NAMELEN+1];
    ElemType e;
    LinkList T,p,q;
-   InitList(&T); /* ³õÊ¼»¯Á´±í */
+   InitList(&T); /* åˆå§‹åŒ–é“¾è¡¨ */
    while(flag)
    {
-     printf("1:½«½á¹¹ÌåÊı×éstudentÖĞµÄ¼ÇÂ¼°´Ñ§ºÅ·Ç½µĞò²åÈëÁ´±í\n");
-     printf("2:½«ÎÄ¼şÖĞµÄ¼ÇÂ¼°´Ñ§ºÅ·Ç½µĞò²åÈëÁ´±í\n");
-     printf("3:¼üÅÌÊäÈëĞÂ¼ÇÂ¼£¬²¢½«Æä°´Ñ§ºÅ·Ç½µĞò²åÈëÁ´±í\n");
-     printf("4:É¾³ıÁ´±íÖĞµÚÒ»¸öÓĞ¸ø¶¨Ñ§ºÅµÄ¼ÇÂ¼\n");
-     printf("5:É¾³ıÁ´±íÖĞµÚÒ»¸öÓĞ¸ø¶¨ĞÕÃûµÄ¼ÇÂ¼\n");
-     printf("6:ĞŞ¸ÄÁ´±íÖĞµÚÒ»¸öÓĞ¸ø¶¨Ñ§ºÅµÄ¼ÇÂ¼\n");
-     printf("7:ĞŞ¸ÄÁ´±íÖĞµÚÒ»¸öÓĞ¸ø¶¨ĞÕÃûµÄ¼ÇÂ¼\n");
-     printf("8:²éÕÒÁ´±íÖĞµÚÒ»¸öÓĞ¸ø¶¨Ñ§ºÅµÄ¼ÇÂ¼\n");
-     printf("9:²éÕÒÁ´±íÖĞµÚÒ»¸öÓĞ¸ø¶¨ĞÕÃûµÄ¼ÇÂ¼\n");
-     printf("10:ÏÔÊ¾ËùÓĞ¼ÇÂ¼ 11:½«Á´±íÖĞµÄËùÓĞ¼ÇÂ¼´æÈëÎÄ¼ş 12:½áÊø\n");
-     printf("ÇëÑ¡Ôñ²Ù×÷ÃüÁî: ");
+     printf("1:å°†ç»“æ„ä½“æ•°ç»„studentä¸­çš„è®°å½•æŒ‰å­¦å·éé™åºæ’å…¥é“¾è¡¨\n");
+     printf("2:å°†æ–‡ä»¶ä¸­çš„è®°å½•æŒ‰å­¦å·éé™åºæ’å…¥é“¾è¡¨\n");
+     printf("3:é”®ç›˜è¾“å…¥æ–°è®°å½•ï¼Œå¹¶å°†å…¶æŒ‰å­¦å·éé™åºæ’å…¥é“¾è¡¨\n");
+     printf("4:åˆ é™¤é“¾è¡¨ä¸­ç¬¬ä¸€ä¸ªæœ‰ç»™å®šå­¦å·çš„è®°å½•\n");
+     printf("5:åˆ é™¤é“¾è¡¨ä¸­ç¬¬ä¸€ä¸ªæœ‰ç»™å®šå§“åçš„è®°å½•\n");
+     printf("6:ä¿®æ”¹é“¾è¡¨ä¸­ç¬¬ä¸€ä¸ªæœ‰ç»™å®šå­¦å·çš„è®°å½•\n");
+     printf("7:ä¿®æ”¹é“¾è¡¨ä¸­ç¬¬ä¸€ä¸ªæœ‰ç»™å®šå§“åçš„è®°å½•\n");
+     printf("8:æŸ¥æ‰¾é“¾è¡¨ä¸­ç¬¬ä¸€ä¸ªæœ‰ç»™å®šå­¦å·çš„è®°å½•\n");
+     printf("9:æŸ¥æ‰¾é“¾è¡¨ä¸­ç¬¬ä¸€ä¸ªæœ‰ç»™å®šå§“åçš„è®°å½•\n");
+     printf("10:æ˜¾ç¤ºæ‰€æœ‰è®°å½• 11:å°†é“¾è¡¨ä¸­çš„æ‰€æœ‰è®°å½•å­˜å…¥æ–‡ä»¶ 12:ç»“æŸ\n");
+     printf("è¯·é€‰æ‹©æ“ä½œå‘½ä»¤: ");
      scanf("%d",&i);
      switch(i)
      {
        case 1: for(j=0;j<N;j++)
                  InsertAscend(T,student[j]);
                break;
-       case 2: printf("ÇëÊäÈëÎÄ¼şÃû: ");
+       case 2: printf("è¯·è¾“å…¥æ–‡ä»¶å: ");
                scanf("%s",filename);
                if((fp=fopen(filename,"rb"))==NULL)
-                 printf("´ò¿ªÎÄ¼şÊ§°Ü!\n");
+                 printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥!\n");
                else
                {
                  while(ReadFromFile(&e))
@@ -224,68 +224,68 @@
        case 3: ReadIn(&e);
                InsertAscend(T,e);
                break;
-       case 4: printf("ÇëÊäÈë´ıÉ¾³ı¼ÇÂ¼µÄÑ§ºÅ: ");
+       case 4: printf("è¯·è¾“å…¥å¾…åˆ é™¤è®°å½•çš„å­¦å·: ");
                scanf("%ld",&num);
                if(!DeleteElemNum(T,num))
-                 printf("Ã»ÓĞÑ§ºÅÎª%ldµÄ¼ÇÂ¼\n",num);
+                 printf("æ²¡æœ‰å­¦å·ä¸º%ldçš„è®°å½•\n",num);
                break;
-       case 5: printf("ÇëÊäÈë´ıÉ¾³ı¼ÇÂ¼µÄĞÕÃû: ");
+       case 5: printf("è¯·è¾“å…¥å¾…åˆ é™¤è®°å½•çš„å§“å: ");
                scanf("%s",name);
                if(!DeleteElemName(T,name))
-                 printf("Ã»ÓĞĞÕÃûÎª%sµÄ¼ÇÂ¼\n",name);
+                 printf("æ²¡æœ‰å§“åä¸º%sçš„è®°å½•\n",name);
                break;
-       case 6: printf("ÇëÊäÈë´ıĞŞ¸Ä¼ÇÂ¼µÄÑ§ºÅ: ");
-               scanf("%ld%*c",&num); /* %*c³Ôµô»Ø³µ·û */
+       case 6: printf("è¯·è¾“å…¥å¾…ä¿®æ”¹è®°å½•çš„å­¦å·: ");
+               scanf("%ld%*c",&num); /* %*cåƒæ‰å›è½¦ç¬¦ */
                if(!FindFromNum(T,num,&p,&q))
-                 printf("Ã»ÓĞÑ§ºÅÎª%ldµÄ¼ÇÂ¼\n",num);
+                 printf("æ²¡æœ‰å­¦å·ä¸º%ldçš„è®°å½•\n",num);
                else
                {
                  Modify(&q->data);
-                 if(q->data.num!=num) /* Ñ§ºÅ±»ĞŞ¸Ä */
+                 if(q->data.num!=num) /* å­¦å·è¢«ä¿®æ”¹ */
                  {
-                   p->next=q->next; /* °ÑqËùÖ¸µÄ½áµã´ÓLÖĞÉ¾³ı */
-                   InsertAscend(T,q->data); /* °ÑÔªËØ²åÈëL */
-                   free(q); /* É¾³ıq */
+                   p->next=q->next; /* æŠŠqæ‰€æŒ‡çš„ç»“ç‚¹ä»Lä¸­åˆ é™¤ */
+                   InsertAscend(T,q->data); /* æŠŠå…ƒç´ æ’å…¥L */
+                   free(q); /* åˆ é™¤q */
                  }
                }
                break;
-       case 7: printf("ÇëÊäÈë´ıĞŞ¸Ä¼ÇÂ¼µÄĞÕÃû: ");
-               scanf("%s%*c",name); /* %*c³Ôµô»Ø³µ·û */
+       case 7: printf("è¯·è¾“å…¥å¾…ä¿®æ”¹è®°å½•çš„å§“å: ");
+               scanf("%s%*c",name); /* %*cåƒæ‰å›è½¦ç¬¦ */
                if(!FindFromName(T,name,&p,&q))
-                 printf("Ã»ÓĞĞÕÃûÎª%sµÄ¼ÇÂ¼\n",name);
+                 printf("æ²¡æœ‰å§“åä¸º%sçš„è®°å½•\n",name);
                else
                {
-                 num=q->data.num; /* Ñ§ºÅ´æÈënum */
+                 num=q->data.num; /* å­¦å·å­˜å…¥num */
                  Modify(&q->data);
-                 if(q->data.num!=num) /* Ñ§ºÅ±»ĞŞ¸Ä */
+                 if(q->data.num!=num) /* å­¦å·è¢«ä¿®æ”¹ */
                  {
-                   p->next=q->next; /* °ÑqËùÖ¸µÄ½áµã´ÓLÖĞÉ¾³ı */
-                   InsertAscend(T,q->data); /* °ÑÔªËØ²åÈëL */
-                   free(q); /* É¾³ıq */
+                   p->next=q->next; /* æŠŠqæ‰€æŒ‡çš„ç»“ç‚¹ä»Lä¸­åˆ é™¤ */
+                   InsertAscend(T,q->data); /* æŠŠå…ƒç´ æ’å…¥L */
+                   free(q); /* åˆ é™¤q */
                  }
                }
                break;
-       case 8: printf("ÇëÊäÈë´ı²éÕÒ¼ÇÂ¼µÄÑ§ºÅ: ");
+       case 8: printf("è¯·è¾“å…¥å¾…æŸ¥æ‰¾è®°å½•çš„å­¦å·: ");
                scanf("%ld",&num);
                if(!FindFromNum(T,num,&p,&q))
-                 printf("Ã»ÓĞÑ§ºÅÎª%ldµÄ¼ÇÂ¼\n",num);
+                 printf("æ²¡æœ‰å­¦å·ä¸º%ldçš„è®°å½•\n",num);
                else
                  Print(q->data);
                break;
-       case 9: printf("ÇëÊäÈë´ı²éÕÒ¼ÇÂ¼µÄĞÕÃû: ");
+       case 9: printf("è¯·è¾“å…¥å¾…æŸ¥æ‰¾è®°å½•çš„å§“å: ");
                scanf("%s",name);
                if(!FindFromName(T,name,&p,&q))
-                 printf("Ã»ÓĞĞÕÃûÎª%sµÄ¼ÇÂ¼\n",name);
+                 printf("æ²¡æœ‰å§“åä¸º%sçš„è®°å½•\n",name);
                else
                Print(q->data);
                break;
-       case 10:printf("  ĞÕÃû    Ñ§ºÅ ĞÔ±ğ ÄêÁä °à¼¶ ½¡¿µ×´¿ö\n");
+       case 10:printf("  å§“å    å­¦å· æ€§åˆ« å¹´é¾„ ç­çº§ å¥åº·çŠ¶å†µ\n");
                ListTraverse(T,Print);
                break;
-       case 11:printf("ÇëÊäÈëÎÄ¼şÃû: ");
+       case 11:printf("è¯·è¾“å…¥æ–‡ä»¶å: ");
                scanf("%s",filename);
                if((fp=fopen(filename,"wb"))==NULL)
-                 printf("´ò¿ªÎÄ¼şÊ§°Ü!\n");
+                 printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥!\n");
                else
                  ListTraverse(T,WriteToFile);
                fclose(fp);

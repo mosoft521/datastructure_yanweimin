@@ -1,7 +1,7 @@
- /* c6-7.h ºÕ·òÂüÊ÷ºÍºÕ·òÂü±àÂëµÄ´æ´¢±íÊ¾ */
+ /* c6-7.h èµ«å¤«æ›¼æ ‘å’Œèµ«å¤«æ›¼ç¼–ç çš„å­˜å‚¨è¡¨ç¤º */
  typedef struct
  {
    unsigned int weight;
    unsigned int parent,lchild,rchild;
- }HTNode,*HuffmanTree; /* ¶¯Ì¬·ÖÅäÊı×é´æ´¢ºÕ·òÂüÊ÷ */
- typedef char **HuffmanCode; /* ¶¯Ì¬·ÖÅäÊı×é´æ´¢ºÕ·òÂü±àÂë±í */
+ }HTNode,*HuffmanTree; /* åŠ¨æ€åˆ†é…æ•°ç»„å­˜å‚¨èµ«å¤«æ›¼æ ‘ */
+ typedef char **HuffmanCode; /* åŠ¨æ€åˆ†é…æ•°ç»„å­˜å‚¨èµ«å¤«æ›¼ç¼–ç è¡¨ */

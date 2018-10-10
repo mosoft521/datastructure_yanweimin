@@ -1,51 +1,51 @@
-/* algo7-3.c ÊµÏÖËã·¨7.10¡¢7.11µÄ³ÌĞò */
+/* algo7-3.c å®ç°ç®—æ³•7.10ã€7.11çš„ç¨‹åº */
 #include "../ch1/c1.h"
-#define MAX_NAME 2 /* ¶¥µã×Ö·û´®µÄ×î´ó³¤¶È+1 */
+#define MAX_NAME 2 /* é¡¶ç‚¹å­—ç¬¦ä¸²çš„æœ€å¤§é•¿åº¦+1 */
 typedef int InfoType;
-typedef char VertexType[MAX_NAME]; /* ×Ö·û´®ÀàĞÍ */
+typedef char VertexType[MAX_NAME]; /* å­—ç¬¦ä¸²ç±»å‹ */
 #include "c7-2.h"
 #include "bo7-2.c"
 
-int count; /* È«¾ÖÁ¿count¶Ô·ÃÎÊ¼ÆÊı */
+int count; /* å…¨å±€é‡countå¯¹è®¿é—®è®¡æ•° */
 int low[MAX_VERTEX_NUM];
 
 void DFSArticul(ALGraph G, int v0)
-{ /* ´ÓµÚv0¸ö¶¥µã³ö·¢Éî¶ÈÓÅÏÈ±éÀúÍ¼G£¬²éÕÒ²¢Êä³ö¹Ø½Úµã¡£Ëã·¨7.11 */
+{ /* ä»ç¬¬v0ä¸ªé¡¶ç‚¹å‡ºå‘æ·±åº¦ä¼˜å…ˆéå†å›¾Gï¼ŒæŸ¥æ‰¾å¹¶è¾“å‡ºå…³èŠ‚ç‚¹ã€‚ç®—æ³•7.11 */
 	int min, w;
 	ArcNode *p;
-	visited[v0] = min = ++count; /* v0ÊÇµÚcount¸ö·ÃÎÊµÄ¶¥µã */
-	for (p = G.vertices[v0].firstarc; p; p = p->nextarc) /* ¶Ôv0µÄÃ¿¸öÁÚ½Ó¶¥µã¼ì²é */
+	visited[v0] = min = ++count; /* v0æ˜¯ç¬¬countä¸ªè®¿é—®çš„é¡¶ç‚¹ */
+	for (p = G.vertices[v0].firstarc; p; p = p->nextarc) /* å¯¹v0çš„æ¯ä¸ªé‚»æ¥é¡¶ç‚¹æ£€æŸ¥ */
 	{
-		w = p->adjvex; /* wÎªv0µÄÁÚ½Ó¶¥µã */
-		if (visited[w] == 0) /* wÎ´Ôø·ÃÎÊ£¬ÊÇv0µÄº¢×Ó */
+		w = p->adjvex; /* wä¸ºv0çš„é‚»æ¥é¡¶ç‚¹ */
+		if (visited[w] == 0) /* wæœªæ›¾è®¿é—®ï¼Œæ˜¯v0çš„å­©å­ */
 		{
-			DFSArticul(G, w); /* ·µ»ØÇ°ÇóµÃlow[w] */
+			DFSArticul(G, w); /* è¿”å›å‰æ±‚å¾—low[w] */
 			if (low[w] < min)
 				min = low[w];
 			if (low[w] >= visited[v0])
-				printf("%d %s\n", v0, G.vertices[v0].data); /* ¹Ø½Úµã */
+				printf("%d %s\n", v0, G.vertices[v0].data); /* å…³èŠ‚ç‚¹ */
 		}
 		else if (visited[w] < min)
-			min = visited[w]; /* wÒÑ·ÃÎÊ£¬wÊÇv0ÔÚÉú³ÉÊ÷ÉÏµÄ×æÏÈ */
+			min = visited[w]; /* wå·²è®¿é—®ï¼Œwæ˜¯v0åœ¨ç”Ÿæˆæ ‘ä¸Šçš„ç¥–å…ˆ */
 	}
 	low[v0] = min;
 }
 
 void FindArticul(ALGraph G)
-{ /* Á¬Í¨Í¼GÒÔÁÚ½Ó±í×÷´æ´¢½á¹¹£¬²éÕÒ²¢Êä³öGÉÏÈ«²¿¹Ø½Úµã¡£Ëã·¨7.10 */
-  /* È«¾ÖÁ¿count¶Ô·ÃÎÊ¼ÆÊı¡£ */
+{ /* è¿é€šå›¾Gä»¥é‚»æ¥è¡¨ä½œå­˜å‚¨ç»“æ„ï¼ŒæŸ¥æ‰¾å¹¶è¾“å‡ºGä¸Šå…¨éƒ¨å…³èŠ‚ç‚¹ã€‚ç®—æ³•7.10 */
+  /* å…¨å±€é‡countå¯¹è®¿é—®è®¡æ•°ã€‚ */
 	int i, v;
 	ArcNode *p;
 	count = 1;
-	low[0] = visited[0] = 1; /* Éè¶¨ÁÚ½Ó±íÉÏ0ºÅ¶¥µãÎªÉú³ÉÊ÷µÄ¸ù */
+	low[0] = visited[0] = 1; /* è®¾å®šé‚»æ¥è¡¨ä¸Š0å·é¡¶ç‚¹ä¸ºç”Ÿæˆæ ‘çš„æ ¹ */
 	for (i = 1; i < G.vexnum; ++i)
-		visited[i] = 0; /* ÆäÓà¶¥µãÉĞÎ´·ÃÎÊ */
+		visited[i] = 0; /* å…¶ä½™é¡¶ç‚¹å°šæœªè®¿é—® */
 	p = G.vertices[0].firstarc;
 	v = p->adjvex;
-	DFSArticul(G, v); /* ´ÓµÚv¶¥µã³ö·¢Éî¶ÈÓÅÏÈ²éÕÒ¹Ø½Úµã */
-	if (count < G.vexnum) /* Éú³ÉÊ÷µÄ¸ùÓĞÖÁÉÙÁ½¿Ã×ÓÊ÷ */
+	DFSArticul(G, v); /* ä»ç¬¬vé¡¶ç‚¹å‡ºå‘æ·±åº¦ä¼˜å…ˆæŸ¥æ‰¾å…³èŠ‚ç‚¹ */
+	if (count < G.vexnum) /* ç”Ÿæˆæ ‘çš„æ ¹æœ‰è‡³å°‘ä¸¤æ£µå­æ ‘ */
 	{
-		printf("%d %s\n", 0, G.vertices[0].data); /* ¸ùÊÇ¹Ø½Úµã£¬Êä³ö */
+		printf("%d %s\n", 0, G.vertices[0].data); /* æ ¹æ˜¯å…³èŠ‚ç‚¹ï¼Œè¾“å‡º */
 		while (p->nextarc)
 		{
 			p = p->nextarc;
@@ -60,9 +60,9 @@ void main()
 {
 	int i;
 	ALGraph g;
-	printf("ÇëÑ¡ÔñÎŞÏòÍ¼\n");
+	printf("è¯·é€‰æ‹©æ— å‘å›¾\n");
 	CreateGraph(&g);
-	printf("Êä³ö¹Ø½Úµã£º\n");
+	printf("è¾“å‡ºå…³èŠ‚ç‚¹ï¼š\n");
 	FindArticul(g);
 	printf(" i G.vertices[i].data visited[i] low[i]\n");
 	for (i = 0; i < g.vexnum; ++i)

@@ -1,15 +1,15 @@
-/* algo9-3.c ¾²Ì¬²éÕÒ±í(¾²Ì¬Ê÷±í)µÄ²Ù×÷ */
+/* algo9-3.c é™æ€æŸ¥æ‰¾è¡¨(é™æ€æ ‘è¡¨)çš„æ“ä½œ */
 #include "../ch1/c1.h"
-#define N 9 /* Êı¾İÔªËØ¸öÊı */
-typedef char KeyType; /* Éè¹Ø¼ü×ÖÓòÎª×Ö·ûĞÍ */
-typedef struct /* Êı¾İÔªËØÀàĞÍ */
+#define N 9 /* æ•°æ®å…ƒç´ ä¸ªæ•° */
+typedef char KeyType; /* è®¾å…³é”®å­—åŸŸä¸ºå­—ç¬¦å‹ */
+typedef struct /* æ•°æ®å…ƒç´ ç±»å‹ */
 {
 	KeyType key;
 	int weight;
 }ElemType;
 ElemType r[N] = { {'A',1},{'B',1},{'C',2},{'D',5},{'E',3},
-			   {'F',4},{'G',4},{'H',3},{'I',5} }; /* Êı¾İÔªËØ(ÒÔ½Ì¿ÆÊéÀı9-1ÎªÀı),È«¾Ö±äÁ¿ */
-int sw[N + 1]; /* ÀÛ¼ÆÈ¨Öµ£¬È«¾Ö±äÁ¿ */
+			   {'F',4},{'G',4},{'H',3},{'I',5} }; /* æ•°æ®å…ƒç´ (ä»¥æ•™ç§‘ä¹¦ä¾‹9-1ä¸ºä¾‹),å…¨å±€å˜é‡ */
+int sw[N + 1]; /* ç´¯è®¡æƒå€¼ï¼Œå…¨å±€å˜é‡ */
 #include "c9.h"
 #include "c9-1.h"
 #include "bo9-1.c"
@@ -17,14 +17,14 @@ int sw[N + 1]; /* ÀÛ¼ÆÈ¨Öµ£¬È«¾Ö±äÁ¿ */
 typedef ElemType TElemType;
 #include "../ch6/c6-2.h"
 Status SecondOptimal(BiTree *T, ElemType R[], int sw[], int low, int high)
-{ /* ÓÉÓĞĞò±íR[low..high]¼°ÆäÀÛ¼ÆÈ¨Öµ±ísw(ÆäÖĞsw[0]==0)µİ¹é¹¹Ôì */
-  /* ´ÎÓÅ²éÕÒÊ÷T¡£Ëã·¨9.3 */
+{ /* ç”±æœ‰åºè¡¨R[low..high]åŠå…¶ç´¯è®¡æƒå€¼è¡¨sw(å…¶ä¸­sw[0]==0)é€’å½’æ„é€  */
+  /* æ¬¡ä¼˜æŸ¥æ‰¾æ ‘Tã€‚ç®—æ³•9.3 */
 	int i, j;
 	double min, dw;
 	i = low;
 	min = fabs(sw[high] - sw[low]);
 	dw = sw[high] + sw[low - 1];
-	for (j = low + 1; j <= high; ++j) /* Ñ¡Ôñ×îĞ¡µÄ¡÷PiÖµ */
+	for (j = low + 1; j <= high; ++j) /* é€‰æ‹©æœ€å°çš„â–³Piå€¼ */
 		if (fabs(dw - sw[j] - sw[j - 1]) < min)
 		{
 			i = j;
@@ -33,52 +33,52 @@ Status SecondOptimal(BiTree *T, ElemType R[], int sw[], int low, int high)
 	*T = (BiTree)malloc(sizeof(BiTNode));
 	if (!*T)
 		return ERROR;
-	(*T)->data = R[i]; /* Éú³É½áµã */
+	(*T)->data = R[i]; /* ç”Ÿæˆç»“ç‚¹ */
 	if (i == low)
-		(*T)->lchild = NULL; /* ×ó×ÓÊ÷¿Õ */
+		(*T)->lchild = NULL; /* å·¦å­æ ‘ç©º */
 	else
-		SecondOptimal(&(*T)->lchild, R, sw, low, i - 1); /* ¹¹Ôì×ó×ÓÊ÷ */
+		SecondOptimal(&(*T)->lchild, R, sw, low, i - 1); /* æ„é€ å·¦å­æ ‘ */
 	if (i == high)
-		(*T)->rchild = NULL; /* ÓÒ×ÓÊ÷¿Õ */
+		(*T)->rchild = NULL; /* å³å­æ ‘ç©º */
 	else
-		SecondOptimal(&(*T)->rchild, R, sw, i + 1, high); /* ¹¹ÔìÓÒ×ÓÊ÷ */
+		SecondOptimal(&(*T)->rchild, R, sw, i + 1, high); /* æ„é€ å³å­æ ‘ */
 	return OK;
 }
 
 void FindSW(int sw[], SSTable ST)
-{ /* °´ÕÕÓĞĞò±íSTÖĞ¸÷Êı¾İÔªËØµÄWeightÓòÇóÀÛ¼ÆÈ¨Öµ±ísw */
+{ /* æŒ‰ç…§æœ‰åºè¡¨STä¸­å„æ•°æ®å…ƒç´ çš„WeightåŸŸæ±‚ç´¯è®¡æƒå€¼è¡¨sw */
 	int i;
 	sw[0] = 0;
 	for (i = 1; i <= ST.length; i++)
 		sw[i] = sw[i - 1] + ST.elem[i].weight;
 }
 
-typedef BiTree SOSTree; /* ´ÎÓÅ²éÕÒÊ÷²ÉÓÃ¶ş²æÁ´±íµÄ´æ´¢½á¹¹ */
+typedef BiTree SOSTree; /* æ¬¡ä¼˜æŸ¥æ‰¾æ ‘é‡‡ç”¨äºŒå‰é“¾è¡¨çš„å­˜å‚¨ç»“æ„ */
 Status CreateSOSTree(SOSTree *T, SSTable ST)
-{ /* ÓÉÓĞĞò±íST¹¹ÔìÒ»¿Ã´ÎÓÅ²éÕÒÊ÷T¡£STµÄÊı¾İÔªËØº¬ÓĞÈ¨Óòweight¡£Ëã·¨9.4 */
+{ /* ç”±æœ‰åºè¡¨STæ„é€ ä¸€æ£µæ¬¡ä¼˜æŸ¥æ‰¾æ ‘Tã€‚STçš„æ•°æ®å…ƒç´ å«æœ‰æƒåŸŸweightã€‚ç®—æ³•9.4 */
 	if (ST.length == 0)
 		*T = NULL;
 	else
 	{
-		FindSW(sw, ST); /* °´ÕÕÓĞĞò±íSTÖĞ¸÷Êı¾İÔªËØµÄWeightÓòÇóÀÛ¼ÆÈ¨Öµ±ísw */
+		FindSW(sw, ST); /* æŒ‰ç…§æœ‰åºè¡¨STä¸­å„æ•°æ®å…ƒç´ çš„WeightåŸŸæ±‚ç´¯è®¡æƒå€¼è¡¨sw */
 		SecondOptimal(T, ST.elem, sw, 1, ST.length);
 	}
 	return OK;
 }
 
 Status Search_SOSTree(SOSTree *T, KeyType key)
-{ /* ÔÚ´ÎÓÅ²éÕÒÊ÷TÖĞ²éÕÒ¹Ø¼ü×ÖµÈÓÚkeyµÄÔªËØ¡£ÕÒµ½Ôò·µ»ØOK£¬·ñÔò·µ»ØFALSE */
-	while (*T) /* T·Ç¿Õ */
+{ /* åœ¨æ¬¡ä¼˜æŸ¥æ‰¾æ ‘Tä¸­æŸ¥æ‰¾å…³é”®å­—ç­‰äºkeyçš„å…ƒç´ ã€‚æ‰¾åˆ°åˆ™è¿”å›OKï¼Œå¦åˆ™è¿”å›FALSE */
+	while (*T) /* Téç©º */
 		if ((*T)->data.key == key)
 			return OK;
 		else if ((*T)->data.key > key)
 			*T = (*T)->lchild;
 		else
 			*T = (*T)->rchild;
-		return FALSE; /* Ë³Ğò±íÖĞ²»´æÔÚ´ı²éÔªËØ */
+		return FALSE; /* é¡ºåºè¡¨ä¸­ä¸å­˜åœ¨å¾…æŸ¥å…ƒç´  */
 }
 
-void print(ElemType c) /* Traverse()µ÷ÓÃµÄº¯Êı */
+void print(ElemType c) /* Traverse()è°ƒç”¨çš„å‡½æ•° */
 {
 	printf("(%c %d) ", c.key, c.weight);
 }
@@ -89,14 +89,14 @@ void main()
 	SOSTree t;
 	Status i;
 	KeyType s;
-	Creat_Ord(&st, N); /* ÓÉÈ«¾ÖÊı×é²úÉú·Ç½µĞò¾²Ì¬²éÕÒ±íst */
+	Creat_Ord(&st, N); /* ç”±å…¨å±€æ•°ç»„äº§ç”Ÿéé™åºé™æ€æŸ¥æ‰¾è¡¨st */
 	Traverse(st, print);
-	CreateSOSTree(&t, st); /* ÓÉÓĞĞò±í¹¹ÔìÒ»¿Ã´ÎÓÅ²éÕÒÊ÷ */
-	printf("\nÇëÊäÈë´ı²éÕÒµÄ×Ö·û: ");
+	CreateSOSTree(&t, st); /* ç”±æœ‰åºè¡¨æ„é€ ä¸€æ£µæ¬¡ä¼˜æŸ¥æ‰¾æ ‘ */
+	printf("\nè¯·è¾“å…¥å¾…æŸ¥æ‰¾çš„å­—ç¬¦: ");
 	scanf("%c", &s);
 	i = Search_SOSTree(&t, s);
 	if (i)
-		printf("%cµÄÈ¨ÖµÊÇ%d\n", s, t->data.weight);
+		printf("%cçš„æƒå€¼æ˜¯%d\n", s, t->data.weight);
 	else
-		printf("±íÖĞ²»´æÔÚ´Ë×Ö·û\n");
+		printf("è¡¨ä¸­ä¸å­˜åœ¨æ­¤å­—ç¬¦\n");
 }

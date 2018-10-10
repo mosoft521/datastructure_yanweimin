@@ -1,7 +1,7 @@
- /* c2-2.h ÏßĞÔ±íµÄµ¥Á´±í´æ´¢½á¹¹ */
+ /* c2-2.h çº¿æ€§è¡¨çš„å•é“¾è¡¨å­˜å‚¨ç»“æ„ */
  struct LNode
  {
    ElemType data;
    struct LNode *next;
  };
- typedef struct LNode *LinkList; /* ÁíÒ»ÖÖ¶¨ÒåLinkListµÄ·½·¨ */
+ typedef struct LNode *LinkList; /* å¦ä¸€ç§å®šä¹‰LinkListçš„æ–¹æ³• */

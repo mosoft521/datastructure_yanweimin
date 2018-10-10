@@ -1,20 +1,20 @@
- /* c7-4.h ÎŞÏòÍ¼µÄÁÚ½Ó¶àÖØ±í´æ´¢±íÊ¾ */
+ /* c7-4.h æ— å‘å›¾çš„é‚»æ¥å¤šé‡è¡¨å­˜å‚¨è¡¨ç¤º */
  #define MAX_VERTEX_NUM 20
  typedef enum{unvisited,visited}VisitIf;
  typedef struct EBox
  {
-   VisitIf mark; /* ·ÃÎÊ±ê¼Ç */
-   int ivex,jvex; /* ¸Ã±ßÒÀ¸½µÄÁ½¸ö¶¥µãµÄÎ»ÖÃ */
-   struct EBox *ilink,*jlink; /* ·Ö±ğÖ¸ÏòÒÀ¸½ÕâÁ½¸ö¶¥µãµÄÏÂÒ»Ìõ±ß */
-   InfoType *info; /* ¸Ã±ßĞÅÏ¢Ö¸Õë */
+   VisitIf mark; /* è®¿é—®æ ‡è®° */
+   int ivex,jvex; /* è¯¥è¾¹ä¾é™„çš„ä¸¤ä¸ªé¡¶ç‚¹çš„ä½ç½® */
+   struct EBox *ilink,*jlink; /* åˆ†åˆ«æŒ‡å‘ä¾é™„è¿™ä¸¤ä¸ªé¡¶ç‚¹çš„ä¸‹ä¸€æ¡è¾¹ */
+   InfoType *info; /* è¯¥è¾¹ä¿¡æ¯æŒ‡é’ˆ */
  }EBox;
  typedef struct
  {
    VertexType data;
-   EBox *firstedge; /* Ö¸ÏòµÚÒ»ÌõÒÀ¸½¸Ã¶¥µãµÄ±ß */
+   EBox *firstedge; /* æŒ‡å‘ç¬¬ä¸€æ¡ä¾é™„è¯¥é¡¶ç‚¹çš„è¾¹ */
  }VexBox;
  typedef struct
  {
    VexBox adjmulist[MAX_VERTEX_NUM];
-   int vexnum,edgenum; /* ÎŞÏòÍ¼µÄµ±Ç°¶¥µãÊıºÍ±ßÊı */
+   int vexnum,edgenum; /* æ— å‘å›¾çš„å½“å‰é¡¶ç‚¹æ•°å’Œè¾¹æ•° */
  }AMLGraph;

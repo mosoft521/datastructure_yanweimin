@@ -1,4 +1,4 @@
-/* algo1-1.c ¼ÆËã1-1/x+1/x*x¡­ */
+/* algo1-1.c è®¡ç®—1-1/x+1/x*xâ€¦ */
 #define _CRT_SECURE_NO_DEPRECATE
 #include<stdio.h>
 #include<sys/timeb.h>
@@ -8,9 +8,9 @@ void main()
 	long t;
 	double x, sum = 1, sum1;
 	int i, j, n;
-	printf("ÇëÊäÈëx n£º");
+	printf("è¯·è¾“å…¥x nï¼š");
 	scanf("%lf%d", &x, &n);
-	ftime(&t1); /* ÇóµÃµ±Ç°Ê±¼ä */
+	ftime(&t1); /* æ±‚å¾—å½“å‰æ—¶é—´ */
 	for (i = 1; i <= n; i++)
 	{
 		sum1 = 1;
@@ -18,7 +18,7 @@ void main()
 			sum1 = -sum1 / x;
 		sum += sum1;
 	}
-	ftime(&t2); /* ÇóµÃµ±Ç°Ê±¼ä */
-	t = (t2.time - t1.time) * 1000 + (t2.millitm - t1.millitm); /* ¼ÆËãÊ±¼ä²î */
-	printf("sum=%lf ÓÃÊ±%ldºÁÃë\n", sum, t);
+	ftime(&t2); /* æ±‚å¾—å½“å‰æ—¶é—´ */
+	t = (t2.time - t1.time) * 1000 + (t2.millitm - t1.millitm); /* è®¡ç®—æ—¶é—´å·® */
+	printf("sum=%lf ç”¨æ—¶%ldæ¯«ç§’\n", sum, t);
 }

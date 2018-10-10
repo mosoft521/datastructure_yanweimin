@@ -1,12 +1,12 @@
- /* c2-5.h ´øÍ·½áµãµÄÏßĞÔÁ´±íÀàĞÍ */
- typedef struct LNode /* ½áµãÀàĞÍ */
+ /* c2-5.h å¸¦å¤´ç»“ç‚¹çš„çº¿æ€§é“¾è¡¨ç±»å‹ */
+ typedef struct LNode /* ç»“ç‚¹ç±»å‹ */
  {
    ElemType data;
    struct LNode *next;
  }LNode,*Link,*Position;
 
- typedef struct LinkList /* Á´±íÀàĞÍ */
+ typedef struct LinkList /* é“¾è¡¨ç±»å‹ */
  {
-   Link head,tail; /* ·Ö±ğÖ¸ÏòÏßĞÔÁ´±íÖĞµÄÍ·½áµãºÍ×îºóÒ»¸ö½áµã */
-   int len; /* Ö¸Ê¾ÏßĞÔÁ´±íÖĞÊı¾İÔªËØµÄ¸öÊı */
+   Link head,tail; /* åˆ†åˆ«æŒ‡å‘çº¿æ€§é“¾è¡¨ä¸­çš„å¤´ç»“ç‚¹å’Œæœ€åä¸€ä¸ªç»“ç‚¹ */
+   int len; /* æŒ‡ç¤ºçº¿æ€§é“¾è¡¨ä¸­æ•°æ®å…ƒç´ çš„ä¸ªæ•° */
  }LinkList;

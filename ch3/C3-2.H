@@ -1,4 +1,4 @@
- /* c3-2.h ╣╔а╢╤сапё╜ё╜╤сап╣да╢й╫╢Ф╢╒╫А╧╧ */
+ /* c3-2.h Е█∙И⌠╬И≤÷Е┬≈О╪█О╪█И≤÷Е┬≈Г └И⌠╬Е╪▐Е╜≤Е┌╗Г╩⌠Ф·└ */
  typedef struct QNode
  {
    QElemType data;
@@ -7,5 +7,5 @@
 
  typedef struct
  {
-   QueuePtr front,rear; /* ╤см╥║╒╤сн╡ж╦уК */
+   QueuePtr front,rear; /* И≤÷Е╓╢Ц─│И≤÷Е╟╬Ф▄┤И▓┬ */
  }LinkQueue;

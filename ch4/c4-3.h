@@ -1,5 +1,5 @@
- /* c4-3.h ´®µÄ¿éÁ´´æ´¢±íÊ¾ */
- #define CHUNKSIZE 4 /* ¿ÉÓÉÓÃ»§¶¨ÒåµÄ¿é´óĞ¡ */
+ /* c4-3.h ä¸²çš„å—é“¾å­˜å‚¨è¡¨ç¤º */
+ #define CHUNKSIZE 4 /* å¯ç”±ç”¨æˆ·å®šä¹‰çš„å—å¤§å° */
  typedef struct Chunk
  {
    char ch[CHUNKSIZE];
@@ -7,6 +7,6 @@
  }Chunk;
  typedef struct
  {
-   Chunk *head,*tail; /* ´®µÄÍ·ºÍÎ²Ö¸Õë */
-   int curlen; /* ´®µÄµ±Ç°³¤¶È */
+   Chunk *head,*tail; /* ä¸²çš„å¤´å’Œå°¾æŒ‡é’ˆ */
+   int curlen; /* ä¸²çš„å½“å‰é•¿åº¦ */
  }LString;

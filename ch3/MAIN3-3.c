@@ -1,4 +1,4 @@
-/* main3-3.c Ñ­»·¶ÓÁĞ ¼ìÑébo3-3.cµÄÖ÷³ÌĞò */
+/* main3-3.c å¾ªç¯é˜Ÿåˆ— æ£€éªŒbo3-3.cçš„ä¸»ç¨‹åº */
 #include "../ch1/c1.h"
 typedef int QElemType;
 #include "c3-3.h"
@@ -16,8 +16,8 @@ void main()
 	QElemType d;
 	SqQueue Q;
 	InitQueue(&Q);
-	printf("³õÊ¼»¯¶ÓÁĞºó£¬¶ÓÁĞ¿Õ·ñ£¿%u(1:¿Õ 0:·ñ)\n", QueueEmpty(Q));
-	printf("ÇëÊäÈëÕûĞÍ¶ÓÁĞÔªËØ(²»³¬¹ı%d¸ö),-1ÎªÌáÇ°½áÊø·û: ", MAXQSIZE - 1);
+	printf("åˆå§‹åŒ–é˜Ÿåˆ—åï¼Œé˜Ÿåˆ—ç©ºå¦ï¼Ÿ%u(1:ç©º 0:å¦)\n", QueueEmpty(Q));
+	printf("è¯·è¾“å…¥æ•´å‹é˜Ÿåˆ—å…ƒç´ (ä¸è¶…è¿‡%dä¸ª),-1ä¸ºæå‰ç»“æŸç¬¦: ", MAXQSIZE - 1);
 	do
 	{
 		scanf("%d", &d);
@@ -26,31 +26,31 @@ void main()
 		i++;
 		EnQueue(&Q, d);
 	} while (i < MAXQSIZE - 1);
-	printf("¶ÓÁĞ³¤¶ÈÎª: %d\n", QueueLength(Q));
-	printf("ÏÖÔÚ¶ÓÁĞ¿Õ·ñ£¿%u(1:¿Õ 0:·ñ)\n", QueueEmpty(Q));
-	printf("Á¬Ğø%d´ÎÓÉ¶ÓÍ·É¾³ıÔªËØ,¶ÓÎ²²åÈëÔªËØ:\n", MAXQSIZE);
+	printf("é˜Ÿåˆ—é•¿åº¦ä¸º: %d\n", QueueLength(Q));
+	printf("ç°åœ¨é˜Ÿåˆ—ç©ºå¦ï¼Ÿ%u(1:ç©º 0:å¦)\n", QueueEmpty(Q));
+	printf("è¿ç»­%dæ¬¡ç”±é˜Ÿå¤´åˆ é™¤å…ƒç´ ,é˜Ÿå°¾æ’å…¥å…ƒç´ :\n", MAXQSIZE);
 	for (l = 1; l <= MAXQSIZE; l++)
 	{
 		DeQueue(&Q, &d);
-		printf("É¾³ıµÄÔªËØÊÇ%d,ÇëÊäÈë´ı²åÈëµÄÔªËØ: ", d);
+		printf("åˆ é™¤çš„å…ƒç´ æ˜¯%d,è¯·è¾“å…¥å¾…æ’å…¥çš„å…ƒç´ : ", d);
 		scanf("%d", &d);
 		EnQueue(&Q, d);
 	}
 	l = QueueLength(Q);
-	printf("ÏÖÔÚ¶ÓÁĞÖĞµÄÔªËØÎª: \n");
+	printf("ç°åœ¨é˜Ÿåˆ—ä¸­çš„å…ƒç´ ä¸º: \n");
 	QueueTraverse(Q, visit);
-	printf("¹²Ïò¶ÓÎ²²åÈëÁË%d¸öÔªËØ\n", i + MAXQSIZE);
+	printf("å…±å‘é˜Ÿå°¾æ’å…¥äº†%dä¸ªå…ƒç´ \n", i + MAXQSIZE);
 	if (l - 2>0)
-		printf("ÏÖÔÚÓÉ¶ÓÍ·É¾³ı%d¸öÔªËØ:\n", l - 2);
+		printf("ç°åœ¨ç”±é˜Ÿå¤´åˆ é™¤%dä¸ªå…ƒç´ :\n", l - 2);
 	while (QueueLength(Q) > 2)
 	{
 		DeQueue(&Q, &d);
-		printf("É¾³ıµÄÔªËØÖµÎª%d\n", d);
+		printf("åˆ é™¤çš„å…ƒç´ å€¼ä¸º%d\n", d);
 	}
 	j = GetHead(Q, &d);
 	if (j)
-		printf("ÏÖÔÚ¶ÓÍ·ÔªËØÎª: %d\n", d);
+		printf("ç°åœ¨é˜Ÿå¤´å…ƒç´ ä¸º: %d\n", d);
 	ClearQueue(&Q);
-	printf("Çå¿Õ¶ÓÁĞºó, ¶ÓÁĞ¿Õ·ñ£¿%u(1:¿Õ 0:·ñ)\n", QueueEmpty(Q));
+	printf("æ¸…ç©ºé˜Ÿåˆ—å, é˜Ÿåˆ—ç©ºå¦ï¼Ÿ%u(1:ç©º 0:å¦)\n", QueueEmpty(Q));
 	DestroyQueue(&Q);
 }

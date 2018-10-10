@@ -1,33 +1,33 @@
-/* algo2-5.c ÊµÏÖËã·¨2.11¡¢2.12µÄ³ÌĞò */
+/* algo2-5.c å®ç°ç®—æ³•2.11ã€2.12çš„ç¨‹åº */
 #include "../ch1/c1.h"
 typedef int ElemType;
 #include "c2-2.h"
 #include "bo2-2.c"
 
-void CreateList(LinkList *L, int n) /* Ëã·¨2.11 */
-{ /* ÄæÎ»Ğò(²åÔÚ±íÍ·)ÊäÈën¸öÔªËØµÄÖµ£¬½¨Á¢´ø±íÍ·½á¹¹µÄµ¥Á´ÏßĞÔ±íL */
+void CreateList(LinkList *L, int n) /* ç®—æ³•2.11 */
+{ /* é€†ä½åº(æ’åœ¨è¡¨å¤´)è¾“å…¥nä¸ªå…ƒç´ çš„å€¼ï¼Œå»ºç«‹å¸¦è¡¨å¤´ç»“æ„çš„å•é“¾çº¿æ€§è¡¨L */
 	int i;
 	LinkList p;
 	*L = (LinkList)malloc(sizeof(struct LNode));
-	(*L)->next = NULL; /* ÏÈ½¨Á¢Ò»¸ö´øÍ·½áµãµÄµ¥Á´±í */
-	printf("ÇëÊäÈë%d¸öÊı¾İ\n", n);
+	(*L)->next = NULL; /* å…ˆå»ºç«‹ä¸€ä¸ªå¸¦å¤´ç»“ç‚¹çš„å•é“¾è¡¨ */
+	printf("è¯·è¾“å…¥%dä¸ªæ•°æ®\n", n);
 	for (i = n; i > 0; --i)
 	{
-		p = (LinkList)malloc(sizeof(struct LNode)); /* Éú³ÉĞÂ½áµã */
-		scanf("%d", &p->data); /* ÊäÈëÔªËØÖµ */
-		p->next = (*L)->next; /* ²åÈëµ½±íÍ· */
+		p = (LinkList)malloc(sizeof(struct LNode)); /* ç”Ÿæˆæ–°ç»“ç‚¹ */
+		scanf("%d", &p->data); /* è¾“å…¥å…ƒç´ å€¼ */
+		p->next = (*L)->next; /* æ’å…¥åˆ°è¡¨å¤´ */
 		(*L)->next = p;
 	}
 }
 
 void CreateList2(LinkList *L, int n)
-{ /* ÕıÎ»Ğò(²åÔÚ±íÎ²)ÊäÈën¸öÔªËØµÄÖµ£¬½¨Á¢´ø±íÍ·½á¹¹µÄµ¥Á´ÏßĞÔ±í */
+{ /* æ­£ä½åº(æ’åœ¨è¡¨å°¾)è¾“å…¥nä¸ªå…ƒç´ çš„å€¼ï¼Œå»ºç«‹å¸¦è¡¨å¤´ç»“æ„çš„å•é“¾çº¿æ€§è¡¨ */
 	int i;
 	LinkList p=NULL, q;
-	*L = (LinkList)malloc(sizeof(struct LNode)); /* Éú³ÉÍ·½áµã */
+	*L = (LinkList)malloc(sizeof(struct LNode)); /* ç”Ÿæˆå¤´ç»“ç‚¹ */
 	(*L)->next = NULL;
 	q = *L;
-	printf("ÇëÊäÈë%d¸öÊı¾İ\n", n);
+	printf("è¯·è¾“å…¥%dä¸ªæ•°æ®\n", n);
 	for (i = 1; i <= n; i++)
 	{
 		p = (LinkList)malloc(sizeof(struct LNode));
@@ -38,11 +38,11 @@ void CreateList2(LinkList *L, int n)
 	p->next = NULL;
 }
 
-void MergeList(LinkList La, LinkList *Lb, LinkList *Lc)/* Ëã·¨2.12 */
-{ /* ÒÑÖªµ¥Á´ÏßĞÔ±íLaºÍLbµÄÔªËØ°´Öµ·Çµİ¼õÅÅÁĞ¡£ */
-  /* ¹é²¢LaºÍLbµÃµ½ĞÂµÄµ¥Á´ÏßĞÔ±íLc£¬LcµÄÔªËØÒ²°´Öµ·Çµİ¼õÅÅÁĞ */
+void MergeList(LinkList La, LinkList *Lb, LinkList *Lc)/* ç®—æ³•2.12 */
+{ /* å·²çŸ¥å•é“¾çº¿æ€§è¡¨Laå’ŒLbçš„å…ƒç´ æŒ‰å€¼éé€’å‡æ’åˆ—ã€‚ */
+  /* å½’å¹¶Laå’ŒLbå¾—åˆ°æ–°çš„å•é“¾çº¿æ€§è¡¨Lcï¼ŒLcçš„å…ƒç´ ä¹ŸæŒ‰å€¼éé€’å‡æ’åˆ— */
 	LinkList pa = La->next, pb = (*Lb)->next, pc;
-	*Lc = pc = La; /* ÓÃLaµÄÍ·½áµã×÷ÎªLcµÄÍ·½áµã */
+	*Lc = pc = La; /* ç”¨Laçš„å¤´ç»“ç‚¹ä½œä¸ºLcçš„å¤´ç»“ç‚¹ */
 	while (pa&&pb)
 		if (pa->data <= pb->data)
 		{
@@ -56,12 +56,12 @@ void MergeList(LinkList La, LinkList *Lb, LinkList *Lc)/* Ëã·¨2.12 */
 			pc = pb;
 			pb = pb->next;
 		}
-	pc->next = pa ? pa : pb; /* ²åÈëÊ£Óà¶Î */
-	free(*Lb); /* ÊÍ·ÅLbµÄÍ·½áµã */
+	pc->next = pa ? pa : pb; /* æ’å…¥å‰©ä½™æ®µ */
+	free(*Lb); /* é‡Šæ”¾Lbçš„å¤´ç»“ç‚¹ */
 	Lb = NULL;
 }
 
-void visit(ElemType c) /* ListTraverse()µ÷ÓÃµÄº¯Êı(ÀàĞÍÒªÒ»ÖÂ) */
+void visit(ElemType c) /* ListTraverse()è°ƒç”¨çš„å‡½æ•°(ç±»å‹è¦ä¸€è‡´) */
 {
 	printf("%d ", c);
 }
@@ -70,15 +70,15 @@ void main()
 {
 	int n = 5;
 	LinkList La, Lb, Lc;
-	printf("°´·Çµİ¼õË³Ğò, ");
-	CreateList2(&La, n); /* ÕıÎ»ĞòÊäÈën¸öÔªËØµÄÖµ */
-	printf("La="); /* Êä³öÁ´±íLaµÄÄÚÈİ */
+	printf("æŒ‰éé€’å‡é¡ºåº, ");
+	CreateList2(&La, n); /* æ­£ä½åºè¾“å…¥nä¸ªå…ƒç´ çš„å€¼ */
+	printf("La="); /* è¾“å‡ºé“¾è¡¨Laçš„å†…å®¹ */
 	ListTraverse(La, visit);
-	printf("°´·ÇµİÔöË³Ğò, ");
-	CreateList(&Lb, n); /* ÄæÎ»ĞòÊäÈën¸öÔªËØµÄÖµ */
-	printf("Lb="); /* Êä³öÁ´±íLbµÄÄÚÈİ */
+	printf("æŒ‰éé€’å¢é¡ºåº, ");
+	CreateList(&Lb, n); /* é€†ä½åºè¾“å…¥nä¸ªå…ƒç´ çš„å€¼ */
+	printf("Lb="); /* è¾“å‡ºé“¾è¡¨Lbçš„å†…å®¹ */
 	ListTraverse(Lb, visit);
-	MergeList(La, &Lb, &Lc); /* °´·Çµİ¼õË³Ğò¹é²¢LaºÍLb,µÃµ½ĞÂ±íLc */
-	printf("Lc="); /* Êä³öÁ´±íLcµÄÄÚÈİ */
+	MergeList(La, &Lb, &Lc); /* æŒ‰éé€’å‡é¡ºåºå½’å¹¶Laå’ŒLb,å¾—åˆ°æ–°è¡¨Lc */
+	printf("Lc="); /* è¾“å‡ºé“¾è¡¨Lcçš„å†…å®¹ */
 	ListTraverse(Lc, visit);
 }

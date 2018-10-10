@@ -1,35 +1,35 @@
-/* algo2-11.c ÊµÏÖËã·¨2.20¡¢2.21µÄ³ÌĞò */
+/* algo2-11.c å®ç°ç®—æ³•2.20ã€2.21çš„ç¨‹åº */
 #include "../ch1/c1.h"
 
 typedef int ElemType;
 #include "c2-5.h"
 #include "bo2-6.c"
 
-Status ListInsert_L(LinkList *L, int i, ElemType e) /* Ëã·¨2.20 */
-{ /* ÔÚ´øÍ·½áµãµÄµ¥Á´ÏßĞÔ±íLµÄµÚi¸öÔªËØÖ®Ç°²åÈëÔªËØe */
+Status ListInsert_L(LinkList *L, int i, ElemType e) /* ç®—æ³•2.20 */
+{ /* åœ¨å¸¦å¤´ç»“ç‚¹çš„å•é“¾çº¿æ€§è¡¨Lçš„ç¬¬iä¸ªå…ƒç´ ä¹‹å‰æ’å…¥å…ƒç´ e */
 	Link h, s;
 	if (!LocatePos(*L, i - 1, &h))
-		return ERROR; /* iÖµ²»ºÏ·¨ */
+		return ERROR; /* iå€¼ä¸åˆæ³• */
 	if (!MakeNode(&s, e))
-		return ERROR; /* ½áµã·ÖÅäÊ§°Ü */
-	InsFirst(L, h, s); /*¶ÔÓÚ´ÓµÚi¸ö½áµã¿ªÊ¼µÄÁ´±í,µÚi-1¸ö½áµãÊÇËüµÄÍ·½áµã */
+		return ERROR; /* ç»“ç‚¹åˆ†é…å¤±è´¥ */
+	InsFirst(L, h, s); /*å¯¹äºä»ç¬¬iä¸ªç»“ç‚¹å¼€å§‹çš„é“¾è¡¨,ç¬¬i-1ä¸ªç»“ç‚¹æ˜¯å®ƒçš„å¤´ç»“ç‚¹ */
 	return OK;
 }
 
 Status MergeList_L(LinkList La, LinkList Lb, LinkList *Lc, int(*compare)(ElemType, ElemType))
-{ /* ÒÑÖªµ¥Á´ÏßĞÔ±íLaºÍLbµÄÔªËØ°´Öµ·Çµİ¼õÅÅÁĞ¡£¹é²¢LaºÍLbµÃµ½ĞÂµÄµ¥Á´ */
-  /* ÏßĞÔ±íLc£¬LcµÄÔªËØÒ²°´Öµ·Çµİ¼õÅÅÁĞ¡££¨²»¸Ä±äLa¡¢Lb£©Ëã·¨2.21 */
+{ /* å·²çŸ¥å•é“¾çº¿æ€§è¡¨Laå’ŒLbçš„å…ƒç´ æŒ‰å€¼éé€’å‡æ’åˆ—ã€‚å½’å¹¶Laå’ŒLbå¾—åˆ°æ–°çš„å•é“¾ */
+  /* çº¿æ€§è¡¨Lcï¼ŒLcçš„å…ƒç´ ä¹ŸæŒ‰å€¼éé€’å‡æ’åˆ—ã€‚ï¼ˆä¸æ”¹å˜Laã€Lbï¼‰ç®—æ³•2.21 */
 	Link ha, hb, pa, pb, q;
 	ElemType a, b;
 	if (!InitList(Lc))
-		return ERROR; /* ´æ´¢¿Õ¼ä·ÖÅäÊ§°Ü */
-	ha = GetHead(La); /* haºÍhb·Ö±ğÖ¸ÏòLaºÍLbµÄÍ·½áµã */
+		return ERROR; /* å­˜å‚¨ç©ºé—´åˆ†é…å¤±è´¥ */
+	ha = GetHead(La); /* haå’Œhbåˆ†åˆ«æŒ‡å‘Laå’ŒLbçš„å¤´ç»“ç‚¹ */
 	hb = GetHead(Lb);
-	pa = NextPos(ha); /* paºÍpb·Ö±ğÖ¸ÏòLaºÍLbµÄµÚÒ»¸ö½áµã */
+	pa = NextPos(ha); /* paå’Œpbåˆ†åˆ«æŒ‡å‘Laå’ŒLbçš„ç¬¬ä¸€ä¸ªç»“ç‚¹ */
 	pb = NextPos(hb);
-	while (!ListEmpty(La) && !ListEmpty(Lb)) /* LaºÍLb¾ù·Ç¿Õ */
+	while (!ListEmpty(La) && !ListEmpty(Lb)) /* Laå’ŒLbå‡éç©º */
 	{
-		a = GetCurElem(pa); /* aºÍbÎªÁ½±íÖĞµ±Ç°±È½ÏÔªËØ */
+		a = GetCurElem(pa); /* aå’Œbä¸ºä¸¤è¡¨ä¸­å½“å‰æ¯”è¾ƒå…ƒç´  */
 		b = GetCurElem(pb);
 		if (compare(a, b) <= 0)
 		{
@@ -60,7 +60,7 @@ int comp(ElemType c1, ElemType c2)
 
 void visit(ElemType c)
 {
-	printf("%d ", c); /* ÕûĞÍ */
+	printf("%d ", c); /* æ•´å‹ */
 }
 
 void main()
@@ -69,16 +69,16 @@ void main()
 	int j;
 	InitList(&La);
 	for (j = 1; j <= 5; j++)
-		ListInsert_L(&La, j, j); /* Ë³Ğò²åÈë 1 2 3 4 5 */
+		ListInsert_L(&La, j, j); /* é¡ºåºæ’å…¥ 1 2 3 4 5 */
 	printf("La=");
 	ListTraverse(La, visit);
 	InitList(&Lb);
 	for (j = 1; j <= 5; j++)
-		ListInsert_L(&Lb, j, 2 * j); /* Ë³Ğò²åÈë 2 4 6 8 10 */
+		ListInsert_L(&Lb, j, 2 * j); /* é¡ºåºæ’å…¥ 2 4 6 8 10 */
 	printf("Lb=");
 	ListTraverse(Lb, visit);
 	InitList(&Lc);
-	MergeList_L(La, Lb, &Lc, comp); /* ¹é²¢LaºÍLb£¬²úÉúLc */
+	MergeList_L(La, Lb, &Lc, comp); /* å½’å¹¶Laå’ŒLbï¼Œäº§ç”ŸLc */
 	printf("Lc=");
 	ListTraverse(Lc, visit);
 	DestroyList(&Lc);

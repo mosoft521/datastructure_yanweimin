@@ -1,44 +1,44 @@
-/* alg10-10.c ¹é²¢ÅÅĞò */
+/* alg10-10.c å½’å¹¶æ’åº */
 #include<stdio.h>
-typedef int InfoType; /* ¶¨ÒåÆäËüÊı¾İÏîµÄÀàĞÍ */
+typedef int InfoType; /* å®šä¹‰å…¶å®ƒæ•°æ®é¡¹çš„ç±»å‹ */
 
 #include "../ch1/c1.h"
 
 #include "c10-1.h"
 
 void Merge(RedType SR[], RedType TR[], int i, int m, int n)
-{ /* ½«ÓĞĞòµÄSR[i..m]ºÍSR[m+1..n]¹é²¢ÎªÓĞĞòµÄTR[i..n] Ëã·¨10.12 */
+{ /* å°†æœ‰åºçš„SR[i..m]å’ŒSR[m+1..n]å½’å¹¶ä¸ºæœ‰åºçš„TR[i..n] ç®—æ³•10.12 */
 	int j, k, l;
-	for (j = m + 1, k = i; i <= m&&j <= n; ++k) /* ½«SRÖĞ¼ÇÂ¼ÓÉĞ¡µ½´óµØ²¢ÈëTR */
+	for (j = m + 1, k = i; i <= m&&j <= n; ++k) /* å°†SRä¸­è®°å½•ç”±å°åˆ°å¤§åœ°å¹¶å…¥TR */
 		if (SR[i].key<= SR[j].key)
 			TR[k] = SR[i++];
 		else
 			TR[k] = SR[j++];
 	if (i <= m)
 		for (l = 0; l <= m - i; l++)
-			TR[k + l] = SR[i + l]; /* ½«Ê£ÓàµÄSR[i..m]¸´ÖÆµ½TR */
+			TR[k + l] = SR[i + l]; /* å°†å‰©ä½™çš„SR[i..m]å¤åˆ¶åˆ°TR */
 	if (j <= n)
 		for (l = 0; l <= n - j; l++)
-			TR[k + l] = SR[j + l]; /* ½«Ê£ÓàµÄSR[j..n]¸´ÖÆµ½TR */
+			TR[k + l] = SR[j + l]; /* å°†å‰©ä½™çš„SR[j..n]å¤åˆ¶åˆ°TR */
 }
 
 void MSort(RedType SR[], RedType TR1[], int s, int t)
-{ /* ½«SR[s..t]¹é²¢ÅÅĞòÎªTR1[s..t]¡£Ëã·¨10.13 */
+{ /* å°†SR[s..t]å½’å¹¶æ’åºä¸ºTR1[s..t]ã€‚ç®—æ³•10.13 */
 	int m;
 	RedType TR2[MAXSIZE + 1];
 	if (s == t)
 		TR1[s] = SR[s];
 	else
 	{
-		m = (s + t) / 2; /* ½«SR[s..t]Æ½·ÖÎªSR[s..m]ºÍSR[m+1..t] */
-		MSort(SR, TR2, s, m); /* µİ¹éµØ½«SR[s..m]¹é²¢ÎªÓĞĞòµÄTR2[s..m] */
-		MSort(SR, TR2, m + 1, t); /* µİ¹éµØ½«SR[m+1..t]¹é²¢ÎªÓĞĞòµÄTR2[m+1..t] */
-		Merge(TR2, TR1, s, m, t); /* ½«TR2[s..m]ºÍTR2[m+1..t]¹é²¢µ½TR1[s..t] */
+		m = (s + t) / 2; /* å°†SR[s..t]å¹³åˆ†ä¸ºSR[s..m]å’ŒSR[m+1..t] */
+		MSort(SR, TR2, s, m); /* é€’å½’åœ°å°†SR[s..m]å½’å¹¶ä¸ºæœ‰åºçš„TR2[s..m] */
+		MSort(SR, TR2, m + 1, t); /* é€’å½’åœ°å°†SR[m+1..t]å½’å¹¶ä¸ºæœ‰åºçš„TR2[m+1..t] */
+		Merge(TR2, TR1, s, m, t); /* å°†TR2[s..m]å’ŒTR2[m+1..t]å½’å¹¶åˆ°TR1[s..t] */
 	}
 }
 
 void MergeSort(SqList *L)
-{ /* ¶ÔË³Ğò±íL×÷¹é²¢ÅÅĞò¡£Ëã·¨10.14 */
+{ /* å¯¹é¡ºåºè¡¨Lä½œå½’å¹¶æ’åºã€‚ç®—æ³•10.14 */
 	MSort((*L).r, (*L).r, 1, (*L).length);
 }
 
@@ -59,9 +59,9 @@ void main()
 	for (i = 0; i < N; i++)
 		l.r[i + 1] = d[i];
 	l.length = N;
-	printf("ÅÅĞòÇ°:\n");
+	printf("æ’åºå‰:\n");
 	print(l);
 	MergeSort(&l);
-	printf("ÅÅĞòºó:\n");
+	printf("æ’åºå:\n");
 	print(l);
 }

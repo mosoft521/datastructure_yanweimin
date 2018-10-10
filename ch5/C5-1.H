@@ -1,11 +1,11 @@
- /* c5-1.h Êı×éµÄË³Ğò´æ´¢±íÊ¾ */
- #include<stdarg.h> /* ±ê×¼Í·ÎÄ¼ş£¬Ìá¹©ºêva_start£¬va_argºÍva_end£¬ */
-                    /* ÓÃÓÚ´æÈ¡±ä³¤²ÎÊı±í */
- #define MAX_ARRAY_DIM 8 /* ¼ÙÉèÊı×éÎ¬ÊıµÄ×î´óÖµÎª8 */
+ /* c5-1.h æ•°ç»„çš„é¡ºåºå­˜å‚¨è¡¨ç¤º */
+ #include<stdarg.h> /* æ ‡å‡†å¤´æ–‡ä»¶ï¼Œæä¾›å®va_startï¼Œva_argå’Œva_endï¼Œ */
+                    /* ç”¨äºå­˜å–å˜é•¿å‚æ•°è¡¨ */
+ #define MAX_ARRAY_DIM 8 /* å‡è®¾æ•°ç»„ç»´æ•°çš„æœ€å¤§å€¼ä¸º8 */
  typedef struct
  {
-   ElemType *base; /* Êı×éÔªËØ»ùÖ·£¬ÓÉInitArray·ÖÅä */
-   int dim; /* Êı×éÎ¬Êı */
-   int *bounds; /* Êı×éÎ¬½ç»ùÖ·£¬ÓÉInitArray·ÖÅä */
-   int *constants; /* Êı×éÓ³Ïóº¯Êı³£Á¿»ùÖ·£¬ÓÉInitArray·ÖÅä */
+   ElemType *base; /* æ•°ç»„å…ƒç´ åŸºå€ï¼Œç”±InitArrayåˆ†é… */
+   int dim; /* æ•°ç»„ç»´æ•° */
+   int *bounds; /* æ•°ç»„ç»´ç•ŒåŸºå€ï¼Œç”±InitArrayåˆ†é… */
+   int *constants; /* æ•°ç»„æ˜ è±¡å‡½æ•°å¸¸é‡åŸºå€ï¼Œç”±InitArrayåˆ†é… */
  }Array;
