@@ -1,0 +1,8 @@
+set(MAIN7-1 MAIN7-1.c)
+set(Main7-2 Main7-2.c)
+set(Main7-3 Main7-3.c)
+set(Main7-4 Main7-4.c)
+add_executable(MAIN7-1 ${MAIN7-1})
+add_executable(Main7-2 ${Main7-2})
+add_executable(Main7-3 ${Main7-3})
+add_executable(Main7-4 ${Main7-4})
